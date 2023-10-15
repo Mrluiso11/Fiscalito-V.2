@@ -67,7 +67,8 @@ public class Forms extends javax.swing.JPanel {
         button.setBackground(Color.decode("#54bbfb")); // Fondo
         button.setForeground(Color.WHITE); // Texto
         button.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 14)); // Fuente
-
+        // Desactivar el enfoque visual
+        button.setFocusPainted(false);
         // Cambiar el color de fondo al hacer hover
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -168,18 +169,39 @@ public class Forms extends javax.swing.JPanel {
         return componentList.toArray(new Component[0]);
     }
 
-    private void aplicarEstiloATabbedPane(JTabbedPane tabbedPane) {
-        // Establece el color de fondo de la segunda pestaña en rojo
-        UIManager.put("TabbedPane.selected", new ColorUIResource(Color.RED));
-        UIManager.put("TabbedPane.background", new ColorUIResource(Color.GREEN));
-        for (int i = 0; i < tabbedPane.getTabCount(); i++) {
-            // Crea un componente personalizado para la pestaña
-            JLabel tabLabel = new JLabel("Pestaña " + i);
-            tabLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 14));
+private void aplicarEstiloATabbedPane(JTabbedPane tabbedPane) {
+    tabbedPane.setBackground(new Color(84, 187, 251));
+
+    // Crea un color para la pestaña seleccionada (por ejemplo, rojo)
+    Color selectedColor = Color.RED;
+
+    for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+        // Obtiene el título de la pestaña existente
+        String tabTitle = tabbedPane.getTitleAt(i);
+
+        // Crea un componente personalizado (JLabel) con el título de la pestaña
+        JLabel tabLabel = new JLabel(tabTitle);
+
+        // Aplica los estilos personalizados
+        tabLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 14));
+        tabLabel.setForeground(Color.blue);
+
+        // Establece el componente personalizado para la pestaña
+        tabbedPane.setTabComponentAt(i, tabLabel);
+
+        // Cambia el color de fondo de la pestaña seleccionada (por ejemplo, rojo) y el color del texto
+        if (i == tabbedPane.getSelectedIndex()) {
+            tabbedPane.setBackgroundAt(i, selectedColor);
+            tabLabel.setForeground(Color.WHITE); // Cambia el color del texto a blanco
+        } else {
+            // Restablece el color de fondo de las otras pestañas (por ejemplo, azul claro) y el color del texto
+            System.out.println(i);
+            tabbedPane.setBackgroundAt(i, new Color(84, 187, 251));
             tabLabel.setForeground(Color.blue);
-            // Establece el componente personalizado para la pestaña
-            tabbedPane.setTabComponentAt(i, tabLabel);
         }
     }
+}
+
+
 
 }

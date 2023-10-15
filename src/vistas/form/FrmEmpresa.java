@@ -160,42 +160,42 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Nombre de la empresa");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Nombre comercial de la empresa");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
-        bg.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 390, -1));
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        bg.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 390, -1));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("R.C.U");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         jTextField3.setToolTipText("Asa");
-        bg.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 170, -1));
+        bg.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 170, -1));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("D.V");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, -1, -1));
-        bg.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 160, -1));
-        bg.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 390, -1));
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+        bg.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 160, -1));
+        bg.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 390, -1));
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Teléfonos:");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, 20));
-        bg.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 180, -1));
-        bg.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 180, -1));
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, 20));
+        bg.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 180, -1));
+        bg.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 180, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Fax:");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, -1, -1));
-        bg.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 160, -1));
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 90, 160, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, -1));
+        bg.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, 160, -1));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 160, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -226,12 +226,9 @@ public class FrmEmpresa extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel48)
@@ -251,204 +248,206 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 80, 170, 470));
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 110, 170, 470));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel8.setText("Dirección");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(84, 187, 251));
         jSeparator1.setForeground(new java.awt.Color(84, 187, 251));
         jSeparator1.setToolTipText("");
         jSeparator1.setOpaque(true);
-        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 390, 3));
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 390, 3));
 
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("País:");
-        bg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
-        bg.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 180, -1));
+        bg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+        bg.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Provincia:");
-        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, -1, -1));
-        bg.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 190, -1));
+        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, -1));
+        bg.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 190, -1));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Distrito:");
-        bg.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
-        bg.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 390, -1));
+        bg.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
+        bg.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 390, -1));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setText("Correguimiento:");
-        bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
-        bg.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 390, -1));
+        bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
+        bg.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 390, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("Población:");
-        bg.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
-        bg.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 390, -1));
+        bg.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
+        bg.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 390, -1));
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setText("Calle:");
-        bg.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
-        bg.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 390, -1));
+        bg.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
+        bg.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 390, -1));
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Casa / N:");
-        bg.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
+        bg.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
         jLabel16.setText("Piso:");
-        bg.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, -1, -1));
+        bg.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Local");
-        bg.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, -1, -1));
-        bg.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, 130, -1));
-        bg.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 110, -1));
-        bg.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 110, -1));
+        bg.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 530, -1, -1));
+        bg.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, 130, -1));
+        bg.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 110, -1));
+        bg.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 110, -1));
 
         jLabel18.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(102, 102, 102));
         jLabel18.setText("Correo Electrónico");
-        bg.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
+        bg.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel19.setText("Representante Legal");
-        bg.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, -1, -1));
+        bg.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, -1, -1));
 
         jSeparator2.setBackground(new java.awt.Color(84, 187, 251));
         jSeparator2.setForeground(new java.awt.Color(84, 187, 251));
         jSeparator2.setOpaque(true);
-        bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 400, 3));
+        bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 400, 3));
 
         jLabel20.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(102, 102, 102));
         jLabel20.setText("Primer Nombre");
-        bg.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, -1, -1));
-        bg.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 190, -1));
+        bg.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
+        bg.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 190, -1));
 
         jLabel21.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setText("Segundo Nombre");
-        bg.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 180, -1, -1));
-        bg.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 190, -1));
+        bg.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, -1, -1));
+        bg.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 190, -1));
 
         jLabel22.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(102, 102, 102));
         jLabel22.setText("Apellido Paterno");
-        bg.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, -1, -1));
+        bg.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(102, 102, 102));
         jLabel23.setText("Apellido Materno");
-        bg.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 110, -1));
-        bg.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 190, -1));
-        bg.add(jTextField21, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 250, 190, -1));
+        bg.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 110, -1));
+        bg.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 190, -1));
+        bg.add(jTextField21, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 190, -1));
 
         jLabel24.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
         jLabel24.setText("Cédula:");
-        bg.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, -1, -1));
-        bg.add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 190, -1));
+        bg.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, -1, -1));
+        bg.add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 190, -1));
 
         jLabel25.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(102, 102, 102));
         jLabel25.setText("D.V:");
-        bg.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, 20));
-        bg.add(jTextField23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 190, -1));
+        bg.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 310, -1, 20));
+        bg.add(jTextField23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 190, -1));
 
         jLabel26.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(102, 102, 102));
         jLabel26.setText("Teléfonos:");
-        bg.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, -1, -1));
-        bg.add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, 190, -1));
-        bg.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 190, -1));
+        bg.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, -1, -1));
+        bg.add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, 190, -1));
+        bg.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, 190, -1));
 
         jLabel27.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 102, 102));
         jLabel27.setText("Correo Electrónico");
-        bg.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, -1));
-        bg.add(jTextField26, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 400, -1));
-        bg.add(jTextField27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 390, -1));
+        bg.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, -1, -1));
+        bg.add(jTextField26, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 400, -1));
+        bg.add(jTextField27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, 390, -1));
 
         jLabel28.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel28.setText("Actividades:");
-        bg.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, -1, -1));
+        bg.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, -1, -1));
 
         jLabel29.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel29.setText("Observaciones:");
-        bg.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 680, -1, -1));
+        bg.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, -1, -1));
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 780, 390, 50));
+        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 730, 390, 50));
 
         jLabel30.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel30.setText("Gerente");
-        bg.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, -1, -1));
+        bg.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 460, -1, -1));
 
         jSeparator3.setBackground(new java.awt.Color(84, 187, 251));
         jSeparator3.setForeground(new java.awt.Color(84, 187, 251));
         jSeparator3.setOpaque(true);
-        bg.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, 400, 3));
+        bg.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 400, 3));
 
         jLabel31.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(102, 102, 102));
         jLabel31.setText("Nombre:");
-        bg.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 460, -1, -1));
-        bg.add(jTextField28, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 400, -1));
+        bg.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, -1, -1));
+        bg.add(jTextField28, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 510, 400, -1));
 
         jLabel32.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(102, 102, 102));
         jLabel32.setText("Cédula:");
-        bg.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 510, -1, -1));
-        bg.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 180, -1));
+        bg.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 540, -1, -1));
+        bg.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, 180, -1));
 
         jLabel33.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(102, 102, 102));
         jLabel33.setText("D.V");
-        bg.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, -1));
-        bg.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 530, 190, -1));
+        bg.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 540, -1, -1));
+        bg.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 190, -1));
 
         jLabel34.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(102, 102, 102));
         jLabel34.setText("Teléfonos");
-        bg.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 550, -1, 20));
-        bg.add(jTextField31, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, 180, -1));
-        bg.add(jTextField32, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, 190, -1));
+        bg.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 580, -1, 20));
+        bg.add(jTextField31, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 180, -1));
+        bg.add(jTextField32, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 600, 190, -1));
 
         jLabel35.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(102, 102, 102));
         jLabel35.setText("Correo Electrónico");
-        bg.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, -1, 20));
-        bg.add(jTextField33, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 620, 400, -1));
+        bg.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, -1, 20));
+        bg.add(jTextField33, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, 400, -1));
 
         jSeparator4.setBackground(new java.awt.Color(84, 187, 251));
         jSeparator4.setForeground(new java.awt.Color(84, 187, 251));
         jSeparator4.setOpaque(true);
-        bg.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 670, 400, 3));
+        bg.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 700, 400, 3));
 
         jLabel42.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel42.setText("Otros:");
-        bg.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, -1, -1));
+        bg.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 710, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setOpaque(false);
 
         btnActualizar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnActualizar.setFocusPainted(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
@@ -457,20 +456,22 @@ public class FrmEmpresa extends javax.swing.JPanel {
 
         jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jButton2.setText("Imprimir");
+        jButton2.setFocusPainted(false);
 
         jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jButton3.setText("Limpiar");
+        jButton3.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -488,19 +489,19 @@ public class FrmEmpresa extends javax.swing.JPanel {
         btnActualizar.getAccessibleContext().setAccessibleParent(bg);
         jButton2.getAccessibleContext().setAccessibleParent(bg);
 
-        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 570, 170, 170));
+        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 600, 170, 170));
 
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
         jScrollPane4.setViewportView(jTextArea4);
 
-        bg.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 390, 50));
+        bg.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 650, 390, 50));
 
         jTextArea5.setColumns(20);
         jTextArea5.setRows(5);
         jScrollPane5.setViewportView(jTextArea5);
 
-        bg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, 390, 50));
+        bg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 730, 390, 50));
 
         jPTitle.setBackground(new java.awt.Color(255, 255, 255));
 

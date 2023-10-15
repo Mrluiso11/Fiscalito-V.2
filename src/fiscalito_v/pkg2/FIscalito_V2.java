@@ -4,6 +4,7 @@
  */
 package fiscalito_v.pkg2;
 
+
 import vistas.main.Main;
 
 /**
@@ -18,6 +19,7 @@ public class FIscalito_V2 {
     public static void main(String[] args) {
         Main m = new Main();
         m.setVisible(true);
+        
     }
     
 }

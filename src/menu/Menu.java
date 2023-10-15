@@ -35,13 +35,13 @@ public class Menu extends JPanel {
         addTitle("FISCALITO V2.0");
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DASHBOARD, "Inicio"));
         addTitle("MENU");
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DESKTOP_MAC, "Sistema","Opciones","Impresion Fiscal"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DESKTOP_MAC, "Sistema", "Opciones", "Impresion Fiscal"));
         //Menu lateral del dashboard
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.NOTE_ADD, "Catalogos", "Empresa", "Productos", "Servicios", "Clientes","Constantes"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DVR, "Operacion","Documentos"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.PIE_CHART_OUTLINED, "Reportes","Reporte de Ventas","Reporte de Creditos"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.VIEW_LIST, "Herramientas","Exportar Datos"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.INSERT_EMOTICON, "ARC","Licencia","Sobre Fiscalito"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.NOTE_ADD, "Catalogos", "Empresa", "Productos", "Servicios", "Clientes", "Constantes"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DVR, "Operacion", "Documentos"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.PIE_CHART_OUTLINED, "Reportes", "Reporte de Ventas", "Reporte de Creditos"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.VIEW_LIST, "Herramientas", "Exportar Datos"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.INSERT_EMOTICON, "ARC", "Licencia", "Sobre Fiscalito"));
     }
 
     private JScrollPane createScroll() {
