@@ -94,6 +94,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         setOpaque(false);
 
         jTabbedPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1100, 881));
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
@@ -101,7 +102,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         });
 
         bg1.setBackground(new java.awt.Color(245, 245, 245));
-        bg1.setPreferredSize(new java.awt.Dimension(1100, 852));
+        bg1.setPreferredSize(new java.awt.Dimension(1156, 850));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Devolución" }));
 
@@ -185,6 +186,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jTabbedPane1.addTab("Factura", null, bg1, "");
 
         bg2.setBackground(new java.awt.Color(245, 245, 245));
+        bg2.setPreferredSize(new java.awt.Dimension(1100, 850));
         bg2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(245, 245, 245));
@@ -294,7 +296,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
