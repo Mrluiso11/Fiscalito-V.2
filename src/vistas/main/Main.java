@@ -15,8 +15,8 @@ public class Main extends javax.swing.JFrame {
         setTitle("Fiscalito");
         init();
         // Establecer el tamaño deseado para la ventana principal
-        Dimension dimension = new Dimension(1334, 885);
-        this.setSize(dimension);
+        /*Dimension dimension = new Dimension(1334, 885);
+        this.setSize(dimension);*/
 
     }
 
@@ -68,6 +68,7 @@ public class Main extends javax.swing.JFrame {
         body = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1324, 840));
         setResizable(false);
 
         background.setBackground(new java.awt.Color(245, 245, 245));
@@ -84,24 +85,28 @@ public class Main extends javax.swing.JFrame {
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        background.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 226, 848));
+        background.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 226, 850));
 
         body.setOpaque(false);
         body.setLayout(new java.awt.BorderLayout());
-        background.add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 0, 1100, 846));
+        background.add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 0, 1100, 850));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 846, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();

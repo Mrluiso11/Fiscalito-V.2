@@ -5,6 +5,7 @@
 package vistas.form;
 
 import Style.*;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -18,21 +19,29 @@ public class frmDocumentos extends javax.swing.JPanel {
      * Creates new form frmDocumentos
      */
     public frmDocumentos() {
-        initComponents();
-        init();
+        initComponents(); // Inicializa los componentes del formulario.
+        init(); // Llama a un método personalizado para inicializar otros componentes y datos.
+
+        // Crea una instancia de Forms y la asocia con este formulario.
         Forms formsPanel = new Forms(this, null);
-        // Aplica estilos a la JTable (table) usando TableStyler
-       TableStyler.applyStyles(table); // Llama al método applyStyles con tu JTable.
-        // Crea una instancia de TableStyler
+
+        // Aplica estilos a la JTable llamada "table" utilizando TableStyler.
+        TableStyler.applyStyles(table); // Llama al método applyStyles con tu JTable.
+
+        // Crea una instancia de TableStyler para personalizar la apariencia de la tabla.
         TableStyler tableStyler = new TableStyler();
-  
-       tableStyler.fixTable(jScrollPane1);
-        // Obtiene el encabezado de la tabla
+
+        // Llama a "fixTable" para aplicar estilos adicionales a la JTable contenida en "jScrollPane1".
+        tableStyler.fixTable(jScrollPane1);
+
+        // Obtiene el encabezado de la tabla.
         JTableHeader header = table.getTableHeader();
-        // Aplica el renderizador personalizado al encabezado de la tabla
+
+        // Aplica un renderizador personalizado al encabezado de la tabla.
         header.setDefaultRenderer(new CustomTableHeaderRenderer());
-        
-       
+
+        // Aplica la interfaz de usuario personalizada al JTabbedPane "jTabbedPane1".
+        jTabbedPane1.setUI(new CustomTabbedPaneUI());
     }
 
     private void init() {
@@ -65,7 +74,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel6 = new javax.swing.JPanel();
+        bg1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -73,7 +82,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        bg = new javax.swing.JPanel();
+        bg2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -84,8 +93,15 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         setOpaque(false);
 
-        jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
         jTabbedPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+
+        bg1.setBackground(new java.awt.Color(245, 245, 245));
+        bg1.setPreferredSize(new java.awt.Dimension(1100, 852));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Devolución" }));
 
@@ -145,31 +161,33 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addGap(0, 532, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout bg1Layout = new javax.swing.GroupLayout(bg1);
+        bg1.setLayout(bg1Layout);
+        bg1Layout.setHorizontalGroup(
+            bg1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bg1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bg1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(354, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        bg1Layout.setVerticalGroup(
+            bg1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bg1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Factura", jPanel6);
+        jTabbedPane1.addTab("Factura", null, bg1, "");
 
-        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        bg2.setBackground(new java.awt.Color(245, 245, 245));
+        bg2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(245, 245, 245));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -183,9 +201,11 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addGap(0, 126, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 942, 130));
+        bg2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 942, 130));
 
+        jPanel2.setBackground(new java.awt.Color(245, 245, 245));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setPreferredSize(new java.awt.Dimension(160, 840));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -195,11 +215,12 @@ public class frmDocumentos extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
+            .addGap(0, 836, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 0, 160, 850));
+        bg2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 0, 160, 840));
 
+        jPanel3.setBackground(new java.awt.Color(245, 245, 245));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -213,7 +234,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addGap(0, 166, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 128, 942, 170));
+        bg2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 128, 942, 170));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.setOpaque(false);
@@ -249,8 +270,9 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 297, 942, 370));
+        bg2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 297, 942, 370));
 
+        jPanel5.setBackground(new java.awt.Color(245, 245, 245));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -264,9 +286,9 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 666, 942, -1));
+        bg2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 666, 942, -1));
 
-        jTabbedPane1.addTab("Registro de Facturas", bg);
+        jTabbedPane1.addTab("Registro de Facturas", bg2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -276,17 +298,20 @@ public class frmDocumentos extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bg;
+    private javax.swing.JPanel bg1;
+    private javax.swing.JPanel bg2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -297,7 +322,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;

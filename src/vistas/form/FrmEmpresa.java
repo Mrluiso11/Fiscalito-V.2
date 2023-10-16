@@ -1,5 +1,6 @@
 package vistas.form;
 
+import Style.CustomTabbedPaneUI;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
@@ -23,32 +24,13 @@ public class FrmEmpresa extends javax.swing.JPanel {
         bgContainer = this;
         Forms formsPanel = new Forms(bgContainer, jPTitle);
         //BottomStyle(btnActualizar);
+        JTabbedPane tabbedPane = new JTabbedPane();
+// Agrega pestañas al tabbedPane
 
+// Aplica el estilo personalizado al tabbedPane
+        tabbedPane.setUI(new CustomTabbedPaneUI());
     }
 
-   /* private void BottomStyle(JButton button) {
-        button.setBackground(Color.decode("#54bbfb")); // Fondo
-        button.setForeground(Color.WHITE); // Texto
-        button.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 14)); // Fuente
-
-        // Agregar un borde redondeado
-        //Border roundedBorder = new Forms.RoundBorder(8, Color.decode("#54bbfb"));
-        //button.setBorder(roundedBorder);
-
-        // Cambiar el color de fondo al hacer hover
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                button.setBackground(Color.decode("#099EF9"));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                button.setBackground(Color.decode("#54bbfb"));
-            }
-        });
-    }
-*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

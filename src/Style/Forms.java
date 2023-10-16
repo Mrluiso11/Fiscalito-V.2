@@ -10,13 +10,11 @@ import javax.swing.border.Border;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.plaf.ColorUIResource;
 
 public class Forms extends javax.swing.JPanel {
 
     private Container bg;
     private JPanel jPTitle;
-
     // Constructor que recibe un contenedor principal y un panel de título
     public Forms(Container container, JPanel jPTitle) {
         this.bg = container;
@@ -26,7 +24,6 @@ public class Forms extends javax.swing.JPanel {
         aplicarEstilosAComponentesUI();
 
     }
-
     // Aplica un borde redondeado al panel de título
     private void aplicarEstiloARoundedBorder(JPanel panel) {
         if (jPTitle != null) {
@@ -34,7 +31,6 @@ public class Forms extends javax.swing.JPanel {
             panel.setBorder(roundedBorder);
         }
     }
-
     // Aplica estilos a todos los botones contenidos en el contenedor principal
     private void aplicarEstilosAComponentesUI() {
         SwingUtilities.invokeLater(() -> {
@@ -46,11 +42,7 @@ public class Forms extends javax.swing.JPanel {
                 } else if (component instanceof JComboBox) {
                     JComboBox<?> comboBox = (JComboBox<?>) component;
                     aplicarEstiloAComboBox(comboBox);
-                } else if (component instanceof JTabbedPane) {
-                    JTabbedPane tabbedPane = (JTabbedPane) component;
-                    aplicarEstiloATabbedPane(tabbedPane); // Descomentar esta línea
-
-                }
+                } 
             }
         });
     }
@@ -82,7 +74,6 @@ public class Forms extends javax.swing.JPanel {
             }
         });
     }
-
     // Aplica estilos a todos los campos de texto (JTextField) dentro de un contenedor
     private void aplicarEstiloATextFields(Container container) {
         Component[] components = container.getComponents();
@@ -168,40 +159,6 @@ public class Forms extends javax.swing.JPanel {
         }
         return componentList.toArray(new Component[0]);
     }
-
-private void aplicarEstiloATabbedPane(JTabbedPane tabbedPane) {
-    tabbedPane.setBackground(new Color(84, 187, 251));
-
-    // Crea un color para la pestaña seleccionada (por ejemplo, rojo)
-    Color selectedColor = Color.RED;
-
-    for (int i = 0; i < tabbedPane.getTabCount(); i++) {
-        // Obtiene el título de la pestaña existente
-        String tabTitle = tabbedPane.getTitleAt(i);
-
-        // Crea un componente personalizado (JLabel) con el título de la pestaña
-        JLabel tabLabel = new JLabel(tabTitle);
-
-        // Aplica los estilos personalizados
-        tabLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 14));
-        tabLabel.setForeground(Color.blue);
-
-        // Establece el componente personalizado para la pestaña
-        tabbedPane.setTabComponentAt(i, tabLabel);
-
-        // Cambia el color de fondo de la pestaña seleccionada (por ejemplo, rojo) y el color del texto
-        if (i == tabbedPane.getSelectedIndex()) {
-            tabbedPane.setBackgroundAt(i, selectedColor);
-            tabLabel.setForeground(Color.WHITE); // Cambia el color del texto a blanco
-        } else {
-            // Restablece el color de fondo de las otras pestañas (por ejemplo, azul claro) y el color del texto
-            System.out.println(i);
-            tabbedPane.setBackgroundAt(i, new Color(84, 187, 251));
-            tabLabel.setForeground(Color.blue);
-        }
-    }
-}
-
 
 
 }
