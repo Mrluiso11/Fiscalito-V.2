@@ -49,9 +49,10 @@ public class Forms extends javax.swing.JPanel {
 
     private void aplicarEstiloAComboBox(JComboBox<?> comboBox) {
         comboBox.setBackground(Color.WHITE);
-        comboBox.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
+        comboBox.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 12));
         // Configura el renderizador personalizado
         comboBox.setRenderer(new CustomComboBoxRenderer());
+        
     }
 
     // Aplica estilos a un botón específico, incluyendo color de fondo, texto y bordes

@@ -16,7 +16,6 @@ public class CustomComboBoxRenderer extends DefaultListCellRenderer {
     @Override
     public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-
         // Cambia el color de fondo cuando se selecciona o se hace hover
         if (isSelected || (index >= 0 && list.isSelectedIndex(index))) {
             label.setBackground(Color.decode("#54bbfb"));
