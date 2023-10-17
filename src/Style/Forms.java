@@ -10,11 +10,13 @@ import javax.swing.border.Border;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.text.JTextComponent;
 
 public class Forms extends javax.swing.JPanel {
 
     private Container bg;
     private JPanel jPTitle;
+
     // Constructor que recibe un contenedor principal y un panel de título
     public Forms(Container container, JPanel jPTitle) {
         this.bg = container;
@@ -24,6 +26,7 @@ public class Forms extends javax.swing.JPanel {
         aplicarEstilosAComponentesUI();
 
     }
+
     // Aplica un borde redondeado al panel de título
     private void aplicarEstiloARoundedBorder(JPanel panel) {
         if (jPTitle != null) {
@@ -31,6 +34,7 @@ public class Forms extends javax.swing.JPanel {
             panel.setBorder(roundedBorder);
         }
     }
+
     // Aplica estilos a todos los botones contenidos en el contenedor principal
     private void aplicarEstilosAComponentesUI() {
         SwingUtilities.invokeLater(() -> {
@@ -42,7 +46,7 @@ public class Forms extends javax.swing.JPanel {
                 } else if (component instanceof JComboBox) {
                     JComboBox<?> comboBox = (JComboBox<?>) component;
                     aplicarEstiloAComboBox(comboBox);
-                } 
+                }
             }
         });
     }
@@ -52,7 +56,8 @@ public class Forms extends javax.swing.JPanel {
         comboBox.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 12));
         // Configura el renderizador personalizado
         comboBox.setRenderer(new CustomComboBoxRenderer());
-        
+        // Aplica un borde redondeado similar al de JTextField
+
     }
 
     // Aplica estilos a un botón específico, incluyendo color de fondo, texto y bordes
@@ -75,40 +80,41 @@ public class Forms extends javax.swing.JPanel {
             }
         });
     }
-    // Aplica estilos a todos los campos de texto (JTextField) dentro de un contenedor
+
     private void aplicarEstiloATextFields(Container container) {
-        Component[] components = container.getComponents();
+    Component[] components = container.getComponents();
 
-        Border defaultBorder = new RoundBorder(4, Color.decode("#F2F2F2")); // Borde por defecto
-        Border focusBorder = new RoundBorder(4, Color.decode("#54bbfb")); // Borde cuando se selecciona
+    Border defaultBorder = new RoundBorder(4, Color.decode("#F2F2F2")); // Borde por defecto
+    Border focusBorder = new RoundBorder(4, Color.decode("#54bbfb")); // Borde cuando se selecciona
 
-        for (Component component : components) {
-            if (component instanceof JTextField) {
-                final JTextField textField = (JTextField) component;
-                textField.setBackground(Color.WHITE);
-                textField.setForeground(Color.LIGHT_GRAY);
-                textField.setFont(new Font("Arial", Font.BOLD, 14));
-                textField.setBorder(defaultBorder);
+    for (Component component : components) {
+        if (component instanceof JTextComponent) {
+            final JTextComponent textComponent = (JTextComponent) component;
+            textComponent.setBackground(Color.WHITE); // Establece el fondo a blanco
+            textComponent.setForeground(Color.LIGHT_GRAY);
+            textComponent.setFont(new Font("Arial", Font.BOLD, 12));
+            textComponent.setBorder(defaultBorder); // Aplica el mismo borde redondeado
 
-                // Agregar un FocusListener para cambiar el borde cuando se selecciona
-                textField.addFocusListener(new FocusListener() {
-                    @Override
-                    public void focusGained(FocusEvent e) {
-                        textField.setBorder(focusBorder);
-                    }
+            // Agregar un FocusListener para cambiar el borde cuando se selecciona
+            textComponent.addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    textComponent.setBorder(focusBorder);
+                }
 
-                    @Override
-                    public void focusLost(FocusEvent e) {
-                        textField.setBorder(defaultBorder);
-                    }
-                });
-            }
+                @Override
+                public void focusLost(FocusEvent e) {
+                    textComponent.setBorder(defaultBorder);
+                }
+            });
+        }
 
-            if (component instanceof Container) {
-                aplicarEstiloATextFields((Container) component);
-            }
+        if (component instanceof Container) {
+            aplicarEstiloATextFields((Container) component);
         }
     }
+}
+
 
     // Aplica estilos a todos los campos de texto en el contenedor principal
     private void aplicarEstiloEnFormulario() {
@@ -160,6 +166,5 @@ public class Forms extends javax.swing.JPanel {
         }
         return componentList.toArray(new Component[0]);
     }
-
 
 }

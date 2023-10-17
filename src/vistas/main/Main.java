@@ -15,7 +15,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("Fiscalito");
         init();
         // Establecer el tamaño deseado para la ventana principal
-         Dimension dimension = new Dimension(1334, 877);
+         Dimension dimension = new Dimension(1345, 877);
         this.setSize(dimension);
 
 
@@ -96,7 +96,7 @@ public class Main extends javax.swing.JFrame {
 
         body.setOpaque(false);
         body.setLayout(new java.awt.BorderLayout());
-        background.add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 0, 1100, 846));
+        background.add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 0, 1120, 850));
         body.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
