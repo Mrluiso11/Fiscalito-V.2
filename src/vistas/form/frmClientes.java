@@ -87,10 +87,10 @@ public class frmClientes extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 270, -1));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
 
         jComboBox1.setEditable(true);
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 460, -1));
+        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 460, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -103,13 +103,13 @@ public class frmClientes extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Observaciones: ");
         bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, -1));
-        bg.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 90, -1));
+        bg.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 90, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Teléfonos: ");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
         bg.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 340, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -122,7 +122,7 @@ public class frmClientes extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Cust# : ");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(102, 153, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -151,33 +151,33 @@ public class frmClientes extends javax.swing.JPanel {
                 jButton4ActionPerformed(evt);
             }
         });
-        bg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 160, 120, 40));
+        bg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Nombre : ");
-        bg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+        bg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
             }
         });
-        bg.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 110, -1));
+        bg.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, 110, -1));
 
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
-        bg.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 110, -1));
+        bg.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 110, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Dirección :");
-        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         jButton5.setBackground(new java.awt.Color(102, 153, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -189,7 +189,7 @@ public class frmClientes extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 980, 120));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 980, 120));
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -201,16 +201,15 @@ public class frmClientes extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 1102, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 1096, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -82,7 +82,7 @@ private Container bgContainer;
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, 280, -1));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -97,7 +97,7 @@ private Container bgContainer;
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código de Servicio :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 150, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 150, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -134,7 +134,7 @@ private Container bgContainer;
         bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 120, 40));
 
         jButton3.setText("Buscar");
-        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 160, 120, 40));
+        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
 
         jButton4.setText("Editar");
         bg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 700, 120, 40));

@@ -84,7 +84,7 @@ public class frmProducto extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 270, -1));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -93,13 +93,13 @@ public class frmProducto extends javax.swing.JPanel {
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
 
         jComboBox1.setEditable(true);
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 460, -1));
+        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 460, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código del Producto :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 120, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -128,7 +128,7 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Producto :");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
         jButton1.setText("Eliminar");
         bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 660, 120, 40));
@@ -140,7 +140,7 @@ public class frmProducto extends javax.swing.JPanel {
         bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 660, 120, 40));
 
         jButton4.setText("Buscar");
-        bg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, 120, 40));
+        bg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
 
         jButton5.setText("Editar");
         bg.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, 120, 40));
