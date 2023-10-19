@@ -11,7 +11,7 @@ import vistas.main.Main;
  *
  * @author dbpan
  */
-public class FIscalito_V2 {
+public class Fiscalito_V2 {
 
     /**
      * @param args the command line arguments
