@@ -1,5 +1,6 @@
 package vistas.main;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import vistas.form.*;
@@ -15,8 +16,10 @@ public class Main extends javax.swing.JFrame {
         setTitle("Fiscalito");
         init();
         // Establecer el tamaño deseado para la ventana principal
-         Dimension dimension = new Dimension(1345, 877);
+        Dimension dimension = new Dimension(1345, 877);
         this.setSize(dimension);
+        System.out.println("Color de fondo del menú: " + menu.getBackground());
+
 
 
     }
@@ -74,7 +77,6 @@ public class Main extends javax.swing.JFrame {
 
         background.setBackground(new java.awt.Color(245, 245, 245));
         background.setPreferredSize(new java.awt.Dimension(1324, 850));
-        background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelMenu.setBackground(new java.awt.Color(255, 255, 255));
         panelMenu.setFocusable(false);
@@ -100,23 +102,36 @@ public class Main extends javax.swing.JFrame {
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
-        background.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 226, 850));
 
         body.setOpaque(false);
         body.setLayout(new java.awt.BorderLayout());
-        background.add(body, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 0, 1120, 850));
+
+        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+        background.setLayout(backgroundLayout);
+        backgroundLayout.setHorizontalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(backgroundLayout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        backgroundLayout.setVerticalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         body.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(background, 1344, 1344, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
