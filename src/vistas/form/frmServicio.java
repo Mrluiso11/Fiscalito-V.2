@@ -37,7 +37,6 @@ private Container bgContainer;
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -54,6 +53,7 @@ private Container bgContainer;
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jTextField2 = new javax.swing.JTextField();
 
         setOpaque(false);
 
@@ -89,9 +89,6 @@ private Container bgContainer;
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Impuesto (%) :");
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
-
-        jComboBox1.setEditable(true);
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 132, 460, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -164,6 +161,7 @@ private Container bgContainer;
         jScrollPane1.setViewportView(jTextArea1);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 950, 150));
+        bg.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 450, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -196,7 +194,6 @@ private Container bgContainer;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
@@ -210,6 +207,7 @@ private Container bgContainer;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
