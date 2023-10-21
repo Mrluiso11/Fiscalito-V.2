@@ -268,7 +268,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel13.setText("Población:");
+        jLabel13.setText("Urbanización:");
         bg.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
         bg.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 390, -1));
 
@@ -280,7 +280,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("Casa / N:");
+        jLabel15.setText("Casa #:");
         bg.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N

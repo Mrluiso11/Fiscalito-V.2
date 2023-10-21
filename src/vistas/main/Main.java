@@ -81,7 +81,7 @@ public class Main extends javax.swing.JFrame {
         panelMenu.setBackground(new java.awt.Color(255, 255, 255));
         panelMenu.setFocusable(false);
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/main/logo_fiscalito_mini.png"))); // NOI18N
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/main/logo_fiscalito_final_mini.png"))); // NOI18N
         jToggleButton1.setBorderPainted(false);
         jToggleButton1.setContentAreaFilled(false);
         jToggleButton1.setFocusable(false);
