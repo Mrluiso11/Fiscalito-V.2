@@ -43,7 +43,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
         bg = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombreEmpresa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -148,7 +148,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Nombre comercial de la empresa");
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
-        bg.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 390, -1));
+        bg.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 390, -1));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -595,7 +595,6 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
@@ -617,5 +616,6 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtNombreEmpresa;
     // End of variables declaration//GEN-END:variables
 }
