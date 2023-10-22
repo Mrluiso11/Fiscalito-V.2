@@ -38,24 +38,24 @@ public class frmProducto extends javax.swing.JPanel {
         bg = new javax.swing.JPanel();
         jPTitle = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCodigoProducto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbxImpuesto = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        txtaDescripcion = new javax.swing.JTextArea();
+        txtNombreProducto = new javax.swing.JTextField();
+        cbxMagnitugM = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -84,7 +84,7 @@ public class frmProducto extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
+        bg.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -109,7 +109,7 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Magnitud de modelo : ");
         bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
-        bg.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 220, -1));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 220, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -117,8 +117,8 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel7.setText("Precio :");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0% ITBMS", "7% ITBMS", "10% ITBMS", "15% ITBMS" }));
-        bg.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 220, -1));
+        cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0% ITBMS", "7% ITBMS", "10% ITBMS", "15% ITBMS" }));
+        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 220, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -126,30 +126,30 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel8.setText("Producto :");
         bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
-        jButton1.setText("Eliminar");
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 660, 120, 40));
+        btnEliminar.setText("Eliminar");
+        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 660, 120, 40));
 
-        jButton2.setText("Nuevo");
-        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 660, 120, 40));
+        btnNuevo.setText("Nuevo");
+        bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 660, 120, 40));
 
-        jButton3.setText("Guardar");
-        bg.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 660, 120, 40));
+        btnGuardar.setText("Guardar");
+        bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 660, 120, 40));
 
-        jButton4.setText("Buscar");
-        bg.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
+        btnBuscar.setText("Buscar");
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
 
-        jButton5.setText("Editar");
-        bg.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, 120, 40));
+        btnEditar.setText("Editar");
+        bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, 120, 40));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtaDescripcion.setColumns(20);
+        txtaDescripcion.setRows(5);
+        jScrollPane1.setViewportView(txtaDescripcion);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 970, 140));
-        bg.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 450, -1));
+        bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 450, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
+        cbxMagnitugM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(cbxMagnitugM, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -168,13 +168,13 @@ public class frmProducto extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JComboBox<String> cbxImpuesto;
+    private javax.swing.JComboBox<String> cbxMagnitugM;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -184,9 +184,9 @@ public class frmProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPTitle;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtCodigoProducto;
+    private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextArea txtaDescripcion;
     // End of variables declaration//GEN-END:variables
 }

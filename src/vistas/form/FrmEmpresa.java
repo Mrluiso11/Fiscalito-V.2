@@ -45,89 +45,89 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtNombreEmpresa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtRCU = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtDV = new javax.swing.JTextField();
+        txtNombreComercialEmpresa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtTelefono1 = new javax.swing.JTextField();
+        txtTelefono2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtFax2 = new javax.swing.JTextField();
+        txtFax1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
+        lblLogoFactura = new javax.swing.JLabel();
+        lblFotoEmpresa = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtPais = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtProvincia = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        txtDistrito = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txtCorreguimiento = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        txtUrbanizacion = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        txtCalle = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
+        txtLocal = new javax.swing.JTextField();
+        txtNCasa = new javax.swing.JTextField();
+        txtPiso = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel20 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
+        txtRNombre = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
+        txtRSegundoNombre = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
+        txtRApellidoPaterno = new javax.swing.JTextField();
+        txtRApellidoMaterno = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
+        txtRCedula = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jTextField23 = new javax.swing.JTextField();
+        txtRDV = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
+        txtRTelefono1 = new javax.swing.JTextField();
+        txtRTelefono2 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
+        txtRCorreo = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtaOtros = new javax.swing.JTextArea();
         jLabel30 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel31 = new javax.swing.JLabel();
-        jTextField28 = new javax.swing.JTextField();
+        txtGNombre = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        jTextField29 = new javax.swing.JTextField();
+        txtGCedula = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        jTextField30 = new javax.swing.JTextField();
+        txtGDV = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
+        txtGTelefono1 = new javax.swing.JTextField();
+        txtGTelefono2 = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
-        jTextField33 = new javax.swing.JTextField();
+        txtGCorreo = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel42 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnActualizar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        txtaActividades = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
+        txtaObervaciones = new javax.swing.JTextArea();
         jPTitle = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -155,39 +155,39 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel4.setText("R.C.U");
         bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        jTextField3.setToolTipText("Asa");
-        bg.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 170, -1));
+        txtRCU.setToolTipText("Asa");
+        bg.add(txtRCU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 170, -1));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("D.V");
         bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
-        bg.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 160, -1));
-        bg.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 390, -1));
+        bg.add(txtDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 160, -1));
+        bg.add(txtNombreComercialEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 390, -1));
 
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Teléfonos:");
         bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, 20));
-        bg.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 180, -1));
-        bg.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 180, -1));
+        bg.add(txtTelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 180, -1));
+        bg.add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 180, -1));
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Fax:");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, -1));
-        bg.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, 160, -1));
-        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 160, -1));
+        bg.add(txtFax2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, 160, -1));
+        bg.add(txtFax1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 160, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setOpaque(false);
 
-        jLabel44.setText("jLabel44");
-        jLabel44.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblLogoFactura.setText("jLabel44");
+        lblLogoFactura.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel45.setText("jLabel45");
-        jLabel45.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblFotoEmpresa.setText("jLabel45");
+        lblFotoEmpresa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel47.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(102, 102, 102));
@@ -208,8 +208,8 @@ public class FrmEmpresa extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblLogoFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFotoEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -220,11 +220,11 @@ public class FrmEmpresa extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLogoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel47)
                 .addGap(37, 37, 37)
-                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFotoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel48)
                 .addContainerGap(105, Short.MAX_VALUE))
@@ -246,37 +246,37 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("País:");
         bg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
-        bg.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 180, -1));
+        bg.add(txtPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Provincia:");
         bg.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, -1));
-        bg.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 190, -1));
+        bg.add(txtProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 190, -1));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Distrito:");
         bg.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
-        bg.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 390, -1));
+        bg.add(txtDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 390, -1));
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setText("Correguimiento:");
         bg.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
-        bg.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 390, -1));
+        bg.add(txtCorreguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 390, -1));
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("Urbanización:");
         bg.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
-        bg.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 390, -1));
+        bg.add(txtUrbanizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 390, -1));
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setText("Calle:");
         bg.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
-        bg.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 390, -1));
+        bg.add(txtCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 390, -1));
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
@@ -292,9 +292,15 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Local");
         bg.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 530, -1, -1));
-        bg.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, 130, -1));
-        bg.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 110, -1));
-        bg.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 110, -1));
+
+        txtLocal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLocalActionPerformed(evt);
+            }
+        });
+        bg.add(txtLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, 130, -1));
+        bg.add(txtNCasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 110, -1));
+        bg.add(txtPiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 110, -1));
 
         jLabel18.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(102, 102, 102));
@@ -314,13 +320,13 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel20.setForeground(new java.awt.Color(102, 102, 102));
         jLabel20.setText("Primer Nombre");
         bg.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
-        bg.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 190, -1));
+        bg.add(txtRNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 190, -1));
 
         jLabel21.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setText("Segundo Nombre");
         bg.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, -1, -1));
-        bg.add(jTextField19, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 190, -1));
+        bg.add(txtRSegundoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 190, -1));
 
         jLabel22.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(102, 102, 102));
@@ -331,34 +337,34 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel23.setForeground(new java.awt.Color(102, 102, 102));
         jLabel23.setText("Apellido Materno");
         bg.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 110, -1));
-        bg.add(jTextField20, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 190, -1));
-        bg.add(jTextField21, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 190, -1));
+        bg.add(txtRApellidoPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 190, -1));
+        bg.add(txtRApellidoMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, 190, -1));
 
         jLabel24.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
         jLabel24.setText("Cédula:");
         bg.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, -1, -1));
-        bg.add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 190, -1));
+        bg.add(txtRCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 190, -1));
 
         jLabel25.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(102, 102, 102));
         jLabel25.setText("D.V:");
         bg.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 310, -1, 20));
-        bg.add(jTextField23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 190, -1));
+        bg.add(txtRDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 190, -1));
 
         jLabel26.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(102, 102, 102));
         jLabel26.setText("Teléfonos:");
         bg.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, -1, -1));
-        bg.add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, 190, -1));
-        bg.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, 190, -1));
+        bg.add(txtRTelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, 190, -1));
+        bg.add(txtRTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, 190, -1));
 
         jLabel27.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 102, 102));
         jLabel27.setText("Correo Electrónico");
         bg.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, -1, -1));
-        bg.add(jTextField26, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 400, -1));
-        bg.add(jTextField27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, 390, -1));
+        bg.add(txtRCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 400, -1));
+        bg.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, 390, -1));
 
         jLabel28.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel28.setText("Actividades:");
@@ -368,9 +374,9 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel29.setText("Observaciones:");
         bg.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 710, -1, -1));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txtaOtros.setColumns(20);
+        txtaOtros.setRows(5);
+        jScrollPane2.setViewportView(txtaOtros);
 
         bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 730, 390, 50));
 
@@ -387,32 +393,32 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel31.setForeground(new java.awt.Color(102, 102, 102));
         jLabel31.setText("Nombre:");
         bg.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, -1, -1));
-        bg.add(jTextField28, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 510, 400, -1));
+        bg.add(txtGNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 510, 400, -1));
 
         jLabel32.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(102, 102, 102));
         jLabel32.setText("Cédula:");
         bg.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 540, -1, -1));
-        bg.add(jTextField29, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, 180, -1));
+        bg.add(txtGCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, 180, -1));
 
         jLabel33.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(102, 102, 102));
         jLabel33.setText("D.V");
         bg.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 540, -1, -1));
-        bg.add(jTextField30, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 190, -1));
+        bg.add(txtGDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, 190, -1));
 
         jLabel34.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(102, 102, 102));
         jLabel34.setText("Teléfonos");
         bg.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 580, -1, 20));
-        bg.add(jTextField31, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 180, -1));
-        bg.add(jTextField32, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 600, 190, -1));
+        bg.add(txtGTelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 180, -1));
+        bg.add(txtGTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 600, 190, -1));
 
         jLabel35.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(102, 102, 102));
         jLabel35.setText("Correo Electrónico");
         bg.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, -1, 20));
-        bg.add(jTextField33, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, 400, -1));
+        bg.add(txtGCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, 400, -1));
 
         jSeparator4.setBackground(new java.awt.Color(84, 187, 251));
         jSeparator4.setForeground(new java.awt.Color(84, 187, 251));
@@ -436,13 +442,13 @@ public class FrmEmpresa extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton2.setText("Imprimir");
-        jButton2.setFocusPainted(false);
+        btnImprimir.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        btnImprimir.setText("Imprimir");
+        btnImprimir.setFocusPainted(false);
 
-        jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton3.setText("Limpiar");
-        jButton3.setFocusPainted(false);
+        btnLimpiar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setFocusPainted(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -452,8 +458,8 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -462,26 +468,26 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(btnActualizar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnImprimir)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnLimpiar)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
         btnActualizar.getAccessibleContext().setAccessibleParent(bg);
-        jButton2.getAccessibleContext().setAccessibleParent(bg);
+        btnImprimir.getAccessibleContext().setAccessibleParent(bg);
 
         bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 600, 170, 170));
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
+        txtaActividades.setColumns(20);
+        txtaActividades.setRows(5);
+        jScrollPane4.setViewportView(txtaActividades);
 
         bg.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 650, 390, 50));
 
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane5.setViewportView(jTextArea5);
+        txtaObervaciones.setColumns(20);
+        txtaObervaciones.setRows(5);
+        jScrollPane5.setViewportView(txtaObervaciones);
 
         bg.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 730, 390, 50));
 
@@ -525,12 +531,16 @@ public class FrmEmpresa extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLocalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -562,8 +572,6 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
@@ -581,41 +589,43 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lblFotoEmpresa;
+    private javax.swing.JLabel lblLogoFactura;
+    private javax.swing.JTextField txtCalle;
+    private javax.swing.JTextField txtCorreguimiento;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDV;
+    private javax.swing.JTextField txtDistrito;
+    private javax.swing.JTextField txtFax1;
+    private javax.swing.JTextField txtFax2;
+    private javax.swing.JTextField txtGCedula;
+    private javax.swing.JTextField txtGCorreo;
+    private javax.swing.JTextField txtGDV;
+    private javax.swing.JTextField txtGNombre;
+    private javax.swing.JTextField txtGTelefono1;
+    private javax.swing.JTextField txtGTelefono2;
+    private javax.swing.JTextField txtLocal;
+    private javax.swing.JTextField txtNCasa;
+    private javax.swing.JTextField txtNombreComercialEmpresa;
     private javax.swing.JTextField txtNombreEmpresa;
+    private javax.swing.JTextField txtPais;
+    private javax.swing.JTextField txtPiso;
+    private javax.swing.JTextField txtProvincia;
+    private javax.swing.JTextField txtRApellidoMaterno;
+    private javax.swing.JTextField txtRApellidoPaterno;
+    private javax.swing.JTextField txtRCU;
+    private javax.swing.JTextField txtRCedula;
+    private javax.swing.JTextField txtRCorreo;
+    private javax.swing.JTextField txtRDV;
+    private javax.swing.JTextField txtRNombre;
+    private javax.swing.JTextField txtRSegundoNombre;
+    private javax.swing.JTextField txtRTelefono1;
+    private javax.swing.JTextField txtRTelefono2;
+    private javax.swing.JTextField txtTelefono1;
+    private javax.swing.JTextField txtTelefono2;
+    private javax.swing.JTextField txtUrbanizacion;
+    private javax.swing.JTextArea txtaActividades;
+    private javax.swing.JTextArea txtaObervaciones;
+    private javax.swing.JTextArea txtaOtros;
     // End of variables declaration//GEN-END:variables
 }
