@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/Form_Empty.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/main/Main.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/frmConstantes.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/Form_Dashboard.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/FrmEmpresa.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/frmServicio.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/frmClientes.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/frmProducto.java</file>
+            <file>file:/D:/NetBeans/projects/Fiscalito_V.2/src/vistas/form/frmDocumentos.java</file>
+        </group>
     </open-files>
 </project-private>
