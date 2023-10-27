@@ -1,5 +1,7 @@
 package vistas.form;
 
+import conexion.*;
+
 public class Form_Dashboard extends javax.swing.JPanel {
 
     public Form_Dashboard() {
@@ -8,7 +10,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
     }
 
     private void init() {
-       
+
     }
 
     @SuppressWarnings("unchecked")
@@ -35,6 +37,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        Conexion = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1096, 934));
@@ -152,6 +155,14 @@ public class Form_Dashboard extends javax.swing.JPanel {
         });
         bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, 180, 160));
 
+        Conexion.setText("Conexion");
+        Conexion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConexionActionPerformed(evt);
+            }
+        });
+        bg.add(Conexion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 800, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,7 +179,13 @@ public class Form_Dashboard extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void ConexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConexionActionPerformed
+        PruebaConexion prueba = new PruebaConexion(); // Crear una instancia de la clase de prueba
+        prueba.main(null); // Llamar al método main
+    }//GEN-LAST:event_ConexionActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Conexion;
     private javax.swing.JPanel bg;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -18,7 +18,7 @@ public class Main extends javax.swing.JFrame {
         // Establecer el tamaño deseado para la ventana principal
         Dimension dimension = new Dimension(1345, 877);
         this.setSize(dimension);
-        System.out.println("Color de fondo del menú: " + menu.getBackground());
+        
 
 
 

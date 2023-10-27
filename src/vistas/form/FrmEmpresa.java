@@ -3,10 +3,17 @@ package vistas.form;
 import Style.CustomTabbedPaneUI;
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.border.*;
 import Style.Forms;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import controladores.*;
+import conexion.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -15,6 +22,8 @@ import java.awt.event.MouseEvent;
 public class FrmEmpresa extends javax.swing.JPanel {
 
     private Container bgContainer;
+    private BufferedImage selectedImage = null;
+    private BufferedImage selectedImageL = null;
 
     /**
      * Creates new form FrmEmpresa
@@ -29,6 +38,15 @@ public class FrmEmpresa extends javax.swing.JPanel {
 
 // Aplica el estilo personalizado al tabbedPane
         tabbedPane.setUI(new CustomTabbedPaneUI());
+        lblLogoFactura.setPreferredSize(new Dimension(154, 119));
+        lblLogoFactura.setMinimumSize(new Dimension(154, 119));
+        lblLogoFactura.setMaximumSize(new Dimension(154, 119));
+        lblLogoFactura.setSize(new Dimension(154, 119));
+
+        lblFotoEmpresa.setPreferredSize(new Dimension(154, 119));
+        lblFotoEmpresa.setMinimumSize(new Dimension(154, 119));
+        lblFotoEmpresa.setMaximumSize(new Dimension(154, 119));
+        lblFotoEmpresa.setSize(new Dimension(154, 119));
     }
 
     /**
@@ -183,11 +201,26 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setOpaque(false);
 
-        lblLogoFactura.setText("jLabel44");
+        lblLogoFactura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogoFactura.setText("Logo Factura");
         lblLogoFactura.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblLogoFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLogoFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoFacturaMouseClicked(evt);
+            }
+        });
 
-        lblFotoEmpresa.setText("jLabel45");
+        lblFotoEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFotoEmpresa.setText("Foto Empresa");
+        lblFotoEmpresa.setToolTipText("");
         lblFotoEmpresa.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblFotoEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblFotoEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblFotoEmpresaMouseClicked(evt);
+            }
+        });
 
         jLabel47.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(102, 102, 102));
@@ -208,13 +241,13 @@ public class FrmEmpresa extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogoFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFotoEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblFotoEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblLogoFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel48)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +263,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 110, 170, 470));
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, 180, 470));
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel8.setText("Dirección");
@@ -445,6 +478,11 @@ public class FrmEmpresa extends javax.swing.JPanel {
         btnImprimir.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         btnImprimir.setText("Imprimir");
         btnImprimir.setFocusPainted(false);
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -455,29 +493,29 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(22, 22, 22)
                 .addComponent(btnActualizar)
                 .addGap(18, 18, 18)
                 .addComponent(btnImprimir)
                 .addGap(18, 18, 18)
                 .addComponent(btnLimpiar)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         btnActualizar.getAccessibleContext().setAccessibleParent(bg);
         btnImprimir.getAccessibleContext().setAccessibleParent(bg);
 
-        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 600, 170, 170));
+        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 600, 180, 170));
 
         txtaActividades.setColumns(20);
         txtaActividades.setRows(5);
@@ -534,6 +572,132 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLocalActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        if (conexion != null) {
+            Insert_FrmEmpresa obj_insertEmpresa = new Insert_FrmEmpresa();
+            obj_insertEmpresa.setNombre_empresa(txtNombreEmpresa.getText().trim());
+            obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
+            obj_insertEmpresa.setRuc(txtRCU.getText().trim());
+            obj_insertEmpresa.setDv(txtDV.getText().trim());
+            obj_insertEmpresa.setPais(txtPais.getText().trim());
+            obj_insertEmpresa.setProvincia(txtProvincia.getText().trim());
+            obj_insertEmpresa.setDistrito(txtDistrito.getText().trim());
+            obj_insertEmpresa.setCorregimiento(txtCorreguimiento.getText().trim());
+            obj_insertEmpresa.setUrbanizacion(txtUrbanizacion.getText().trim());
+            obj_insertEmpresa.setCalle(txtCalle.getText().trim());
+            obj_insertEmpresa.setLocall(txtNCasa.getText().trim());
+            obj_insertEmpresa.setPiso(txtPiso.getText().trim());
+            obj_insertEmpresa.setCorreo_empresa(txtCorreo.getText().trim());
+            obj_insertEmpresa.setFax(txtFax1.getText().trim());
+            obj_insertEmpresa.setTelefono1(txtTelefono1.getText().trim());
+            obj_insertEmpresa.setTelefono2(txtTelefono2.getText().trim());
+            obj_insertEmpresa.setPrimer_nombre_representante(txtRNombre.getText().trim());
+            obj_insertEmpresa.setSegundo_nombre_representante(txtRSegundoNombre.getText().trim());
+            obj_insertEmpresa.setApellido_paterno_representante(txtRApellidoPaterno.getText().trim());
+            obj_insertEmpresa.setApellido_materno_representante(txtRApellidoMaterno.getText().trim());
+            obj_insertEmpresa.setCedula_representante(txtRCedula.getText().trim());
+            obj_insertEmpresa.setDv_representante(txtRDV.getText().trim());
+            obj_insertEmpresa.setTelefono1_representante(txtRTelefono1.getText().trim());
+            obj_insertEmpresa.setTelefono2_representante(txtRTelefono2.getText().trim());
+            obj_insertEmpresa.setCorreo_representante(txtRCorreo.getText().trim());
+            obj_insertEmpresa.setNombre_gerente(txtGNombre.getText().trim());
+            obj_insertEmpresa.setCedula_gerente(txtGCedula.getText().trim());
+            obj_insertEmpresa.setDv_gerente(txtGDV.getText().trim());
+            obj_insertEmpresa.setTelefono1_gerente(txtGTelefono1.getText().trim());
+            obj_insertEmpresa.setTelefono2_gerente(txtGTelefono2.getText().trim());
+            obj_insertEmpresa.setCorreo_gerente(txtGCorreo.getText().trim());
+            obj_insertEmpresa.setFecha_eliminacion(new Date());
+            obj_insertEmpresa.setFecha_modificacion(new Date());
+            // Insertar la imagen en la base de datos
+            
+            if (selectedImageL != null) {
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(selectedImageL, "jpg", baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    obj_insertEmpresa.setLogo_factura(imageBytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (selectedImage != null) {
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(selectedImage, "jpg", baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    obj_insertEmpresa.setImagenEmpresa(imageBytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("selectedImageL es nulo. Asegúrate de que la imagen esté cargada correctamente.");
+            }
+
+            obj_insertEmpresa.insertarEnBaseDeDatos(conexion);
+            Conexion.cerrarConexion(conexion);
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void lblLogoFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoFacturaMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(imageFilter);
+
+        int returnVal = fileChooser.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            try {
+                selectedImageL = ImageIO.read(selectedFile);
+
+                // Escalar la imagen para que se ajuste al tamaño del JLabel
+                int width = 154;
+                int height = 119;
+                Image scaledImage = selectedImageL.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+                // Mostrar la imagen en el JLabel
+                ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+                lblLogoFactura.setIcon(scaledImageIcon);
+
+                // No necesitas convertir la imagen a byte[] aquí, puedes hacerlo más tarde si es necesario
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_lblLogoFacturaMouseClicked
+
+    private void lblFotoEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFotoEmpresaMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(imageFilter);
+
+        int returnVal = fileChooser.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            try {
+                Image selectedImage = ImageIO.read(selectedFile);
+
+                // Escalar la imagen para que se ajuste al tamaño del JLabel
+                int width = 154;
+                int height = 119;
+                Image scaledImage = selectedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+                // Mostrar la imagen en el JLabel
+                ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+                lblFotoEmpresa.setIcon(scaledImageIcon);
+
+                // No necesitas convertir la imagen a byte[] aquí, puedes hacerlo más tarde si es necesario
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_lblFotoEmpresaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
