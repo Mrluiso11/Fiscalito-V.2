@@ -24,7 +24,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private Container bgContainer;
     private BufferedImage selectedImage = null;
     private BufferedImage selectedImageL = null;
-
+//ggg
     /**
      * Creates new form FrmEmpresa
      */
