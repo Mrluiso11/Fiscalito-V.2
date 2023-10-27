@@ -35,14 +35,9 @@ public class Form_Dashboard extends javax.swing.JPanel {
         lblDireccion = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-<<<<<<< HEAD
-        jLabel30 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        Conexion = new javax.swing.JButton();
-=======
         lblActividades = new javax.swing.JLabel();
-        imgFotoEmpresa = new javax.swing.JButton();
->>>>>>> 448f59017ef8d18720997d810e8ff096cc266994
+        Conexion = new javax.swing.JButton();
+        imgFotoEmpresa = new javax.swing.JLabel();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1096, 934));
@@ -73,7 +68,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("R.C.U:");
+        jLabel4.setText("R.U.C. :");
         bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -152,14 +147,6 @@ public class Form_Dashboard extends javax.swing.JPanel {
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, 860, 110));
 
-        imgFotoEmpresa.setText("Foto o Logo de Empresa");
-        imgFotoEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imgFotoEmpresaActionPerformed(evt);
-            }
-        });
-        bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, 180, 160));
-
         Conexion.setText("Conexion");
         Conexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +154,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
             }
         });
         bg.add(Conexion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 800, -1, -1));
+        bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 170, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -180,10 +168,6 @@ public class Form_Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void imgFotoEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imgFotoEmpresaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imgFotoEmpresaActionPerformed
-
     private void ConexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConexionActionPerformed
         PruebaConexion prueba = new PruebaConexion(); // Crear una instancia de la clase de prueba
         prueba.main(null); // Llamar al método main
@@ -192,7 +176,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Conexion;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton imgFotoEmpresa;
+    private javax.swing.JLabel imgFotoEmpresa;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

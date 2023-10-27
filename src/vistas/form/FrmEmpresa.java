@@ -63,7 +63,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtNombreEmpresa = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtRCU = new javax.swing.JTextField();
+        txtRUC = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtDV = new javax.swing.JTextField();
         txtNombreComercialEmpresa = new javax.swing.JTextField();
@@ -170,11 +170,11 @@ public class FrmEmpresa extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("R.C.U");
+        jLabel4.setText("R.U.C. / R.U.T.");
         bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        txtRCU.setToolTipText("Asa");
-        bg.add(txtRCU, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 170, -1));
+        txtRUC.setToolTipText("Asa");
+        bg.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 170, -1));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
@@ -579,7 +579,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
             Insert_FrmEmpresa obj_insertEmpresa = new Insert_FrmEmpresa();
             obj_insertEmpresa.setNombre_empresa(txtNombreEmpresa.getText().trim());
             obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
-            obj_insertEmpresa.setRuc(txtRCU.getText().trim());
+            obj_insertEmpresa.setRuc(txtRUC.getText().trim());
             obj_insertEmpresa.setDv(txtDV.getText().trim());
             obj_insertEmpresa.setPais(txtPais.getText().trim());
             obj_insertEmpresa.setProvincia(txtProvincia.getText().trim());
@@ -777,7 +777,6 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private javax.swing.JTextField txtProvincia;
     private javax.swing.JTextField txtRApellidoMaterno;
     private javax.swing.JTextField txtRApellidoPaterno;
-    private javax.swing.JTextField txtRCU;
     private javax.swing.JTextField txtRCedula;
     private javax.swing.JTextField txtRCorreo;
     private javax.swing.JTextField txtRDV;
@@ -785,6 +784,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private javax.swing.JTextField txtRSegundoNombre;
     private javax.swing.JTextField txtRTelefono1;
     private javax.swing.JTextField txtRTelefono2;
+    private javax.swing.JTextField txtRUC;
     private javax.swing.JTextField txtTelefono1;
     private javax.swing.JTextField txtTelefono2;
     private javax.swing.JTextField txtUrbanizacion;
