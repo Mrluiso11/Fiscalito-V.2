@@ -25,6 +25,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private BufferedImage selectedImage = null;
     private BufferedImage selectedImageL = null;
 //ggg
+
     /**
      * Creates new form FrmEmpresa
      */
@@ -577,27 +578,29 @@ public class FrmEmpresa extends javax.swing.JPanel {
         Connection conexion = Conexion.obtenerConexion();
         if (conexion != null) {
             Insert_FrmEmpresa obj_insertEmpresa = new Insert_FrmEmpresa();
-            obj_insertEmpresa.setNombre_empresa(txtNombreEmpresa.getText().trim());
+            obj_insertEmpresa.setNombre(txtNombreEmpresa.getText().trim());
             obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
-            obj_insertEmpresa.setRuc(txtRUC.getText().trim());
             obj_insertEmpresa.setDv(txtDV.getText().trim());
+            obj_insertEmpresa.setRuc(txtRUC.getText().trim());
             obj_insertEmpresa.setPais(txtPais.getText().trim());
             obj_insertEmpresa.setProvincia(txtProvincia.getText().trim());
             obj_insertEmpresa.setDistrito(txtDistrito.getText().trim());
             obj_insertEmpresa.setCorregimiento(txtCorreguimiento.getText().trim());
             obj_insertEmpresa.setUrbanizacion(txtUrbanizacion.getText().trim());
             obj_insertEmpresa.setCalle(txtCalle.getText().trim());
-            obj_insertEmpresa.setLocall(txtNCasa.getText().trim());
+            obj_insertEmpresa.setCasa(txtNCasa.getText().trim());
+            obj_insertEmpresa.setLocal(txtLocal.getText().trim());
             obj_insertEmpresa.setPiso(txtPiso.getText().trim());
             obj_insertEmpresa.setCorreo_empresa(txtCorreo.getText().trim());
-            obj_insertEmpresa.setFax(txtFax1.getText().trim());
             obj_insertEmpresa.setTelefono1(txtTelefono1.getText().trim());
             obj_insertEmpresa.setTelefono2(txtTelefono2.getText().trim());
+            obj_insertEmpresa.setFax1(txtFax1.getText().trim());
+            obj_insertEmpresa.setFax2(txtFax2.getText().trim());
             obj_insertEmpresa.setPrimer_nombre_representante(txtRNombre.getText().trim());
             obj_insertEmpresa.setSegundo_nombre_representante(txtRSegundoNombre.getText().trim());
-            obj_insertEmpresa.setApellido_paterno_representante(txtRApellidoPaterno.getText().trim());
-            obj_insertEmpresa.setApellido_materno_representante(txtRApellidoMaterno.getText().trim());
-            obj_insertEmpresa.setCedula_representante(txtRCedula.getText().trim());
+            obj_insertEmpresa.setApellido_paterno(txtRApellidoPaterno.getText().trim());
+            obj_insertEmpresa.setApellido_materno(txtRApellidoMaterno.getText().trim());
+            obj_insertEmpresa.setCedula(txtRCedula.getText().trim());
             obj_insertEmpresa.setDv_representante(txtRDV.getText().trim());
             obj_insertEmpresa.setTelefono1_representante(txtRTelefono1.getText().trim());
             obj_insertEmpresa.setTelefono2_representante(txtRTelefono2.getText().trim());
@@ -605,13 +608,13 @@ public class FrmEmpresa extends javax.swing.JPanel {
             obj_insertEmpresa.setNombre_gerente(txtGNombre.getText().trim());
             obj_insertEmpresa.setCedula_gerente(txtGCedula.getText().trim());
             obj_insertEmpresa.setDv_gerente(txtGDV.getText().trim());
-            obj_insertEmpresa.setTelefono1_gerente(txtGTelefono1.getText().trim());
-            obj_insertEmpresa.setTelefono2_gerente(txtGTelefono2.getText().trim());
+            obj_insertEmpresa.setTelefono_gerente1(txtGTelefono1.getText().trim());
+            obj_insertEmpresa.setTelefono_gerente2(txtGTelefono2.getText().trim());
             obj_insertEmpresa.setCorreo_gerente(txtGCorreo.getText().trim());
-            obj_insertEmpresa.setFecha_eliminacion(new Date());
-            obj_insertEmpresa.setFecha_modificacion(new Date());
+            obj_insertEmpresa.setOtros(txtaOtros.getText().trim());
+            obj_insertEmpresa.setFecha_actualizacion(new Date());
+
             // Insertar la imagen en la base de datos
-            
             if (selectedImageL != null) {
                 try {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -628,7 +631,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ImageIO.write(selectedImage, "jpg", baos);
                     byte[] imageBytes = baos.toByteArray();
-                    obj_insertEmpresa.setImagenEmpresa(imageBytes);
+                    obj_insertEmpresa.setLogo_empresa(imageBytes);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
