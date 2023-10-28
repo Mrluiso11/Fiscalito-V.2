@@ -1,4 +1,5 @@
 package controladores;
+
 import java.util.Date;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,6 +21,8 @@ public class Insert_FrmEmpresa {
     private String local;
     private String piso;
     private String correo_empresa;
+    private String actividades; // Nueva variable para actividades
+    private String observaciones; // Nueva variable para observaciones
     private String telefono1;
     private String telefono2;
     private String fax1;
@@ -59,6 +62,8 @@ public class Insert_FrmEmpresa {
             String local,
             String piso,
             String correo_empresa,
+            String actividades,
+            String observaciones,
             String telefono1,
             String telefono2,
             String fax1,
@@ -97,6 +102,8 @@ public class Insert_FrmEmpresa {
         this.local = local;
         this.piso = piso;
         this.correo_empresa = correo_empresa;
+        this.actividades = actividades; // Asignar el valor de actividades
+        this.observaciones = observaciones; // Asignar el valor de observaciones
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
         this.fax1 = fax1;
@@ -235,6 +242,22 @@ public class Insert_FrmEmpresa {
 
     public void setCorreo_empresa(String correo_empresa) {
         this.correo_empresa = correo_empresa;
+    }
+
+    public String getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(String actividades) {
+        this.actividades = actividades;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
     public String getTelefono1() {
@@ -421,20 +444,18 @@ public class Insert_FrmEmpresa {
         this.fecha_actualizacion = fecha_actualizacion;
     }
 
-   
 
-    
 
     public void insertarEnBaseDeDatos(Connection conexion) {
         System.out.println("Imagen empresa: " + logo_empresa);
         System.out.println("Logo factura: " + logo_factura);
         String query = "INSERT INTO tbl_empresa (ruc, nombre, nombre_comercial, dv, pais, provincia, distrito, "
-                + "corregimiento, urbanizacion, calle, casa, piso, local, correo_empresa, telefono1, telefono2, fax1, fax2, "
+                + "corregimiento, urbanizacion, calle, casa, piso, local, correo_empresa, actividades, observaciones, telefono1, telefono2, fax1, fax2, "
                 + "primer_nombre_representante, segundo_nombre_representante, apellido_paterno, "
                 + "apellido_materno, cedula, dv_representante, telefono1_representante, "
                 + "telefono2_representante, correo_representante, nombre_gerente, cedula_gerente, dv_gerente, "
                 + "telefono_gerente1, telefono_gerente2, correo_gerente, otros, logo_factura, logo_empresa, fecha_actualizacion) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, ruc);
@@ -451,29 +472,31 @@ public class Insert_FrmEmpresa {
             statement.setString(12, local);
             statement.setString(13, piso);
             statement.setString(14, correo_empresa);
-            statement.setString(15, telefono1);
-            statement.setString(16, telefono2);
-            statement.setString(17, fax1);
-            statement.setString(18, fax2);
-            statement.setString(19, primer_nombre_representante);
-            statement.setString(20, segundo_nombre_representante);
-            statement.setString(21, apellido_paterno);
-            statement.setString(22, apellido_materno);
-            statement.setString(23, cedula);
-            statement.setString(24, dv_representante);
-            statement.setString(25, telefono1_representante);
-            statement.setString(26, telefono2_representante);
-            statement.setString(27, correo_representante);
-            statement.setString(28, nombre_gerente);
-            statement.setString(29, cedula_gerente);
-            statement.setString(30, dv_gerente);
-            statement.setString(31, telefono_gerente1);
-            statement.setString(32, telefono_gerente2);
-            statement.setString(33, correo_gerente);
-            statement.setString(34, otros);
-            statement.setBytes(35, logo_factura);
-            statement.setBytes(36, logo_empresa);
-            statement.setDate(37, new java.sql.Date(fecha_actualizacion.getTime()));
+            statement.setString(15, actividades); 
+            statement.setString(16, observaciones);
+            statement.setString(17, telefono1);
+            statement.setString(18, telefono2);
+            statement.setString(19, fax1);
+            statement.setString(20, fax2);
+            statement.setString(21, primer_nombre_representante);
+            statement.setString(22, segundo_nombre_representante);
+            statement.setString(23, apellido_paterno);
+            statement.setString(24, apellido_materno);
+            statement.setString(25, cedula);
+            statement.setString(26, dv_representante);
+            statement.setString(27, telefono1_representante);
+            statement.setString(28, telefono2_representante);
+            statement.setString(29, correo_representante);
+            statement.setString(30, nombre_gerente);
+            statement.setString(31, cedula_gerente);
+            statement.setString(32, dv_gerente);
+            statement.setString(33, telefono_gerente1);
+            statement.setString(34, telefono_gerente2);
+            statement.setString(35, correo_gerente);
+            statement.setString(36, otros);
+            statement.setBytes(37, logo_factura);
+            statement.setBytes(38, logo_empresa);
+            statement.setDate(39, new java.sql.Date(fecha_actualizacion.getTime()));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

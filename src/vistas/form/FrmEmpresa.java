@@ -578,10 +578,10 @@ public class FrmEmpresa extends javax.swing.JPanel {
         Connection conexion = Conexion.obtenerConexion();
         if (conexion != null) {
             Insert_FrmEmpresa obj_insertEmpresa = new Insert_FrmEmpresa();
+            obj_insertEmpresa.setRuc(txtRUC.getText().trim());  
             obj_insertEmpresa.setNombre(txtNombreEmpresa.getText().trim());
             obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
             obj_insertEmpresa.setDv(txtDV.getText().trim());
-            obj_insertEmpresa.setRuc(txtRUC.getText().trim());
             obj_insertEmpresa.setPais(txtPais.getText().trim());
             obj_insertEmpresa.setProvincia(txtProvincia.getText().trim());
             obj_insertEmpresa.setDistrito(txtDistrito.getText().trim());
@@ -592,6 +592,8 @@ public class FrmEmpresa extends javax.swing.JPanel {
             obj_insertEmpresa.setLocal(txtLocal.getText().trim());
             obj_insertEmpresa.setPiso(txtPiso.getText().trim());
             obj_insertEmpresa.setCorreo_empresa(txtCorreo.getText().trim());
+            obj_insertEmpresa.setActividades(txtaActividades.getText().trim());
+            obj_insertEmpresa.setObservaciones(txtaObervaciones.getText().trim());
             obj_insertEmpresa.setTelefono1(txtTelefono1.getText().trim());
             obj_insertEmpresa.setTelefono2(txtTelefono2.getText().trim());
             obj_insertEmpresa.setFax1(txtFax1.getText().trim());
