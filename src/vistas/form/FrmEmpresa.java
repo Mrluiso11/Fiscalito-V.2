@@ -641,7 +641,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 System.out.println("selectedImageL es nulo. Asegúrate de que la imagen esté cargada correctamente.");
             }
 
-            obj_insertEmpresa.insertarEnBaseDeDatos(conexion);
+            obj_insertEmpresa.insertEmpresa(conexion);
             Conexion.cerrarConexion(conexion);
         }
     }//GEN-LAST:event_btnImprimirActionPerformed

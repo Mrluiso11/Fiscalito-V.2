@@ -446,7 +446,7 @@ public class Insert_FrmEmpresa {
 
 
 
-    public void insertarEnBaseDeDatos(Connection conexion) {
+    public void insertEmpresa(Connection conexion) {
         System.out.println("Imagen empresa: " + logo_empresa);
         System.out.println("Logo factura: " + logo_factura);
         String query = "INSERT INTO tbl_empresa (ruc, nombre, nombre_comercial, dv, pais, provincia, distrito, "

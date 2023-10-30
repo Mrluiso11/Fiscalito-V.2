@@ -3,8 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package vistas.form;
+
 import Style.Forms;
+import conexion.Conexion;
 import java.awt.Container;
+import java.sql.Connection;
+import controladores.*;
 
 /**
  *
@@ -19,9 +23,9 @@ public class frmClientes extends javax.swing.JPanel {
      */
     public frmClientes() {
         initComponents();
-       bgContainer = this;
+        bgContainer = this;
         Forms formsPanel = new Forms(bgContainer, jPTitle);
-      
+
     }
 
     /**
@@ -136,6 +140,11 @@ public class frmClientes extends javax.swing.JPanel {
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 710, 120, 40));
 
         btnBuscar.setBackground(new java.awt.Color(102, 153, 255));
@@ -227,6 +236,22 @@ public class frmClientes extends javax.swing.JPanel {
     private void txttelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefono1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttelefono1ActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        if (conexion != null) {
+            Insert_FrmClientes obj_insertClientes = new Insert_FrmClientes();
+            obj_insertClientes.setRuc(txtRUC.getText().trim());
+            obj_insertClientes.setNombre(txtNombreCliente.getText().trim());
+            obj_insertClientes.setDireccion(txtareaDireccion.getText().trim());
+            obj_insertClientes.setTelefono1(txttelefono1.getText().trim());
+            obj_insertClientes.setTelefono2(txtTelefono2.getText().trim());
+            obj_insertClientes.setCorreo(txtEmail.getText().trim());
+            obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
+            obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
+            Conexion.cerrarConexion(conexion);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
