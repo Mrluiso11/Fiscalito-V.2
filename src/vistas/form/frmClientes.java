@@ -9,6 +9,8 @@ import conexion.Conexion;
 import java.awt.Container;
 import java.sql.Connection;
 import controladores.*;
+import java.util.ArrayList;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,6 +20,7 @@ public class frmClientes extends javax.swing.JPanel {
 
     private Container bgContainer;
     String operacion = "";
+    private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
 
     /**
      * Creates new form frmClientes
@@ -26,6 +29,12 @@ public class frmClientes extends javax.swing.JPanel {
         initComponents();
         bgContainer = this;
         Forms formsPanel = new Forms(bgContainer, jPTitle);
+        inhabilitar();
+        // Agregar campos de texto a la lista
+        camposDeTexto.add(txtNombreCliente);
+        camposDeTexto.add(txttelefono1);
+        camposDeTexto.add(txtTelefono2);
+        camposDeTexto.add(txtEmail);
 
     }
 
@@ -240,6 +249,13 @@ public class frmClientes extends javax.swing.JPanel {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+public void limpiarCampos() {
+        for (JTextField campo : camposDeTexto) {
+            campo.setText("");
+        }
+        txtareaDireccion.setText("");
+        txtaObservaciones.setText("");
+    }
 
     private void txtTelefono2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono2ActionPerformed
         // TODO add your handling code here:
@@ -252,6 +268,17 @@ public class frmClientes extends javax.swing.JPanel {
             cliente.setRuc(txtRUC.getText().trim());
             cliente.selectClientePorRuc(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
+        }
+
+        if (cliente.getNombre() != null) {
+            // Cliente encontrado, habilita los botones
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            btnNuevo.setEnabled(false);
+        } else {
+            // Cliente no encontrado, deshabilita los botones
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
         }
 
         // Actualiza los campos de texto y áreas de texto en el formulario aquí
@@ -271,7 +298,7 @@ public class frmClientes extends javax.swing.JPanel {
         Connection conexion = Conexion.obtenerConexion();
         Clientes obj_insertClientes = new Clientes();
         if (conexion != null) {
-            
+
             obj_insertClientes.setRuc(txtRUC.getText().trim());
             obj_insertClientes.setNombre(txtNombreCliente.getText().trim());
             obj_insertClientes.setDireccion(txtareaDireccion.getText().trim());
@@ -281,9 +308,13 @@ public class frmClientes extends javax.swing.JPanel {
             obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
             if (operacion.equals("nuevo")) {
                 obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
-            }else if (operacion.equals("modificar")){
-                 obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
-            
+                inhabilitar();
+                limpiarCampos();
+            } else if (operacion.equals("modificar")) {
+                obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
+                inhabilitar();
+                limpiarCampos();
+
             }
 
             Conexion.cerrarConexion(conexion);
@@ -297,15 +328,54 @@ public class frmClientes extends javax.swing.JPanel {
             cliente.setRuc(txtRUC.getText().trim());
             cliente.deleteClientePorRuc(conexion);
             Conexion.cerrarConexion(conexion);
+            limpiarCampos();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    public void inhabilitar() {
+        lblNumCliente.setEnabled(false);
+        txtNombreCliente.setEnabled(false);
+        txtareaDireccion.setEnabled(false);
+        txttelefono1.setEnabled(false);
+        txtTelefono2.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtaObservaciones.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnBuscar.setEnabled(true);
+        btnNuevo.setEnabled(true);
+    }
+
+    public void habilitar() {
+        lblNumCliente.setEnabled(true);
+        txtNombreCliente.setEnabled(true);
+        txtareaDireccion.setEnabled(true);
+        txttelefono1.setEnabled(true);
+        txtTelefono2.setEnabled(true);
+        txtEmail.setEnabled(true);
+        txtaObservaciones.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }
+
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         operacion = "modificar";
+        habilitar();
+        btnEditar.setEnabled(false);
+        btnBuscar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         operacion = "nuevo";
+        habilitar();
+        btnBuscar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
 
