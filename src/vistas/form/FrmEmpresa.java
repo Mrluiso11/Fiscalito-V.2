@@ -614,7 +614,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
             obj_insertEmpresa.setTelefono_gerente2(txtGTelefono2.getText().trim());
             obj_insertEmpresa.setCorreo_gerente(txtGCorreo.getText().trim());
             obj_insertEmpresa.setOtros(txtaOtros.getText().trim());
-            obj_insertEmpresa.setFecha_actualizacion(new Date());
+            //obj_insertEmpresa.setFecha_actualizacion(new Date());
 
             // Insertar la imagen en la base de datos
             if (selectedImageL != null) {

@@ -36,7 +36,6 @@ public class Form_Dashboard extends javax.swing.JPanel {
         lblTelefono = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblActividades = new javax.swing.JLabel();
-        Conexion = new javax.swing.JButton();
         imgFotoEmpresa = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -146,14 +145,6 @@ public class Form_Dashboard extends javax.swing.JPanel {
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, 860, 110));
-
-        Conexion.setText("Conexion");
-        Conexion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConexionActionPerformed(evt);
-            }
-        });
-        bg.add(Conexion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 800, -1, -1));
         bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 170, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -168,13 +159,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ConexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConexionActionPerformed
-        PruebaConexion prueba = new PruebaConexion(); // Crear una instancia de la clase de prueba
-        prueba.main(null); // Llamar al método main
-    }//GEN-LAST:event_ConexionActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Conexion;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel imgFotoEmpresa;
     private javax.swing.JLabel jLabel2;

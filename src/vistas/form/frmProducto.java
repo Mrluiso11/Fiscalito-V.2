@@ -148,7 +148,7 @@ public class frmProducto extends javax.swing.JPanel {
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 970, 140));
         bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 450, -1));
 
-        cbxMagnitugM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas", " ", " ", " " }));
+        cbxMagnitugM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas" }));
         bg.add(cbxMagnitugM, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

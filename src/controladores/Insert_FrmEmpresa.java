@@ -454,8 +454,8 @@ public class Insert_FrmEmpresa {
                 + "primer_nombre_representante, segundo_nombre_representante, apellido_paterno, "
                 + "apellido_materno, cedula, dv_representante, telefono1_representante, "
                 + "telefono2_representante, correo_representante, nombre_gerente, cedula_gerente, dv_gerente, "
-                + "telefono_gerente1, telefono_gerente2, correo_gerente, otros, logo_factura, logo_empresa, fecha_actualizacion) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "telefono_gerente1, telefono_gerente2, correo_gerente, otros, logo_factura, logo_empresa) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, ruc);
@@ -469,8 +469,8 @@ public class Insert_FrmEmpresa {
             statement.setString(9, urbanizacion);
             statement.setString(10, calle);
             statement.setString(11, casa);
-            statement.setString(12, local);
-            statement.setString(13, piso);
+            statement.setString(12, piso);
+            statement.setString(13, local);
             statement.setString(14, correo_empresa);
             statement.setString(15, actividades); 
             statement.setString(16, observaciones);
@@ -496,7 +496,7 @@ public class Insert_FrmEmpresa {
             statement.setString(36, otros);
             statement.setBytes(37, logo_factura);
             statement.setBytes(38, logo_empresa);
-            statement.setDate(39, new java.sql.Date(fecha_actualizacion.getTime()));
+           // statement.setDate(39, new java.sql.Date(fecha_actualizacion.getTime()));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

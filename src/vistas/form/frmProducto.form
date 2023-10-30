@@ -314,7 +314,7 @@
         <Component class="javax.swing.JComboBox" name="cbxMagnitugM">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="24">
+              <StringArray count="21">
                 <StringItem index="0" value="Unidades"/>
                 <StringItem index="1" value="Piezas"/>
                 <StringItem index="2" value="Docenas"/>
@@ -336,9 +336,6 @@
                 <StringItem index="18" value="P&#xe1;ginas"/>
                 <StringItem index="19" value="Resmas"/>
                 <StringItem index="20" value="Toneladas"/>
-                <StringItem index="21" value=" "/>
-                <StringItem index="22" value=" "/>
-                <StringItem index="23" value=" "/>
               </StringArray>
             </Property>
           </Properties>
