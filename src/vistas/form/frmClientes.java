@@ -230,7 +230,22 @@ public class frmClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTelefono2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        Connection conexion = Conexion.obtenerConexion();
+        Select_frmClientes select = new Select_frmClientes();
+        if (conexion != null) {
+            
+            select.setRuc(txtRUC.getText().trim());
+            select.selectClientePorRuc(conexion); // Llama al método para recuperar los datos
+            Conexion.cerrarConexion(conexion);
+        }
+
+        // Actualiza los campos de texto y áreas de texto en el formulario aquí
+        txtNombreCliente.setText(select.getNombre()); // Asumiendo que Select_frmClientes tiene un método getNombre
+        txtareaDireccion.setText(select.getDireccion());
+        txttelefono1.setText(select.getTelefono1());
+        txtTelefono2.setText(select.getTelefono2());
+        txtEmail.setText(select.getCorreo());
+        txtaObservaciones.setText(select.getObservaciones());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txttelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefono1ActionPerformed
