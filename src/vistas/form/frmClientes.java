@@ -17,6 +17,7 @@ import controladores.*;
 public class frmClientes extends javax.swing.JPanel {
 
     private Container bgContainer;
+    String operacion = "";
 
     /**
      * Creates new form frmClientes
@@ -128,12 +129,22 @@ public class frmClientes extends javax.swing.JPanel {
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 710, 120, 40));
 
         btnNuevo.setBackground(new java.awt.Color(102, 153, 255));
         btnNuevo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 710, 120, 40));
 
         btnGuardar.setBackground(new java.awt.Color(102, 153, 255));
@@ -181,6 +192,11 @@ public class frmClientes extends javax.swing.JPanel {
         btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 710, 120, 40));
 
         txtareaDireccion.setColumns(20);
@@ -231,21 +247,20 @@ public class frmClientes extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         Connection conexion = Conexion.obtenerConexion();
-        Select_frmClientes select = new Select_frmClientes();
+        Clientes cliente = new Clientes(); // Crear un objeto de la clase Clientes
         if (conexion != null) {
-            
-            select.setRuc(txtRUC.getText().trim());
-            select.selectClientePorRuc(conexion); // Llama al método para recuperar los datos
+            cliente.setRuc(txtRUC.getText().trim());
+            cliente.selectClientePorRuc(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
         }
 
         // Actualiza los campos de texto y áreas de texto en el formulario aquí
-        txtNombreCliente.setText(select.getNombre()); // Asumiendo que Select_frmClientes tiene un método getNombre
-        txtareaDireccion.setText(select.getDireccion());
-        txttelefono1.setText(select.getTelefono1());
-        txtTelefono2.setText(select.getTelefono2());
-        txtEmail.setText(select.getCorreo());
-        txtaObservaciones.setText(select.getObservaciones());
+        txtNombreCliente.setText(cliente.getNombre());
+        txtareaDireccion.setText(cliente.getDireccion());
+        txttelefono1.setText(cliente.getTelefono1());
+        txtTelefono2.setText(cliente.getTelefono2());
+        txtEmail.setText(cliente.getCorreo());
+        txtaObservaciones.setText(cliente.getObservaciones());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txttelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefono1ActionPerformed
@@ -254,8 +269,9 @@ public class frmClientes extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Connection conexion = Conexion.obtenerConexion();
+        Clientes obj_insertClientes = new Clientes();
         if (conexion != null) {
-            Insert_FrmClientes obj_insertClientes = new Insert_FrmClientes();
+            
             obj_insertClientes.setRuc(txtRUC.getText().trim());
             obj_insertClientes.setNombre(txtNombreCliente.getText().trim());
             obj_insertClientes.setDireccion(txtareaDireccion.getText().trim());
@@ -263,10 +279,34 @@ public class frmClientes extends javax.swing.JPanel {
             obj_insertClientes.setTelefono2(txtTelefono2.getText().trim());
             obj_insertClientes.setCorreo(txtEmail.getText().trim());
             obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
-            obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
+            if (operacion.equals("nuevo")) {
+                obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
+            }else if (operacion.equals("modificar")){
+                 obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
+            
+            }
+
             Conexion.cerrarConexion(conexion);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        Clientes cliente = new Clientes(); // Crear un objeto de la clase Clientes
+        if (conexion != null) {
+            cliente.setRuc(txtRUC.getText().trim());
+            cliente.deleteClientePorRuc(conexion);
+            Conexion.cerrarConexion(conexion);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        operacion = "modificar";
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        operacion = "nuevo";
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
