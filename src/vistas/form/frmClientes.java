@@ -9,8 +9,13 @@ import conexion.Conexion;
 import java.awt.Container;
 import java.sql.Connection;
 import controladores.*;
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +26,8 @@ public class frmClientes extends javax.swing.JPanel {
     private Container bgContainer;
     String operacion = "";
     private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
+    Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
+
 
     /**
      * Creates new form frmClientes
@@ -35,7 +42,8 @@ public class frmClientes extends javax.swing.JPanel {
         camposDeTexto.add(txttelefono1);
         camposDeTexto.add(txtTelefono2);
         camposDeTexto.add(txtEmail);
-
+        camposDeTexto.add(txtRUC);
+        
     }
 
     /**
@@ -297,27 +305,38 @@ public void limpiarCampos() {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Connection conexion = Conexion.obtenerConexion();
         Clientes obj_insertClientes = new Clientes();
-        if (conexion != null) {
+        if (txtRUC.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El R.C.U no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            txtRUC.requestFocus();
+            txtRUC.setBorder(BorderFactory.createLineBorder(Color.RED));
+        } else {
+            if (conexion != null) {
 
-            obj_insertClientes.setRuc(txtRUC.getText().trim());
-            obj_insertClientes.setNombre(txtNombreCliente.getText().trim());
-            obj_insertClientes.setDireccion(txtareaDireccion.getText().trim());
-            obj_insertClientes.setTelefono1(txttelefono1.getText().trim());
-            obj_insertClientes.setTelefono2(txtTelefono2.getText().trim());
-            obj_insertClientes.setCorreo(txtEmail.getText().trim());
-            obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
-            if (operacion.equals("nuevo")) {
-                obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
-                inhabilitar();
-                limpiarCampos();
-            } else if (operacion.equals("modificar")) {
-                obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
-                inhabilitar();
-                limpiarCampos();
+                obj_insertClientes.setRuc(txtRUC.getText().trim());
+                obj_insertClientes.setNombre(txtNombreCliente.getText().trim());
+                obj_insertClientes.setDireccion(txtareaDireccion.getText().trim());
+                obj_insertClientes.setTelefono1(txttelefono1.getText().trim());
+                obj_insertClientes.setTelefono2(txtTelefono2.getText().trim());
+                obj_insertClientes.setCorreo(txtEmail.getText().trim());
+                obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
+                if (operacion.equals("nuevo")) {
+                    obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
+                    inhabilitar();
+                    limpiarCampos();
 
+                    // Notificar al usuario
+                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                } else if (operacion.equals("modificar")) {
+                    obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
+                    inhabilitar();
+                    limpiarCampos();
+
+                    // Notificar al usuario
+                    JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+                Conexion.cerrarConexion(conexion);
             }
-
-            Conexion.cerrarConexion(conexion);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

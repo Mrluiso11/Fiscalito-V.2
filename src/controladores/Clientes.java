@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -154,7 +155,7 @@ public class Clientes {
                 observaciones = resultSet.getString("observaciones");
 
             } else {
-                System.out.println("Cliente con RUC " + ruc + " no encontrado.");
+                JOptionPane.showMessageDialog(null, "El R.C.U "+ ruc +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,11 +174,7 @@ public class Clientes {
         statement.setString(7, cliente.getRuc());
 
         int filasAfectadas = statement.executeUpdate();
-        if (filasAfectadas > 0) {
-            System.out.println("Cliente con RUC " + cliente.getRuc() + " actualizado exitosamente.");
-        } else {
-            System.out.println("Cliente con RUC " + cliente.getRuc() + " no encontrado o no pudo ser actualizado.");
-        }
+ 
     } catch (SQLException e) {
         e.printStackTrace();
     }
