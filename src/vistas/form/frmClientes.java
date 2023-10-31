@@ -308,7 +308,6 @@ public void limpiarCampos() {
         if (txtRUC.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El R.C.U no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
             txtRUC.requestFocus();
-            txtRUC.setBorder(BorderFactory.createLineBorder(Color.RED));
         } else {
             if (conexion != null) {
 
@@ -363,7 +362,7 @@ public void limpiarCampos() {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
-        btnNuevo.setEnabled(true);
+        
     }
 
     public void habilitar() {

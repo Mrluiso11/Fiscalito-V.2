@@ -161,6 +161,8 @@ public class Clientes {
             e.printStackTrace();
         }
     }
+    
+    //metodo update
     public void updateClientePorRuc(Connection conexion, Clientes cliente) {
     String query = "UPDATE tbl_cliente SET nombre = ?, direccion = ?, telefono1 = ?, telefono2 = ?, correo = ?, observaciones = ? WHERE ruc = ?";
 
