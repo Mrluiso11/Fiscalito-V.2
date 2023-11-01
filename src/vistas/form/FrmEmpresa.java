@@ -22,9 +22,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FrmEmpresa extends javax.swing.JPanel {
 
     private Container bgContainer;
-    private BufferedImage selectedImage = null;
+    private BufferedImage localSelectedImage  = null;
     private BufferedImage selectedImageL = null;
-//ggg
+    Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
 
     /**
      * Creates new form FrmEmpresa
@@ -577,8 +577,8 @@ public class FrmEmpresa extends javax.swing.JPanel {
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         Connection conexion = Conexion.obtenerConexion();
         if (conexion != null) {
-            Insert_FrmEmpresa obj_insertEmpresa = new Insert_FrmEmpresa();
-            obj_insertEmpresa.setRuc(txtRUC.getText().trim());  
+            Empresa obj_insertEmpresa = new Empresa();
+            obj_insertEmpresa.setRuc(txtRUC.getText().trim());
             obj_insertEmpresa.setNombre(txtNombreEmpresa.getText().trim());
             obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
             obj_insertEmpresa.setDv(txtDV.getText().trim());
@@ -628,10 +628,10 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 }
             }
 
-            if (selectedImage != null) {
+            if (localSelectedImage  != null) {
                 try {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(selectedImage, "jpg", baos);
+                    ImageIO.write(localSelectedImage , "jpg", baos);
                     byte[] imageBytes = baos.toByteArray();
                     obj_insertEmpresa.setLogo_empresa(imageBytes);
                 } catch (IOException e) {
@@ -641,7 +641,15 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 System.out.println("selectedImageL es nulo. Asegúrate de que la imagen esté cargada correctamente.");
             }
 
-            obj_insertEmpresa.insertEmpresa(conexion);
+            // Attempt to insert data
+            if (obj_insertEmpresa.insertEmpresa(conexion)) {
+                // Show a success message using JOptionPane
+                JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+            } else {
+                // Show an error message using JOptionPane
+                JOptionPane.showMessageDialog(this, "Error al insertar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
             Conexion.cerrarConexion(conexion);
         }
     }//GEN-LAST:event_btnImprimirActionPerformed
@@ -686,18 +694,18 @@ public class FrmEmpresa extends javax.swing.JPanel {
             File selectedFile = fileChooser.getSelectedFile();
 
             try {
-                Image selectedImage = ImageIO.read(selectedFile);
+                localSelectedImage = ImageIO.read(selectedFile); // Cambia el nombre de la variable local
 
                 // Escalar la imagen para que se ajuste al tamaño del JLabel
                 int width = 154;
                 int height = 119;
-                Image scaledImage = selectedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                Image scaledImage = localSelectedImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
                 // Mostrar la imagen en el JLabel
                 ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
                 lblFotoEmpresa.setIcon(scaledImageIcon);
 
-                // No necesitas convertir la imagen a byte[] aquí, puedes hacerlo más tarde si es necesario
+                // Si deseas convertir la imagen a byte[] para guardarla en la base de datos, puedes hacerlo aquí
             } catch (IOException e) {
                 e.printStackTrace();
             }

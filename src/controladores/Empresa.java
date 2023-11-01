@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-public class Insert_FrmEmpresa {
+public class Empresa {
 
     private String nombre;
     private String nombre_comercial;
@@ -47,7 +47,7 @@ public class Insert_FrmEmpresa {
     private byte[] logo_empresa;
     private Date fecha_actualizacion;
 
-    public Insert_FrmEmpresa(
+    public Empresa(
             String nombre,
             String nombre_comercial,
             String dv,
@@ -87,7 +87,7 @@ public class Insert_FrmEmpresa {
             byte[] logo_factura,
             byte[] logo_empresa,
             Date fecha_actualizacion) {
-       
+
         this.nombre = nombre;
         this.nombre_comercial = nombre_comercial;
         this.dv = dv;
@@ -129,7 +129,7 @@ public class Insert_FrmEmpresa {
         this.fecha_actualizacion = fecha_actualizacion;
     }
 
-    public Insert_FrmEmpresa() {
+    public Empresa() {
     }
 
     public String getNombre() {
@@ -444,11 +444,11 @@ public class Insert_FrmEmpresa {
         this.fecha_actualizacion = fecha_actualizacion;
     }
 
-
-
-    public void insertEmpresa(Connection conexion) {
-        System.out.println("Imagen empresa: " + logo_empresa);
-        System.out.println("Logo factura: " + logo_factura);
+    public boolean insertEmpresa(Connection connection) {
+        boolean insercionExitosa = false;
+        System.out.println("Logo factura "+logo_factura);
+        System.out.println("Logo empresa "+logo_empresa);    
+             
         String query = "INSERT INTO tbl_empresa (ruc, nombre, nombre_comercial, dv, pais, provincia, distrito, "
                 + "corregimiento, urbanizacion, calle, casa, piso, local, correo_empresa, actividades, observaciones, telefono1, telefono2, fax1, fax2, "
                 + "primer_nombre_representante, segundo_nombre_representante, apellido_paterno, "
@@ -457,7 +457,7 @@ public class Insert_FrmEmpresa {
                 + "telefono_gerente1, telefono_gerente2, correo_gerente, otros, logo_factura, logo_empresa) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, ruc);
             statement.setString(2, nombre);
             statement.setString(3, nombre_comercial);
@@ -472,7 +472,7 @@ public class Insert_FrmEmpresa {
             statement.setString(12, piso);
             statement.setString(13, local);
             statement.setString(14, correo_empresa);
-            statement.setString(15, actividades); 
+            statement.setString(15, actividades);
             statement.setString(16, observaciones);
             statement.setString(17, telefono1);
             statement.setString(18, telefono2);
@@ -496,10 +496,19 @@ public class Insert_FrmEmpresa {
             statement.setString(36, otros);
             statement.setBytes(37, logo_factura);
             statement.setBytes(38, logo_empresa);
-           // statement.setDate(39, new java.sql.Date(fecha_actualizacion.getTime()));
-            statement.executeUpdate();
+            // ... (Establece los valores de los parámetros restantes)
+
+            // Ejecuta la inserción
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                insercionExitosa = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return insercionExitosa;
     }
+
 }
