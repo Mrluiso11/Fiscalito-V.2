@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -155,28 +157,66 @@ public class Clientes {
                 observaciones = resultSet.getString("observaciones");
 
             } else {
-                JOptionPane.showMessageDialog(null, "El R.C.U "+ ruc +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El R.C.U " + ruc + " no Existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     //metodo update
     public void updateClientePorRuc(Connection conexion, Clientes cliente) {
-    String query = "UPDATE tbl_cliente SET nombre = ?, direccion = ?, telefono1 = ?, telefono2 = ?, correo = ?, observaciones = ? WHERE ruc = ?";
+        String query = "UPDATE tbl_cliente SET nombre = ?, direccion = ?, telefono1 = ?, telefono2 = ?, correo = ?, observaciones = ? WHERE ruc = ?";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, cliente.getNombre());
+            statement.setString(2, cliente.getDireccion());
+            statement.setString(3, cliente.getTelefono1());
+            statement.setString(4, cliente.getTelefono2());
+            statement.setString(5, cliente.getCorreo());
+            statement.setString(6, cliente.getObservaciones());
+            statement.setString(7, cliente.getRuc());
+
+            int filasAfectadas = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+//Lista de nombres
+
+    public List<String> getAllNombres(Connection conexion) {
+        List<String> nombres = new ArrayList<>();
+        String query = "SELECT nombre FROM tbl_cliente";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String nombre = resultSet.getString("nombre");
+                nombres.add(nombre);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nombres;
+    }
+
+  public void InfoClientePorNombre(Connection conexion) {
+    String query = "SELECT ruc, telefono1, telefono2, direccion FROM tbl_cliente WHERE nombre = ?";
 
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
-        statement.setString(1, cliente.getNombre());
-        statement.setString(2, cliente.getDireccion());
-        statement.setString(3, cliente.getTelefono1());
-        statement.setString(4, cliente.getTelefono2());
-        statement.setString(5, cliente.getCorreo());
-        statement.setString(6, cliente.getObservaciones());
-        statement.setString(7, cliente.getRuc());
+        statement.setString(1, nombre); // Establece el nombre en lugar de ruc
 
-        int filasAfectadas = statement.executeUpdate();
- 
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            ruc = resultSet.getString("ruc");
+            direccion = resultSet.getString("direccion");
+            telefono1 = resultSet.getString("telefono1");
+            telefono2 = resultSet.getString("telefono2");
+
+        } 
     } catch (SQLException e) {
         e.printStackTrace();
     }

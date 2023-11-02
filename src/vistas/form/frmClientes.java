@@ -16,6 +16,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -27,7 +28,7 @@ public class frmClientes extends javax.swing.JPanel {
     String operacion = "";
     private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
     Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
-
+    private JTextField[] textFieldsToStyle = new JTextField[4];
 
     /**
      * Creates new form frmClientes
@@ -36,6 +37,11 @@ public class frmClientes extends javax.swing.JPanel {
         initComponents();
         bgContainer = this;
         Forms formsPanel = new Forms(bgContainer, jPTitle);
+        textFieldsToStyle[0] = txtNombreCliente;
+        textFieldsToStyle[1] = txttelefono1;
+        textFieldsToStyle[2] = txtTelefono2;
+        textFieldsToStyle[3] = txtEmail;
+
         inhabilitar();
         // Agregar campos de texto a la lista
         camposDeTexto.add(txtNombreCliente);
@@ -43,7 +49,7 @@ public class frmClientes extends javax.swing.JPanel {
         camposDeTexto.add(txtTelefono2);
         camposDeTexto.add(txtEmail);
         camposDeTexto.add(txtRUC);
-        
+
     }
 
     /**
@@ -321,6 +327,7 @@ public void limpiarCampos() {
                 if (operacion.equals("nuevo")) {
                     obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
                     inhabilitar();
+                    btnNuevo.setEnabled(true);
                     limpiarCampos();
 
                     // Notificar al usuario
@@ -328,6 +335,7 @@ public void limpiarCampos() {
                 } else if (operacion.equals("modificar")) {
                     obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
                     inhabilitar();
+                    btnNuevo.setEnabled(true);
                     limpiarCampos();
 
                     // Notificar al usuario
@@ -362,7 +370,26 @@ public void limpiarCampos() {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
+        txtareaDireccion.setBackground(new Color(208, 211, 212));
+        txtaObservaciones.setBackground(new Color(208, 211, 212));
+        colorTexfiel();
+
+    }
+
+    public void colorTexfiel() {
         
+        for (JTextField textField : textFieldsToStyle) {
+            if (textField != null) { // Verificar que el textField no sea nulo
+                if (!textField.isEnabled()) {
+                    // Cambiar color de fondo y texto para campos inhabilitados
+                    textField.setBackground(new Color(208, 211, 212));
+                } else {
+                    // Restablecer colores originales para campos habilitados
+                    textField.setBackground(Color.WHITE);
+                }
+            }
+        }
+
     }
 
     public void habilitar() {
@@ -376,6 +403,9 @@ public void limpiarCampos() {
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
+        txtareaDireccion.setBackground(Color.WHITE);
+        txtaObservaciones.setBackground(Color.WHITE);
+        colorTexfiel();
     }
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
