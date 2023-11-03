@@ -598,14 +598,14 @@ public class frmDocumentos extends javax.swing.JPanel {
         jRadioButton1.setText("% Desc. Línea:");
 
         jLabel21.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        jLabel21.setText("I.T.B.M.S. :");
+        jLabel21.setText("I.T.B.M.S. (%) :");
 
         jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas", "Por Hora", "Por Día", "Por Semana ", "Por Mes", "Por Año" }));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabel5.setText("Magnitud :");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0% ITBMS", "7% ITBMS", "10% ITBMS", "15% ITBMS" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
 
         jCheckBox2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jCheckBox2.setText("Servicio");
@@ -662,8 +662,8 @@ public class frmDocumentos extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))

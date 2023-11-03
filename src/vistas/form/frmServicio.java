@@ -82,7 +82,7 @@ private Container bgContainer;
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtCodigoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
+        bg.add(txtCodigoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -94,7 +94,7 @@ private Container bgContainer;
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código de Servicio :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 150, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 130, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -115,8 +115,8 @@ private Container bgContainer;
         jLabel7.setText("Precio :");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, -1, -1));
 
-        cbxITBMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0% ITBMS", "7% ITBMS", "10% ITBMS", "15% ITBMS" }));
-        bg.add(cbxITBMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 230, -1));
+        cbxITBMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
+        bg.add(cbxITBMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 90, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -128,6 +128,11 @@ private Container bgContainer;
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 700, 120, 40));
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 120, 40));
 
         btnBuscar.setText("Buscar");
@@ -161,7 +166,7 @@ private Container bgContainer;
         jScrollPane1.setViewportView(txtaDescripcion);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 950, 150));
-        bg.add(txtNombreServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 450, -1));
+        bg.add(txtNombreServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 450, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -184,6 +189,10 @@ private Container bgContainer;
     private void chkboxContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkboxContratoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chkboxContratoActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

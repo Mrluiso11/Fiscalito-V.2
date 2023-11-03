@@ -5,8 +5,17 @@
 package vistas.form;
 
 import Style.Forms;
+import conexion.Conexion;
 import java.awt.Container;
-
+import java.sql.Connection;
+import controladores.*;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -16,6 +25,8 @@ import java.awt.Container;
 public class frmProducto extends javax.swing.JPanel {
 
     private Container bgContainer;
+    String operacion = "";
+    private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
 
     /**
      * Creates new form frmArticulos
@@ -24,6 +35,7 @@ public class frmProducto extends javax.swing.JPanel {
         initComponents();
        bgContainer = this;
         Forms formsPanel = new Forms(bgContainer,jPTitle);
+        inhabilitar();
     }
 
     /**
@@ -55,7 +67,7 @@ public class frmProducto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaDescripcion = new javax.swing.JTextArea();
         txtNombreProducto = new javax.swing.JTextField();
-        cbxMagnitugM = new javax.swing.JComboBox<>();
+        cbxMagnitud = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -84,7 +96,7 @@ public class frmProducto extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
+        bg.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -96,7 +108,7 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código del Producto :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -117,28 +129,53 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel7.setText("Precio :");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
 
-        cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0% ITBMS", "7% ITBMS", "10% ITBMS", "15% ITBMS" }));
-        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 220, -1));
+        cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
+        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 90, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Producto :");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, -1));
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 660, 120, 40));
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 660, 120, 40));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 660, 120, 40));
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, 120, 40));
 
         txtaDescripcion.setColumns(20);
@@ -146,10 +183,10 @@ public class frmProducto extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtaDescripcion);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 970, 140));
-        bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 450, -1));
+        bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 450, -1));
 
-        cbxMagnitugM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas" }));
-        bg.add(cbxMagnitugM, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
+        cbxMagnitud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas" }));
+        bg.add(cbxMagnitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -165,7 +202,144 @@ public class frmProducto extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+       operacion = "nuevo";
+        habilitar();
+        btnBuscar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+       operacion = "modificar";
+        habilitar();
+        btnEditar.setEnabled(false);
+        btnBuscar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        Productos obj_insertProductos = new Productos();
+        if (txtCodigoProducto.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El Codigo de Producto no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCodigoProducto.requestFocus();
+        } else {
+            if (conexion != null) {
+
+                obj_insertProductos.setCodigoproducto(txtCodigoProducto.getText().trim());
+                obj_insertProductos.setNombreproducto(txtNombreProducto.getText().trim());
+                obj_insertProductos.setDescripcion(txtaDescripcion.getText().trim());
+                obj_insertProductos.setMagnitud(cbxMagnitud.getSelectedItem().toString());
+                obj_insertProductos.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
+                obj_insertProductos.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
+                
+                if (operacion.equals("nuevo")) {
+                    obj_insertProductos.insertProductos(conexion, obj_insertProductos); // Pasar el objeto obj_insertProductos
+                    inhabilitar();
+                    limpiarCampos();
+
+                    // Notificar al usuario
+                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else if (operacion.equals("modificar")) {
+                    obj_insertProductos.updateProductoporCodigo(conexion, obj_insertProductos);
+                    inhabilitar();
+                    limpiarCampos();
+
+                    // Notificar al usuario
+                    JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+                Conexion.cerrarConexion(conexion);
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        Productos productos = new Productos(); // Crear un objeto de la clase Clientes
+        if (conexion != null) {
+            productos.setCodigoproducto(txtCodigoProducto.getText().trim());
+            productos.selectProductoporCodigo(conexion); // Llama al método en la clase Clientes
+            Conexion.cerrarConexion(conexion);
+        }
+
+        if (productos.getNombreproducto() != null) {
+            // Cliente encontrado, habilita los botones
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            btnNuevo.setEnabled(false);
+        } else {
+            // Cliente no encontrado, deshabilita los botones
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No se encontró Producto.", "Producto", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // Actualiza los campos de texto y áreas de texto en el formulario aquí
+        txtNombreProducto.setText(productos.getNombreproducto());
+        txtCodigoProducto.setText(productos.getCodigoproducto());
+        txtaDescripcion.setText(productos.getDescripcion());
+        txtPrecio.setText(String.valueOf(productos.getPrecio()));
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear un objeto de la clase producto
+        Productos productos = new Productos();
+        if (conexion != null) {
+            //cliente.setRuc(txtRUC.getText().trim());
+            productos.setCodigoproducto(txtCodigoProducto.getText().trim());
+            productos.deleteProductoporCodigo(conexion);
+            Conexion.cerrarConexion(conexion);
+            limpiarCampos();
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+                                                                                                                                                                                                        
+    private void cbxMagnitudActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    
+    public void inhabilitar() {
+        txtNombreProducto.setEnabled(false);
+        txtCodigoProducto.setEnabled(true);
+        txtaDescripcion.setEnabled(false);
+        txtPrecio.setEnabled(false);
+        cbxMagnitud.setEnabled(false);
+        cbxImpuesto.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnBuscar.setEnabled(true);
+        
+    }
+
+    public void habilitar() {
+        txtNombreProducto.setEnabled(true);
+        txtCodigoProducto.setEnabled(true);
+        txtaDescripcion.setEnabled(true);
+        txtPrecio.setEnabled(true);
+        cbxMagnitud.setEnabled(true);
+        cbxImpuesto.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }
+    
+    public void limpiarCampos() {
+        for (JTextField campo : camposDeTexto) {
+            campo.setText("");
+        }
+        txtNombreProducto.setText("");
+        txtCodigoProducto.setText("");
+        txtaDescripcion.setText("");
+        txtPrecio.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnBuscar;
@@ -174,7 +348,7 @@ public class frmProducto extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbxImpuesto;
-    private javax.swing.JComboBox<String> cbxMagnitugM;
+    private javax.swing.JComboBox<String> cbxMagnitud;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
