@@ -275,7 +275,6 @@ public class frmProducto extends javax.swing.JPanel {
             // Cliente no encontrado, deshabilita los botones
             btnEditar.setEnabled(false);
             btnEliminar.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "No se encontró Producto.", "Producto", JOptionPane.INFORMATION_MESSAGE);
         }
 
         // Actualiza los campos de texto y áreas de texto en el formulario aquí
@@ -283,6 +282,7 @@ public class frmProducto extends javax.swing.JPanel {
         txtCodigoProducto.setText(productos.getCodigoproducto());
         txtaDescripcion.setText(productos.getDescripcion());
         txtPrecio.setText(String.valueOf(productos.getPrecio()));
+        cbxImpuesto.setSelectedItem(productos.getItbms());
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 

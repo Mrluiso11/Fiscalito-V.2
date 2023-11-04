@@ -83,7 +83,7 @@ public class Productos {
     
     //metodo insertar
     public void insertProductos(Connection conexion, Productos productos) {
-        String query = "INSERT INTO tbl_producto (codigoproducto, producto, descripcion, magnitud, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_producto (codigo_producto, producto, descripcion, magnitud, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, productos.getCodigoproducto());
@@ -101,12 +101,13 @@ public class Productos {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
     
     //metodo update
     public void updateProductoporCodigo(Connection conexion, Productos productos) {
-    String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, magnitud = ?, precio = ?, impuesto = ? WHERE codigoproducto = ?";
+    String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, magnitud = ?, precio = ?, impuesto = ? WHERE codigo_producto = ?";
 
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
         statement.setString(1, productos.getNombreproducto());
@@ -120,11 +121,12 @@ public class Productos {
  
     } catch (SQLException e) {
         e.printStackTrace();
+        System.out.println("Error: " + e.getMessage());
     }
 }
    //metodo delete
     public void deleteProductoporCodigo(Connection conexion) {
-        String query = "DELETE FROM tbl_producto WHERE codigoproducto = ?";
+        String query = "DELETE FROM tbl_producto WHERE codigo_producto = ?";
         
         int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de querer eliminar este producto?", "Confirmación", JOptionPane.YES_NO_OPTION);
         
@@ -135,12 +137,13 @@ public class Productos {
             int filasAfectadas = statement.executeUpdate();
 
             if (filasAfectadas > 0) {
-                System.out.println("Producto con Codigo " + codigoproducto + " eliminado exitosamente.");
+                System.out.println("Producto con Codigo " + this.codigoproducto + " eliminado exitosamente.");
             } else {
-                System.out.println("Producto con Codigo " + codigoproducto + " no encontrado o no pudo ser eliminado.");
+                System.out.println("Producto con Codigo " + this.codigoproducto + " no encontrado o no pudo ser eliminado.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }  
         }
         if (opcion == JOptionPane.NO_OPTION){
@@ -151,26 +154,28 @@ public class Productos {
     
     //metodo select
     public void selectProductoporCodigo(Connection conexion) {
-        String query = "SELECT * FROM tbl_producto codigoproducto  = ?";
+        String query = "SELECT * FROM tbl_producto WHERE codigo_producto  = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
-            statement.setString(1, codigoproducto);
+            statement.setString(1, this.codigoproducto);
 
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 // Recupera los datos del cliente
-                nombreproducto = resultSet.getString("Nombre de Producto");
-                descripcion = resultSet.getString("descripcion");
-                magnitud = resultSet.getString("magnitud");
-                precio = resultSet.getFloat("precio");
-                itbms = resultSet.getDouble("itbms");
+                this.codigoproducto = resultSet.getString(1);
+                this.nombreproducto = resultSet.getString(2);
+                this.descripcion = resultSet.getString(3);
+                this.magnitud = resultSet.getString(4);
+                this.precio = resultSet.getFloat(5);
+                this.itbms = resultSet.getDouble(6);
 
             } else {
-                JOptionPane.showMessageDialog(null, "El Codigo de Producto"+ codigoproducto +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El Codigo de Producto"+ this.codigoproducto +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
     
