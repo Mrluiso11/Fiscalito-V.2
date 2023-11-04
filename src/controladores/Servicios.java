@@ -17,14 +17,14 @@ public class Servicios {
     private String nombreservicio;
     private String descripcion;
     private String tipocobro;
-    private String contrato;
+    private Boolean contrato;
     private float precio;
     private double itbms;
     
     public Servicios(){   
     }
     
-    public Servicios(String codigoservicio,String nombreservicio,String descripcion,String tipocobro,String contrato,float precio,double itbms ){
+    public Servicios(String codigoservicio,String nombreservicio,String descripcion,String tipocobro,Boolean contrato,float precio,double itbms ){
        this.codigoservicio= codigoservicio;
        this.nombreservicio= nombreservicio;
        this.descripcion= descripcion;
@@ -66,11 +66,11 @@ public class Servicios {
         this.tipocobro = tipocobro;
     }
 
-    public String getContrato() {
+    public Boolean getContrato() {
         return contrato;
     }
 
-    public void setContrato(String contrato) {
+    public void setContrato(Boolean contrato) {
         this.contrato = contrato;
     }
 
@@ -99,7 +99,7 @@ public class Servicios {
             statement.setString(2, servicios.getNombreservicio());
             statement.setString(3, servicios.getDescripcion());
             statement.setString(4, servicios.getTipocobro());
-            statement.setString(5, servicios.getContrato());
+            statement.setBoolean(5, servicios.getContrato());
             statement.setFloat(6, servicios.getPrecio());
             statement.setDouble(7, servicios.getItbms());
 
@@ -115,6 +115,27 @@ public class Servicios {
         }
     }
     
+    //metodo update
+    public void updateServicioporCodigo(Connection conexion, Servicios servicios) {
+    String query = "UPDATE tbl_servicio SET servicio = ?, descripcion = ?, tipo_cobro = ?, contrato = ?, precio = ?, impuesto = ? WHERE codigo_servicio = ?";
+
+    try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, servicios.getNombreservicio());
+            statement.setString(2, servicios.getDescripcion());
+            statement.setString(3, servicios.getTipocobro());
+            statement.setBoolean(4, servicios.getContrato());
+            statement.setFloat(5, servicios.getPrecio());
+            statement.setDouble(6, servicios.getItbms());
+            statement.setString(7, servicios.getCodigoservicio());
+
+        int filasAfectadas = statement.executeUpdate();
+ 
+    } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Error: " + e.getMessage());
+    }
+}
     
+    //
     
 }

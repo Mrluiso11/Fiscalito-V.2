@@ -124,6 +124,7 @@ public class Productos {
         System.out.println("Error: " + e.getMessage());
     }
 }
+    
    //metodo delete
     public void deleteProductoporCodigo(Connection conexion) {
         String query = "DELETE FROM tbl_producto WHERE codigo_producto = ?";

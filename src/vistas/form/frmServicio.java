@@ -177,6 +177,11 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(chkboxContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 700, 120, 40));
 
         txtaDescripcion.setColumns(20);
@@ -226,6 +231,45 @@ public class frmServicio extends javax.swing.JPanel {
         btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        Servicios obj_insertServicios = new Servicios();
+        if (txtCodigoServicio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El Codigo de Servicio no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCodigoServicio.requestFocus();
+        } else {
+            if (conexion != null) {
+
+                obj_insertServicios.setCodigoservicio(txtCodigoServicio.getText().trim());
+                obj_insertServicios.setNombreservicio(txtNombreServicio.getText().trim());
+                obj_insertServicios.setDescripcion(txtaDescripcion.getText().trim());
+                obj_insertServicios.setTipocobro(cbxTipoCobro.getSelectedItem().toString());
+                obj_insertServicios.setContrato(chkboxContrato.isSelected());
+                obj_insertServicios.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
+                obj_insertServicios.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
+                
+                if (operacion.equals("nuevo")) {
+                    obj_insertServicios.insertServicio(conexion, obj_insertServicios); // Pasar el objeto obj_insertServicios
+                    inhabilitar();
+                    limpiarCampos();
+
+                    // Notificar al usuario
+                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else if (operacion.equals("modificar")) {
+                    obj_insertServicios.updateServicioporCodigo(conexion, obj_insertServicios);
+                    inhabilitar();
+                    limpiarCampos();
+
+                    // Notificar al usuario
+                    JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+                Conexion.cerrarConexion(conexion);
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    
     public void inhabilitar() {
         txtNombreServicio.setEnabled(false);
         txtCodigoServicio.setEnabled(true);
