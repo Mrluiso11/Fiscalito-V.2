@@ -203,7 +203,7 @@ public class frmProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-       operacion = "nuevo";
+        operacion = "nuevo";
         habilitar();
         btnBuscar.setEnabled(false);
         btnNuevo.setEnabled(false);
@@ -212,7 +212,7 @@ public class frmProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-       operacion = "modificar";
+        operacion = "modificar";
         habilitar();
         btnEditar.setEnabled(false);
         btnBuscar.setEnabled(false);

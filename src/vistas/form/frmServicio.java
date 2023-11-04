@@ -5,14 +5,26 @@
 package vistas.form;
 
 import Style.Forms;
+import conexion.Conexion;
 import java.awt.Container;
+import java.sql.Connection;
+import controladores.*;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author dbpan
  */
 public class frmServicio extends javax.swing.JPanel {
-private Container bgContainer;
+      private Container bgContainer;
+      String operacion = "";
+      private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
 
     /**
      * Creates new form frmArticulos
@@ -21,6 +33,7 @@ private Container bgContainer;
         initComponents();
         bgContainer = this;
         Forms formsPanel = new Forms(bgContainer,jPTitle);
+        inhabilitar();
     }
 
     /**
@@ -42,7 +55,7 @@ private Container bgContainer;
         jLabel6 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        cbxITBMS = new javax.swing.JComboBox<>();
+        cbxImpuesto = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -94,7 +107,7 @@ private Container bgContainer;
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código de Servicio :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 130, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 130, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -115,14 +128,14 @@ private Container bgContainer;
         jLabel7.setText("Precio :");
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, -1, -1));
 
-        cbxITBMS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
-        bg.add(cbxITBMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 90, -1));
+        cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
+        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 90, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Servicio :");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, -1));
 
         btnEliminar.setText("Eliminar");
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 700, 120, 40));
@@ -139,6 +152,11 @@ private Container bgContainer;
         bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
         bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 700, 120, 40));
 
         cbxTipoCobro.setForeground(new java.awt.Color(102, 102, 102));
@@ -191,9 +209,60 @@ private Container bgContainer;
     }//GEN-LAST:event_chkboxContratoActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
+        operacion = "nuevo";
+        habilitar();
+        btnBuscar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        operacion = "modificar";
+        habilitar();
+        btnEditar.setEnabled(false);
+        btnBuscar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnNuevo.setEnabled(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    public void inhabilitar() {
+        txtNombreServicio.setEnabled(false);
+        txtCodigoServicio.setEnabled(true);
+        txtaDescripcion.setEnabled(false);
+        txtPrecio.setEnabled(false);
+        cbxTipoCobro.setEnabled(false);
+        cbxImpuesto.setEnabled(false);
+        chkboxContrato.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnBuscar.setEnabled(true);
+        
+    }
+
+    public void habilitar() {
+        txtNombreServicio.setEnabled(true);
+        txtCodigoServicio.setEnabled(true);
+        txtaDescripcion.setEnabled(true);
+        txtPrecio.setEnabled(true);
+        cbxTipoCobro.setEnabled(true);
+        cbxImpuesto.setEnabled(true);
+        chkboxContrato.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+    }
+    
+    public void limpiarCampos() {
+        for (JTextField campo : camposDeTexto) {
+            campo.setText("");
+        }
+        txtNombreServicio.setText("");
+        txtCodigoServicio.setText("");
+        txtaDescripcion.setText("");
+        txtPrecio.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
@@ -202,7 +271,7 @@ private Container bgContainer;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JComboBox<String> cbxITBMS;
+    private javax.swing.JComboBox<String> cbxImpuesto;
     private javax.swing.JComboBox<String> cbxTipoCobro;
     private javax.swing.JCheckBox chkboxContrato;
     private javax.swing.JLabel jLabel1;
