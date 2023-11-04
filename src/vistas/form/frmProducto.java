@@ -27,6 +27,7 @@ public class frmProducto extends javax.swing.JPanel {
     private Container bgContainer;
     String operacion = "";
     private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
+    private JTextField[] textFieldsToStyle = new JTextField[2];
 
     /**
      * Creates new form frmArticulos
@@ -35,7 +36,11 @@ public class frmProducto extends javax.swing.JPanel {
         initComponents();
        bgContainer = this;
         Forms formsPanel = new Forms(bgContainer,jPTitle);
+        textFieldsToStyle[0] = txtNombreProducto;
+        textFieldsToStyle[1] =txtPrecio;
         inhabilitar();
+        
+   
     }
 
     /**
@@ -96,7 +101,7 @@ public class frmProducto extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, -1));
+        bg.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 370, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -108,7 +113,7 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código del Producto :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -135,8 +140,8 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("Producto :");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, -1));
+        jLabel8.setText("Nombre Producto :");
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +173,7 @@ public class frmProducto extends javax.swing.JPanel {
                 btnBuscarActionPerformed(evt);
             }
         });
-        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, 120, 40));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +188,7 @@ public class frmProducto extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtaDescripcion);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 970, 140));
-        bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 450, -1));
+        bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 260, -1));
 
         cbxMagnitud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas" }));
         bg.add(cbxMagnitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
@@ -243,13 +248,14 @@ public class frmProducto extends javax.swing.JPanel {
 
                     // Notificar al usuario
                     JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    btnNuevo.setEnabled(true);
                 } else if (operacion.equals("modificar")) {
                     obj_insertProductos.updateProductoporCodigo(conexion, obj_insertProductos);
                     inhabilitar();
                     limpiarCampos();
-
                     // Notificar al usuario
                     JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                     btnNuevo.setEnabled(true);
                 }
 
                 Conexion.cerrarConexion(conexion);
@@ -315,6 +321,8 @@ public class frmProducto extends javax.swing.JPanel {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
+        txtaDescripcion.setBackground(new Color(214, 234, 248));
+        colorTexfiel();
         
     }
 
@@ -328,6 +336,8 @@ public class frmProducto extends javax.swing.JPanel {
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
+        txtaDescripcion.setBackground(Color.WHITE);
+        colorTexfiel();
     }
     
     public void limpiarCampos() {
@@ -339,7 +349,21 @@ public class frmProducto extends javax.swing.JPanel {
         txtaDescripcion.setText("");
         txtPrecio.setText("");
     }
-    
+     public void colorTexfiel() {
+        
+        for (JTextField textField : textFieldsToStyle) {
+            if (textField != null) { // Verificar que el textField no sea nulo
+                if (!textField.isEnabled()) {
+                    // Cambiar color de fondo y texto para campos inhabilitados
+                    textField.setBackground(new Color(214, 234, 248));
+                } else {
+                    // Restablecer colores originales para campos habilitados
+                    textField.setBackground(Color.WHITE);
+                }
+            }
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnBuscar;

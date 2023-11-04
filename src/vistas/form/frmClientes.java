@@ -115,13 +115,13 @@ public class frmClientes extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 280, -1));
+        bg.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 280, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("R.U.C. :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -190,7 +190,7 @@ public class frmClientes extends javax.swing.JPanel {
                 btnBuscarActionPerformed(evt);
             }
         });
-        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 160, 120, 40));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -370,8 +370,8 @@ public void limpiarCampos() {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
-        txtareaDireccion.setBackground(new Color(208, 211, 212));
-        txtaObservaciones.setBackground(new Color(208, 211, 212));
+        txtareaDireccion.setBackground(new Color(214, 234, 248));
+        txtaObservaciones.setBackground(new Color(214, 234, 248));
         colorTexfiel();
 
     }
@@ -382,7 +382,7 @@ public void limpiarCampos() {
             if (textField != null) { // Verificar que el textField no sea nulo
                 if (!textField.isEnabled()) {
                     // Cambiar color de fondo y texto para campos inhabilitados
-                    textField.setBackground(new Color(208, 211, 212));
+                    textField.setBackground(new Color(214, 234, 248));
                 } else {
                     // Restablecer colores originales para campos habilitados
                     textField.setBackground(Color.WHITE);

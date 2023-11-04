@@ -25,6 +25,7 @@ public class frmServicio extends javax.swing.JPanel {
       private Container bgContainer;
       String operacion = "";
       private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
+       private JTextField[] textFieldsToStyle = new JTextField[2];
 
     /**
      * Creates new form frmArticulos
@@ -33,6 +34,8 @@ public class frmServicio extends javax.swing.JPanel {
         initComponents();
         bgContainer = this;
         Forms formsPanel = new Forms(bgContainer,jPTitle);
+        textFieldsToStyle[0] =txtNombreServicio;
+        textFieldsToStyle[1] =txtPrecio;
         inhabilitar();
     }
 
@@ -95,7 +98,7 @@ public class frmServicio extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtCodigoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, -1));
+        bg.add(txtCodigoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 370, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -107,7 +110,7 @@ public class frmServicio extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código de Servicio :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 130, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 130, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -134,8 +137,8 @@ public class frmServicio extends javax.swing.JPanel {
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("Servicio :");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, -1));
+        jLabel8.setText("Nombre del Servicio :");
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
 
         btnEliminar.setText("Eliminar");
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 700, 120, 40));
@@ -149,7 +152,7 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 120, 40));
 
         btnBuscar.setText("Buscar");
-        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 120, 40));
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 160, 120, 40));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +192,7 @@ public class frmServicio extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtaDescripcion);
 
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 950, 150));
-        bg.add(txtNombreServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 450, -1));
+        bg.add(txtNombreServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 250, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -255,6 +258,7 @@ public class frmServicio extends javax.swing.JPanel {
 
                     // Notificar al usuario
                     JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    btnNuevo.setEnabled(true);
                 } else if (operacion.equals("modificar")) {
                     obj_insertServicios.updateServicioporCodigo(conexion, obj_insertServicios);
                     inhabilitar();
@@ -262,6 +266,7 @@ public class frmServicio extends javax.swing.JPanel {
 
                     // Notificar al usuario
                     JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    btnNuevo.setEnabled(true);
                 }
 
                 Conexion.cerrarConexion(conexion);
@@ -282,6 +287,8 @@ public class frmServicio extends javax.swing.JPanel {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
+        txtaDescripcion.setBackground(new Color(214, 234, 248));
+        colorTexfiel();
         
     }
 
@@ -296,6 +303,8 @@ public class frmServicio extends javax.swing.JPanel {
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
+        txtaDescripcion.setBackground(Color.WHITE);
+        colorTexfiel();
     }
     
     public void limpiarCampos() {
@@ -307,7 +316,21 @@ public class frmServicio extends javax.swing.JPanel {
         txtaDescripcion.setText("");
         txtPrecio.setText("");
     }
+ public void colorTexfiel() {
+        
+        for (JTextField textField : textFieldsToStyle) {
+            if (textField != null) { // Verificar que el textField no sea nulo
+                if (!textField.isEnabled()) {
+                    // Cambiar color de fondo y texto para campos inhabilitados
+                    textField.setBackground(new Color(214, 234, 248));
+                } else {
+                    // Restablecer colores originales para campos habilitados
+                    textField.setBackground(Color.WHITE);
+                }
+            }
+        }
 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnBuscar;
