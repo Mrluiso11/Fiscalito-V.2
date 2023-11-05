@@ -86,6 +86,7 @@ public class frmClientes extends javax.swing.JPanel {
         txtNombreCliente = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txttelefono1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -115,13 +116,13 @@ public class frmClientes extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 280, -1));
+        bg.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 280, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("R.U.C. :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -190,7 +191,7 @@ public class frmClientes extends javax.swing.JPanel {
                 btnBuscarActionPerformed(evt);
             }
         });
-        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 160, 120, 40));
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 40));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -247,6 +248,9 @@ public class frmClientes extends javax.swing.JPanel {
             }
         });
         bg.add(txttelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 110, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -434,6 +438,7 @@ public void limpiarCampos() {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

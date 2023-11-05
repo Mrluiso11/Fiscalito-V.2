@@ -28,6 +28,7 @@ public class frmProducto extends javax.swing.JPanel {
     String operacion = "";
     private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
     private JTextField[] textFieldsToStyle = new JTextField[2];
+    Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
 
     /**
      * Creates new form frmArticulos
@@ -59,7 +60,6 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cbxImpuesto = new javax.swing.JComboBox<>();
@@ -72,7 +72,7 @@ public class frmProducto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaDescripcion = new javax.swing.JTextArea();
         txtNombreProducto = new javax.swing.JTextField();
-        cbxMagnitud = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -101,7 +101,7 @@ public class frmProducto extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 370, -1));
+        bg.add(txtCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 370, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -113,19 +113,13 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código del Producto :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Descripción :");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Magnitud de modelo : ");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
         bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 220, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -141,7 +135,7 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Nombre Producto :");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +143,7 @@ public class frmProducto extends javax.swing.JPanel {
                 btnEliminarActionPerformed(evt);
             }
         });
-        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 660, 120, 40));
+        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 710, 120, 40));
 
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +151,7 @@ public class frmProducto extends javax.swing.JPanel {
                 btnNuevoActionPerformed(evt);
             }
         });
-        bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 660, 120, 40));
+        bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 710, 120, 40));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +159,7 @@ public class frmProducto extends javax.swing.JPanel {
                 btnGuardarActionPerformed(evt);
             }
         });
-        bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 660, 120, 40));
+        bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 710, 120, 40));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +167,7 @@ public class frmProducto extends javax.swing.JPanel {
                 btnBuscarActionPerformed(evt);
             }
         });
-        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 170, 120, 40));
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 40));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,17 +175,17 @@ public class frmProducto extends javax.swing.JPanel {
                 btnEditarActionPerformed(evt);
             }
         });
-        bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, 120, 40));
+        bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 710, 120, 40));
 
         txtaDescripcion.setColumns(20);
         txtaDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtaDescripcion);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 970, 140));
-        bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 260, -1));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 980, 150));
+        bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 450, -1));
 
-        cbxMagnitud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas" }));
-        bg.add(cbxMagnitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, -1));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -237,7 +231,6 @@ public class frmProducto extends javax.swing.JPanel {
                 obj_insertProductos.setCodigoproducto(txtCodigoProducto.getText().trim());
                 obj_insertProductos.setNombreproducto(txtNombreProducto.getText().trim());
                 obj_insertProductos.setDescripcion(txtaDescripcion.getText().trim());
-                obj_insertProductos.setMagnitud(cbxMagnitud.getSelectedItem().toString());
                 obj_insertProductos.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
                 obj_insertProductos.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
                 
@@ -247,7 +240,7 @@ public class frmProducto extends javax.swing.JPanel {
                     limpiarCampos();
 
                     // Notificar al usuario
-                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE,customIcon);
                     btnNuevo.setEnabled(true);
                 } else if (operacion.equals("modificar")) {
                     obj_insertProductos.updateProductoporCodigo(conexion, obj_insertProductos);
@@ -315,7 +308,6 @@ public class frmProducto extends javax.swing.JPanel {
         txtCodigoProducto.setEnabled(true);
         txtaDescripcion.setEnabled(false);
         txtPrecio.setEnabled(false);
-        cbxMagnitud.setEnabled(false);
         cbxImpuesto.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(false);
@@ -331,7 +323,6 @@ public class frmProducto extends javax.swing.JPanel {
         txtCodigoProducto.setEnabled(true);
         txtaDescripcion.setEnabled(true);
         txtPrecio.setEnabled(true);
-        cbxMagnitud.setEnabled(true);
         cbxImpuesto.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(true);
@@ -372,12 +363,11 @@ public class frmProducto extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbxImpuesto;
-    private javax.swing.JComboBox<String> cbxMagnitud;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPTitle;

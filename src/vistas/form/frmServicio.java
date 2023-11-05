@@ -65,11 +65,11 @@ public class frmServicio extends javax.swing.JPanel {
         btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         cbxTipoCobro = new javax.swing.JComboBox<>();
-        chkboxContrato = new javax.swing.JCheckBox();
         btnGuardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaDescripcion = new javax.swing.JTextArea();
         txtNombreServicio = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -98,50 +98,50 @@ public class frmServicio extends javax.swing.JPanel {
         );
 
         bg.add(jPTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 1040, 50));
-        bg.add(txtCodigoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 370, -1));
+        bg.add(txtCodigoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 370, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Impuesto (%) :");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, -1, -1));
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Código de Servicio :");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 130, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 130, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Descripción :");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Tipo de cobro:");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
-        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, 230, -1));
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 220, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Precio :");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, -1, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
 
         cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
-        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 90, -1));
+        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 90, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Nombre del Servicio :");
-        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         btnEliminar.setText("Eliminar");
-        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 700, 120, 40));
+        bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 710, 120, 40));
 
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -149,10 +149,10 @@ public class frmServicio extends javax.swing.JPanel {
                 btnNuevoActionPerformed(evt);
             }
         });
-        bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, 120, 40));
+        bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 710, 120, 40));
 
         btnBuscar.setText("Buscar");
-        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 160, 120, 40));
+        bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 40));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +160,7 @@ public class frmServicio extends javax.swing.JPanel {
                 btnEditarActionPerformed(evt);
             }
         });
-        bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 700, 120, 40));
+        bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 710, 120, 40));
 
         cbxTipoCobro.setForeground(new java.awt.Color(102, 102, 102));
         cbxTipoCobro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Por Hora", "Por Día", "Por Semana ", "Por Mes", "Por Año" }));
@@ -171,28 +171,23 @@ public class frmServicio extends javax.swing.JPanel {
         });
         bg.add(cbxTipoCobro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 230, -1));
 
-        chkboxContrato.setText("Por Contrato");
-        chkboxContrato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkboxContratoActionPerformed(evt);
-            }
-        });
-        bg.add(chkboxContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
-
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 700, 120, 40));
+        bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 710, 120, 40));
 
         txtaDescripcion.setColumns(20);
         txtaDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtaDescripcion);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 950, 150));
-        bg.add(txtNombreServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 250, -1));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 980, 120));
+        bg.add(txtNombreServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 450, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -211,10 +206,6 @@ public class frmServicio extends javax.swing.JPanel {
     private void cbxTipoCobroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCobroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxTipoCobroActionPerformed
-
-    private void chkboxContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkboxContratoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkboxContratoActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         operacion = "nuevo";
@@ -247,7 +238,6 @@ public class frmServicio extends javax.swing.JPanel {
                 obj_insertServicios.setNombreservicio(txtNombreServicio.getText().trim());
                 obj_insertServicios.setDescripcion(txtaDescripcion.getText().trim());
                 obj_insertServicios.setTipocobro(cbxTipoCobro.getSelectedItem().toString());
-                obj_insertServicios.setContrato(chkboxContrato.isSelected());
                 obj_insertServicios.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
                 obj_insertServicios.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
                 
@@ -282,7 +272,6 @@ public class frmServicio extends javax.swing.JPanel {
         txtPrecio.setEnabled(false);
         cbxTipoCobro.setEnabled(false);
         cbxImpuesto.setEnabled(false);
-        chkboxContrato.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
@@ -299,7 +288,6 @@ public class frmServicio extends javax.swing.JPanel {
         txtPrecio.setEnabled(true);
         cbxTipoCobro.setEnabled(true);
         cbxImpuesto.setEnabled(true);
-        chkboxContrato.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -340,7 +328,7 @@ public class frmServicio extends javax.swing.JPanel {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbxImpuesto;
     private javax.swing.JComboBox<String> cbxTipoCobro;
-    private javax.swing.JCheckBox chkboxContrato;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
