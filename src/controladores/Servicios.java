@@ -154,8 +154,9 @@ public class Servicios {
 
     }
     
+    //metodo select
     public void selectProductoporCodigo(Connection conexion) {
-        String query = "SELECT * FROM tbl_servicio WHERE codigo_servicio  = ?";
+        String query = "SELECT * FROM tbl_servicio WHERE codigo_servicio = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, this.codigoservicio);
