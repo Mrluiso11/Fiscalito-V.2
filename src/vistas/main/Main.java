@@ -31,6 +31,8 @@ public class Main extends javax.swing.JFrame {
             public void menuSelected(int index, int indexSubMenu) {
                 if (index == 0 && indexSubMenu == 0) {
                     showForm(new Form_Dashboard());
+                }else if (index == 1 && indexSubMenu == 2) {
+                    showForm(new frmAdministracion());
                 } else if (index == 2 && indexSubMenu == 1) {
                     showForm(new FrmEmpresa());
                 } else if (index == 2 && indexSubMenu == 2) {

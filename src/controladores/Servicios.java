@@ -81,10 +81,12 @@ public class Servicios {
     public void setItbms(double itbms) {
         this.itbms = itbms;
     }
+
+   
     
     //metodos insertar
     public void insertServicio(Connection conexion, Servicios servicios) {
-        String query = "INSERT INTO tbl_servicio (codigo_servicio, servicio, descripcion, tipo_cobro, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_servicio (codigo_servicio, servicio, descripcion, tipo_cobro, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, servicios.getCodigoservicio());
@@ -201,7 +203,7 @@ public class Servicios {
     
     
     public void InfoServicioPorNombre(Connection conexion) {
-    String query = "SELECT codigo_servicio, descripcion, tipo_cobro, precio, impuesto FROM tbl_producto WHERE servicio = ?";
+    String query = "SELECT codigo_servicio, descripcion, tipo_cobro, precio, impuesto FROM tbl_servicio WHERE servicio = ?";
     
 
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
@@ -210,11 +212,11 @@ public class Servicios {
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            this.codigoservicio = resultSet.getString("codigo_producto");
-            this.descripcion= resultSet.getString("descripcion");
-            this.tipocobro = resultSet.getString("tipo_cobro");
-            this.precio = resultSet.getFloat("precio");
-            this.itbms = resultSet.getDouble("impuesto");
+            codigoservicio = resultSet.getString("codigo_servicio");
+            descripcion= resultSet.getString("descripcion");
+            tipocobro = resultSet.getString("tipo_cobro");
+            precio = resultSet.getFloat("precio");
+            itbms = resultSet.getDouble("impuesto");
         } 
     } catch (SQLException e) {
         e.printStackTrace();

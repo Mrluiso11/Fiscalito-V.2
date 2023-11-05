@@ -23,10 +23,11 @@ import javax.swing.JOptionPane;
  * @author dbpan
  */
 public class frmServicio extends javax.swing.JPanel {
-      private Container bgContainer;
-      String operacion = "";
-      private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
-       private JTextField[] textFieldsToStyle = new JTextField[2];
+
+    private Container bgContainer;
+    String operacion = "";
+    private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
+    private JTextField[] textFieldsToStyle = new JTextField[2];
 
     /**
      * Creates new form frmArticulos
@@ -34,9 +35,9 @@ public class frmServicio extends javax.swing.JPanel {
     public frmServicio() {
         initComponents();
         bgContainer = this;
-        Forms formsPanel = new Forms(bgContainer,jPTitle);
-        textFieldsToStyle[0] =txtNombreServicio;
-        textFieldsToStyle[1] =txtPrecio;
+        Forms formsPanel = new Forms(bgContainer, jPTitle);
+        textFieldsToStyle[0] = txtNombreServicio;
+        textFieldsToStyle[1] = txtPrecio;
         inhabilitar();
         ObtenerNombreServicio();
     }
@@ -72,6 +73,7 @@ public class frmServicio extends javax.swing.JPanel {
         txtaDescripcion = new javax.swing.JTextArea();
         txtNombreServicio = new javax.swing.JTextField();
         cbxServicios = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -134,6 +136,11 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
+        cbxImpuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxImpuestoActionPerformed(evt);
+            }
+        });
         bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 90, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -170,7 +177,7 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 710, 120, 40));
 
         cbxTipoCobro.setForeground(new java.awt.Color(102, 102, 102));
-        cbxTipoCobro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Por Hora", "Por Día", "Por Semana ", "Por Mes", "Por Año" }));
+        cbxTipoCobro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Por Hora", "Por Día", "Por Semana", "Por Mes", "Por Año" }));
         cbxTipoCobro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxTipoCobroActionPerformed(evt);
@@ -195,6 +202,9 @@ public class frmServicio extends javax.swing.JPanel {
 
         cbxServicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         bg.add(cbxServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 580, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -232,8 +242,8 @@ public class frmServicio extends javax.swing.JPanel {
             // Cerrar la conexión a la base de datos aquí
         }
     }
-    
-    
+
+
     private void cbxTipoCobroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCobroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxTipoCobroActionPerformed
@@ -271,7 +281,7 @@ public class frmServicio extends javax.swing.JPanel {
                 obj_insertServicios.setTipocobro(cbxTipoCobro.getSelectedItem().toString());
                 obj_insertServicios.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
                 obj_insertServicios.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
-                
+
                 if (operacion.equals("nuevo")) {
                     obj_insertServicios.insertServicio(conexion, obj_insertServicios); // Pasar el objeto obj_insertServicios
                     inhabilitar();
@@ -309,8 +319,7 @@ public class frmServicio extends javax.swing.JPanel {
         cbxTipoCobro.setSelectedItem(servicio.getTipocobro());
         txtPrecio.setText(String.valueOf(servicio.getPrecio()));
         cbxImpuesto.setSelectedItem(servicio.getItbms());
-        cbxImpuesto.setSelectedItem(String.valueOf(servicio.getItbms()));
-        
+       
         if (servicio.getNombreservicio() != null) {
             // Cliente encontrado, habilita los botones
             btnEditar.setEnabled(true);
@@ -323,7 +332,10 @@ public class frmServicio extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    
+    private void cbxImpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxImpuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxImpuestoActionPerformed
+
     public void inhabilitar() {
         txtNombreServicio.setEnabled(false);
         txtCodigoServicio.setEnabled(true);
@@ -337,7 +349,7 @@ public class frmServicio extends javax.swing.JPanel {
         btnBuscar.setEnabled(true);
         txtaDescripcion.setBackground(new Color(214, 234, 248));
         colorTexfiel();
-        
+
     }
 
     public void habilitar() {
@@ -353,7 +365,7 @@ public class frmServicio extends javax.swing.JPanel {
         txtaDescripcion.setBackground(Color.WHITE);
         colorTexfiel();
     }
-    
+
     public void limpiarCampos() {
         for (JTextField campo : camposDeTexto) {
             campo.setText("");
@@ -363,8 +375,9 @@ public class frmServicio extends javax.swing.JPanel {
         txtaDescripcion.setText("");
         txtPrecio.setText("");
     }
- public void colorTexfiel() {
-        
+
+    public void colorTexfiel() {
+
         for (JTextField textField : textFieldsToStyle) {
             if (textField != null) { // Verificar que el textField no sea nulo
                 if (!textField.isEnabled()) {
@@ -388,6 +401,7 @@ public class frmServicio extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbxImpuesto;
     private javax.swing.JComboBox<String> cbxServicios;
     private javax.swing.JComboBox<String> cbxTipoCobro;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
