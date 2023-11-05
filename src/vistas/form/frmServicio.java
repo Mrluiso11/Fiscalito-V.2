@@ -11,6 +11,7 @@ import java.sql.Connection;
 import controladores.*;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -37,6 +38,7 @@ public class frmServicio extends javax.swing.JPanel {
         textFieldsToStyle[0] =txtNombreServicio;
         textFieldsToStyle[1] =txtPrecio;
         inhabilitar();
+        ObtenerNombreServicio();
     }
 
     /**
@@ -69,7 +71,7 @@ public class frmServicio extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaDescripcion = new javax.swing.JTextArea();
         txtNombreServicio = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxServicios = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -104,7 +106,7 @@ public class frmServicio extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Impuesto (%) :");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -122,17 +124,17 @@ public class frmServicio extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Tipo de cobro:");
-        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
-        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 220, -1));
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 220, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Precio :");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
-        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 90, -1));
+        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 90, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -152,6 +154,11 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 710, 120, 40));
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 40));
 
         btnEditar.setText("Editar");
@@ -169,7 +176,7 @@ public class frmServicio extends javax.swing.JPanel {
                 cbxTipoCobroActionPerformed(evt);
             }
         });
-        bg.add(cbxTipoCobro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 230, -1));
+        bg.add(cbxTipoCobro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 230, -1));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,8 +193,8 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 980, 120));
         bg.add(txtNombreServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 450, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
+        cbxServicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(cbxServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,6 +210,30 @@ public class frmServicio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ObtenerNombreServicio() {
+        // Instanciar la clase Clientes
+        Servicios servicio = new Servicios();
+        Connection conexion = Conexion.obtenerConexion();
+
+        try {
+            // Establecer la conexión a la base de datos aquí
+
+            List<String> Servicios = servicio.getAllServicios(conexion);
+
+            // Limpiar el JComboBox antes de agregar los nuevos elementos
+            cbxServicios.removeAllItems();
+
+            for (String nombreservicio : Servicios) {
+                cbxServicios.addItem(nombreservicio);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar la conexión a la base de datos aquí
+        }
+    }
+    
+    
     private void cbxTipoCobroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoCobroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxTipoCobroActionPerformed
@@ -263,6 +294,34 @@ public class frmServicio extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        Connection conexion = Conexion.obtenerConexion();
+        Servicios servicio = new Servicios(); // Crear un objeto de la clase Clientes
+        if (conexion != null) {
+            servicio.setNombreservicio(cbxServicios.getSelectedItem().toString());
+            servicio.InfoServicioPorNombre(conexion); // Llama al método en la clase Clientes
+            Conexion.cerrarConexion(conexion);
+        }
+        txtNombreServicio.setText(servicio.getNombreservicio());
+        txtCodigoServicio.setText(servicio.getCodigoservicio());
+        txtaDescripcion.setText(servicio.getDescripcion());
+        cbxTipoCobro.setSelectedItem(servicio.getTipocobro());
+        txtPrecio.setText(String.valueOf(servicio.getPrecio()));
+        cbxImpuesto.setSelectedItem(servicio.getItbms());
+        cbxImpuesto.setSelectedItem(String.valueOf(servicio.getItbms()));
+        
+        if (servicio.getNombreservicio() != null) {
+            // Cliente encontrado, habilita los botones
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            btnNuevo.setEnabled(false);
+        } else {
+            // Cliente no encontrado, deshabilita los botones
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     
     public void inhabilitar() {
@@ -327,8 +386,8 @@ public class frmServicio extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbxImpuesto;
+    private javax.swing.JComboBox<String> cbxServicios;
     private javax.swing.JComboBox<String> cbxTipoCobro;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

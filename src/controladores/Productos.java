@@ -19,16 +19,18 @@ public class Productos {
     private String codigoproducto;
     private String nombreproducto;
     private String descripcion;
+    private String magnitud;
     private float precio;
     private double itbms;
     
     public Productos(){   
     }
     
-    public Productos(String codigoproducto,String nombreproducto, String descripcion,float precio,double itbms) {
+    public Productos(String codigoproducto,String nombreproducto, String descripcion,String magnitud,float precio,double itbms) {
         this.codigoproducto= codigoproducto;
         this.nombreproducto= nombreproducto;
         this.descripcion= descripcion;
+        this.magnitud=magnitud;
         this.precio= precio;
         this.itbms= itbms;   
     }
@@ -57,6 +59,14 @@ public class Productos {
         this.descripcion = descripcion;
     }
 
+    public String getMagnitud() {
+        return magnitud;
+    }
+
+    public void setMagnitud(String magnitud) {
+        this.magnitud = magnitud;
+    }
+
     public float getPrecio() {
         return precio;
     }
@@ -75,12 +85,13 @@ public class Productos {
     
     //metodo insertar
     public void insertProductos(Connection conexion, Productos productos) {
-        String query = "INSERT INTO tbl_producto (codigo_producto, producto, descripcion, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_producto (codigo_producto, producto, descripcion, magnitud, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, productos.getCodigoproducto());
             statement.setString(2, productos.getNombreproducto());
             statement.setString(3, productos.getDescripcion());
+            statement.setString(4, productos.getMagnitud());
             statement.setFloat(5, productos.getPrecio());
             statement.setDouble(6, productos.getItbms());
 
@@ -98,11 +109,12 @@ public class Productos {
     
     //metodo update
     public void updateProductoporCodigo(Connection conexion, Productos productos) {
-    String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, precio = ?, impuesto = ? WHERE codigo_producto = ?";
+    String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, magnitud = ?, precio = ?, impuesto = ? WHERE codigo_producto = ?";
 
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
         statement.setString(1, productos.getNombreproducto());
         statement.setString(2, productos.getDescripcion());
+        statement.setString(3, productos.getMagnitud());
         statement.setFloat(4, productos.getPrecio());
         statement.setDouble(5, productos.getItbms());
         statement.setString( 6, productos.getCodigoproducto());
@@ -157,11 +169,12 @@ public class Productos {
                 this.codigoproducto = resultSet.getString(1);
                 this.nombreproducto = resultSet.getString(2);
                 this.descripcion = resultSet.getString(3);
+                this.magnitud = resultSet.getString(4);
                 this.precio = resultSet.getFloat(5);
                 this.itbms = resultSet.getDouble(6);
 
             } else {
-                JOptionPane.showMessageDialog(null, "El Codigo de Producto"+ this.codigoproducto +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El Codigo de Producto "+ this.codigoproducto +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,7 +190,7 @@ public class Productos {
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                nombreproducto = resultSet.getString("producto");
+                this.nombreproducto = resultSet.getString("producto");
                 productos.add(nombreproducto);
             }
         } catch (SQLException e) {
@@ -188,7 +201,7 @@ public class Productos {
     }
     
     public void InfoProductoPorNombre(Connection conexion) {
-    String query = "SELECT codigo_producto, precio , impuesto FROM tbl_producto WHERE producto = ?";
+    String query = "SELECT codigo_producto, descripcion,magnitud ,precio , impuesto FROM tbl_producto WHERE producto = ?";
     
 
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
@@ -197,9 +210,11 @@ public class Productos {
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            codigoproducto = resultSet.getString("codigo_producto");
-            precio = resultSet.getFloat("precio");
-            itbms = resultSet.getDouble("impuesto");
+            this.codigoproducto = resultSet.getString("codigo_producto");
+            this.descripcion=resultSet.getString("descripcion");
+            this.magnitud = resultSet.getString("magnitud");
+            this.precio = resultSet.getFloat("precio");
+            this.itbms = resultSet.getDouble("impuesto");
             
             
 

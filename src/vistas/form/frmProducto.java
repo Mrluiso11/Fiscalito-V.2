@@ -11,6 +11,7 @@ import java.sql.Connection;
 import controladores.*;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -40,7 +41,7 @@ public class frmProducto extends javax.swing.JPanel {
         textFieldsToStyle[0] = txtNombreProducto;
         textFieldsToStyle[1] =txtPrecio;
         inhabilitar();
-        
+        ObtenerNombreProducto();
    
     }
 
@@ -72,7 +73,9 @@ public class frmProducto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtaDescripcion = new javax.swing.JTextArea();
         txtNombreProducto = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxProductos = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        cbxMagnitud = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -107,7 +110,7 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Impuesto (%) :");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -120,16 +123,16 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Descripción :");
         bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
-        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 220, -1));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 220, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Precio :");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         cbxImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "7", "10", "15" }));
-        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 530, 90, -1));
+        bg.add(cbxImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, 90, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -181,11 +184,26 @@ public class frmProducto extends javax.swing.JPanel {
         txtaDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtaDescripcion);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 980, 150));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 980, 120));
         bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 450, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
+        cbxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(cbxProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Magnitud de Unidades:");
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+
+        cbxMagnitud.setForeground(new java.awt.Color(102, 102, 102));
+        cbxMagnitud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidades", "Piezas", "Docenas", "cm", "m", "m cuadrados", "m Cúbicos", "Pulgadas", "Yardas", "Yardas líneales", "Pies ", "Pies Cúbicos", "Litros", "Galones", "Pintas", "Onzas", "Kg", "Lb", "Páginas", "Resmas", "Toneladas" }));
+        cbxMagnitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxMagnitudActionPerformed(evt);
+            }
+        });
+        bg.add(cbxMagnitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 230, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -201,6 +219,30 @@ public class frmProducto extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ObtenerNombreProducto() {
+        // Instanciar la clase Clientes
+        Productos producto = new Productos();
+        Connection conexion = Conexion.obtenerConexion();
+
+        try {
+            // Establecer la conexión a la base de datos aquí
+
+            List<String> Productos = producto.getAllProductos(conexion);
+
+            // Limpiar el JComboBox antes de agregar los nuevos elementos
+            cbxProductos.removeAllItems();
+
+            for (String nombreproducto : Productos) {
+                cbxProductos.addItem(nombreproducto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar la conexión a la base de datos aquí
+        }
+
+    }
+    
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         operacion = "nuevo";
         habilitar();
@@ -231,6 +273,7 @@ public class frmProducto extends javax.swing.JPanel {
                 obj_insertProductos.setCodigoproducto(txtCodigoProducto.getText().trim());
                 obj_insertProductos.setNombreproducto(txtNombreProducto.getText().trim());
                 obj_insertProductos.setDescripcion(txtaDescripcion.getText().trim());
+                obj_insertProductos.setMagnitud(cbxMagnitud.getSelectedItem().toString());
                 obj_insertProductos.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
                 obj_insertProductos.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
                 
@@ -258,14 +301,21 @@ public class frmProducto extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         Connection conexion = Conexion.obtenerConexion();
-        Productos productos = new Productos(); // Crear un objeto de la clase Clientes
+        Productos producto = new Productos(); // Crear un objeto de la clase Clientes
         if (conexion != null) {
-            productos.setCodigoproducto(txtCodigoProducto.getText().trim());
-            productos.selectProductoporCodigo(conexion); // Llama al método en la clase Clientes
+            producto.setNombreproducto(cbxProductos.getSelectedItem().toString());
+            producto.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
         }
-
-        if (productos.getNombreproducto() != null) {
+        txtNombreProducto.setText(producto.getNombreproducto());
+        txtCodigoProducto.setText(producto.getCodigoproducto());
+        txtaDescripcion.setText(producto.getDescripcion());
+        cbxMagnitud.setSelectedItem(producto.getMagnitud());
+        txtPrecio.setText(String.valueOf(producto.getPrecio()));
+        cbxImpuesto.setSelectedItem(producto.getItbms());
+        cbxImpuesto.setSelectedItem(String.valueOf(producto.getItbms()));
+        
+        if (producto.getNombreproducto() != null) {
             // Cliente encontrado, habilita los botones
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
@@ -275,13 +325,6 @@ public class frmProducto extends javax.swing.JPanel {
             btnEditar.setEnabled(false);
             btnEliminar.setEnabled(false);
         }
-
-        // Actualiza los campos de texto y áreas de texto en el formulario aquí
-        txtNombreProducto.setText(productos.getNombreproducto());
-        txtCodigoProducto.setText(productos.getCodigoproducto());
-        txtaDescripcion.setText(productos.getDescripcion());
-        txtPrecio.setText(String.valueOf(productos.getPrecio()));
-        cbxImpuesto.setSelectedItem(productos.getItbms());
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -297,16 +340,19 @@ public class frmProducto extends javax.swing.JPanel {
             limpiarCampos();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-                                                                                                                                                                                                        
-    private void cbxMagnitudActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    // TODO add your handling code here:
+
+    private void cbxMagnitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMagnitudActionPerformed
         // TODO add your handling code here:
-    }                                           
+    }//GEN-LAST:event_cbxMagnitudActionPerformed
+                                                                                                                                                                                                                                              
 
     
     public void inhabilitar() {
         txtNombreProducto.setEnabled(false);
         txtCodigoProducto.setEnabled(true);
         txtaDescripcion.setEnabled(false);
+        cbxMagnitud.setEnabled(false);
         txtPrecio.setEnabled(false);
         cbxImpuesto.setEnabled(false);
         btnGuardar.setEnabled(false);
@@ -322,6 +368,7 @@ public class frmProducto extends javax.swing.JPanel {
         txtNombreProducto.setEnabled(true);
         txtCodigoProducto.setEnabled(true);
         txtaDescripcion.setEnabled(true);
+        cbxMagnitud.setEnabled(true);
         txtPrecio.setEnabled(true);
         cbxImpuesto.setEnabled(true);
         btnGuardar.setEnabled(true);
@@ -363,11 +410,13 @@ public class frmProducto extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cbxImpuesto;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxMagnitud;
+    private javax.swing.JComboBox<String> cbxProductos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPTitle;

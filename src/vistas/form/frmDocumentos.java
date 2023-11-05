@@ -899,7 +899,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         } finally {
             // Cerrar la conexión a la base de datos aquí
         }
-
     }
 
     private void ObtenerNombreProducto() {
@@ -947,7 +946,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         } finally {
             // Cerrar la conexión a la base de datos aquí
         }
-
     }
     
     

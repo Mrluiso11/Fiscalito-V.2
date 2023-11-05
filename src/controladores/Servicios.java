@@ -91,8 +91,8 @@ public class Servicios {
             statement.setString(2, servicios.getNombreservicio());
             statement.setString(3, servicios.getDescripcion());
             statement.setString(4, servicios.getTipocobro());
-            statement.setFloat(6, servicios.getPrecio());
-            statement.setDouble(7, servicios.getItbms());
+            statement.setFloat(5, servicios.getPrecio());
+            statement.setDouble(6, servicios.getItbms());
 
             int filasAfectadas = statement.executeUpdate();
             if (filasAfectadas > 0) {
@@ -126,6 +126,60 @@ public class Servicios {
     }
 }
     
+    //metodo delete
+    public void deleteProductoporCodigo(Connection conexion) {
+        String query = "DELETE FROM tbl_servicio WHERE codigo_servicio = ?";
+        
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de querer eliminar este producto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if (opcion == JOptionPane.YES_OPTION){
+          try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, codigoservicio);
+
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("Producto con Codigo " + this.codigoservicio + " eliminado exitosamente.");
+            } else {
+                System.out.println("Producto con Codigo " + this.codigoservicio + " no encontrado o no pudo ser eliminado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        }  
+        }
+        if (opcion == JOptionPane.NO_OPTION){
+            JOptionPane.showMessageDialog(null, "No se eliminó el producto");
+        }
+
+    }
+    
+    public void selectProductoporCodigo(Connection conexion) {
+        String query = "SELECT * FROM tbl_servicio WHERE codigo_servicio  = ?";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, this.codigoservicio);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                // Recupera los datos del cliente
+                this.codigoservicio = resultSet.getString("codigo_servicio");
+                this.nombreservicio = resultSet.getString("servicio");
+                this.descripcion = resultSet.getString("descripcion");
+                this.tipocobro = resultSet.getString("tipo_cobro");
+                this.precio = resultSet.getFloat("precio");
+                this.itbms = resultSet.getDouble("Impuesto");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El Codigo de Servicio "+ this.codigoservicio +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
     //metodo listado de nombres 
     public List<String> getAllServicios(Connection conexion) {
         List<String> servicios = new ArrayList<>();
@@ -134,7 +188,7 @@ public class Servicios {
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                nombreservicio = resultSet.getString("servicio");
+                this.nombreservicio = resultSet.getString("servicio");
                 servicios.add(nombreservicio);
             }
         } catch (SQLException e) {
@@ -145,25 +199,26 @@ public class Servicios {
     }
     
     
-    /*public void InfoProductoPorNombre(Connection conexion) {
-    String query = "SELECT ruc, telefono1, telefono2, direccion FROM tbl_cliente WHERE nombre = ?";
+    public void InfoServicioPorNombre(Connection conexion) {
+    String query = "SELECT codigo_servicio, descripcion, tipo_cobro, precio, impuesto FROM tbl_producto WHERE servicio = ?";
+    
 
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
-        statement.setString(1, nombre); // Establece el nombre en lugar de ruc
+        statement.setString(1, nombreservicio); // Establece el nombre de la variable en lugar de ruc
 
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            ruc = resultSet.getString("ruc");
-            direccion = resultSet.getString("direccion");
-            telefono1 = resultSet.getString("telefono1");
-            telefono2 = resultSet.getString("telefono2");
-
+            this.codigoservicio = resultSet.getString("codigo_producto");
+            this.descripcion= resultSet.getString("descripcion");
+            this.tipocobro = resultSet.getString("tipo_cobro");
+            this.precio = resultSet.getFloat("precio");
+            this.itbms = resultSet.getDouble("impuesto");
         } 
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    }*/
+    }
     
     
 }
