@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -25,8 +26,10 @@ public class Clientes {
     private String telefono2;
     private String correo;
     private String observaciones;
+    private Date Fecha_registro;
+    private Date Fecha_actualizacion;
 
-    public Clientes(String ruc, String nombre, String direccion, String telefono1, String telefono2, String correo, String observaciones) {
+    public Clientes(String ruc, String nombre, String direccion, String telefono1, String telefono2, String correo, String observaciones, Date Fecha_registro, Date Fecha_actualizacion) {
         this.ruc = ruc;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -34,6 +37,8 @@ public class Clientes {
         this.telefono2 = telefono2;
         this.correo = correo;
         this.observaciones = observaciones;
+        this.Fecha_registro = Fecha_registro;
+        this.Fecha_actualizacion = Fecha_actualizacion;
     }
 
     public Clientes() {
@@ -95,9 +100,25 @@ public class Clientes {
         this.observaciones = observaciones;
     }
 
+    public Date getFecha_registro() {
+        return Fecha_registro;
+    }
+
+    public void setFecha_registro(Date Fecha_registro) {
+        this.Fecha_registro = Fecha_registro;
+    }
+
+    public Date getFecha_actualizacion() {
+        return Fecha_actualizacion;
+    }
+
+    public void setFecha_actualizacion(Date Fecha_actualizacion) {
+        this.Fecha_actualizacion = Fecha_actualizacion;
+    }
+
     //Metodo para insertar
     public void insertClientes(Connection conexion, Clientes cliente) {
-        String query = "INSERT INTO tbl_cliente (ruc, nombre, direccion, telefono1, telefono2, correo, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_cliente (ruc, nombre, direccion, telefono1, telefono2, correo, observaciones,fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?,CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, cliente.getRuc());
@@ -166,7 +187,7 @@ public class Clientes {
 
     //metodo update
     public void updateClientePorRuc(Connection conexion, Clientes cliente) {
-        String query = "UPDATE tbl_cliente SET nombre = ?, direccion = ?, telefono1 = ?, telefono2 = ?, correo = ?, observaciones = ? WHERE ruc = ?";
+        String query = "UPDATE tbl_cliente SET nombre = ?, direccion = ?, telefono1 = ?, telefono2 = ?, correo = ?, observaciones = ?,fecha_actualizacion = CURRENT_TIMESTAMP  WHERE ruc = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, cliente.getNombre());
@@ -202,24 +223,60 @@ public class Clientes {
         return nombres;
     }
 
-  public void InfoClientePorNombre(Connection conexion) {
-    String query = "SELECT ruc, telefono1, telefono2, direccion FROM tbl_cliente WHERE nombre = ?";
+    public void InfoClientePorNombre(Connection conexion) {
+        String query = "SELECT ruc, telefono1, telefono2, direccion FROM tbl_cliente WHERE nombre = ?";
 
-    try (PreparedStatement statement = conexion.prepareStatement(query)) {
-        statement.setString(1, nombre); // Establece el nombre en lugar de ruc
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, nombre); // Establece el nombre en lugar de ruc
 
-        ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
-            ruc = resultSet.getString("ruc");
-            direccion = resultSet.getString("direccion");
-            telefono1 = resultSet.getString("telefono1");
-            telefono2 = resultSet.getString("telefono2");
+            if (resultSet.next()) {
+                ruc = resultSet.getString("ruc");
+                direccion = resultSet.getString("direccion");
+                telefono1 = resultSet.getString("telefono1");
+                telefono2 = resultSet.getString("telefono2");
 
-        } 
-    } catch (SQLException e) {
-        e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-}
+
+    public List<Clientes> getAllClientesTable(Connection conexion) {
+        List<Clientes> Clientes = new ArrayList<>();
+        String query = "SELECT * FROM tbl_cliente";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                ruc = resultSet.getString("ruc");
+                nombre = resultSet.getString("nombre");
+                direccion = resultSet.getString("direccion");
+                telefono1 = resultSet.getString("telefono1");
+                telefono2 = resultSet.getString("telefono2");
+                correo = resultSet.getString("correo");
+                observaciones = resultSet.getString("observaciones");
+                Fecha_registro = resultSet.getDate("fecha_registro");
+                Fecha_actualizacion = resultSet.getDate("fecha_actualizacion");
+
+                Clientes cliente = new Clientes();
+                cliente.setRuc(ruc);
+                cliente.setNombre(nombre);
+                cliente.setDireccion(direccion);
+                cliente.setTelefono1(telefono1);
+                cliente.setTelefono2(telefono2);
+                cliente.setCorreo(correo);
+                cliente.setFecha_registro(Fecha_registro);
+                cliente.setFecha_actualizacion(Fecha_actualizacion );
+
+                Clientes.add(cliente);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Clientes;
+    }
 
 }

@@ -44,8 +44,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         // Aplica un renderizador personalizado al encabezado de la tabla.
         header.setDefaultRenderer(new CustomTableHeaderRenderer());
 
-        // Aplica la interfaz de usuario personalizada al JTabbedPane "jTabbedPane1".
-        jTabbedPane1.setUI(new CustomTabbedPaneUI());
         
         
         ObtenerNombreCliente();
@@ -726,10 +724,10 @@ public class frmDocumentos extends javax.swing.JPanel {
                                 .addGap(5, 5, 5)
                                 .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel18)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel19))
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel18))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -108,7 +108,7 @@ public class Productos {
 
     //metodo insertar
     public void insertProductos(Connection conexion, Productos productos) {
-        String query = "INSERT INTO tbl_producto (codigo_producto, producto, descripcion, magnitud, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_producto (codigo_producto, producto, descripcion, magnitud, precio, impuesto, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, productos.getCodigoproducto());
@@ -131,8 +131,8 @@ public class Productos {
     }
 
     //metodo update
-    public void updateProductoporCodigo(Connection conexion, Productos productos) {
-        String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, magnitud = ?, precio = ?, impuesto = ? WHERE codigo_producto = ?";
+    public void actualizarProducto(Connection conexion, Productos productos) {
+        String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, magnitud = ?, precio = ?, impuesto = ?, fecha_actualizacion = CURRENT_TIMESTAMP WHERE codigo_producto = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, productos.getNombreproducto());
@@ -143,7 +143,11 @@ public class Productos {
             statement.setString(6, productos.getCodigoproducto());
 
             int filasAfectadas = statement.executeUpdate();
-
+            if (filasAfectadas > 0) {
+                System.out.println("Datos actualizados exitosamente");
+            } else {
+                System.out.println("No se pudo actualizar el producto");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());

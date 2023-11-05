@@ -4,12 +4,20 @@
  */
 package vistas.form;
 
+import Style.CustomTabbedPaneUI;
+import Style.CustomTableHeaderRenderer;
+import Style.Forms;
+import Style.TableStyler;
 import javax.swing.table.DefaultTableModel;
 import controladores.*;
 import java.util.ArrayList;
 import java.util.List;
 import conexion.Conexion;
 import java.sql.Connection;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -23,6 +31,21 @@ public class frmAdministracion extends javax.swing.JPanel {
     public frmAdministracion() {
         initComponents();
         cargarProductos();
+        cargarServicios();
+        cargarClientes();
+        Forms formsPanel = new Forms(this, jPTitle);
+        TableStyler.applyStyles(tbl_Productos);
+        // Aplica los estilos a la tabla de productos
+        applyTableStyles(tbl_Productos, jScrollPane1);
+        // Aplica los estilos a la tabla de servicios
+        applyTableStyles(tbl_Servicios, jScrollPane2);
+        // Aplica los estilos a la tabla de clientes
+        applyTableStyles(tbl_Clientes, jScrollPane3);
+        // Aplica la interfaz de usuario personalizada al JTabbedPane "jTabbedPane1"
+        jTabbedPane1.setUI(new CustomTabbedPaneUI());
+        applyStylesToTitlePanel(jPTitle2);
+        applyStylesToTitlePanel(jPTitle3);
+
     }
 
     /**
@@ -36,13 +59,27 @@ public class frmAdministracion extends javax.swing.JPanel {
 
         bg = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        Productos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Productos = new javax.swing.JTable();
-        btnBorrar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        btnBorrarP = new javax.swing.JButton();
+        btnActualizarP = new javax.swing.JButton();
+        jPTitle = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        Servicios = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_Servicios = new javax.swing.JTable();
+        jPTitle2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnActualizarS = new javax.swing.JButton();
+        btnBorrarS = new javax.swing.JButton();
+        Clientes = new javax.swing.JPanel();
+        jPTitle3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_Clientes = new javax.swing.JTable();
+        btnActualizarC = new javax.swing.JButton();
+        btnBorrarC = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1096, 846));
 
@@ -56,69 +93,225 @@ public class frmAdministracion extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbl_Productos);
 
-        btnBorrar.setText("Borrar");
+        btnBorrarP.setText("Borrar");
 
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarP.setText("Actualizar");
+        btnActualizarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnActualizarPActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnActualizar)
+        jPTitle.setBackground(new java.awt.Color(255, 255, 255));
+        jPTitle.setToolTipText("");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(125, 125, 125));
+        jLabel1.setText("Listado de productos");
+
+        javax.swing.GroupLayout jPTitleLayout = new javax.swing.GroupLayout(jPTitle);
+        jPTitle.setLayout(jPTitleLayout);
+        jPTitleLayout.setHorizontalGroup(
+            jPTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPTitleLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(619, Short.MAX_VALUE))
+        );
+        jPTitleLayout.setVerticalGroup(
+            jPTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout ProductosLayout = new javax.swing.GroupLayout(Productos);
+        Productos.setLayout(ProductosLayout);
+        ProductosLayout.setHorizontalGroup(
+            ProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductosLayout.createSequentialGroup()
+                .addGroup(ProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ProductosLayout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnActualizarP)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnBorrarP))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ProductosLayout.createSequentialGroup()
+                            .addGap(66, 66, 66)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ProductosLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jPTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(162, Short.MAX_VALUE))
+        );
+        ProductosLayout.setVerticalGroup(
+            ProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductosLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jPTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addGroup(ProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBorrarP)
+                    .addComponent(btnActualizarP))
+                .addGap(53, 53, 53))
+        );
+
+        jTabbedPane1.addTab("Productos", Productos);
+
+        tbl_Servicios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo del Servicio", "Nombre del Servicio", "Descripcion", "Tipo de Cobro", "Precio", "Impuesto", "Fecha de registo", "Fecha de actualizacion"
+            }
+        ));
+        jScrollPane2.setViewportView(tbl_Servicios);
+
+        jPTitle2.setBackground(new java.awt.Color(255, 255, 255));
+        jPTitle2.setPreferredSize(new java.awt.Dimension(867, 50));
+        jPTitle2.setRequestFocusEnabled(false);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(125, 125, 125));
+        jLabel2.setText("Listado de Servicios");
+
+        javax.swing.GroupLayout jPTitle2Layout = new javax.swing.GroupLayout(jPTitle2);
+        jPTitle2.setLayout(jPTitle2Layout);
+        jPTitle2Layout.setHorizontalGroup(
+            jPTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPTitle2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(619, Short.MAX_VALUE))
+        );
+        jPTitle2Layout.setVerticalGroup(
+            jPTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        btnActualizarS.setText("Actualizar");
+        btnActualizarS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarSActionPerformed(evt);
+            }
+        });
+
+        btnBorrarS.setText("Borrar");
+
+        javax.swing.GroupLayout ServiciosLayout = new javax.swing.GroupLayout(Servicios);
+        Servicios.setLayout(ServiciosLayout);
+        ServiciosLayout.setHorizontalGroup(
+            ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ServiciosLayout.createSequentialGroup()
+                .addGroup(ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ServiciosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnActualizarS)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnBorrarS))
+                    .addGroup(ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ServiciosLayout.createSequentialGroup()
+                            .addGap(66, 66, 66)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ServiciosLayout.createSequentialGroup()
+                            .addGap(111, 111, 111)
+                            .addComponent(jPTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+        ServiciosLayout.setVerticalGroup(
+            ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ServiciosLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jPTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(btnBorrar)
-                .addGap(80, 80, 80))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBorrar)
-                    .addComponent(btnActualizar))
-                .addGap(63, 63, 63))
+                .addGroup(ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizarS)
+                    .addComponent(btnBorrarS))
+                .addGap(53, 53, 53))
         );
 
-        jTabbedPane1.addTab("Productos", jPanel1);
+        jTabbedPane1.addTab("Servicios", Servicios);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1084, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 803, Short.MAX_VALUE)
-        );
+        jPTitle3.setBackground(new java.awt.Color(255, 255, 255));
+        jPTitle3.setPreferredSize(new java.awt.Dimension(867, 50));
+        jPTitle3.setRequestFocusEnabled(false);
 
-        jTabbedPane1.addTab("Servicios", jPanel2);
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(125, 125, 125));
+        jLabel3.setText("Listado de Servicios");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1084, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPTitle3Layout = new javax.swing.GroupLayout(jPTitle3);
+        jPTitle3.setLayout(jPTitle3Layout);
+        jPTitle3Layout.setHorizontalGroup(
+            jPTitle3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPTitle3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(619, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 803, Short.MAX_VALUE)
+        jPTitle3Layout.setVerticalGroup(
+            jPTitle3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Clientes", jPanel3);
+        tbl_Clientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo del Cliente", "RUC", "Nombre", "Dirección", "Telefono 1", "Telefono 2", "Correo", "Observaciones", "Fecha de registro", "Fecha de actualización"
+            }
+        ));
+        jScrollPane3.setViewportView(tbl_Clientes);
+
+        btnActualizarC.setText("Actualizar");
+        btnActualizarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarCActionPerformed(evt);
+            }
+        });
+
+        btnBorrarC.setText("Borrar");
+
+        javax.swing.GroupLayout ClientesLayout = new javax.swing.GroupLayout(Clientes);
+        Clientes.setLayout(ClientesLayout);
+        ClientesLayout.setHorizontalGroup(
+            ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ClientesLayout.createSequentialGroup()
+                .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(ClientesLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnActualizarC)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnBorrarC))
+                    .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ClientesLayout.createSequentialGroup()
+                            .addGap(111, 111, 111)
+                            .addComponent(jPTitle3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ClientesLayout.createSequentialGroup()
+                            .addGap(66, 66, 66)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+        ClientesLayout.setVerticalGroup(
+            ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ClientesLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jPTitle3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizarC)
+                    .addComponent(btnBorrarC))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Clientes", Clientes);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -148,12 +341,30 @@ public class frmAdministracion extends javax.swing.JPanel {
             .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+private void applyTableStyles(JTable table, JScrollPane scrollPane) {
+        TableStyler tableStyler = new TableStyler();
+        TableStyler.applyStyles(table);  // Aplica estilos a la tabla
+        tableStyler.fixTable(scrollPane); // Configura la apariencia del JScrollPane
+        JTableHeader header = table.getTableHeader();
+        header.setDefaultRenderer(new CustomTableHeaderRenderer()); // Aplica el renderizador personalizado al encabezado de la tabla
+    }
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void applyStylesToTitlePanel(JPanel titlePanel) {
+       Forms formsPanel = new Forms(this, titlePanel);
+    }
+    private void btnActualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPActionPerformed
         cargarProductos();
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_btnActualizarPActionPerformed
+
+    private void btnActualizarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarSActionPerformed
+        cargarServicios();
+    }//GEN-LAST:event_btnActualizarSActionPerformed
+
+    private void btnActualizarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCActionPerformed
+        cargarClientes();
+    }//GEN-LAST:event_btnActualizarCActionPerformed
     public void cargarProductos() {
-         Connection conexion = Conexion.obtenerConexion();
+        Connection conexion = Conexion.obtenerConexion();
         DefaultTableModel modelo = (DefaultTableModel) tbl_Productos.getModel();
 
         // Limpiar cualquier contenido que pueda haber en la tabla actualmente
@@ -180,16 +391,86 @@ public class frmAdministracion extends javax.swing.JPanel {
         }
     }
 
+    public void cargarServicios() {
+        Connection conexion = Conexion.obtenerConexion();
+        DefaultTableModel modelo = (DefaultTableModel) tbl_Servicios.getModel();
+
+        // Limpiar cualquier contenido que pueda haber en la tabla actualmente
+        modelo.setRowCount(0);
+
+        // Crear una instancia de Productos para obtener los datos de la base de datos
+        Servicios obj_servicios = new Servicios();
+
+        // Obtener la lista de productos desde la base de datos
+        List<Servicios> servicios = obj_servicios.getAllProductosTable(conexion);
+
+        // Llenar la tabla con los datos
+        for (Servicios servicio : servicios) {
+            modelo.addRow(new Object[]{
+                servicio.getCodigoservicio(),
+                servicio.getNombreservicio(),
+                servicio.getDescripcion(),
+                servicio.getTipocobro(),
+                servicio.getPrecio(),
+                servicio.getItbms(),
+                servicio.getFecha_registro(), // Usa getFechaRegistro() en lugar de getFecha_registro()
+                servicio.getFecha_actualizacion() // Usa getFechaActualizacion() en lugar de getFecha_actualizacion()
+            });
+        }
+    }
+
+    public void cargarClientes() {
+        Connection conexion = Conexion.obtenerConexion();
+        DefaultTableModel modelo = (DefaultTableModel) tbl_Clientes.getModel();
+
+        // Limpiar cualquier contenido que pueda haber en la tabla actualmente
+        modelo.setRowCount(0);
+
+        // Crear una instancia de Clientes para obtener los datos de la base de datos
+        Clientes obj_clientes = new Clientes();
+
+        // Obtener la lista de clientes desde la base de datos
+        List<Clientes> clientes = obj_clientes.getAllClientesTable(conexion);
+
+        // Llenar la tabla con los datos
+        for (Clientes cliente : clientes) {
+            modelo.addRow(new Object[]{
+                cliente.getRuc(),
+                cliente.getNombre(),
+                cliente.getDireccion(),
+                cliente.getTelefono1(),
+                cliente.getTelefono2(),
+                cliente.getCorreo(),
+                cliente.getFecha_registro(),
+                cliente.getFecha_actualizacion()
+            });
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Clientes;
+    private javax.swing.JPanel Productos;
+    private javax.swing.JPanel Servicios;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton btnActualizarC;
+    private javax.swing.JButton btnActualizarP;
+    private javax.swing.JButton btnActualizarS;
+    private javax.swing.JButton btnBorrarC;
+    private javax.swing.JButton btnBorrarP;
+    private javax.swing.JButton btnBorrarS;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPTitle;
+    private javax.swing.JPanel jPTitle2;
+    private javax.swing.JPanel jPTitle3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable tbl_Clientes;
     private javax.swing.JTable tbl_Productos;
+    private javax.swing.JTable tbl_Servicios;
     // End of variables declaration//GEN-END:variables
 }

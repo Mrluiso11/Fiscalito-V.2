@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 /**
@@ -21,18 +22,23 @@ public class Servicios {
     private String tipocobro;
     private float precio;
     private double itbms;
-    
+    private Date fecha_registro;
+    private Date fecha_actualizacion;
     public Servicios(){   
     }
-    
-    public Servicios(String codigoservicio,String nombreservicio,String descripcion,String tipocobro,float precio,double itbms ){
-       this.codigoservicio= codigoservicio;
-       this.nombreservicio= nombreservicio;
-       this.descripcion= descripcion;
-       this.tipocobro= tipocobro;
-       this.precio= precio;
-       this.itbms= itbms; 
+
+    public Servicios(String codigoservicio, String nombreservicio, String descripcion, String tipocobro, float precio, double itbms, Date fecha_registro, Date fecha_actualizacion) {
+        this.codigoservicio = codigoservicio;
+        this.nombreservicio = nombreservicio;
+        this.descripcion = descripcion;
+        this.tipocobro = tipocobro;
+        this.precio = precio;
+        this.itbms = itbms;
+        this.fecha_registro = fecha_registro;
+        this.fecha_actualizacion = fecha_actualizacion;
     }
+    
+  
 
     public String getCodigoservicio() {
         return codigoservicio;
@@ -82,11 +88,27 @@ public class Servicios {
         this.itbms = itbms;
     }
 
+    public Date getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
+
+    public Date getFecha_actualizacion() {
+        return fecha_actualizacion;
+    }
+
+    public void setFecha_actualizacion(Date fecha_actualizacion) {
+        this.fecha_actualizacion = fecha_actualizacion;
+    }
+
    
     
     //metodos insertar
     public void insertServicio(Connection conexion, Servicios servicios) {
-        String query = "INSERT INTO tbl_servicio (codigo_servicio, servicio, descripcion, tipo_cobro, precio, impuesto) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_servicio (codigo_servicio, servicio, descripcion, tipo_cobro, precio, impuesto,fecha_registro) VALUES (?, ?, ?, ?, ?, ?,CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, servicios.getCodigoservicio());
@@ -109,25 +131,30 @@ public class Servicios {
     }
     
     //metodo update
-    public void updateServicioporCodigo(Connection conexion, Servicios servicios) {
-    String query = "UPDATE tbl_servicio SET servicio = ?, descripcion = ?, tipo_cobro = ?, precio = ?, impuesto = ? WHERE codigo_servicio = ?";
+public void updateServicioporCodigo(Connection conexion, Servicios servicios) {
+    String query = "UPDATE tbl_servicio SET servicio = ?, descripcion = ?, tipo_cobro = ?, precio = ?, impuesto = ?, fecha_actualizacion = CURRENT_TIMESTAMP WHERE codigo_servicio = ?";
 
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
-            statement.setString(1, servicios.getNombreservicio());
-            statement.setString(2, servicios.getDescripcion());
-            statement.setString(3, servicios.getTipocobro());
-            statement.setFloat(5, servicios.getPrecio());
-            statement.setDouble(6, servicios.getItbms());
-            statement.setString(7, servicios.getCodigoservicio());
+        statement.setString(1, servicios.getNombreservicio());
+        statement.setString(2, servicios.getDescripcion());
+        statement.setString(3, servicios.getTipocobro());
+        statement.setFloat(4, servicios.getPrecio());
+        statement.setDouble(5, servicios.getItbms());
+        statement.setString(6, servicios.getCodigoservicio());
 
         int filasAfectadas = statement.executeUpdate();
- 
+
+        if (filasAfectadas > 0) {
+            System.out.println("Datos actualizados exitosamente");
+        } else {
+            System.out.println("No se pudo actualizar el servicio");
+        }
     } catch (SQLException e) {
         e.printStackTrace();
         System.out.println("Error: " + e.getMessage());
     }
 }
-    
+ 
     //metodo delete
     public void deleteProductoporCodigo(Connection conexion) {
         String query = "DELETE FROM tbl_servicio WHERE codigo_servicio = ?";
@@ -223,5 +250,38 @@ public class Servicios {
     }
     }
     
-    
+    public List<Servicios> getAllProductosTable(Connection conexion) {
+        List<Servicios> Servicios = new ArrayList<>();
+        String query = "SELECT * FROM tbl_servicio";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String codigoservicio= resultSet.getString("codigo_servicio");
+                String nombreservicio = resultSet.getString("servicio");
+                String descripcion= resultSet.getString("descripcion");
+                String tipocobro = resultSet.getString("tipo_cobro");
+                float precio = resultSet.getFloat("precio");
+                double itbms = resultSet.getDouble("impuesto");
+                Date fechaRegistro = resultSet.getDate("fecha_registro");
+                Date fechaActualizacion = resultSet.getDate("fecha_actualizacion");
+
+                Servicios servicios = new Servicios();
+                servicios.setCodigoservicio(codigoservicio);
+                servicios.setNombreservicio(nombreservicio);
+                servicios.setDescripcion(descripcion);
+                servicios.setTipocobro(tipocobro);
+                servicios.setPrecio(precio);
+                servicios.setItbms(itbms);
+                servicios.setFecha_registro(fechaRegistro);
+                servicios.setFecha_actualizacion(fechaActualizacion);
+
+                Servicios .add(servicios);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Servicios ;
+    }
 }

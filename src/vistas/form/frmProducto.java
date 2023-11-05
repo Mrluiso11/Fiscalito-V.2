@@ -286,7 +286,7 @@ public class frmProducto extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE,customIcon);
                     btnNuevo.setEnabled(true);
                 } else if (operacion.equals("modificar")) {
-                    obj_insertProductos.updateProductoporCodigo(conexion, obj_insertProductos);
+                    obj_insertProductos.actualizarProducto(conexion, obj_insertProductos);
                     inhabilitar();
                     limpiarCampos();
                     // Notificar al usuario
