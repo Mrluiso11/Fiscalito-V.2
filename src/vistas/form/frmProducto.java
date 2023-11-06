@@ -18,7 +18,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author dbpan
@@ -28,7 +27,7 @@ public class frmProducto extends javax.swing.JPanel {
     private Container bgContainer;
     String operacion = "";
     private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
-    private JTextField[] textFieldsToStyle = new JTextField[2];
+    private JTextField[] textFieldsToStyle = new JTextField[3];
     Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
 
     /**
@@ -36,13 +35,14 @@ public class frmProducto extends javax.swing.JPanel {
      */
     public frmProducto() {
         initComponents();
-       bgContainer = this;
-        Forms formsPanel = new Forms(bgContainer,jPTitle);
+        bgContainer = this;
+        Forms formsPanel = new Forms(bgContainer, jPTitle);
         textFieldsToStyle[0] = txtNombreProducto;
-        textFieldsToStyle[1] =txtPrecio;
+        textFieldsToStyle[1] = txtPrecio;
+        textFieldsToStyle[2] = txtCodigoProducto;
         inhabilitar();
         ObtenerNombreProducto();
-   
+
     }
 
     /**
@@ -188,6 +188,11 @@ public class frmProducto extends javax.swing.JPanel {
         bg.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 450, -1));
 
         cbxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProductosActionPerformed(evt);
+            }
+        });
         bg.add(cbxProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -242,7 +247,7 @@ public class frmProducto extends javax.swing.JPanel {
         }
 
     }
-    
+
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         operacion = "nuevo";
         habilitar();
@@ -250,6 +255,7 @@ public class frmProducto extends javax.swing.JPanel {
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
+        cbxProductos.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -261,94 +267,161 @@ public class frmProducto extends javax.swing.JPanel {
         btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Maneja el evento de guardar un producto en la base de datos.
+     *
+     * @param evt El evento de acción que activó este método.
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
+
+        // Crea un objeto Productos para manejar los datos del producto.
         Productos obj_insertProductos = new Productos();
+
+        // Verifica si el campo del Código de Producto está vacío.
         if (txtCodigoProducto.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El Codigo de Producto no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            // Muestra un mensaje de error si el campo está vacío y pide al usuario que lo complete.
+            JOptionPane.showMessageDialog(null, "El Codigo de Producto no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCodigoProducto.requestFocus();
         } else {
             if (conexion != null) {
-
+                // Asigna los valores de los campos a las propiedades del objeto Productos.
                 obj_insertProductos.setCodigoproducto(txtCodigoProducto.getText().trim());
                 obj_insertProductos.setNombreproducto(txtNombreProducto.getText().trim());
                 obj_insertProductos.setDescripcion(txtaDescripcion.getText().trim());
                 obj_insertProductos.setMagnitud(cbxMagnitud.getSelectedItem().toString());
                 obj_insertProductos.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
                 obj_insertProductos.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
-                
-                if (operacion.equals("nuevo")) {
-                    obj_insertProductos.insertProductos(conexion, obj_insertProductos); // Pasar el objeto obj_insertProductos
-                    inhabilitar();
-                    limpiarCampos();
 
-                    // Notificar al usuario
-                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE,customIcon);
-                    btnNuevo.setEnabled(true);
+                // Comprueba si se está realizando una operación de inserción o modificación.
+                if (operacion.equals("nuevo")) {
+                    // Intenta insertar el producto en la base de datos y obtiene el número de filas afectadas.
+                    int filasAfectadas = obj_insertProductos.insertProductos(conexion, obj_insertProductos);
+                    if (filasAfectadas > 0) {
+                        // Notifica al usuario que los datos se han guardado con éxito.
+                        JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                        // Si se insertaron filas, significa que los datos se guardaron con éxito.
+                        inhabilitar();
+                        limpiarCampos();
+                        btnNuevo.setEnabled(true);
+                        cbxProductos.setEnabled(true);
+                    } else {
+                        // Si no se actualizaron filas, muestra un mensaje de error.
+                        JOptionPane.showMessageDialog(null, "Los datos no se han podido guardar", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else if (operacion.equals("modificar")) {
-                    obj_insertProductos.actualizarProducto(conexion, obj_insertProductos);
-                    inhabilitar();
-                    limpiarCampos();
-                    // Notificar al usuario
-                    JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                     btnNuevo.setEnabled(true);
+                    // Intenta actualizar el producto en la base de datos y obtiene el número de filas afectadas.
+                    int filasAfectadas = obj_insertProductos.actualizarProducto(conexion, obj_insertProductos);
+                    if (filasAfectadas > 0) {
+                        // Notifica al usuario que los datos se han actualizado con éxito.
+                        JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                        // Si se actualizaron filas, significa que los datos se han actualizado con éxito.
+                        inhabilitar();
+                        limpiarCampos();
+
+                        btnNuevo.setEnabled(true);
+                    } else {
+                        // Si no se actualizaron filas, muestra un mensaje de error.
+                        JOptionPane.showMessageDialog(null, "Los datos no se han podido actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
 
+                // Cierra la conexión a la base de datos.
                 Conexion.cerrarConexion(conexion);
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
-        Productos producto = new Productos(); // Crear un objeto de la clase Clientes
+
+        // Crea un objeto Productos para manejar los datos del producto.
+        Productos producto = new Productos(); // Crear un objeto de la clase Productos
+
         if (conexion != null) {
+            // Obtiene el nombre del producto seleccionado en el ComboBox y lo asigna al objeto producto.
             producto.setNombreproducto(cbxProductos.getSelectedItem().toString());
-            producto.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
+
+            // Llama al método en la clase Productos para obtener información del producto por nombre.
+            producto.InfoProductoPorNombre(conexion);
+
+            // Cierra la conexión a la base de datos.
             Conexion.cerrarConexion(conexion);
         }
+
+        // Asigna los datos del producto a los campos de texto y ComboBox.
         txtNombreProducto.setText(producto.getNombreproducto());
         txtCodigoProducto.setText(producto.getCodigoproducto());
         txtaDescripcion.setText(producto.getDescripcion());
         cbxMagnitud.setSelectedItem(producto.getMagnitud());
         txtPrecio.setText(String.valueOf(producto.getPrecio()));
-        cbxImpuesto.setSelectedItem(producto.getItbms());
         cbxImpuesto.setSelectedItem(String.valueOf(producto.getItbms()));
-        
+
         if (producto.getNombreproducto() != null) {
-            // Cliente encontrado, habilita los botones
+            // Producto encontrado, habilita los botones de edición y eliminación.
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
             btnNuevo.setEnabled(false);
         } else {
-            // Cliente no encontrado, deshabilita los botones
+            // Producto no encontrado, deshabilita los botones de edición y eliminación.
             btnEditar.setEnabled(false);
             btnEliminar.setEnabled(false);
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
-        // Crear un objeto de la clase producto
+
+        // Crea un objeto de la clase Productos para gestionar los datos del producto.
         Productos productos = new Productos();
+
         if (conexion != null) {
-            //cliente.setRuc(txtRUC.getText().trim());
-            productos.setCodigoproducto(txtCodigoProducto.getText().trim());
-            productos.deleteProductoporCodigo(conexion);
-            Conexion.cerrarConexion(conexion);
-            limpiarCampos();
+            // Obtiene el nombre del producto desde el campo de texto.
+            String nombre = txtNombreProducto.getText();
+
+            // Muestra un cuadro de diálogo de confirmación para la eliminación.
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de querer eliminar este producto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                // Asigna el código del producto al objeto productos.
+                productos.setCodigoproducto(txtCodigoProducto.getText().trim());
+
+                // Llama al método en la clase Productos para eliminar el producto por su código.
+                int filasAfectadas = productos.deleteProductoporCodigo(conexion);
+
+                // Cierra la conexión a la base de datos.
+                Conexion.cerrarConexion(conexion);
+                if (filasAfectadas > 0) {
+                    // Notifica al usuario que el producto se ha eliminado con éxito.
+                    JOptionPane.showMessageDialog(null, "El producto: " + nombre + " se ha eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                    btnNuevo.setEnabled(true);
+
+                    // Limpia los campos después de la eliminación.
+                    limpiarCampos();
+                } else {
+                    // Notifica al usuario que no se pudo eliminar el producto.
+                    JOptionPane.showMessageDialog(null, "El producto: " + nombre + " no se ha podido eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+                    btnNuevo.setEnabled(true);
+                }
+            }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-    // TODO add your handling code here:
+
 
     private void cbxMagnitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMagnitudActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxMagnitudActionPerformed
-                                                                                                                                                                                                                                              
 
-    
+    private void cbxProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProductosActionPerformed
+
     public void inhabilitar() {
+        // Deshabilita campos y botones
         txtNombreProducto.setEnabled(false);
         txtCodigoProducto.setEnabled(true);
         txtaDescripcion.setEnabled(false);
@@ -359,12 +432,13 @@ public class frmProducto extends javax.swing.JPanel {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
+        txtCodigoProducto.setEnabled(false);
         txtaDescripcion.setBackground(new Color(214, 234, 248));
-        colorTexfiel();
-        
+        colorTexfiel(); // Llama al método colorTexfiel para aplicar estilos
     }
 
     public void habilitar() {
+        // Habilita campos y botones
         txtNombreProducto.setEnabled(true);
         txtCodigoProducto.setEnabled(true);
         txtaDescripcion.setEnabled(true);
@@ -375,10 +449,11 @@ public class frmProducto extends javax.swing.JPanel {
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
         txtaDescripcion.setBackground(Color.WHITE);
-        colorTexfiel();
+        colorTexfiel(); // Llama al método colorTexfiel para aplicar estilos
     }
-    
+
     public void limpiarCampos() {
+        // Limpia el contenido de los campos de texto
         for (JTextField campo : camposDeTexto) {
             campo.setText("");
         }
@@ -387,21 +462,21 @@ public class frmProducto extends javax.swing.JPanel {
         txtaDescripcion.setText("");
         txtPrecio.setText("");
     }
-     public void colorTexfiel() {
-        
+
+    public void colorTexfiel() {
         for (JTextField textField : textFieldsToStyle) {
-            if (textField != null) { // Verificar que el textField no sea nulo
+            if (textField != null) { // Verifica que el textField no sea nulo
                 if (!textField.isEnabled()) {
-                    // Cambiar color de fondo y texto para campos inhabilitados
+                    // Cambia el color de fondo y texto para campos inhabilitados
                     textField.setBackground(new Color(214, 234, 248));
                 } else {
-                    // Restablecer colores originales para campos habilitados
+                    // Restablece los colores originales para campos habilitados
                     textField.setBackground(Color.WHITE);
                 }
             }
         }
-
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnBuscar;

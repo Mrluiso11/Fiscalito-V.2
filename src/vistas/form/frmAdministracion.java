@@ -350,7 +350,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     }
 
     private void applyStylesToTitlePanel(JPanel titlePanel) {
-       Forms formsPanel = new Forms(this, titlePanel);
+        Forms formsPanel = new Forms(this, titlePanel);
     }
     private void btnActualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPActionPerformed
         cargarProductos();
@@ -435,12 +435,14 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         // Llenar la tabla con los datos
         for (Clientes cliente : clientes) {
             modelo.addRow(new Object[]{
+                cliente.getCodigo_cliente(),
                 cliente.getRuc(),
                 cliente.getNombre(),
                 cliente.getDireccion(),
                 cliente.getTelefono1(),
                 cliente.getTelefono2(),
                 cliente.getCorreo(),
+                cliente.getObservaciones(),
                 cliente.getFecha_registro(),
                 cliente.getFecha_actualizacion()
             });

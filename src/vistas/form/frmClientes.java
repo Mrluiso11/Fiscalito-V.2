@@ -11,6 +11,7 @@ import java.sql.Connection;
 import controladores.*;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -28,7 +29,7 @@ public class frmClientes extends javax.swing.JPanel {
     String operacion = "";
     private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
     Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
-    private JTextField[] textFieldsToStyle = new JTextField[4];
+    private JTextField[] textFieldsToStyle = new JTextField[5];
 
     /**
      * Creates new form frmClientes
@@ -41,6 +42,7 @@ public class frmClientes extends javax.swing.JPanel {
         textFieldsToStyle[1] = txttelefono1;
         textFieldsToStyle[2] = txtTelefono2;
         textFieldsToStyle[3] = txtEmail;
+        textFieldsToStyle[4] = txtRUC;
 
         inhabilitar();
         // Agregar campos de texto a la lista
@@ -49,6 +51,7 @@ public class frmClientes extends javax.swing.JPanel {
         camposDeTexto.add(txtTelefono2);
         camposDeTexto.add(txtEmail);
         camposDeTexto.add(txtRUC);
+        ObtenerNombreClientes();
 
     }
 
@@ -86,7 +89,7 @@ public class frmClientes extends javax.swing.JPanel {
         txtNombreCliente = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txttelefono1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxClientes = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -234,6 +237,12 @@ public class frmClientes extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtaObservaciones);
 
         bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 980, 130));
+
+        txtNombreCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreClienteActionPerformed(evt);
+            }
+        });
         bg.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 450, -1));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -249,8 +258,8 @@ public class frmClientes extends javax.swing.JPanel {
         });
         bg.add(txttelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 110, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
+        cbxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bg.add(cbxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -276,30 +285,67 @@ public void limpiarCampos() {
     }
 
     private void txtTelefono2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono2ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtTelefono2ActionPerformed
+    private void ObtenerNombreClientes() {
+        Clientes cliente = new Clientes();
+        Connection conexion = Conexion.obtenerConexion();
+
+        try {
+
+            List<String> nombres = cliente.getAllNombres(conexion);
+
+            cbxClientes.removeAllItems();
+
+            for (String nombre : nombres) {
+                cbxClientes.addItem(nombre);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+
+    }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // Se inicia la acción del botón "Buscar"
+
+        // Se obtiene una conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
-        Clientes cliente = new Clientes(); // Crear un objeto de la clase Clientes
+
+        // Se crea un objeto de la clase "Clientes" para manejar la información del cliente
+        Clientes cliente = new Clientes();
+
+        // Verifica si la conexión a la base de datos es exitosa
         if (conexion != null) {
-            cliente.setRuc(txtRUC.getText().trim());
-            cliente.selectClientePorRuc(conexion); // Llama al método en la clase Clientes
+            // Se establece el nombre del cliente seleccionado en un JComboBox
+            cliente.setNombre(cbxClientes.getSelectedItem().toString());
+
+            // Se llama al método "selectClientePorNombre" en la clase "Clientes" para buscar el cliente por nombre
+            cliente.selectClientePorNombre(conexion);
+
+            // Se cierra la conexión a la base de datos
             Conexion.cerrarConexion(conexion);
         }
 
         if (cliente.getNombre() != null) {
-            // Cliente encontrado, habilita los botones
+            // Si se encontró al cliente en la base de datos:
+
+            // Habilita los botones de "Editar" y "Eliminar" y deshabilita el botón "Nuevo"
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
             btnNuevo.setEnabled(false);
         } else {
-            // Cliente no encontrado, deshabilita los botones
+            // Si el cliente no se encontró en la base de datos:
+
+            // Deshabilita los botones de "Editar" y "Eliminar"
             btnEditar.setEnabled(false);
             btnEliminar.setEnabled(false);
         }
 
-        // Actualiza los campos de texto y áreas de texto en el formulario aquí
+        // Actualiza los campos de texto y áreas de texto en el formulario con la información del cliente
+        txtRUC.setText(cliente.getRuc());
         txtNombreCliente.setText(cliente.getNombre());
         txtareaDireccion.setText(cliente.getDireccion());
         txttelefono1.setText(cliente.getTelefono1());
@@ -313,14 +359,22 @@ public void limpiarCampos() {
     }//GEN-LAST:event_txttelefono1ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // Se inicia la acción del botón "Guardar"
+
+        // Se obtiene una conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
+
+        // Se crea un objeto de la clase "Clientes" para manejar la información del cliente a insertar o actualizar
         Clientes obj_insertClientes = new Clientes();
+
+        // Verifica si el campo de RUC está vacío
         if (txtRUC.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El R.C.U no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            // Muestra un mensaje de error si el campo está vacío
+            JOptionPane.showMessageDialog(null, "El R.C.U no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtRUC.requestFocus();
         } else {
             if (conexion != null) {
-
+                // Se asignan los valores de los campos del formulario al objeto "obj_insertClientes"
                 obj_insertClientes.setRuc(txtRUC.getText().trim());
                 obj_insertClientes.setNombre(txtNombreCliente.getText().trim());
                 obj_insertClientes.setDireccion(txtareaDireccion.getText().trim());
@@ -328,41 +382,101 @@ public void limpiarCampos() {
                 obj_insertClientes.setTelefono2(txtTelefono2.getText().trim());
                 obj_insertClientes.setCorreo(txtEmail.getText().trim());
                 obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
+
                 if (operacion.equals("nuevo")) {
-                    obj_insertClientes.insertClientes(conexion, obj_insertClientes); // Pasar el objeto obj_insertClientes
-                    inhabilitar();
-                    btnNuevo.setEnabled(true);
-                    limpiarCampos();
+                    // Si se está realizando una operación de inserción:
 
-                    // Notificar al usuario
-                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                    // Llama al método "insertClientes" en la clase "Clientes" para agregar el cliente a la base de datos
+                    int filasAfectadas = obj_insertClientes.insertClientes(conexion, obj_insertClientes);
+
+                    if (filasAfectadas > 0) {
+                        // Si se insertaron filas con éxito, muestra un mensaje de éxito
+                        JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                        // Llama a métodos para limpiar y deshabilitar campos y habilitar el botón "Nuevo"
+                        inhabilitar();
+                        btnNuevo.setEnabled(true);
+                        cbxClientes.setEnabled(true);
+                        limpiarCampos();
+                    } else {
+                        // Si no se actualizaron filas, muestra un mensaje de error.
+                        JOptionPane.showMessageDialog(null, "Los datos no se han podido guardar", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else if (operacion.equals("modificar")) {
-                    obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
-                    inhabilitar();
-                    btnNuevo.setEnabled(true);
-                    limpiarCampos();
+                    // Si se está realizando una operación de actualización:
 
-                    // Notificar al usuario
-                    JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    // Llama al método "updateClientePorRuc" en la clase "Clientes" para actualizar el cliente en la base de datos
+                    int filasAfectadas = obj_insertClientes.updateClientePorRuc(conexion, obj_insertClientes);
+
+                    if (filasAfectadas > 0) {
+                        // Si se actualizaron filas con éxito, muestra un mensaje de éxito
+                        JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                        // Llama a métodos para limpiar y deshabilitar campos y habilitar el botón "Nuevo"
+                        inhabilitar();
+                        btnNuevo.setEnabled(true);
+                        cbxClientes.setEnabled(true);
+                        limpiarCampos();
+                    } else {
+                        // Si no se actualizaron filas, muestra un mensaje de error.
+                        JOptionPane.showMessageDialog(null, "Los datos no se han podido actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
 
+                // Cierra la conexión a la base de datos
                 Conexion.cerrarConexion(conexion);
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // Se inicia la acción del botón "Eliminar"
+
+        // Se obtiene una conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
-        Clientes cliente = new Clientes(); // Crear un objeto de la clase Clientes
+
+        // Se crea un objeto de la clase "Clientes" para manejar la información del cliente a eliminar
+        Clientes cliente = new Clientes();
+
         if (conexion != null) {
-            cliente.setRuc(txtRUC.getText().trim());
-            cliente.deleteClientePorRuc(conexion);
-            Conexion.cerrarConexion(conexion);
-            limpiarCampos();
+            // Se obtiene el nombre del cliente del campo de texto
+            String nombre = txtNombreCliente.getText();
+
+            // Se muestra un cuadro de diálogo de confirmación para asegurarse de que el usuario quiere eliminar el cliente
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de querer eliminar este cliente?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                // Si el usuario confirma la eliminación:
+
+                // Se establece el RUC del cliente a eliminar en el objeto "cliente"
+                cliente.setRuc(txtRUC.getText().trim());
+
+                // Se llama al método "deleteClientePorRuc" en la clase "Clientes" para eliminar el cliente de la base de datos
+                int filasAfectadas = cliente.deleteClientePorRuc(conexion);
+
+                // Se cierra la conexión a la base de datos
+                Conexion.cerrarConexion(conexion);
+
+                if (filasAfectadas > 0) {
+                    // Si se eliminaron filas con éxito, muestra un mensaje de éxito
+                    JOptionPane.showMessageDialog(null, "El Cliente: " + nombre + " se ha eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+
+                    // Habilita el botón "Nuevo" y limpia los campos
+                    btnNuevo.setEnabled(true);
+                    limpiarCampos();
+                } else {
+                    // Si no se eliminaron filas, muestra un mensaje de error
+                    JOptionPane.showMessageDialog(null, "El Cliente: " + nombre + " no se ha podido eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                    // Habilita el botón "Nuevo"
+                    btnNuevo.setEnabled(true);
+                }
+            }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     public void inhabilitar() {
+        // Este método se encarga de deshabilitar los elementos de la interfaz de usuario, establecer colores de fondo y texto, y actualizar el estado de los botones.
+
+        // Se deshabilitan los elementos de la interfaz de usuario
         lblNumCliente.setEnabled(false);
         txtNombreCliente.setEnabled(false);
         txtareaDireccion.setEnabled(false);
@@ -374,29 +488,37 @@ public void limpiarCampos() {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
+        txtRUC.setEnabled(false);
+
+        // Se establecen colores de fondo para los campos de texto y áreas de texto
         txtareaDireccion.setBackground(new Color(214, 234, 248));
         txtaObservaciones.setBackground(new Color(214, 234, 248));
-        colorTexfiel();
 
+        // Se llama al método "colorTexfiel" para actualizar los colores de fondo de los campos de texto
+        colorTexfiel();
     }
 
     public void colorTexfiel() {
-        
+        // Este método se encarga de actualizar los colores de fondo y texto de los campos de texto según su estado de habilitación.
+
+        // Se itera a través de los campos de texto especificados en el array "textFieldsToStyle"
         for (JTextField textField : textFieldsToStyle) {
             if (textField != null) { // Verificar que el textField no sea nulo
                 if (!textField.isEnabled()) {
-                    // Cambiar color de fondo y texto para campos inhabilitados
+                    // Si el campo de texto está deshabilitado, se cambia el color de fondo y texto
                     textField.setBackground(new Color(214, 234, 248));
                 } else {
-                    // Restablecer colores originales para campos habilitados
+                    // Si el campo de texto está habilitado, se restablecen los colores originales
                     textField.setBackground(Color.WHITE);
                 }
             }
         }
-
     }
 
     public void habilitar() {
+        // Este método se encarga de habilitar los elementos de la interfaz de usuario, establecer colores de fondo y texto, y actualizar el estado de los botones.
+
+        // Se habilitan los elementos de la interfaz de usuario
         lblNumCliente.setEnabled(true);
         txtNombreCliente.setEnabled(true);
         txtareaDireccion.setEnabled(true);
@@ -407,10 +529,16 @@ public void limpiarCampos() {
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
+        txtRUC.setEnabled(true);
+
+        // Se establecen colores de fondo para los campos de texto y áreas de texto
         txtareaDireccion.setBackground(Color.WHITE);
         txtaObservaciones.setBackground(Color.WHITE);
+
+        // Se llama al método "colorTexfiel" para actualizar los colores de fondo de los campos de texto
         colorTexfiel();
     }
+
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         operacion = "modificar";
@@ -428,7 +556,12 @@ public void limpiarCampos() {
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
+        cbxClientes.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void txtNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -438,7 +571,7 @@ public void limpiarCampos() {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

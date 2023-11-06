@@ -1,6 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * Clase para gestionar clientes en una base de datos.
+ * La clase "Clientes" se utiliza para interactuar con los datos de clientes en una base de datos.
+ * Proporciona métodos para insertar, actualizar, eliminar y consultar información
+ * relacionada con clientes.
+ *
+ * @author dbpan
  */
 package controladores;
 
@@ -13,12 +17,10 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author dbpan
- */
 public class Clientes {
 
+    // Campos de la clase que representan las propiedades de un cliente.
+    private String codigo_cliente; 
     private String ruc;
     private String nombre;
     private String direccion;
@@ -29,7 +31,10 @@ public class Clientes {
     private Date Fecha_registro;
     private Date Fecha_actualizacion;
 
-    public Clientes(String ruc, String nombre, String direccion, String telefono1, String telefono2, String correo, String observaciones, Date Fecha_registro, Date Fecha_actualizacion) {
+    // Constructor
+
+    public Clientes(String codigo_cliente, String ruc, String nombre, String direccion, String telefono1, String telefono2, String correo, String observaciones, Date Fecha_registro, Date Fecha_actualizacion) {
+        this.codigo_cliente = codigo_cliente;
         this.ruc = ruc;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -40,8 +45,18 @@ public class Clientes {
         this.Fecha_registro = Fecha_registro;
         this.Fecha_actualizacion = Fecha_actualizacion;
     }
+   
 
     public Clientes() {
+    }
+    // Métodos de acceso y mutadores
+    public String getCodigo_cliente() {
+        return codigo_cliente;
+    }
+
+    
+    public void setCodigo_cliente(String codigo_cliente) {    
+        this.codigo_cliente = codigo_cliente;
     }
 
     public String getRuc() {
@@ -116,8 +131,8 @@ public class Clientes {
         this.Fecha_actualizacion = Fecha_actualizacion;
     }
 
-    //Metodo para insertar
-    public void insertClientes(Connection conexion, Clientes cliente) {
+    // Método para insertar un nuevo cliente en la base de datos
+    public int insertClientes(Connection conexion, Clientes cliente) {
         String query = "INSERT INTO tbl_cliente (ruc, nombre, direccion, telefono1, telefono2, correo, observaciones,fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?,CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
@@ -130,64 +145,54 @@ public class Clientes {
             statement.setString(7, cliente.getObservaciones());
 
             int filasAfectadas = statement.executeUpdate();
-            if (filasAfectadas > 0) {
-                System.out.println("Inserción exitosa");
-            } else {
-                System.out.println("No se pudo insertar el cliente");
-            }
+            return filasAfectadas;
         } catch (SQLException e) {
             e.printStackTrace();
+            return 0;
         }
     }
 
-    //Metodo para eliminar
-    public void deleteClientePorRuc(Connection conexion) {
+    // Método para eliminar un cliente por su RUC
+    public int deleteClientePorRuc(Connection conexion) {
         String query = "DELETE FROM tbl_cliente WHERE ruc = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, ruc);
 
             int filasAfectadas = statement.executeUpdate();
-
-            if (filasAfectadas > 0) {
-                System.out.println("Cliente con RUC " + ruc + " eliminado exitosamente.");
-            } else {
-                System.out.println("Cliente con RUC " + ruc + " no encontrado o no pudo ser eliminado.");
-            }
+            return filasAfectadas;
         } catch (SQLException e) {
             e.printStackTrace();
+            return 0;
         }
     }
 
-    //Metodo select
-    public void selectClientePorRuc(Connection conexion) {
-        String query = "SELECT * FROM tbl_cliente WHERE ruc = ?";
+    // Método para seleccionar un cliente por su nombre
+    public void selectClientePorNombre(Connection conexion) {
+        String query = "SELECT * FROM tbl_cliente WHERE nombre = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
-            statement.setString(1, ruc);
+            statement.setString(1, nombre);
 
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 // Recupera los datos del cliente
-                nombre = resultSet.getString("nombre");
+                ruc = resultSet.getString("ruc");
                 direccion = resultSet.getString("direccion");
                 telefono1 = resultSet.getString("telefono1");
                 telefono2 = resultSet.getString("telefono2");
                 correo = resultSet.getString("correo");
                 observaciones = resultSet.getString("observaciones");
-
-            } else {
-                JOptionPane.showMessageDialog(null, "El R.C.U " + ruc + " no Existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    //metodo update
-    public void updateClientePorRuc(Connection conexion, Clientes cliente) {
-        String query = "UPDATE tbl_cliente SET nombre = ?, direccion = ?, telefono1 = ?, telefono2 = ?, correo = ?, observaciones = ?,fecha_actualizacion = CURRENT_TIMESTAMP  WHERE ruc = ?";
+    // Método para actualizar un cliente existente en la base de datos
+    public int updateClientePorRuc(Connection conexion, Clientes cliente) {
+        String query = "UPDATE tbl_cliente SET nombre = ?, direccion = ?, telefono1 = ?, telefono2 = ?, correo = ?, observaciones = ?, fecha_actualizacion = CURRENT_TIMESTAMP WHERE ruc = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, cliente.getNombre());
@@ -199,19 +204,19 @@ public class Clientes {
             statement.setString(7, cliente.getRuc());
 
             int filasAfectadas = statement.executeUpdate();
-
+            return filasAfectadas;
         } catch (SQLException e) {
             e.printStackTrace();
+            return 0;
         }
     }
-//Lista de nombres
 
+// Método para obtener una lista de nombres de clientes
     public List<String> getAllNombres(Connection conexion) {
         List<String> nombres = new ArrayList<>();
         String query = "SELECT nombre FROM tbl_cliente";
 
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
-
             while (resultSet.next()) {
                 String nombre = resultSet.getString("nombre");
                 nombres.add(nombre);
@@ -223,11 +228,12 @@ public class Clientes {
         return nombres;
     }
 
+// Método para obtener información de un cliente por su nombre
     public void InfoClientePorNombre(Connection conexion) {
         String query = "SELECT ruc, telefono1, telefono2, direccion FROM tbl_cliente WHERE nombre = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
-            statement.setString(1, nombre); // Establece el nombre en lugar de ruc
+            statement.setString(1, nombre);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -236,20 +242,20 @@ public class Clientes {
                 direccion = resultSet.getString("direccion");
                 telefono1 = resultSet.getString("telefono1");
                 telefono2 = resultSet.getString("telefono2");
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+// Método para obtener una lista de clientes en forma de objetos
     public List<Clientes> getAllClientesTable(Connection conexion) {
-        List<Clientes> Clientes = new ArrayList<>();
+        List<Clientes> clientes = new ArrayList<>();
         String query = "SELECT * FROM tbl_cliente";
 
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
-
             while (resultSet.next()) {
+                codigo_cliente=resultSet.getString("codigo_cliente");
                 ruc = resultSet.getString("ruc");
                 nombre = resultSet.getString("nombre");
                 direccion = resultSet.getString("direccion");
@@ -261,22 +267,23 @@ public class Clientes {
                 Fecha_actualizacion = resultSet.getDate("fecha_actualizacion");
 
                 Clientes cliente = new Clientes();
+                cliente.setCodigo_cliente( codigo_cliente);
                 cliente.setRuc(ruc);
                 cliente.setNombre(nombre);
                 cliente.setDireccion(direccion);
                 cliente.setTelefono1(telefono1);
                 cliente.setTelefono2(telefono2);
                 cliente.setCorreo(correo);
+                cliente.setObservaciones(observaciones);
                 cliente.setFecha_registro(Fecha_registro);
-                cliente.setFecha_actualizacion(Fecha_actualizacion );
+                cliente.setFecha_actualizacion(Fecha_actualizacion);
 
-                Clientes.add(cliente);
+                clientes.add(cliente);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return Clientes;
+        return clientes;
     }
-
 }

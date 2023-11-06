@@ -44,7 +44,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         // Aplica un renderizador personalizado al encabezado de la tabla.
         header.setDefaultRenderer(new CustomTableHeaderRenderer());
 
-        
+        jTabbedPane1.setUI(new CustomTabbedPaneUI());
         
         ObtenerNombreCliente();
         

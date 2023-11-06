@@ -1,8 +1,12 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * En este archivo se encuentra la definición de la clase "Servicios" que se utiliza
+ * para interactuar con los datos de servicios en la base de datos.
+ * Proporciona métodos para insertar, actualizar, eliminar y consultar información
+ * relacionada con servicios.
  */
+
 package controladores;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -11,11 +15,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+
 /**
+ * La clase "Servicios" representa los servicios y proporciona métodos para interactuar con ellos.
  *
  * @author admin
  */
 public class Servicios {
+    // Atributos que representan las propiedades de un servicio.
     private String codigoservicio;
     private String nombreservicio;
     private String descripcion;
@@ -24,9 +31,25 @@ public class Servicios {
     private double itbms;
     private Date fecha_registro;
     private Date fecha_actualizacion;
-    public Servicios(){   
+
+    /**
+     * Constructor vacío de la clase "Servicios".
+     */
+    public Servicios() {
     }
 
+    /**
+     * Constructor con parámetros de la clase "Servicios" que inicializa todas las propiedades.
+     *
+     * @param codigoservicio        Código del servicio.
+     * @param nombreservicio        Nombre del servicio.
+     * @param descripcion           Descripción del servicio.
+     * @param tipocobro             Tipo de cobro del servicio.
+     * @param precio                Precio del servicio.
+     * @param itbms                 Impuesto del servicio.
+     * @param fecha_registro        Fecha de registro del servicio.
+     * @param fecha_actualizacion   Fecha de actualización del servicio.
+     */
     public Servicios(String codigoservicio, String nombreservicio, String descripcion, String tipocobro, float precio, double itbms, Date fecha_registro, Date fecha_actualizacion) {
         this.codigoservicio = codigoservicio;
         this.nombreservicio = nombreservicio;
@@ -37,8 +60,6 @@ public class Servicios {
         this.fecha_registro = fecha_registro;
         this.fecha_actualizacion = fecha_actualizacion;
     }
-    
-  
 
     public String getCodigoservicio() {
         return codigoservicio;
@@ -103,12 +124,14 @@ public class Servicios {
     public void setFecha_actualizacion(Date fecha_actualizacion) {
         this.fecha_actualizacion = fecha_actualizacion;
     }
-
-   
     
-    //metodos insertar
-    public void insertServicio(Connection conexion, Servicios servicios) {
-        String query = "INSERT INTO tbl_servicio (codigo_servicio, servicio, descripcion, tipo_cobro, precio, impuesto,fecha_registro) VALUES (?, ?, ?, ?, ?, ?,CURRENT_TIMESTAMP)";
+
+    // Los siguientes métodos son operaciones relacionadas con la base de datos.
+    // Cada método realiza una operación específica, como insertar, actualizar, eliminar o consultar servicios.
+
+    // Método para insertar un nuevo servicio en la base de datos.
+    public int insertServicio(Connection conexion, Servicios servicios) {
+        String query = "INSERT INTO tbl_servicio (codigo_servicio, servicio, descripcion, tipo_cobro, precio, impuesto, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, servicios.getCodigoservicio());
@@ -119,71 +142,58 @@ public class Servicios {
             statement.setDouble(6, servicios.getItbms());
 
             int filasAfectadas = statement.executeUpdate();
-            if (filasAfectadas > 0) {
-                System.out.println("Datos ingresados exitosamente");
-            } else {
-                System.out.println("No se pudo insertar el producto");
-            }
+
+            // Retorna la cantidad de filas afectadas por la inserción.
+            return filasAfectadas;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());
+            return 0;
         }
     }
-    
-    //metodo update
-public void updateServicioporCodigo(Connection conexion, Servicios servicios) {
-    String query = "UPDATE tbl_servicio SET servicio = ?, descripcion = ?, tipo_cobro = ?, precio = ?, impuesto = ?, fecha_actualizacion = CURRENT_TIMESTAMP WHERE codigo_servicio = ?";
 
-    try (PreparedStatement statement = conexion.prepareStatement(query)) {
-        statement.setString(1, servicios.getNombreservicio());
-        statement.setString(2, servicios.getDescripcion());
-        statement.setString(3, servicios.getTipocobro());
-        statement.setFloat(4, servicios.getPrecio());
-        statement.setDouble(5, servicios.getItbms());
-        statement.setString(6, servicios.getCodigoservicio());
+    // Método para actualizar un servicio existente en la base de datos.
+    public int updateServicioporCodigo(Connection conexion, Servicios servicios) {
+        String query = "UPDATE tbl_servicio SET servicio = ?, descripcion = ?, tipo_cobro = ?, precio = ?, impuesto = ?, fecha_actualizacion = CURRENT_TIMESTAMP WHERE codigo_servicio = ?";
 
-        int filasAfectadas = statement.executeUpdate();
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, servicios.getNombreservicio());
+            statement.setString(2, servicios.getDescripcion());
+            statement.setString(3, servicios.getTipocobro());
+            statement.setFloat(4, servicios.getPrecio());
+            statement.setDouble(5, servicios.getItbms());
+            statement.setString(6, servicios.getCodigoservicio());
 
-        if (filasAfectadas > 0) {
-            System.out.println("Datos actualizados exitosamente");
-        } else {
-            System.out.println("No se pudo actualizar el servicio");
+            int filasAfectadas = statement.executeUpdate();
+
+            // Retorna la cantidad de filas afectadas por la actualización.
+            return filasAfectadas;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+            return 0;
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        System.out.println("Error: " + e.getMessage());
     }
-}
- 
-    //metodo delete
-    public void deleteProductoporCodigo(Connection conexion) {
+
+    // Método para eliminar un servicio por su código.
+    public int deleteServicioporCodigo(Connection conexion) {
         String query = "DELETE FROM tbl_servicio WHERE codigo_servicio = ?";
-        
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de querer eliminar este producto?", "Confirmación", JOptionPane.YES_NO_OPTION);
-        
-        if (opcion == JOptionPane.YES_OPTION){
-          try (PreparedStatement statement = conexion.prepareStatement(query)) {
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, codigoservicio);
 
             int filasAfectadas = statement.executeUpdate();
 
-            if (filasAfectadas > 0) {
-                System.out.println("Producto con Codigo " + this.codigoservicio + " eliminado exitosamente.");
-            } else {
-                System.out.println("Producto con Codigo " + this.codigoservicio + " no encontrado o no pudo ser eliminado.");
-            }
+            // Retorna la cantidad de filas afectadas por la eliminación.
+            return filasAfectadas;
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());
-        }  
+            return 0;
         }
-        if (opcion == JOptionPane.NO_OPTION){
-            JOptionPane.showMessageDialog(null, "No se eliminó el producto");
-        }
-
     }
-    
-    //metodo select
+
+    // Método para seleccionar un servicio por su código y cargar sus datos.
     public void selectProductoporCodigo(Connection conexion) {
         String query = "SELECT * FROM tbl_servicio WHERE codigo_servicio = ?";
 
@@ -193,30 +203,28 @@ public void updateServicioporCodigo(Connection conexion, Servicios servicios) {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                // Recupera los datos del cliente
+                // Recupera los datos del servicio.
                 this.codigoservicio = resultSet.getString("codigo_servicio");
                 this.nombreservicio = resultSet.getString("servicio");
                 this.descripcion = resultSet.getString("descripcion");
                 this.tipocobro = resultSet.getString("tipo_cobro");
                 this.precio = resultSet.getFloat("precio");
-                this.itbms = resultSet.getDouble("Impuesto");
-
+                this.itbms = resultSet.getDouble("impuesto");
             } else {
-                JOptionPane.showMessageDialog(null, "El Codigo de Servicio "+ this.codigoservicio +" no Existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El Codigo de Servicio " + this.codigoservicio + " no Existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());
         }
     }
-    
-    //metodo listado de nombres 
+
+    // Método para obtener una lista de nombres de servicios desde la base de datos.
     public List<String> getAllServicios(Connection conexion) {
         List<String> servicios = new ArrayList<>();
         String query = "SELECT servicio FROM tbl_servicio";
 
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
-
             while (resultSet.next()) {
                 this.nombreservicio = resultSet.getString("servicio");
                 servicios.add(nombreservicio);
@@ -227,61 +235,60 @@ public void updateServicioporCodigo(Connection conexion, Servicios servicios) {
 
         return servicios;
     }
-    
-    
+
+    // Método para cargar la información de un servicio por su nombre.
     public void InfoServicioPorNombre(Connection conexion) {
-    String query = "SELECT codigo_servicio, descripcion, tipo_cobro, precio, impuesto FROM tbl_servicio WHERE servicio = ?";
-    
+        String query = "SELECT codigo_servicio, descripcion, tipo_cobro, precio, impuesto FROM tbl_servicio WHERE servicio = ?";
 
-    try (PreparedStatement statement = conexion.prepareStatement(query)) {
-        statement.setString(1, nombreservicio); // Establece el nombre de la variable en lugar de ruc
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, nombreservicio);
 
-        ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
-            codigoservicio = resultSet.getString("codigo_servicio");
-            descripcion= resultSet.getString("descripcion");
-            tipocobro = resultSet.getString("tipo_cobro");
-            precio = resultSet.getFloat("precio");
-            itbms = resultSet.getDouble("impuesto");
-        } 
-    } catch (SQLException e) {
-        e.printStackTrace();
+            if (resultSet.next()) {
+                codigoservicio = resultSet.getString("codigo_servicio");
+                descripcion = resultSet.getString("descripcion");
+                tipocobro = resultSet.getString("tipo_cobro");
+                precio = resultSet.getFloat("precio");
+                itbms = resultSet.getDouble("impuesto");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-    }
-    
+
+    // Método para obtener una lista de todos los servicios en la base de datos.
     public List<Servicios> getAllProductosTable(Connection conexion) {
-        List<Servicios> Servicios = new ArrayList<>();
+        List<Servicios> servicios = new ArrayList<>();
         String query = "SELECT * FROM tbl_servicio";
 
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
-
             while (resultSet.next()) {
-                String codigoservicio= resultSet.getString("codigo_servicio");
+                String codigoservicio = resultSet.getString("codigo_servicio");
                 String nombreservicio = resultSet.getString("servicio");
-                String descripcion= resultSet.getString("descripcion");
+                String descripcion = resultSet.getString("descripcion");
                 String tipocobro = resultSet.getString("tipo_cobro");
                 float precio = resultSet.getFloat("precio");
                 double itbms = resultSet.getDouble("impuesto");
                 Date fechaRegistro = resultSet.getDate("fecha_registro");
                 Date fechaActualizacion = resultSet.getDate("fecha_actualizacion");
 
-                Servicios servicios = new Servicios();
-                servicios.setCodigoservicio(codigoservicio);
-                servicios.setNombreservicio(nombreservicio);
-                servicios.setDescripcion(descripcion);
-                servicios.setTipocobro(tipocobro);
-                servicios.setPrecio(precio);
-                servicios.setItbms(itbms);
-                servicios.setFecha_registro(fechaRegistro);
-                servicios.setFecha_actualizacion(fechaActualizacion);
+                Servicios servicio = new Servicios();
+                servicio.setCodigoservicio(codigoservicio);
+                servicio.setNombreservicio(nombreservicio);
+                servicio.setDescripcion(descripcion);
+                servicio.setTipocobro(tipocobro);
+                servicio.setPrecio(precio);
+                servicio.setItbms(itbms);
+                servicio.setFecha_registro(fechaRegistro);
+                servicio.setFecha_actualizacion(fechaActualizacion);
 
-                Servicios .add(servicios);
+                servicios.add(servicio);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return Servicios ;
+        return servicios;
     }
 }

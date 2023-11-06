@@ -27,7 +27,8 @@ public class frmServicio extends javax.swing.JPanel {
     private Container bgContainer;
     String operacion = "";
     private ArrayList<JTextField> camposDeTexto = new ArrayList<>();
-    private JTextField[] textFieldsToStyle = new JTextField[2];
+    private JTextField[] textFieldsToStyle = new JTextField[3];
+    Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
 
     /**
      * Creates new form frmArticulos
@@ -38,6 +39,7 @@ public class frmServicio extends javax.swing.JPanel {
         Forms formsPanel = new Forms(bgContainer, jPTitle);
         textFieldsToStyle[0] = txtNombreServicio;
         textFieldsToStyle[1] = txtPrecio;
+        textFieldsToStyle[2] = txtCodigoServicio;
         inhabilitar();
         ObtenerNombreServicio();
     }
@@ -73,7 +75,6 @@ public class frmServicio extends javax.swing.JPanel {
         txtaDescripcion = new javax.swing.JTextArea();
         txtNombreServicio = new javax.swing.JTextField();
         cbxServicios = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setOpaque(false);
 
@@ -150,6 +151,11 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 710, 120, 40));
 
         btnNuevo.setText("Nuevo");
@@ -203,9 +209,6 @@ public class frmServicio extends javax.swing.JPanel {
         cbxServicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         bg.add(cbxServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        bg.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 580, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,6 +258,7 @@ public class frmServicio extends javax.swing.JPanel {
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
+        cbxServicios.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -267,14 +271,17 @@ public class frmServicio extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
         Servicios obj_insertServicios = new Servicios();
+
+        // Verifica si el campo del Código de Servicio está vacío.
         if (txtCodigoServicio.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El Codigo de Servicio no puede estar vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El Codigo de Servicio no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCodigoServicio.requestFocus();
         } else {
             if (conexion != null) {
-
+                // Asigna los valores de los campos a las propiedades del objeto Servicios.
                 obj_insertServicios.setCodigoservicio(txtCodigoServicio.getText().trim());
                 obj_insertServicios.setNombreservicio(txtNombreServicio.getText().trim());
                 obj_insertServicios.setDescripcion(txtaDescripcion.getText().trim());
@@ -282,51 +289,66 @@ public class frmServicio extends javax.swing.JPanel {
                 obj_insertServicios.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
                 obj_insertServicios.setItbms(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
 
+                // Comprueba si se está realizando una operación de inserción o modificación.
                 if (operacion.equals("nuevo")) {
-                    obj_insertServicios.insertServicio(conexion, obj_insertServicios); // Pasar el objeto obj_insertServicios
-                    inhabilitar();
-                    limpiarCampos();
-
-                    // Notificar al usuario
-                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    btnNuevo.setEnabled(true);
+                    int filasAfectadas = obj_insertServicios.insertServicio(conexion, obj_insertServicios);
+                    if (filasAfectadas > 0) {
+                        limpiarCampos();
+                        // Notifica al usuario que los datos se han guardado con éxito.
+                        JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                        btnNuevo.setEnabled(true);
+                        cbxServicios.setEnabled(true);
+                    } else {
+                        // Notifica al usuario que los datos no se han podido guardar.
+                        JOptionPane.showMessageDialog(null, "Los datos no se han podido guardar", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else if (operacion.equals("modificar")) {
-                    obj_insertServicios.updateServicioporCodigo(conexion, obj_insertServicios);
-                    inhabilitar();
-                    limpiarCampos();
-
-                    // Notificar al usuario
-                    JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    btnNuevo.setEnabled(true);
+                    int filasAfectadas = obj_insertServicios.updateServicioporCodigo(conexion, obj_insertServicios);
+                    if (filasAfectadas > 0) {
+                        inhabilitar();
+                        limpiarCampos();
+                        // Notifica al usuario que los datos se han actualizado con éxito.
+                        JOptionPane.showMessageDialog(null, "Los datos se han actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                        btnNuevo.setEnabled(true);
+                    } else {
+                        // Notifica al usuario que los datos no se han podido actualizar.
+                        JOptionPane.showMessageDialog(null, "Los datos no se han podido actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
 
+                // Cierra la conexión a la base de datos.
                 Conexion.cerrarConexion(conexion);
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
-        Servicios servicio = new Servicios(); // Crear un objeto de la clase Clientes
+        Servicios servicio = new Servicios(); // Crear un objeto de la clase Servicios
+
         if (conexion != null) {
+            // Establece el nombre del servicio seleccionado en el ComboBox.
             servicio.setNombreservicio(cbxServicios.getSelectedItem().toString());
-            servicio.InfoServicioPorNombre(conexion); // Llama al método en la clase Clientes
+            servicio.InfoServicioPorNombre(conexion); // Llama al método en la clase Servicios para obtener información del servicio.
             Conexion.cerrarConexion(conexion);
         }
+
+        // Rellena los campos de la interfaz con la información del servicio encontrado.
         txtNombreServicio.setText(servicio.getNombreservicio());
         txtCodigoServicio.setText(servicio.getCodigoservicio());
         txtaDescripcion.setText(servicio.getDescripcion());
         cbxTipoCobro.setSelectedItem(servicio.getTipocobro());
         txtPrecio.setText(String.valueOf(servicio.getPrecio()));
         cbxImpuesto.setSelectedItem(servicio.getItbms());
-       
+
         if (servicio.getNombreservicio() != null) {
-            // Cliente encontrado, habilita los botones
+            // Servicio encontrado, habilita los botones de edición y eliminación.
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
             btnNuevo.setEnabled(false);
         } else {
-            // Cliente no encontrado, deshabilita los botones
+            // Servicio no encontrado, deshabilita los botones de edición y eliminación.
             btnEditar.setEnabled(false);
             btnEliminar.setEnabled(false);
         }
@@ -336,7 +358,46 @@ public class frmServicio extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxImpuestoActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // Obtiene una conexión a la base de datos.
+        Connection conexion = Conexion.obtenerConexion();
+
+        // Crea un objeto de la clase Servicios para manejar los datos del servicio.
+        Servicios servicios = new Servicios();
+
+        if (conexion != null) {
+            String nombre = txtNombreServicio.getText();
+
+            // Muestra un cuadro de diálogo de confirmación antes de eliminar el servicio.
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de querer eliminar este servicio?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                servicios.setCodigoservicio(txtCodigoServicio.getText().trim());
+
+                // Llama al método para eliminar el servicio por su código.
+                int filasAfectadas = servicios.deleteServicioporCodigo(conexion);
+
+                // Cierra la conexión a la base de datos.
+                Conexion.cerrarConexion(conexion);
+
+                if (filasAfectadas > 0) {
+                    // Notifica al usuario que el servicio se ha eliminado con éxito.
+                    JOptionPane.showMessageDialog(null, "El servicio: " + nombre + " se ha eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                     btnNuevo.setEnabled(true);
+
+                    // Limpia los campos después de eliminar el servicio.
+                    limpiarCampos();
+                } else {
+                    // Notifica al usuario que no se ha podido eliminar el servicio.
+                    JOptionPane.showMessageDialog(null, "El servicio: " + nombre + " no se ha podido eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+                     btnNuevo.setEnabled(true);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     public void inhabilitar() {
+        // Deshabilita campos y botones para evitar la edición.
         txtNombreServicio.setEnabled(false);
         txtCodigoServicio.setEnabled(true);
         txtaDescripcion.setEnabled(false);
@@ -347,12 +408,13 @@ public class frmServicio extends javax.swing.JPanel {
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnBuscar.setEnabled(true);
-        txtaDescripcion.setBackground(new Color(214, 234, 248));
-        colorTexfiel();
-
+        txtCodigoServicio.setEnabled(false);
+        txtaDescripcion.setBackground(new Color(214, 234, 248)); // Cambia el fondo del campo de descripción.
+        colorTexfiel(); // Llama al método para establecer estilos de campo.
     }
 
     public void habilitar() {
+        // Habilita campos y botones para permitir la edición.
         txtNombreServicio.setEnabled(true);
         txtCodigoServicio.setEnabled(true);
         txtaDescripcion.setEnabled(true);
@@ -362,11 +424,12 @@ public class frmServicio extends javax.swing.JPanel {
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
-        txtaDescripcion.setBackground(Color.WHITE);
-        colorTexfiel();
+        txtaDescripcion.setBackground(Color.WHITE); // Restablece el fondo del campo de descripción a blanco.
+        colorTexfiel(); // Llama al método para establecer estilos de campo.
     }
 
     public void limpiarCampos() {
+        // Limpia el contenido de todos los campos de texto y reinicia los campos relacionados con nombres y códigos.
         for (JTextField campo : camposDeTexto) {
             campo.setText("");
         }
@@ -377,20 +440,21 @@ public class frmServicio extends javax.swing.JPanel {
     }
 
     public void colorTexfiel() {
+        // Establece el color de fondo para los campos de texto habilitados y deshabilitados.
 
         for (JTextField textField : textFieldsToStyle) {
-            if (textField != null) { // Verificar que el textField no sea nulo
+            if (textField != null) { // Verifica que el textField no sea nulo.
                 if (!textField.isEnabled()) {
-                    // Cambiar color de fondo y texto para campos inhabilitados
+                    // Cambia el color de fondo y texto para campos deshabilitados.
                     textField.setBackground(new Color(214, 234, 248));
                 } else {
-                    // Restablecer colores originales para campos habilitados
+                    // Restablece los colores originales para campos habilitados.
                     textField.setBackground(Color.WHITE);
                 }
             }
         }
-
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnBuscar;
@@ -401,7 +465,6 @@ public class frmServicio extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbxImpuesto;
     private javax.swing.JComboBox<String> cbxServicios;
     private javax.swing.JComboBox<String> cbxTipoCobro;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
