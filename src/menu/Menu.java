@@ -35,7 +35,7 @@ public class Menu extends JPanel {
         addTitle("FISCALITO V2.0");
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DASHBOARD, "Inicio"));
         addTitle("MENU");
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DESKTOP_MAC, "Sistema", "Opciones","Administración"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DESKTOP_MAC, "Sistema","Opciones","Administración"));
         //Menu lateral del dashboard
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.NOTE_ADD, "Catalogos", "Empresa", "Productos", "Servicios", "Clientes", "Constantes"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DVR, "Operacion", "Documentos"));
