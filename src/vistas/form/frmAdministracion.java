@@ -34,7 +34,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         cargarServicios();
         cargarClientes();
         Forms formsPanel = new Forms(this, jPTitle);
-        TableStyler.applyStyles(tbl_Productos);
+
         // Aplica los estilos a la tabla de productos
         applyTableStyles(tbl_Productos, jScrollPane1);
         // Aplica los estilos a la tabla de servicios
@@ -345,8 +345,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         TableStyler tableStyler = new TableStyler();
         TableStyler.applyStyles(table);  // Aplica estilos a la tabla
         tableStyler.fixTable(scrollPane); // Configura la apariencia del JScrollPane
-        JTableHeader header = table.getTableHeader();
-        header.setDefaultRenderer(new CustomTableHeaderRenderer()); // Aplica el renderizador personalizado al encabezado de la tabla
+        CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
     }
 
     private void applyStylesToTitlePanel(JPanel titlePanel) {

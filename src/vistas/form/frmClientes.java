@@ -373,17 +373,6 @@ public void limpiarCampos() {
             JOptionPane.showMessageDialog(null, "El R.C.U no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtRUC.requestFocus();
         } else {
-            // Obtiene una lista de RUC de clientes existentes en la base de datos.
-            List<String> rucList = obj_insertClientes.getAllRUC(conexion);
-            // Recorre la lista de RUC de clientes.
-            for (String ruc : rucList) {
-                // Comprueba si el RUC de cliente ya existe en la base de datos.
-                if (ruc.equals(txtRUC.getText())) {
-                    // Muestra un mensaje de error y detiene el flujo si el código existe.
-                    JOptionPane.showMessageDialog(null, "Este código del R.U.C. del cliente ya existe", "Error", JOptionPane.ERROR_MESSAGE);
-                    return; // Sale del método actual y detiene el flujo del programa
-                }
-            }
 
             if (conexion != null) {
                 // Se asignan los valores de los campos del formulario al objeto "obj_insertClientes"
@@ -396,6 +385,17 @@ public void limpiarCampos() {
                 obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
 
                 if (operacion.equals("nuevo")) {
+                    // Obtiene una lista de RUC de clientes existentes en la base de datos.
+                    List<String> rucList = obj_insertClientes.getAllRUC(conexion);
+                    // Recorre la lista de RUC de clientes.
+                    for (String ruc : rucList) {
+                        // Comprueba si el RUC de cliente ya existe en la base de datos.
+                        if (ruc.equals(txtRUC.getText())) {
+                            // Muestra un mensaje de error y detiene el flujo si el código existe.
+                            JOptionPane.showMessageDialog(null, "Este código del R.U.C. del cliente ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                            return; // Sale del método actual y detiene el flujo del programa
+                        }
+                    }
                     // Si se está realizando una operación de inserción:
 
                     // Llama al método "insertClientes" en la clase "Clientes" para agregar el cliente a la base de datos

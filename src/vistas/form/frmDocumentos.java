@@ -12,6 +12,8 @@ import conexion.Conexion;
 import java.sql.Connection;
 import controladores.*;
 import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -30,34 +32,28 @@ public class frmDocumentos extends javax.swing.JPanel {
         Forms formsPanel = new Forms(this, null);
 
         // Aplica estilos a la JTable llamada "table" utilizando TableStyler.
-        TableStyler.applyStyles(table); // Llama al método applyStyles con tu JTable.
-
-        // Crea una instancia de TableStyler para personalizar la apariencia de la tabla.
-        TableStyler tableStyler = new TableStyler();
-
-        // Llama a "fixTable" para aplicar estilos adicionales a la JTable contenida en "jScrollPane1".
-        tableStyler.fixTable(jScrollPane1);
-
-        // Obtiene el encabezado de la tabla.
-        JTableHeader header = table.getTableHeader();
-
-        // Aplica un renderizador personalizado al encabezado de la tabla.
-        header.setDefaultRenderer(new CustomTableHeaderRenderer());
-
+        applyTableStyles(TableDocumentos, jScrollPane1);
+        applyTableStyles(TableFacturas, jScrollPane2);
+        TableFacturas.setShowVerticalLines(true);
         jTabbedPane1.setUI(new CustomTabbedPaneUI());
-        
         ObtenerNombreCliente();
-        
+
         //ObtenerNombreServicio();
         ObtenerNombreProducto();
-        
-        
-        
+
+    }
+    // Método para aplicar estilos adicionales a la tabla contenida en un JScrollPane.
+
+    private void applyTableStyles(JTable table, JScrollPane scrollPane) {
+        TableStyler tableStyler = new TableStyler();
+        TableStyler.applyStyles(table);  // Aplica estilos a la tabla
+        tableStyler.fixTable(scrollPane); // Configura la apariencia del JScrollPane
+        CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
     }
 
     private void init() {
         //TableStyler.fixTable(jScrollPane1);
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
 
         model.addRow(new Object[]{"1", "Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018"});
         model.addRow(new Object[]{"2", "Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018"});
@@ -129,7 +125,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtRUC = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        TableDocumentos = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -174,7 +170,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel46 = new javax.swing.JLabel();
         btnAplicar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableFacturas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -499,12 +495,12 @@ public class frmDocumentos extends javax.swing.JPanel {
             }
         });
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        TableDocumentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "N° de Producto/Servicio", "Articulo/ Servicio", "¿Servicio?", "Descripción", "Magnitud", "Cantidad", "Precio", "Desc. Linea", "Desc. General", "Base", "I.T.B.M.S", "Importe I.T.B.M.S", "Subtotal"
+                "N°", "Articulo/ Servicio", "¿Servicio?", "Descripción", "Magnitud", "Cantidad", "Precio", "Desc. Linea", "Desc. General", "Base", "I.T.B.M.S", "Importe I.T.B.M.S", "Subtotal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -515,7 +511,9 @@ public class frmDocumentos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(table);
+        TableDocumentos.setShowHorizontalLines(true);
+        TableDocumentos.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(TableDocumentos);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -804,6 +802,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         bg1.setPreferredSize(new java.awt.Dimension(1156, 850));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Devolución" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel40.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(0, 204, 204));
@@ -835,7 +838,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         btnAplicar.setText("Aplicar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -846,7 +849,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                 "ID Factura", "Numero de cliente", "Nombre de Cliente", "Fecha de Facturación", "Monto Total"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(TableFacturas);
 
         jButton1.setText("Visualizar");
 
@@ -888,10 +891,10 @@ public class frmDocumentos extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jMonthChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                         .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -979,7 +982,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
 
     }
-    
+
     private void ObtenerNombreServicio() {
         // Instanciar la clase Clientes
         Servicios servicio = new Servicios();
@@ -1002,10 +1005,8 @@ public class frmDocumentos extends javax.swing.JPanel {
             // Cerrar la conexión a la base de datos aquí
         }
     }
-    
-    
-    
-    
+
+
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
@@ -1049,7 +1050,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_chkServicioActionPerformed
 
     private void cbxArticuloServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxArticuloServicioActionPerformed
-       
+
     }//GEN-LAST:event_cbxArticuloServicioActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
@@ -1064,8 +1065,14 @@ public class frmDocumentos extends javax.swing.JPanel {
         cbxImpuesto.setSelectedItem(String.valueOf(producto.getItbms()));
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableDocumentos;
+    private javax.swing.JTable TableFacturas;
     private javax.swing.JPanel bg1;
     private javax.swing.JPanel bg2;
     private javax.swing.JButton btnAgregar;
@@ -1137,14 +1144,12 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JComboBox<String> jcbNombre;
     private javax.swing.JComboBox<String> jcbTipoDocumento;
     private javax.swing.JLabel lblFechaImpresion;
     private javax.swing.JLabel lblIDfactura;
     private javax.swing.JLabel lblNumeroCliente;
-    private javax.swing.JTable table;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigoproducto;
     private javax.swing.JTextField txtDescGeneral;

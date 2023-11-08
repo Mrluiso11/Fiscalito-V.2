@@ -695,11 +695,11 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="table">
+                    <Component class="javax.swing.JTable" name="TableDocumentos">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="13" rowCount="0">
-                            <Column editable="false" title="N&#xb0; de Producto/Servicio" type="java.lang.Object"/>
+                            <Column editable="false" title="N&#xb0;" type="java.lang.Object"/>
                             <Column editable="false" title="Articulo/ Servicio" type="java.lang.Object"/>
                             <Column editable="false" title="&#xbf;Servicio?" type="java.lang.Object"/>
                             <Column editable="false" title="Descripci&#xf3;n" type="java.lang.Object"/>
@@ -783,6 +783,8 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="showHorizontalLines" type="boolean" value="true"/>
+                        <Property name="showVerticalLines" type="boolean" value="true"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
@@ -1391,6 +1393,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -1453,10 +1458,10 @@
                                   <Component id="jMonthChooser1" pref="29" max="32767" attributes="0"/>
                                   <Component id="jYearChooser1" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="btnAplicar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                                   <Component id="jButton1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnAplicar" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -1491,7 +1496,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable1">
+                    <Component class="javax.swing.JTable" name="TableFacturas">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="4">

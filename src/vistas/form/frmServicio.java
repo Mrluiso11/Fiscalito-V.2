@@ -280,17 +280,7 @@ public class frmServicio extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El Codigo de Servicio no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCodigoServicio.requestFocus();
         } else {
-            // Obtiene una lista de códigos de servicios existentes en la base de datos.
-            List<String> codigosServicios = obj_insertServicios.getAllCServicios(conexion);
-            // Recorre la lista de códigos de servicios.
-            for (String cservicios : codigosServicios) {
-                // Comprueba si el código del servicio ya existe en la base de datos.
-                if (cservicios.equals(txtCodigoServicio.getText())) {
-                    // Muestra un mensaje de error y detiene el flujo si el código existe.
-                    JOptionPane.showMessageDialog(null, "Este código del servicio ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return; // Sale del método actual y detiene el flujo del programa
-                }
-            }
+
             if (conexion != null) {
                 // Asigna los valores de los campos a las propiedades del objeto Servicios.
                 obj_insertServicios.setCodigoservicio(txtCodigoServicio.getText().trim());
@@ -302,6 +292,17 @@ public class frmServicio extends javax.swing.JPanel {
 
                 // Comprueba si se está realizando una operación de inserción o modificación.
                 if (operacion.equals("nuevo")) {
+                    // Obtiene una lista de códigos de servicios existentes en la base de datos.
+                    List<String> codigosServicios = obj_insertServicios.getAllCServicios(conexion);
+                    // Recorre la lista de códigos de servicios.
+                    for (String cservicios : codigosServicios) {
+                        // Comprueba si el código del servicio ya existe en la base de datos.
+                        if (cservicios.equals(txtCodigoServicio.getText())) {
+                            // Muestra un mensaje de error y detiene el flujo si el código existe.
+                            JOptionPane.showMessageDialog(null, "Este código del servicio ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return; // Sale del método actual y detiene el flujo del programa
+                        }
+                    }
                     int filasAfectadas = obj_insertServicios.insertServicio(conexion, obj_insertServicios);
                     if (filasAfectadas > 0) {
                         limpiarCampos();
