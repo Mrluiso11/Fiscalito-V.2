@@ -132,6 +132,22 @@ public class Productos {
         }
     }
 
+    // Método para obtener una lista de códigos de productos
+    public List<String> getAllCodigoProductos(Connection conexion) {
+        List<String> codigosProductos = new ArrayList<>();
+        String query = "SELECT codigo_producto FROM tbl_producto";  // Asumiendo que "codigo_producto" es el nombre correcto de la columna
+
+        try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                codigoproducto = resultSet.getString("codigo_producto");
+                codigosProductos.add(codigoproducto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return codigosProductos;
+    }
+
     // Método para actualizar un producto existente en la base de datos
     public int actualizarProducto(Connection conexion, Productos productos) {
         String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, magnitud = ?, precio = ?, impuesto = ?, fecha_actualizacion = CURRENT_TIMESTAMP WHERE codigo_producto = ?";

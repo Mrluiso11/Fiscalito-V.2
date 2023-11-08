@@ -286,6 +286,17 @@ public class frmProducto extends javax.swing.JPanel {
             txtCodigoProducto.requestFocus();
         } else {
             if (conexion != null) {
+                // Obtiene una lista de códigos de productos existentes en la base de datos.
+                List<String> codigosProductos = obj_insertProductos.getAllCodigoProductos(conexion);
+                // Recorre la lista de códigos de productos.
+                for (String cproductos : codigosProductos) {
+                    // Comprueba si el código del producto ya existe en la base de datos.
+                    if (cproductos.equals(txtCodigoProducto.getText())) {
+                        // Muestra un mensaje de error y detiene el flujo si el código existe.
+                        JOptionPane.showMessageDialog(null, "Este código del producto ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return; // Sale del método actual y detiene el flujo del programa
+                    }
+                }
                 // Asigna los valores de los campos a las propiedades del objeto Productos.
                 obj_insertProductos.setCodigoproducto(txtCodigoProducto.getText().trim());
                 obj_insertProductos.setNombreproducto(txtNombreProducto.getText().trim());

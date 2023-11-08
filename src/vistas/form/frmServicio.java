@@ -280,6 +280,17 @@ public class frmServicio extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El Codigo de Servicio no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCodigoServicio.requestFocus();
         } else {
+            // Obtiene una lista de códigos de servicios existentes en la base de datos.
+            List<String> codigosServicios = obj_insertServicios.getAllCServicios(conexion);
+            // Recorre la lista de códigos de servicios.
+            for (String cservicios : codigosServicios) {
+                // Comprueba si el código del servicio ya existe en la base de datos.
+                if (cservicios.equals(txtCodigoServicio.getText())) {
+                    // Muestra un mensaje de error y detiene el flujo si el código existe.
+                    JOptionPane.showMessageDialog(null, "Este código del servicio ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return; // Sale del método actual y detiene el flujo del programa
+                }
+            }
             if (conexion != null) {
                 // Asigna los valores de los campos a las propiedades del objeto Servicios.
                 obj_insertServicios.setCodigoservicio(txtCodigoServicio.getText().trim());
@@ -383,14 +394,14 @@ public class frmServicio extends javax.swing.JPanel {
                 if (filasAfectadas > 0) {
                     // Notifica al usuario que el servicio se ha eliminado con éxito.
                     JOptionPane.showMessageDialog(null, "El servicio: " + nombre + " se ha eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
-                     btnNuevo.setEnabled(true);
+                    btnNuevo.setEnabled(true);
 
                     // Limpia los campos después de eliminar el servicio.
                     limpiarCampos();
                 } else {
                     // Notifica al usuario que no se ha podido eliminar el servicio.
                     JOptionPane.showMessageDialog(null, "El servicio: " + nombre + " no se ha podido eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
-                     btnNuevo.setEnabled(true);
+                    btnNuevo.setEnabled(true);
                 }
             }
         }

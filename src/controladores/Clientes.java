@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class Clientes {
 
     // Campos de la clase que representan las propiedades de un cliente.
-    private String codigo_cliente; 
+    private String codigo_cliente;
     private String ruc;
     private String nombre;
     private String direccion;
@@ -32,7 +32,6 @@ public class Clientes {
     private Date Fecha_actualizacion;
 
     // Constructor
-
     public Clientes(String codigo_cliente, String ruc, String nombre, String direccion, String telefono1, String telefono2, String correo, String observaciones, Date Fecha_registro, Date Fecha_actualizacion) {
         this.codigo_cliente = codigo_cliente;
         this.ruc = ruc;
@@ -45,17 +44,16 @@ public class Clientes {
         this.Fecha_registro = Fecha_registro;
         this.Fecha_actualizacion = Fecha_actualizacion;
     }
-   
 
     public Clientes() {
     }
+
     // Métodos de acceso y mutadores
     public String getCodigo_cliente() {
         return codigo_cliente;
     }
 
-    
-    public void setCodigo_cliente(String codigo_cliente) {    
+    public void setCodigo_cliente(String codigo_cliente) {
         this.codigo_cliente = codigo_cliente;
     }
 
@@ -150,6 +148,23 @@ public class Clientes {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    // Método para obtener una lista de RUC de clientes
+    public List<String> getAllRUC(Connection conexion) {
+        List<String> rucList = new ArrayList<>();
+        String query = "SELECT ruc FROM tbl_cliente";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                 ruc = resultSet.getString("ruc");
+                rucList.add(ruc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rucList;
     }
 
     // Método para eliminar un cliente por su RUC
@@ -255,7 +270,7 @@ public class Clientes {
 
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                codigo_cliente=resultSet.getString("codigo_cliente");
+                codigo_cliente = resultSet.getString("codigo_cliente");
                 ruc = resultSet.getString("ruc");
                 nombre = resultSet.getString("nombre");
                 direccion = resultSet.getString("direccion");
@@ -267,7 +282,7 @@ public class Clientes {
                 Fecha_actualizacion = resultSet.getDate("fecha_actualizacion");
 
                 Clientes cliente = new Clientes();
-                cliente.setCodigo_cliente( codigo_cliente);
+                cliente.setCodigo_cliente(codigo_cliente);
                 cliente.setRuc(ruc);
                 cliente.setNombre(nombre);
                 cliente.setDireccion(direccion);

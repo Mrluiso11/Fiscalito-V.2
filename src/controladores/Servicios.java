@@ -4,7 +4,6 @@
  * Proporciona métodos para insertar, actualizar, eliminar y consultar información
  * relacionada con servicios.
  */
-
 package controladores;
 
 import java.sql.Connection;
@@ -17,11 +16,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- * La clase "Servicios" representa los servicios y proporciona métodos para interactuar con ellos.
+ * La clase "Servicios" representa los servicios y proporciona métodos para
+ * interactuar con ellos.
  *
  * @author admin
  */
 public class Servicios {
+
     // Atributos que representan las propiedades de un servicio.
     private String codigoservicio;
     private String nombreservicio;
@@ -39,16 +40,17 @@ public class Servicios {
     }
 
     /**
-     * Constructor con parámetros de la clase "Servicios" que inicializa todas las propiedades.
+     * Constructor con parámetros de la clase "Servicios" que inicializa todas
+     * las propiedades.
      *
-     * @param codigoservicio        Código del servicio.
-     * @param nombreservicio        Nombre del servicio.
-     * @param descripcion           Descripción del servicio.
-     * @param tipocobro             Tipo de cobro del servicio.
-     * @param precio                Precio del servicio.
-     * @param itbms                 Impuesto del servicio.
-     * @param fecha_registro        Fecha de registro del servicio.
-     * @param fecha_actualizacion   Fecha de actualización del servicio.
+     * @param codigoservicio Código del servicio.
+     * @param nombreservicio Nombre del servicio.
+     * @param descripcion Descripción del servicio.
+     * @param tipocobro Tipo de cobro del servicio.
+     * @param precio Precio del servicio.
+     * @param itbms Impuesto del servicio.
+     * @param fecha_registro Fecha de registro del servicio.
+     * @param fecha_actualizacion Fecha de actualización del servicio.
      */
     public Servicios(String codigoservicio, String nombreservicio, String descripcion, String tipocobro, float precio, double itbms, Date fecha_registro, Date fecha_actualizacion) {
         this.codigoservicio = codigoservicio;
@@ -124,11 +126,9 @@ public class Servicios {
     public void setFecha_actualizacion(Date fecha_actualizacion) {
         this.fecha_actualizacion = fecha_actualizacion;
     }
-    
 
     // Los siguientes métodos son operaciones relacionadas con la base de datos.
     // Cada método realiza una operación específica, como insertar, actualizar, eliminar o consultar servicios.
-
     // Método para insertar un nuevo servicio en la base de datos.
     public int insertServicio(Connection conexion, Servicios servicios) {
         String query = "INSERT INTO tbl_servicio (codigo_servicio, servicio, descripcion, tipo_cobro, precio, impuesto, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
@@ -150,6 +150,23 @@ public class Servicios {
             System.out.println("Error: " + e.getMessage());
             return 0;
         }
+    }
+
+    // Método para obtener una lista de los códigos de servicios desde la base de datos.
+    public List<String> getAllCServicios(Connection conexion) {
+        List<String> codigosServicios = new ArrayList<>();
+        String query = "SELECT codigo_servicio FROM tbl_servicio";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                codigoservicio = resultSet.getString("codigo_servicio");
+                codigosServicios.add(codigoservicio);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return codigosServicios;
     }
 
     // Método para actualizar un servicio existente en la base de datos.
