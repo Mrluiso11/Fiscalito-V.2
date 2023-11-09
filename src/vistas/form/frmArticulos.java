@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  *
  * @author dbpan
  */
-public class frmProducto extends javax.swing.JPanel {
+public class frmArticulos extends javax.swing.JPanel {
 
     private Container bgContainer;
     String operacion = "";
@@ -33,7 +33,7 @@ public class frmProducto extends javax.swing.JPanel {
     /**
      * Creates new form frmArticulos
      */
-    public frmProducto() {
+    public frmArticulos() {
         initComponents();
         bgContainer = this;
         Forms formsPanel = new Forms(bgContainer, jPTitle);
@@ -87,7 +87,7 @@ public class frmProducto extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(125, 125, 125));
-        jLabel1.setText("DATOS DE PRODUCTO");
+        jLabel1.setText("DATOS DEL ATÍCULO");
 
         javax.swing.GroupLayout jPTitleLayout = new javax.swing.GroupLayout(jPTitle);
         jPTitle.setLayout(jPTitleLayout);
@@ -96,7 +96,7 @@ public class frmProducto extends javax.swing.JPanel {
             .addGroup(jPTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(841, Short.MAX_VALUE))
+                .addContainerGap(854, Short.MAX_VALUE))
         );
         jPTitleLayout.setVerticalGroup(
             jPTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +137,7 @@ public class frmProducto extends javax.swing.JPanel {
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("Nombre Producto :");
+        jLabel8.setText("Nombre Atículo :");
         bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         btnEliminar.setText("Eliminar");
@@ -226,7 +226,7 @@ public class frmProducto extends javax.swing.JPanel {
 
     private void ObtenerNombreProducto() {
         // Instanciar la clase Clientes
-        Productos producto = new Productos();
+        Articulos producto = new Articulos();
         Connection conexion = Conexion.obtenerConexion();
 
         try {
@@ -276,8 +276,8 @@ public class frmProducto extends javax.swing.JPanel {
         // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
 
-        // Crea un objeto Productos para manejar los datos del producto.
-        Productos obj_insertProductos = new Productos();
+        // Crea un objeto Articulos para manejar los datos del producto.
+        Articulos obj_insertProductos = new Articulos();
 
         // Verifica si el campo del Código de Producto está vacío.
         if (txtCodigoProducto.getText().trim().isEmpty()) {
@@ -287,7 +287,7 @@ public class frmProducto extends javax.swing.JPanel {
         } else {
             if (conexion != null) {
 
-                // Asigna los valores de los campos a las propiedades del objeto Productos.
+                // Asigna los valores de los campos a las propiedades del objeto Articulos.
                 obj_insertProductos.setCodigoproducto(txtCodigoProducto.getText().trim());
                 obj_insertProductos.setNombreproducto(txtNombreProducto.getText().trim());
                 obj_insertProductos.setDescripcion(txtaDescripcion.getText().trim());
@@ -349,14 +349,14 @@ public class frmProducto extends javax.swing.JPanel {
         // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
 
-        // Crea un objeto Productos para manejar los datos del producto.
-        Productos producto = new Productos(); // Crear un objeto de la clase Productos
+        // Crea un objeto Articulos para manejar los datos del producto.
+        Articulos producto = new Articulos(); // Crear un objeto de la clase Articulos
 
         if (conexion != null) {
             // Obtiene el nombre del producto seleccionado en el ComboBox y lo asigna al objeto producto.
             producto.setNombreproducto(cbxProductos.getSelectedItem().toString());
 
-            // Llama al método en la clase Productos para obtener información del producto por nombre.
+            // Llama al método en la clase Articulos para obtener información del producto por nombre.
             producto.InfoProductoPorNombre(conexion);
 
             // Cierra la conexión a la base de datos.
@@ -388,8 +388,8 @@ public class frmProducto extends javax.swing.JPanel {
         // Obtiene una conexión a la base de datos.
         Connection conexion = Conexion.obtenerConexion();
 
-        // Crea un objeto de la clase Productos para gestionar los datos del producto.
-        Productos productos = new Productos();
+        // Crea un objeto de la clase Articulos para gestionar los datos del producto.
+        Articulos productos = new Articulos();
 
         if (conexion != null) {
             // Obtiene el nombre del producto desde el campo de texto.
@@ -402,7 +402,7 @@ public class frmProducto extends javax.swing.JPanel {
                 // Asigna el código del producto al objeto productos.
                 productos.setCodigoproducto(txtCodigoProducto.getText().trim());
 
-                // Llama al método en la clase Productos para eliminar el producto por su código.
+                // Llama al método en la clase Articulos para eliminar el producto por su código.
                 int filasAfectadas = productos.deleteProductoporCodigo(conexion);
 
                 // Cierra la conexión a la base de datos.

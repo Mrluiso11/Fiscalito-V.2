@@ -36,7 +36,7 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 2 && indexSubMenu == 1) {
                     showForm(new FrmEmpresa());
                 } else if (index == 2 && indexSubMenu == 2) {
-                    showForm(new frmProducto());
+                    showForm(new frmArticulos());
                 } else if (index == 2 && indexSubMenu == 3) {
                     showForm(new frmServicio());
                 } else if (index == 2 && indexSubMenu == 4) {

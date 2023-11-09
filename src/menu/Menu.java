@@ -37,7 +37,7 @@ public class Menu extends JPanel {
         addTitle("MENU");
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DESKTOP_MAC, "Sistema","Opciones","Administración"));
         //Menu lateral del dashboard
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.NOTE_ADD, "Catalogos", "Empresa", "Productos", "Servicios", "Clientes", "Constantes"));
+        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.NOTE_ADD, "Catalogos", "Empresa", "Artículos", "Servicios", "Clientes", "Constantes"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DVR, "Operacion", "Documentos"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.PIE_CHART_OUTLINED, "Reportes", "Reporte de Ventas", "Reporte de Creditos"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.VIEW_LIST, "Herramientas", "Exportar Datos"));

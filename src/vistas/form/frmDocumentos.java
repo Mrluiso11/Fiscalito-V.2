@@ -26,20 +26,19 @@ public class frmDocumentos extends javax.swing.JPanel {
      */
     public frmDocumentos() {
         initComponents(); // Inicializa los componentes del formulario.
-        init(); // Llama a un método personalizado para inicializar otros componentes y datos.
-
         // Crea una instancia de Forms y la asocia con este formulario.
         Forms formsPanel = new Forms(this, null);
 
-        // Aplica estilos a la JTable llamada "table" utilizando TableStyler.
+        /* // Aplica estilos a la JTable llamada "table" utilizando TableStyler.
         applyTableStyles(TableDocumentos, jScrollPane1);
         applyTableStyles(TableFacturas, jScrollPane2);
         TableFacturas.setShowVerticalLines(true);
         jTabbedPane1.setUI(new CustomTabbedPaneUI());
         ObtenerNombreCliente();
-
+         */
         //ObtenerNombreServicio();
         ObtenerNombreProducto();
+        txtDescLinea.setEnabled(false);
 
     }
     // Método para aplicar estilos adicionales a la tabla contenida en un JScrollPane.
@@ -51,24 +50,22 @@ public class frmDocumentos extends javax.swing.JPanel {
         CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
     }
 
-    private void init() {
-        //TableStyler.fixTable(jScrollPane1);
+    private void cargarTable() {
+        String DecLinea;
+        if (txtDescLinea.isEnabled()) {
+           DecLinea = txtDescLinea.getText();
+        } else {
+            DecLinea = "no";
+        }
+        Connection conexion = Conexion.obtenerConexion();
+        Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
+        if (conexion != null) {
+            producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
+            producto.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
+            Conexion.cerrarConexion(conexion);
+        }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-
-        model.addRow(new Object[]{"1", "Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018"});
-        model.addRow(new Object[]{"2", "Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018"});
-        model.addRow(new Object[]{"3", "Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018"});
-        model.addRow(new Object[]{"5", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-        model.addRow(new Object[]{"6", "Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018"});
-        model.addRow(new Object[]{"7", "Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018"});
-        model.addRow(new Object[]{"8", "Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018"});
-        model.addRow(new Object[]{"9", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-        model.addRow(new Object[]{"10", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-        model.addRow(new Object[]{"11", "Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018"});
-        model.addRow(new Object[]{"12", "Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018"});
-        model.addRow(new Object[]{"13", "Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018"});
-        model.addRow(new Object[]{"14", "Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018"});
-
+        model.addRow(new Object[]{"1", cbxArticuloServicio.getSelectedItem().toString(), "mikebhand@gmail.com", producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), txtCantidad.getText(), txtPrecio.getText(),DecLinea, "25 Apr,2018", "25 Apr,2018", cbxImpuesto.getSelectedItem().toString(), "25 Apr,2018", "25 Apr,2018"});
     }
 
     /**
@@ -142,7 +139,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtCantidad = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        chkDescLinea = new javax.swing.JRadioButton();
         txtDescLinea = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         cbxMagnitudes = new javax.swing.JComboBox<>();
@@ -488,7 +485,8 @@ public class frmDocumentos extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.setOpaque(false);
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jScrollPane1ComponentAdded(evt);
@@ -609,8 +607,13 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel20.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabel20.setText("Precio :");
 
-        jRadioButton1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        jRadioButton1.setText("% Desc. Línea:");
+        chkDescLinea.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        chkDescLinea.setText("% Desc. Línea:");
+        chkDescLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkDescLineaActionPerformed(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabel21.setText("I.T.B.M.S. (%) :");
@@ -633,6 +636,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         btnRemover.setText("-");
 
         btnAgregar.setText("+");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabel18.setText("Código Producto:");
@@ -678,7 +686,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton1))
+                            .addComponent(chkDescLinea))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
@@ -698,7 +706,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jRadioButton1))
+                    .addComponent(chkDescLinea))
                 .addGap(53, 53, 53))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -961,7 +969,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void ObtenerNombreProducto() {
         // Instanciar la clase Clientes
-        Productos producto = new Productos();
+        Articulos producto = new Articulos();
         Connection conexion = Conexion.obtenerConexion();
 
         try {
@@ -1028,6 +1036,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_jScrollPane1ComponentAdded
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
         Connection conexion = Conexion.obtenerConexion();
         Clientes cliente = new Clientes(); // Crear un objeto de la clase Clientes
         if (conexion != null) {
@@ -1055,19 +1064,33 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
         Connection conexion = Conexion.obtenerConexion();
-        Productos producto = new Productos(); // Crear un objeto de la clase Clientes
+        Articulos articulo = new Articulos(); // Crear un objeto de la clase Clientes
         if (conexion != null) {
-            producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
-            producto.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
+            articulo.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
+            articulo.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
         }
-        txtCodigoproducto.setText(producto.getCodigoproducto());
-        cbxImpuesto.setSelectedItem(String.valueOf(producto.getItbms()));
+        txtCodigoproducto.setText(articulo.getCodigoproducto());
+        txtPrecio.setText(String.valueOf(articulo.getPrecio()));
+        cbxImpuesto.setSelectedItem(String.valueOf(articulo.getItbms()));
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        cargarTable();
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void chkDescLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDescLineaActionPerformed
+
+        if (chkDescLinea.isSelected()) {
+            txtDescLinea.setEnabled(true);
+        } else {
+            txtDescLinea.setEnabled(false);
+        }
+    }//GEN-LAST:event_chkDescLineaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1091,6 +1114,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbxImpuesto;
     private javax.swing.JComboBox<String> cbxMagnitudes;
     private javax.swing.JCheckBox chkCredito;
+    private javax.swing.JRadioButton chkDescLinea;
     private javax.swing.JCheckBox chkServicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton7;
@@ -1139,7 +1163,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;

@@ -65,12 +65,23 @@ public class TableStyler extends JTable {
     }
 
     public void fixTable(JScrollPane scroll) {
-        scroll.setBorder(null);
+        // Configurar la barra de desplazamiento vertical
         scroll.setVerticalScrollBar(new ScrollBar());
         scroll.getVerticalScrollBar().setBackground(Color.WHITE);
+
+        // Habilitar la barra de desplazamiento horizontal
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBar(new ScrollBar());
+        scroll.getHorizontalScrollBar().setBackground(Color.WHITE);
+
+        // Configuraciones adicionales
         scroll.getViewport().setBackground(Color.WHITE);
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        scroll.setBorder(null);
+
+        // Configurar esquina superior derecha con un panel blanco
+        JPanel cornerPanel = new JPanel();
+        cornerPanel.setBackground(Color.WHITE);
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, cornerPanel);
     }
+
 }

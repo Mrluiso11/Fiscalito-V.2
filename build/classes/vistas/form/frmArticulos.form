@@ -62,7 +62,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="841" max="32767" attributes="0"/>
+                      <EmptySpace pref="854" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -81,7 +81,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="7d" green="7d" red="7d" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="DATOS DE PRODUCTO"/>
+                <Property name="text" type="java.lang.String" value="DATOS DEL AT&#xcd;CULO"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -207,7 +207,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nombre Producto :"/>
+            <Property name="text" type="java.lang.String" value="Nombre At&#xed;culo :"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class Productos {
+public class Articulos {
 
     // Campos de la clase que representan las propiedades de un producto.
     private String codigoproducto;
@@ -30,10 +30,10 @@ public class Productos {
     private Date fecha_actualizacion;
 
     // Constructores
-    public Productos() {
+    public Articulos() {
     }
 
-    public Productos(String codigoproducto, String nombreproducto, String descripcion, String magnitud, float precio, double itbms, Date fecha_registro, Date fecha_actualizacion) {
+    public Articulos(String codigoproducto, String nombreproducto, String descripcion, String magnitud, float precio, double itbms, Date fecha_registro, Date fecha_actualizacion) {
         this.codigoproducto = codigoproducto;
         this.nombreproducto = nombreproducto;
         this.descripcion = descripcion;
@@ -110,7 +110,7 @@ public class Productos {
     }
 
     // Método para insertar un nuevo producto en la base de datos
-    public int insertProductos(Connection conexion, Productos productos) {
+    public int insertProductos(Connection conexion, Articulos productos) {
         String query = "INSERT INTO tbl_producto (codigo_producto, producto, descripcion, magnitud, precio, impuesto, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
@@ -149,7 +149,7 @@ public class Productos {
     }
 
     // Método para actualizar un producto existente en la base de datos
-    public int actualizarProducto(Connection conexion, Productos productos) {
+    public int actualizarProducto(Connection conexion, Articulos productos) {
         String query = "UPDATE tbl_producto SET producto = ?, descripcion = ?, magnitud = ?, precio = ?, impuesto = ?, fecha_actualizacion = CURRENT_TIMESTAMP WHERE codigo_producto = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
@@ -252,8 +252,8 @@ public class Productos {
     }
 
     // Método para obtener una lista de productos en forma de objetos
-    public List<Productos> getAllProductosTable(Connection conexion) {
-        List<Productos> productos = new ArrayList<>();
+    public List<Articulos> getAllProductosTable(Connection conexion) {
+        List<Articulos> productos = new ArrayList<>();
         String query = "SELECT * FROM tbl_producto";
 
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
@@ -267,7 +267,7 @@ public class Productos {
                 Date fechaRegistro = resultSet.getDate("fecha_registro");
                 Date fechaActualizacion = resultSet.getDate("fecha_actualizacion");
 
-                Productos producto = new Productos();
+                Articulos producto = new Articulos();
                 producto.setCodigoproducto(codigoProducto);
                 producto.setNombreproducto(nombreProducto);
                 producto.setDescripcion(descripcion);
