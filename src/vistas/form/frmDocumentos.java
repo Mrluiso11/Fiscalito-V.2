@@ -30,14 +30,14 @@ public class frmDocumentos extends javax.swing.JPanel {
         // Crea una instancia de Forms y la asocia con este formulario.
         Forms formsPanel = new Forms(this, null);
 
-        /* // Aplica estilos a la JTable llamada "table" utilizando TableStyler.
+        // Aplica estilos a la JTable llamada "table" utilizando TableStyler.
         applyTableStyles(TableDocumentos, jScrollPane1);
         applyTableStyles(TableFacturas, jScrollPane2);
         TableFacturas.setShowVerticalLines(true);
         jTabbedPane1.setUI(new CustomTabbedPaneUI());
         ObtenerNombreCliente();
-         */
-        //ObtenerNombreServicio();
+        
+        ObtenerNombreServicio();
         ObtenerNombreProducto();
         //Descuentos
         txtDescLinea.setText(String.valueOf(0.00));
@@ -88,26 +88,25 @@ public class frmDocumentos extends javax.swing.JPanel {
         
         double sumaCantidad = 0.0;
 
+        
+        //Suma de Cantidad de productos
+        for (int i = 0; i < model.getRowCount(); i++) {
+        // Obtener el valor de la columna "Cantidad" en la fila actual
+        String cantidadString = model.getValueAt(i, model.findColumn("Cantidad")).toString();
 
-    //Suma de Cantidad de productos
-    for (int i = 0; i < model.getRowCount(); i++) {
-    // Obtener el valor de la columna "Cantidad" en la fila actual
-    String cantidadString = model.getValueAt(i, model.findColumn("Cantidad")).toString();
-
-    // Convertir el valor a tipo Double y sumarlo a la variable acumulativa
-    try {
-        double cantidad = Double.parseDouble(cantidadString);
-        sumaCantidad += cantidad;
-        Double CantidadProducto=sumaCantidad;
-    } catch (NumberFormatException e) {
-        // Manejar la excepción si no se puede convertir a Double
-        // Puedes mostrar un mensaje de error o simplemente omitir la fila
-        JOptionPane.showMessageDialog(null, "Agregar una cantidad del Producto agregado " + i + ": " + "este valor no es valido "+cantidadString, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    }
-    lblCantidad.setText(String.valueOf(sumaCantidad));
-    
-    //
+        // Convertir el valor a tipo Double y sumarlo a la variable acumulativa
+        try {
+            double cantidad = Double.parseDouble(cantidadString);
+            sumaCantidad += cantidad;
+            Double CantidadProducto=sumaCantidad;
+        } catch (NumberFormatException e) {
+            // Manejar la excepción si no se puede convertir a Double
+            // Puedes mostrar un mensaje de error o simplemente omitir la fila
+            JOptionPane.showMessageDialog(null, "Agregar una cantidad del Producto agregado " + i + ": " + "este valor no es valido "+cantidadString, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        }
+        lblCantidad.setText(String.valueOf(sumaCantidad));
+        
     
     }
 
@@ -1194,16 +1193,26 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxArticuloServicioActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
-        Connection conexion = Conexion.obtenerConexion();
-        Articulos articulo = new Articulos(); // Crear un objeto de la clase Clientes
-        if (conexion != null) {
-            articulo.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
-            articulo.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
+            Connection conexion = Conexion.obtenerConexion();
+            Articulos articulo = new Articulos(); // Crear un objeto de la clase Clientes
+            Servicios servicio = new Servicios();
+            if (chkServicio.isSelected()){
+                if (conexion != null){
+                servicio.setNombreservicio(cbxArticuloServicio.getSelectedItem().toString());
+                servicio.InfoServicioPorNombre(conexion);
+                txtCodigoproducto.setText(servicio.getCodigoservicio());
+                txtPrecio.setText(String.valueOf(servicio.getPrecio()));
+                }
+            }else {
+                if (conexion != null) {
+                articulo.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
+                articulo.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
+                txtCodigoproducto.setText(articulo.getCodigoproducto());
+                txtPrecio.setText(String.valueOf(articulo.getPrecio())); 
+                }
+            }
             Conexion.cerrarConexion(conexion);
-        }
-        txtCodigoproducto.setText(articulo.getCodigoproducto());
-        txtPrecio.setText(String.valueOf(articulo.getPrecio()));
-        cbxImpuesto.setSelectedItem(String.valueOf(articulo.getItbms()));
+            
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
