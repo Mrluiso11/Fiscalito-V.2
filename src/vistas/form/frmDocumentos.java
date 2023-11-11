@@ -1194,7 +1194,8 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
             Connection conexion = Conexion.obtenerConexion();
-            Articulos articulo = new Articulos(); // Crear un objeto de la clase Clientes
+            // Crear un objeto de la clase Clientes
+            Articulos articulo = new Articulos();
             Servicios servicio = new Servicios();
             if (chkServicio.isSelected()){
                 if (conexion != null){
@@ -1239,7 +1240,8 @@ public class frmDocumentos extends javax.swing.JPanel {
     descuenta general= suma de los descuento general de los productos
     Subtotal = la suma de los precio de los producto sin impuesto y con descuento si este tiene 
     Impuestos= la suma de los ImporteImpuesto de cada producto agregado a la lista
-    Total = Suma de los precios de los productos con ImporteImpuesto 
+    Total = Suma de los precios de los productos con ImporteImpuesto
+    DIF= diferencia de monto - total 
     */
     
     private void btnRecalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecalcularActionPerformed
