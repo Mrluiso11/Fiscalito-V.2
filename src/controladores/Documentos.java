@@ -394,6 +394,7 @@ public class Documentos {
         this.MontoPago4 = MontoPago4;
     }
     
+    //metodo insert de datos de factura
     public int insertDocumentos(Connection conexion, Documentos documentos) {
         String query = "INSERT INTO tbl_documentos (id,codigo_cliente,nombre,ruc,descuento_general,direccion,telefono1,telefono2,referencia,credito,codigo_producto,codigo_servicio,nombre_producto,nombre_servicio,cantidad,magnitud,precio_unitario,descuento_linea,itbms,importeimpuesto,base,subtotal1,montoprecio,suma_descuentolinea,suma_descuentogeneral,subtotal2,impuesto_total,total,diferencia,forma_pago1,monto_pago1,forma_pago2,monto_pago2,forma_pago3,monto_pago3,,forma_pago4,monto_pago4) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, CURRENT_TIMESTAMP)";
 
