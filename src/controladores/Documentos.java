@@ -46,19 +46,19 @@ public class Documentos {
     private double SumaImpuesto;
     private double Total;
     private double DIF;
-    private double FormaPago1;
+    private String FormaPago1;
     private double MontoPago1;
-    private double FormaPago2;
+    private String FormaPago2;
     private double MontoPago2;
-    private double FormaPago3;
+    private String FormaPago3;
     private double MontoPago3;
-    private double FormaPago4;
+    private String FormaPago4;
     private double MontoPago4;
     
     public Documentos(){
     }
 
-    public Documentos(int IDfactura, int Codigocliente, String Nombre, String RUC, double DescGen, String Direccion, String Telefono1, String Telefono2, String Referencia, double Credito, String Codigoproducto, String Codigoservicio, String Nombreproducto, String Nombreservicio, double Cantidad, String Magnitud, double PrecioProducto, double DescLinea, double Impuestos, double ImporteImpuesto, double Base, double Subtotal1, double MontoPrecio, double SumaDescLinea, double SumaDescGen, double Subtotal2, double SumaImpuesto, double Total, double DIF, double FormaPago1, double MontoPago1, double FormaPago2, double MontoPago2, double FormaPago3, double MontoPago3, double FormaPago4, double MontoPago4) {
+    public Documentos(int IDfactura, int Codigocliente, String Nombre, String RUC, double DescGen, String Direccion, String Telefono1, String Telefono2, String Referencia, double Credito, String Codigoproducto, String Codigoservicio, String Nombreproducto, String Nombreservicio, double Cantidad, String Magnitud, double PrecioProducto, double DescLinea, double Impuestos, double ImporteImpuesto, double Base, double Subtotal1, double MontoPrecio, double SumaDescLinea, double SumaDescGen, double Subtotal2, double SumaImpuesto, double Total, double DIF, String FormaPago1, double MontoPago1, String FormaPago2, double MontoPago2, String FormaPago3, double MontoPago3, String FormaPago4, double MontoPago4) {
         this.IDfactura = IDfactura;
         this.Codigocliente = Codigocliente;
         this.Nombre = Nombre;
@@ -97,6 +97,7 @@ public class Documentos {
         this.FormaPago4 = FormaPago4;
         this.MontoPago4 = MontoPago4;
     }
+
 
     public int getIDfactura() {
         return IDfactura;
@@ -330,11 +331,11 @@ public class Documentos {
         this.DIF = DIF;
     }
 
-    public double getFormaPago1() {
+    public String getFormaPago1() {
         return FormaPago1;
     }
 
-    public void setFormaPago1(double FormaPago1) {
+    public void setFormaPago1(String FormaPago1) {
         this.FormaPago1 = FormaPago1;
     }
 
@@ -346,11 +347,11 @@ public class Documentos {
         this.MontoPago1 = MontoPago1;
     }
 
-    public double getFormaPago2() {
+    public String getFormaPago2() {
         return FormaPago2;
     }
 
-    public void setFormaPago2(double FormaPago2) {
+    public void setFormaPago2(String FormaPago2) {
         this.FormaPago2 = FormaPago2;
     }
 
@@ -362,11 +363,11 @@ public class Documentos {
         this.MontoPago2 = MontoPago2;
     }
 
-    public double getFormaPago3() {
+    public String getFormaPago3() {
         return FormaPago3;
     }
 
-    public void setFormaPago3(double FormaPago3) {
+    public void setFormaPago3(String FormaPago3) {
         this.FormaPago3 = FormaPago3;
     }
 
@@ -378,11 +379,11 @@ public class Documentos {
         this.MontoPago3 = MontoPago3;
     }
 
-    public double getFormaPago4() {
+    public String getFormaPago4() {
         return FormaPago4;
     }
 
-    public void setFormaPago4(double FormaPago4) {
+    public void setFormaPago4(String FormaPago4) {
         this.FormaPago4 = FormaPago4;
     }
 
@@ -393,6 +394,7 @@ public class Documentos {
     public void setMontoPago4(double MontoPago4) {
         this.MontoPago4 = MontoPago4;
     }
+
     
     //metodo insert de datos de factura
     public int insertDocumentos(Connection conexion, Documentos documentos) {
@@ -428,13 +430,13 @@ public class Documentos {
             statement.setDouble(27, documentos.getSumaImpuesto());
             statement.setDouble(28, documentos.getTotal());
             statement.setDouble(29, documentos.getDIF());
-            statement.setDouble(30, documentos.getFormaPago1());
+            statement.setString(30, documentos.getFormaPago1());
             statement.setDouble(31, documentos.getMontoPago1());
-            statement.setDouble(32, documentos.getFormaPago2());
+            statement.setString(32, documentos.getFormaPago2());
             statement.setDouble(33, documentos.getMontoPago2());
-            statement.setDouble(34, documentos.getFormaPago3());
+            statement.setString(34, documentos.getFormaPago3());
             statement.setDouble(35, documentos.getMontoPago3());
-            statement.setDouble(36, documentos.getFormaPago4());
+            statement.setString(36, documentos.getFormaPago4());
             statement.setDouble(37, documentos.getMontoPago4());
             
 
