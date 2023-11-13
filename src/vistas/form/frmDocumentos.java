@@ -249,13 +249,13 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel31.setText("Forma de pago [1]");
 
-        cboxFormapago1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo. ", "Clave. ", "Visa. ", "MasterCard. ", "Amex. ", "Transferencia Bancaria. ", "Cheque. ", "T. Débito 1. ", "T. Credito 1. ", "T. Credito 2. ", "Cheque Banco1. ", "Cheque Banco 2. ", "Nota de Credito. ", "Otros" }));
+        cboxFormapago1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "             ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel32.setText("Monto del pago [1]");
 
         jLabel33.setText("Forma de pago [2]");
 
-        cboxFormapago2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo. ", "Clave. ", "Visa. ", "MasterCard. ", "Amex. ", "Transferencia Bancaria. ", "Cheque. ", "T. Débito 1. ", "T. Credito 1. ", "T. Credito 2. ", "Cheque Banco1. ", "Cheque Banco 2. ", "Nota de Credito. ", "Otros" }));
+        cboxFormapago2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                  ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel34.setText("Monto del pago [2]");
 
@@ -267,13 +267,13 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel35.setText("Forma de pago [3]");
 
-        cboxFormapago3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo. ", "Clave. ", "Visa. ", "MasterCard. ", "Amex. ", "Transferencia Bancaria. ", "Cheque. ", "T. Débito 1. ", "T. Credito 1. ", "T. Credito 2. ", "Cheque Banco1. ", "Cheque Banco 2. ", "Nota de Credito. ", "Otros" }));
+        cboxFormapago3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                    ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel36.setText("Monto del pago[3]");
 
         jLabel37.setText("Forma de pago [4]");
 
-        cboxFormapago4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo. ", "Clave. ", "Visa. ", "MasterCard. ", "Amex. ", "Transferencia Bancaria. ", "Cheque. ", "T. Débito 1. ", "T. Credito 1. ", "T. Credito 2. ", "Cheque Banco1. ", "Cheque Banco 2. ", "Nota de Credito. ", "Otros" }));
+        cboxFormapago4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                   ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel38.setText("Monto del pago");
 

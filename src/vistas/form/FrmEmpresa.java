@@ -477,7 +477,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
         });
 
         btnImprimir.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        btnImprimir.setText("Imprimir");
+        btnImprimir.setText("Guardar");
         btnImprimir.setFocusPainted(false);
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -87,7 +87,7 @@ public class frmArticulos extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(125, 125, 125));
-        jLabel1.setText("DATOS DEL ATÍCULO");
+        jLabel1.setText("DATOS DEL ARTÍCULO");
 
         javax.swing.GroupLayout jPTitleLayout = new javax.swing.GroupLayout(jPTitle);
         jPTitle.setLayout(jPTitleLayout);
@@ -96,7 +96,7 @@ public class frmArticulos extends javax.swing.JPanel {
             .addGroup(jPTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(854, Short.MAX_VALUE))
+                .addContainerGap(842, Short.MAX_VALUE))
         );
         jPTitleLayout.setVerticalGroup(
             jPTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

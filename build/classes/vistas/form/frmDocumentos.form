@@ -242,21 +242,22 @@
                 <Component class="javax.swing.JComboBox" name="cboxFormapago1">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="14">
-                        <StringItem index="0" value="Efectivo. "/>
-                        <StringItem index="1" value="Clave. "/>
-                        <StringItem index="2" value="Visa. "/>
-                        <StringItem index="3" value="MasterCard. "/>
-                        <StringItem index="4" value="Amex. "/>
-                        <StringItem index="5" value="Transferencia Bancaria. "/>
-                        <StringItem index="6" value="Cheque. "/>
-                        <StringItem index="7" value="T. D&#xe9;bito 1. "/>
-                        <StringItem index="8" value="T. Credito 1. "/>
-                        <StringItem index="9" value="T. Credito 2. "/>
-                        <StringItem index="10" value="Cheque Banco1. "/>
-                        <StringItem index="11" value="Cheque Banco 2. "/>
-                        <StringItem index="12" value="Nota de Credito. "/>
-                        <StringItem index="13" value="Otros"/>
+                      <StringArray count="15">
+                        <StringItem index="0" value="             "/>
+                        <StringItem index="1" value="Efectivo"/>
+                        <StringItem index="2" value="Clave"/>
+                        <StringItem index="3" value="Visa"/>
+                        <StringItem index="4" value="MasterCard"/>
+                        <StringItem index="5" value="Amex"/>
+                        <StringItem index="6" value="Transferencia Bancaria"/>
+                        <StringItem index="7" value="Cheque"/>
+                        <StringItem index="8" value="T. D&#xe9;bito 1"/>
+                        <StringItem index="9" value="T. Credito 1"/>
+                        <StringItem index="10" value="T. Credito 2"/>
+                        <StringItem index="11" value="Cheque Banco1"/>
+                        <StringItem index="12" value="Cheque Banco 2"/>
+                        <StringItem index="13" value="Nota de Credito"/>
+                        <StringItem index="14" value="Otros"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -279,21 +280,22 @@
                 <Component class="javax.swing.JComboBox" name="cboxFormapago2">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="14">
-                        <StringItem index="0" value="Efectivo. "/>
-                        <StringItem index="1" value="Clave. "/>
-                        <StringItem index="2" value="Visa. "/>
-                        <StringItem index="3" value="MasterCard. "/>
-                        <StringItem index="4" value="Amex. "/>
-                        <StringItem index="5" value="Transferencia Bancaria. "/>
-                        <StringItem index="6" value="Cheque. "/>
-                        <StringItem index="7" value="T. D&#xe9;bito 1. "/>
-                        <StringItem index="8" value="T. Credito 1. "/>
-                        <StringItem index="9" value="T. Credito 2. "/>
-                        <StringItem index="10" value="Cheque Banco1. "/>
-                        <StringItem index="11" value="Cheque Banco 2. "/>
-                        <StringItem index="12" value="Nota de Credito. "/>
-                        <StringItem index="13" value="Otros"/>
+                      <StringArray count="15">
+                        <StringItem index="0" value="                  "/>
+                        <StringItem index="1" value="Efectivo"/>
+                        <StringItem index="2" value="Clave"/>
+                        <StringItem index="3" value="Visa"/>
+                        <StringItem index="4" value="MasterCard"/>
+                        <StringItem index="5" value="Amex"/>
+                        <StringItem index="6" value="Transferencia Bancaria"/>
+                        <StringItem index="7" value="Cheque"/>
+                        <StringItem index="8" value="T. D&#xe9;bito 1"/>
+                        <StringItem index="9" value="T. Credito 1"/>
+                        <StringItem index="10" value="T. Credito 2"/>
+                        <StringItem index="11" value="Cheque Banco1"/>
+                        <StringItem index="12" value="Cheque Banco 2"/>
+                        <StringItem index="13" value="Nota de Credito"/>
+                        <StringItem index="14" value="Otros"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -319,21 +321,22 @@
                 <Component class="javax.swing.JComboBox" name="cboxFormapago3">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="14">
-                        <StringItem index="0" value="Efectivo. "/>
-                        <StringItem index="1" value="Clave. "/>
-                        <StringItem index="2" value="Visa. "/>
-                        <StringItem index="3" value="MasterCard. "/>
-                        <StringItem index="4" value="Amex. "/>
-                        <StringItem index="5" value="Transferencia Bancaria. "/>
-                        <StringItem index="6" value="Cheque. "/>
-                        <StringItem index="7" value="T. D&#xe9;bito 1. "/>
-                        <StringItem index="8" value="T. Credito 1. "/>
-                        <StringItem index="9" value="T. Credito 2. "/>
-                        <StringItem index="10" value="Cheque Banco1. "/>
-                        <StringItem index="11" value="Cheque Banco 2. "/>
-                        <StringItem index="12" value="Nota de Credito. "/>
-                        <StringItem index="13" value="Otros"/>
+                      <StringArray count="15">
+                        <StringItem index="0" value="                    "/>
+                        <StringItem index="1" value="Efectivo"/>
+                        <StringItem index="2" value="Clave"/>
+                        <StringItem index="3" value="Visa"/>
+                        <StringItem index="4" value="MasterCard"/>
+                        <StringItem index="5" value="Amex"/>
+                        <StringItem index="6" value="Transferencia Bancaria"/>
+                        <StringItem index="7" value="Cheque"/>
+                        <StringItem index="8" value="T. D&#xe9;bito 1"/>
+                        <StringItem index="9" value="T. Credito 1"/>
+                        <StringItem index="10" value="T. Credito 2"/>
+                        <StringItem index="11" value="Cheque Banco1"/>
+                        <StringItem index="12" value="Cheque Banco 2"/>
+                        <StringItem index="13" value="Nota de Credito"/>
+                        <StringItem index="14" value="Otros"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -356,21 +359,22 @@
                 <Component class="javax.swing.JComboBox" name="cboxFormapago4">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="14">
-                        <StringItem index="0" value="Efectivo. "/>
-                        <StringItem index="1" value="Clave. "/>
-                        <StringItem index="2" value="Visa. "/>
-                        <StringItem index="3" value="MasterCard. "/>
-                        <StringItem index="4" value="Amex. "/>
-                        <StringItem index="5" value="Transferencia Bancaria. "/>
-                        <StringItem index="6" value="Cheque. "/>
-                        <StringItem index="7" value="T. D&#xe9;bito 1. "/>
-                        <StringItem index="8" value="T. Credito 1. "/>
-                        <StringItem index="9" value="T. Credito 2. "/>
-                        <StringItem index="10" value="Cheque Banco1. "/>
-                        <StringItem index="11" value="Cheque Banco 2. "/>
-                        <StringItem index="12" value="Nota de Credito. "/>
-                        <StringItem index="13" value="Otros"/>
+                      <StringArray count="15">
+                        <StringItem index="0" value="                   "/>
+                        <StringItem index="1" value="Efectivo"/>
+                        <StringItem index="2" value="Clave"/>
+                        <StringItem index="3" value="Visa"/>
+                        <StringItem index="4" value="MasterCard"/>
+                        <StringItem index="5" value="Amex"/>
+                        <StringItem index="6" value="Transferencia Bancaria"/>
+                        <StringItem index="7" value="Cheque"/>
+                        <StringItem index="8" value="T. D&#xe9;bito 1"/>
+                        <StringItem index="9" value="T. Credito 1"/>
+                        <StringItem index="10" value="T. Credito 2"/>
+                        <StringItem index="11" value="Cheque Banco1"/>
+                        <StringItem index="12" value="Cheque Banco 2"/>
+                        <StringItem index="13" value="Nota de Credito"/>
+                        <StringItem index="14" value="Otros"/>
                       </StringArray>
                     </Property>
                   </Properties>
