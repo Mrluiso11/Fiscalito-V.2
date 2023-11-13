@@ -3,6 +3,8 @@ package vistas.main;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import vistas.form.*;
 import menu.EventMenuSelected;
 
@@ -13,6 +15,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
 
         initComponents();
+        setIconImage( getIconImage());
         setTitle("Fiscalito");
         init();
         // Establecer el tamaño deseado para la ventana principal
@@ -26,6 +29,7 @@ public class Main extends javax.swing.JFrame {
 
     private void init() {
         main = this;
+       
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelected(int index, int indexSubMenu) {
@@ -53,6 +57,13 @@ public class Main extends javax.swing.JFrame {
         menu.setSelectedIndex(0, 0);
     }
 
+    @Override
+    public Image getIconImage(){
+     Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("img/icon_fiscalito.png"));
+     return retValue;
+    }
+    
+    
     public void showForm(Component com) {
         body.removeAll();
         body.add(com);

@@ -239,6 +239,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 245));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(160, 840));
 
         jLabel30.setBackground(new java.awt.Color(204, 204, 204));
@@ -401,6 +402,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         bg2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 0, 160, 840));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setOpaque(false);
 
         jLabel9.setBackground(new java.awt.Color(204, 204, 204));
         jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -525,7 +527,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                         .addComponent(btnBuscar)
                         .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -533,14 +535,14 @@ public class frmDocumentos extends javax.swing.JPanel {
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chkCredito)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         bg2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 79, 942, 180));
@@ -593,6 +595,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jPanel5.setBackground(new java.awt.Color(245, 245, 245));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel5.setOpaque(false);
 
         jLabel22.setText("Cantidad:");
 
@@ -703,6 +706,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         bg2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 730, 942, 60));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setOpaque(false);
 
         jLabel17.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabel17.setText("Articulo/ Servicio :");
@@ -867,6 +871,8 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         bg2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 252, 942, 120));
 
+        jPanel9.setOpaque(false);
+
         jcbTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Devolución" }));
 
         jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -922,6 +928,8 @@ public class frmDocumentos extends javax.swing.JPanel {
         bg1.setBackground(new java.awt.Color(245, 245, 245));
         bg1.setPreferredSize(new java.awt.Dimension(1156, 850));
 
+        jPanel7.setOpaque(false);
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Devolución" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -953,6 +961,8 @@ public class frmDocumentos extends javax.swing.JPanel {
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
+
+        jPanel1.setOpaque(false);
 
         jLabel46.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel46.setText("Período Facturado");

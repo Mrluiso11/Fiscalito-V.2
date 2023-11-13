@@ -14,9 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import conexion.Conexion;
 import java.sql.Connection;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -24,6 +29,9 @@ import javax.swing.table.JTableHeader;
  * @author dbpan
  */
 public class frmAdministracion extends javax.swing.JPanel {
+
+    Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
+    String vNombre = "";
 
     /**
      * Creates new form frmAdministracion
@@ -83,6 +91,13 @@ public class frmAdministracion extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1096, 846));
 
+        bg.setBackground(new java.awt.Color(245, 245, 245));
+
+        jTabbedPane1.setBackground(new java.awt.Color(245, 245, 245));
+        jTabbedPane1.setOpaque(true);
+
+        Articulos.setBackground(new java.awt.Color(245, 245, 245));
+
         tbl_Productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -94,6 +109,11 @@ public class frmAdministracion extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_Productos);
 
         btnBorrarP.setText("Borrar");
+        btnBorrarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarPActionPerformed(evt);
+            }
+        });
 
         btnActualizarP.setText("Actualizar");
         btnActualizarP.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +158,7 @@ public class frmAdministracion extends javax.swing.JPanel {
                         .addComponent(btnActualizarP)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBorrarP)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(ArticulosLayout.createSequentialGroup()
                 .addGap(104, 104, 104)
                 .addComponent(jPLProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,6 +179,8 @@ public class frmAdministracion extends javax.swing.JPanel {
         );
 
         jTabbedPane1.addTab("Artículos", Articulos);
+
+        Servicios.setBackground(new java.awt.Color(245, 245, 245));
 
         tbl_Servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,6 +222,11 @@ public class frmAdministracion extends javax.swing.JPanel {
         });
 
         btnBorrarS.setText("Borrar");
+        btnBorrarS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ServiciosLayout = new javax.swing.GroupLayout(Servicios);
         Servicios.setLayout(ServiciosLayout);
@@ -219,7 +246,7 @@ public class frmAdministracion extends javax.swing.JPanel {
                     .addGroup(ServiciosLayout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(jPLServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         ServiciosLayout.setVerticalGroup(
             ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,6 +263,8 @@ public class frmAdministracion extends javax.swing.JPanel {
         );
 
         jTabbedPane1.addTab("Servicios", Servicios);
+
+        Clientes.setBackground(new java.awt.Color(245, 245, 245));
 
         jPLCLientes.setBackground(new java.awt.Color(255, 255, 255));
         jPLCLientes.setPreferredSize(new java.awt.Dimension(867, 50));
@@ -277,6 +306,11 @@ public class frmAdministracion extends javax.swing.JPanel {
         });
 
         btnBorrarC.setText("Borrar");
+        btnBorrarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarCActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ClientesLayout = new javax.swing.GroupLayout(Clientes);
         Clientes.setLayout(ClientesLayout);
@@ -296,7 +330,7 @@ public class frmAdministracion extends javax.swing.JPanel {
                         .addGroup(ClientesLayout.createSequentialGroup()
                             .addGap(66, 66, 66)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         ClientesLayout.setVerticalGroup(
             ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,8 +352,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
@@ -363,7 +396,257 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     private void btnActualizarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCActionPerformed
         cargarClientes();
     }//GEN-LAST:event_btnActualizarCActionPerformed
-    public void cargarProductos() {
+
+    private void btnBorrarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarCActionPerformed
+        delectCliente();
+    }//GEN-LAST:event_btnBorrarCActionPerformed
+
+    private void btnBorrarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPActionPerformed
+        getCodigoArticulo();
+    }//GEN-LAST:event_btnBorrarPActionPerformed
+
+    private void btnBorrarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSActionPerformed
+        delectServicio();
+    }//GEN-LAST:event_btnBorrarSActionPerformed
+
+    // Método para eliminar un cliente
+    private void delectCliente() {
+        // Establecer la conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear una instancia de la clase Clientes para gestionar clientes
+        Clientes cliente = new Clientes();
+
+        // Obtener la fila seleccionada en la tabla
+        int filaSeleccionada = tbl_Clientes.getSelectedRow();
+
+        // Verificar si hay una fila seleccionada
+        if (filaSeleccionada != -1) {
+            // Obtener el modelo de la tabla
+            DefaultTableModel modelo = (DefaultTableModel) tbl_Clientes.getModel();
+
+            // Intentar obtener y convertir a entero el valor en la celda de la columna 1 (considerando la base 0)
+            try {
+                // Mostrar un cuadro de confirmación al usuario
+                int opcion = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Está seguro de querer eliminar este Cliente?",
+                        "Confirmación",
+                        JOptionPane.YES_NO_OPTION
+                );
+                // Obtener el valor de la celda y convertirlo a cadena
+                Object valorCelda = modelo.getValueAt(filaSeleccionada, 1);
+
+                // Verificar que el valor de la celda no sea nulo
+                if (valorCelda != null) {
+                    // Convertir el valor de la celda a entero
+                    String ruc = valorCelda.toString();
+
+                    // Verificar si el usuario confirmó la eliminación
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        // Establecer el RUC del cliente a eliminar en el objeto "cliente"
+                        cliente.setRuc(ruc);
+
+                        // Llamar al método "deleteClientePorRuc" en la clase "Clientes" para eliminar el cliente de la base de datos
+                        int filasAfectadas = cliente.deleteClientePorRuc(conexion);
+
+                        // Cerrar la conexión a la base de datos
+                        Conexion.cerrarConexion(conexion);
+
+                        // Verificar si se eliminaron filas con éxito
+                        if (filasAfectadas > 0) {
+                            // Mostrar un mensaje de éxito si se eliminaron filas
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Cliente eliminado con éxito.",
+                                    "Éxito",
+                                    JOptionPane.INFORMATION_MESSAGE,
+                                    customIcon
+                            );
+                        } else {
+                            // Mostrar un mensaje de error si no se eliminaron filas
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "No se pudo eliminar el cliente.",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
+                }
+            } catch (NumberFormatException e) {
+                // Manejar error en caso de que la conversión a entero falle
+                System.out.println("Error al convertir el valor a entero: " + e.getMessage());
+            }
+        } else {
+            // Mostrar un mensaje de error si no se seleccionó ninguna fila en la tabla
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No se ha seleccionado ninguna fila en la tabla.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+// Método para eliminar un servicio
+    private void delectServicio() {
+        // Establecer la conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear una instancia de la clase Servicios para gestionar servicios
+        Servicios servicio = new Servicios();
+
+        // Obtener la fila seleccionada en la tabla
+        int filaSeleccionada = tbl_Servicios.getSelectedRow();
+
+        // Verificar si hay una fila seleccionada
+        if (filaSeleccionada != -1) {
+            // Obtener el modelo de la tabla
+            DefaultTableModel modelo = (DefaultTableModel) tbl_Servicios.getModel();
+
+            // Intentar obtener y convertir a entero el valor en la celda de la columna 1 (considerando la base 0)
+            try {
+                // Mostrar un cuadro de confirmación al usuario
+                int opcion = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Está seguro de querer eliminar este Servicio?",
+                        "Confirmación",
+                        JOptionPane.YES_NO_OPTION
+                );
+                // Obtener el valor de la celda y convertirlo a cadena
+                Object valorCelda = modelo.getValueAt(filaSeleccionada, 0);
+
+                // Verificar que el valor de la celda no sea nulo
+                if (valorCelda != null) {
+                    // Convertir el valor de la celda a entero
+                    String cServicio = valorCelda.toString();
+
+                    // Verificar si el usuario confirmó la eliminación
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        // Establecer el código del servicio a eliminar en el objeto "servicio"
+                        servicio.setCodigoservicio(cServicio);
+
+                        // Llamar al método "deleteServicioporCodigo" en la clase "Servicios" para eliminar el servicio de la base de datos
+                        int filasAfectadas = servicio.deleteServicioporCodigo(conexion);
+
+                        // Cerrar la conexión a la base de datos
+                        Conexion.cerrarConexion(conexion);
+
+                        // Verificar si se eliminaron filas con éxito
+                        if (filasAfectadas > 0) {
+                            // Mostrar un mensaje de éxito si se eliminaron filas
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Servicio eliminado con éxito.",
+                                    "Éxito",
+                                    JOptionPane.INFORMATION_MESSAGE,
+                                    customIcon
+                            );
+                        } else {
+                            // Mostrar un mensaje de error si no se eliminaron filas
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "No se pudo eliminar el servicio.",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
+                }
+            } catch (NumberFormatException e) {
+                // Manejar error en caso de que la conversión a entero falle
+                System.out.println("Error al convertir el valor a entero: " + e.getMessage());
+            }
+        } else {
+            // Mostrar un mensaje de error si no se seleccionó ninguna fila en la tabla
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No se ha seleccionado ninguna fila en la tabla.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+// Método para obtener el código de un artículo seleccionado
+    private void getCodigoArticulo() {
+        // Establecer la conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear una instancia de la clase Articulos para gestionar artículos
+        Articulos articulo = new Articulos();
+
+        // Obtener la fila seleccionada en la tabla
+        int filaSeleccionada = tbl_Productos.getSelectedRow();
+
+        // Verificar si hay una fila seleccionada
+        if (filaSeleccionada != -1) {
+            // Obtener el modelo de la tabla
+            DefaultTableModel modelo = (DefaultTableModel) tbl_Productos.getModel();
+
+            // Intentar obtener y convertir a entero el valor en la celda de la columna 1 (considerando la base 0)
+            try {
+                // Mostrar un cuadro de confirmación al usuario
+                int opcion = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Está seguro de querer eliminar este Articulo?",
+                        "Confirmación",
+                        JOptionPane.YES_NO_OPTION
+                );
+                // Obtener el valor de la celda y convertirlo a cadena
+                Object valorCelda = modelo.getValueAt(filaSeleccionada, 0);
+
+                // Verificar que el valor de la celda no sea nulo
+                if (valorCelda != null) {
+                    // Convertir el valor de la celda a entero
+                    String cArticulo = valorCelda.toString();
+
+                    // Verificar si el usuario confirmó la eliminación
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        // Establecer el código del artículo a eliminar en el objeto "articulo"
+                        articulo.setCodigoproducto(cArticulo);
+
+                        // Llamar al método "deleteProductoporCodigo" en la clase "Articulos" para eliminar el artículo de la base de datos
+                        int filasAfectadas = articulo.deleteProductoporCodigo(conexion);
+
+                        // Cerrar la conexión a la base de datos
+                        Conexion.cerrarConexion(conexion);
+
+                        // Verificar si se eliminaron filas con éxito
+                        if (filasAfectadas > 0) {
+                            // Mostrar un mensaje de éxito si se eliminaron filas
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Artículo eliminado con éxito.",
+                                    "Éxito",
+                                    JOptionPane.INFORMATION_MESSAGE,
+                                    customIcon
+                            );
+                        } else {
+                            // Mostrar un mensaje de error si no se eliminaron filas
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "No se pudo eliminar el artículo.",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                        }
+                    }
+                }
+            } catch (NumberFormatException e) {
+                // Manejar error en caso de que la conversión a entero falle
+                System.out.println("Error al convertir el valor a entero: " + e.getMessage());
+            }
+        } else {
+            // Mostrar un mensaje de error si no se seleccionó ninguna fila en la tabla
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No se ha seleccionado ninguna fila en la tabla.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    private void cargarProductos() {
         Connection conexion = Conexion.obtenerConexion();
         DefaultTableModel modelo = (DefaultTableModel) tbl_Productos.getModel();
 
