@@ -359,6 +359,7 @@ public void limpiarCampos() {
     }//GEN-LAST:event_txttelefono1ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
         // Se inicia la acción del botón "Guardar"
 
         // Se obtiene una conexión a la base de datos
@@ -376,6 +377,7 @@ public void limpiarCampos() {
 
             if (conexion != null) {
                 // Se asignan los valores de los campos del formulario al objeto "obj_insertClientes"
+
                 obj_insertClientes.setRuc(txtRUC.getText().trim());
                 obj_insertClientes.setNombre(txtNombreCliente.getText().trim());
                 obj_insertClientes.setDireccion(txtareaDireccion.getText().trim());
@@ -385,19 +387,24 @@ public void limpiarCampos() {
                 obj_insertClientes.setObservaciones(txtaObservaciones.getText().trim());
 
                 if (operacion.equals("nuevo")) {
+                    String cruc = txtRUC.getText().trim();
                     // Obtiene una lista de RUC de clientes existentes en la base de datos.
-                    List<String> rucList = obj_insertClientes.getAllRUC(conexion);
-                    // Recorre la lista de RUC de clientes.
-                    for (String ruc : rucList) {
+                    // Obtiene una lista de RUC de clientes existentes en la base de datos.
+                    Clientes obj_insertCliente = new Clientes();
+
+                    List<String> rucList = obj_insertCliente.getAllRUC(conexion);
+
+                     // Recorre la lista de RUC de clientes.
+                    for (String existingRuc : rucList) {
                         // Comprueba si el RUC de cliente ya existe en la base de datos.
-                        if (ruc.equals(txtRUC.getText())) {
+                        if (existingRuc.trim().equalsIgnoreCase(txtRUC.getText().trim())) {
                             // Muestra un mensaje de error y detiene el flujo si el código existe.
                             JOptionPane.showMessageDialog(null, "Este código del R.U.C. del cliente ya existe", "Error", JOptionPane.ERROR_MESSAGE);
                             return; // Sale del método actual y detiene el flujo del programa
                         }
                     }
-                    // Si se está realizando una operación de inserción:
 
+                    // Si se está realizando una operación de inserción:
                     // Llama al método "insertClientes" en la clase "Clientes" para agregar el cliente a la base de datos
                     int filasAfectadas = obj_insertClientes.insertClientes(conexion, obj_insertClientes);
 

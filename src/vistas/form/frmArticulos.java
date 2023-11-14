@@ -297,8 +297,9 @@ public class frmArticulos extends javax.swing.JPanel {
 
                 // Comprueba si se está realizando una operación de inserción o modificación.
                 if (operacion.equals("nuevo")) {
+                     Articulos obj_insertProducto = new Articulos();
                     // Obtiene una lista de códigos de productos existentes en la base de datos.
-                    List<String> codigosProductos = obj_insertProductos.getAllCodigoProductos(conexion);
+                    List<String> codigosProductos = obj_insertProducto.getAllCodigoProductos(conexion);
                     // Recorre la lista de códigos de productos.
                     for (String cproductos : codigosProductos) {
                         // Comprueba si el código del producto ya existe en la base de datos.

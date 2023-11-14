@@ -292,8 +292,9 @@ public class frmServicio extends javax.swing.JPanel {
 
                 // Comprueba si se está realizando una operación de inserción o modificación.
                 if (operacion.equals("nuevo")) {
+                     Servicios obj_insertServicio = new Servicios();
                     // Obtiene una lista de códigos de servicios existentes en la base de datos.
-                    List<String> codigosServicios = obj_insertServicios.getAllCServicios(conexion);
+                    List<String> codigosServicios = obj_insertServicio.getAllCServicios(conexion);
                     // Recorre la lista de códigos de servicios.
                     for (String cservicios : codigosServicios) {
                         // Comprueba si el código del servicio ya existe en la base de datos.

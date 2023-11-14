@@ -62,6 +62,7 @@ public class Clientes {
     }
 
     public void setRuc(String ruc) {
+        //System.out.println(ruc);
         this.ruc = ruc;
     }
 
@@ -129,8 +130,9 @@ public class Clientes {
         this.Fecha_actualizacion = Fecha_actualizacion;
     }
 
-    // Método para insertar un nuevo cliente en la base de datos
+// Método para insertar un nuevo cliente en la base de datos
     public int insertClientes(Connection conexion, Clientes cliente) {
+
         String query = "INSERT INTO tbl_cliente (ruc, nombre, direccion, telefono1, telefono2, correo, observaciones,fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?,CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
@@ -144,6 +146,7 @@ public class Clientes {
 
             int filasAfectadas = statement.executeUpdate();
             return filasAfectadas;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
@@ -157,7 +160,7 @@ public class Clientes {
 
         try (PreparedStatement statement = conexion.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                 ruc = resultSet.getString("ruc");
+                ruc = resultSet.getString("ruc");
                 rucList.add(ruc);
             }
         } catch (SQLException e) {

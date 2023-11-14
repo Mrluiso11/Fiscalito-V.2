@@ -74,6 +74,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         btnActualizarP = new javax.swing.JButton();
         jPLProductos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnEliminarTodo = new javax.swing.JButton();
         Servicios = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_Servicios = new javax.swing.JTable();
@@ -81,6 +82,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         btnActualizarS = new javax.swing.JButton();
         btnBorrarS = new javax.swing.JButton();
+        btnEliminarTodoS = new javax.swing.JButton();
         Clientes = new javax.swing.JPanel();
         jPLCLientes = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -88,6 +90,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         tbl_Clientes = new javax.swing.JTable();
         btnActualizarC = new javax.swing.JButton();
         btnBorrarC = new javax.swing.JButton();
+        btnEliminarTodoC = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1096, 846));
 
@@ -144,25 +147,28 @@ public class frmAdministracion extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
         );
 
+        btnEliminarTodo.setText("Eliminar Todo");
+
         javax.swing.GroupLayout ArticulosLayout = new javax.swing.GroupLayout(Articulos);
         Articulos.setLayout(ArticulosLayout);
         ArticulosLayout.setHorizontalGroup(
             ArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ArticulosLayout.createSequentialGroup()
-                .addGroup(ArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(ArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ArticulosLayout.createSequentialGroup()
                         .addGap(66, 66, 66)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(ArticulosLayout.createSequentialGroup()
+                                .addComponent(btnEliminarTodo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnActualizarP)
+                                .addGap(59, 59, 59)
+                                .addComponent(btnBorrarP))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ArticulosLayout.createSequentialGroup()
-                        .addGap(818, 818, 818)
-                        .addComponent(btnActualizarP)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBorrarP)))
-                .addContainerGap(66, Short.MAX_VALUE))
-            .addGroup(ArticulosLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jPLProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(104, 104, 104)
+                        .addComponent(jPLProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         ArticulosLayout.setVerticalGroup(
             ArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +180,8 @@ public class frmAdministracion extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(ArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizarP, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBorrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBorrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarTodo))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -228,25 +235,28 @@ public class frmAdministracion extends javax.swing.JPanel {
             }
         });
 
+        btnEliminarTodoS.setText("Eliminar Todo");
+
         javax.swing.GroupLayout ServiciosLayout = new javax.swing.GroupLayout(Servicios);
         Servicios.setLayout(ServiciosLayout);
         ServiciosLayout.setHorizontalGroup(
             ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ServiciosLayout.createSequentialGroup()
                 .addGroup(ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ServiciosLayout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnActualizarS)
-                            .addGap(59, 59, 59)
-                            .addComponent(btnBorrarS))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ServiciosLayout.createSequentialGroup()
-                            .addGap(66, 66, 66)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ServiciosLayout.createSequentialGroup()
                         .addGap(104, 104, 104)
-                        .addComponent(jPLServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addComponent(jPLServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ServiciosLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(ServiciosLayout.createSequentialGroup()
+                                .addComponent(btnEliminarTodoS)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnActualizarS)
+                                .addGap(59, 59, 59)
+                                .addComponent(btnBorrarS))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         ServiciosLayout.setVerticalGroup(
             ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +268,8 @@ public class frmAdministracion extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(ServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrarS, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizarS, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnActualizarS, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarTodoS))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
@@ -312,25 +323,28 @@ public class frmAdministracion extends javax.swing.JPanel {
             }
         });
 
+        btnEliminarTodoC.setText("Eliminar Todo");
+
         javax.swing.GroupLayout ClientesLayout = new javax.swing.GroupLayout(Clientes);
         Clientes.setLayout(ClientesLayout);
         ClientesLayout.setHorizontalGroup(
             ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ClientesLayout.createSequentialGroup()
-                .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ClientesLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnActualizarC)
-                        .addGap(59, 59, 59)
-                        .addComponent(btnBorrarC))
-                    .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(ClientesLayout.createSequentialGroup()
-                            .addGap(104, 104, 104)
-                            .addComponent(jPLCLientes, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(ClientesLayout.createSequentialGroup()
-                            .addGap(66, 66, 66)
+                        .addGap(104, 104, 104)
+                        .addComponent(jPLCLientes, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ClientesLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(ClientesLayout.createSequentialGroup()
+                                .addComponent(btnEliminarTodoC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnActualizarC)
+                                .addGap(59, 59, 59)
+                                .addComponent(btnBorrarC))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         ClientesLayout.setVerticalGroup(
             ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +356,8 @@ public class frmAdministracion extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(ClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBorrarC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizarC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnActualizarC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarTodoC))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -744,6 +759,9 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     private javax.swing.JButton btnBorrarC;
     private javax.swing.JButton btnBorrarP;
     private javax.swing.JButton btnBorrarS;
+    private javax.swing.JButton btnEliminarTodo;
+    private javax.swing.JButton btnEliminarTodoC;
+    private javax.swing.JButton btnEliminarTodoS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
