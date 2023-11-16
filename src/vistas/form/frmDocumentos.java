@@ -76,6 +76,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             Confirmservicio= "No";
         }
         
+        
         Connection conexion = Conexion.obtenerConexion();
         Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
         if (conexion != null) {
@@ -613,20 +614,6 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel29.setText("DIF:");
 
-        lblMonto.setText("jLabel3");
-
-        lblDescLinea.setText("jLabel4");
-
-        lblDescGen.setText("jLabel6");
-
-        lblSubtotal.setText("jLabel7");
-
-        lblImpuesto.setText("jLabel8");
-
-        lblTotal.setText("jLabel16");
-
-        lblDIF.setText("jLabel41");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -644,15 +631,14 @@ public class frmDocumentos extends javax.swing.JPanel {
                     .addComponent(lblMonto))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel24)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(lblDescLinea)
-                        .addGap(78, 78, 78)
-                        .addComponent(lblDescGen)))
+                        .addComponent(lblDescLinea)))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDescGen)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -691,15 +677,16 @@ public class frmDocumentos extends javax.swing.JPanel {
                     .addComponent(jLabel28)
                     .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCantidad)
-                    .addComponent(lblMonto)
-                    .addComponent(lblDescLinea)
-                    .addComponent(lblDescGen)
-                    .addComponent(lblSubtotal)
-                    .addComponent(lblImpuesto)
-                    .addComponent(lblTotal)
-                    .addComponent(lblDIF))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCantidad)
+                        .addComponent(lblMonto)
+                        .addComponent(lblDescLinea)
+                        .addComponent(lblSubtotal)
+                        .addComponent(lblImpuesto)
+                        .addComponent(lblTotal)
+                        .addComponent(lblDIF))
+                    .addComponent(lblDescGen))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -1232,6 +1219,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         cargarTable();
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void chkDescLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDescLineaActionPerformed
@@ -1375,4 +1363,5 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JTextField txtTelefono1;
     private javax.swing.JTextField txtTelefono2;
     // End of variables declaration//GEN-END:variables
+
 }

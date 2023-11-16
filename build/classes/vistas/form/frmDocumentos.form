@@ -841,17 +841,16 @@
                           </Group>
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jLabel25" min="-2" pref="82" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                   <Component id="lblDescLinea" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                                  <Component id="lblDescGen" min="-2" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblDescGen" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel25" min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -901,15 +900,17 @@
                               <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblMonto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDescLinea" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDescGen" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblSubtotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblImpuesto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDIF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMonto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDescLinea" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSubtotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblImpuesto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDIF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="lblDescGen" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="12" max="32767" attributes="0"/>
                       </Group>
@@ -960,39 +961,18 @@
                 <Component class="javax.swing.JLabel" name="lblCantidad">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblMonto">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel3"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblDescLinea">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel4"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblDescGen">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel6"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblSubtotal">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel7"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblImpuesto">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel8"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblTotal">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel16"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblDIF">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel41"/>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
