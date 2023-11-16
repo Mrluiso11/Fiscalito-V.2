@@ -76,6 +76,27 @@ public class frmDocumentos extends javax.swing.JPanel {
             Confirmservicio= "No";
         }
         
+        Documentos documentos = new Documentos();
+
+        // Obtener los valores necesarios (ajusta según tus necesidades)
+        double precioProducto = Double.parseDouble(txtPrecio.getText());
+        double cantidad = Double.parseDouble(txtCantidad.getText());
+        double descLinea = Double.parseDouble(DecLinea);
+        double descGen = Double.parseDouble(Decgen);
+        double impuestos = Double.parseDouble(cbxImpuesto.getSelectedItem().toString());
+
+        // Llamar a los métodos de cálculo en la clase Documentos
+        documentos.CalcularDescuentoGen(descGen);
+        documentos.CalcularDescuentoLinea(descLinea);
+        documentos.CalcularBase(precioProducto, cantidad, descLinea, descGen);
+        documentos.CalcularItbms(impuestos);
+        documentos.CalcularImporteImpuesto(precioProducto, documentos.getImpuestos());
+        documentos.CalcularSubtotal();
+
+        // Obtener resultados de los métodos get
+        double base = documentos.getBase();
+        double importeImpuesto = documentos.getImporteImpuesto();
+        double subtotal = documentos.getSubtotal1();
         
         Connection conexion = Conexion.obtenerConexion();
         Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
@@ -85,7 +106,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), txtCantidad.getText(), txtPrecio.getText(),DecLinea, Decgen, "25 Apr,2018", cbxImpuesto.getSelectedItem().toString(), "25 Apr,2018", "25 Apr,2018"});
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), txtCantidad.getText(), txtPrecio.getText(),descLinea, descGen , base, cbxImpuesto.getSelectedItem().toString(), importeImpuesto, subtotal});
         
         double sumaCantidad = 0.0;
 
@@ -97,7 +118,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         // Convertir el valor a tipo Double y sumarlo a la variable acumulativa
         try {
-            double cantidad = Double.parseDouble(cantidadString);
+            cantidad = Double.parseDouble(cantidadString);
             sumaCantidad += cantidad;
             Double CantidadProducto=sumaCantidad;
         } catch (NumberFormatException e) {

@@ -454,49 +454,43 @@ public class Documentos {
     //Calculos dentro de la tabla
     
     //metodo calculo descuentogeneral
-    public double CalcularDescuentoGen(double DescGen){
+    public void  CalcularDescuentoGen(double DescGen){
         if (DescGen >0){
           DescGen = DescGen/100;
         }
-        return DescGen;
     }
     
     
     //metodo calculo descuentogeneral
-    public double CalcularDescuentoLinea(double DescLinea){
+    public void  CalcularDescuentoLinea(double DescLinea){
         if (DescLinea >0){
           DescLinea = DescLinea/100;
         }
-        return DescLinea;
     }
             
     //metodo calculo base
     //Base= la suma de los precios sin impuesto de un mismo Articulo/servicio y con descuento si este tiene 
-    public double CalcularBase (double PrecioProducto,double Cantidad,double DescLinea,double DescGen){
+    public void  CalcularBase (double PrecioProducto,double Cantidad,double DescLinea,double DescGen){
         double preciosindesc = PrecioProducto * Cantidad;
-        Base = preciosindesc - (DescLinea+DescGen);
-        return Base;    
+        Base = preciosindesc - (DescLinea+DescGen);   
     }
     
     //metodo calculo ibtms
     //itbms = impuesto aplicado a un Articulo/servicio en especifico
-    public double CalcularItbms(double Impuestos){
+    public void  CalcularItbms(double Impuestos){
         Impuestos = Impuestos/100;
-        return Impuestos;
     }
     
     //metodo calculo ImporteImpuesto
     //ImporteImpuesto= ibtmsxPrecio de Articulo/servicio
-    public double CalcularImporteImpuesto(double PrecioProducto,double Impuestos){
+    public void  CalcularImporteImpuesto(double PrecioProducto,double Impuestos){
         ImporteImpuesto= PrecioProducto*Impuestos;
-        return ImporteImpuesto;
     }
     
     //metodo calculo subtotal
     //Subtotal1= SubTotal: La suma total de precio de Articulo/servicio con descuento aplicado + ibtms de cada Articulo/servicio 
-    public double CalcularSubtotal(double Base, double ImporteImpuesto){
+    public void  CalcularSubtotal(){
         Subtotal1= Base+ImporteImpuesto;
-        return Subtotal1;
     }
     
     //Calculos panel inferior totales
