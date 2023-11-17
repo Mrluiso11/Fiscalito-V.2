@@ -58,15 +58,11 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void cargarTable() {
         String DecLinea;
-        if (txtDescLinea.isEnabled()) {
-           DecLinea = txtDescLinea.getText();
-        } else {
+        if (!txtDescLinea.isEnabled()) {
             DecLinea = String.valueOf(0.00);
         }
         String Decgen;
-        if (txtDescGeneral.isEnabled()) {
-           Decgen = txtDescGeneral.getText();
-        } else {
+        if (!txtDescGeneral.isEnabled()) {
             Decgen = String.valueOf(0.00);
         }
         String Confirmservicio;
@@ -77,26 +73,33 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
         
         Documentos documentos = new Documentos();
+        //Calculos de tabla
 
-        // Obtener los valores necesarios (ajusta según tus necesidades)
-        double precioProducto = Double.parseDouble(txtPrecio.getText());
-        double cantidad = Double.parseDouble(txtCantidad.getText());
-        double descLinea = Double.parseDouble(DecLinea);
-        double descGen = Double.parseDouble(Decgen);
-        double impuestos = Double.parseDouble(cbxImpuesto.getSelectedItem().toString());
-
+        // Enviar los valores necesarios a clase (ajusta según tus necesidades)
+        documentos.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
+        documentos.setCantidad(Double.parseDouble(txtCantidad.getText()));
+        documentos.setDescLinea(Double.parseDouble(txtDescLinea.getText()));
+        documentos.setDescGen(Double.parseDouble(txtDescGeneral.getText()));
+        documentos.setImpuestos(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
+        
         // Llamar a los métodos de cálculo en la clase Documentos
-        documentos.CalcularDescuentoGen(descGen);
-        documentos.CalcularDescuentoLinea(descLinea);
-        documentos.CalcularBase(precioProducto, cantidad, descLinea, descGen);
-        documentos.CalcularItbms(impuestos);
-        documentos.CalcularImporteImpuesto(precioProducto, documentos.getImpuestos());
-        documentos.CalcularSubtotal();
+        documentos.CalcularDescuentoGen(documentos.getDescGen());
+        documentos.CalcularDescuentoLinea(documentos.getDescLinea());
+        documentos.CalcularBase(documentos.getPrecioProducto(), documentos.getCantidad(), documentos.getDescLinea(), documentos.getDescGen());
+        documentos.CalcularItbms(documentos.getImpuestos());
+        documentos.CalcularImporteImpuesto(documentos.getPrecioProducto(), documentos.getImpuestos(), documentos.getCantidad());
+        documentos.CalcularSubtotal(documentos.getBase(),documentos.getImporteImpuesto());
 
         // Obtener resultados de los métodos get
+        double precioProducto1= documentos.getPrecioProducto();
+        double cantidad= Double.parseDouble(txtCantidad.getText());
+        double DescGen1= documentos.getDescGen();
+        double DescLinea1= documentos.getDescLinea();
+        double Impuestos1= documentos.getImpuestos();
         double base = documentos.getBase();
         double importeImpuesto = documentos.getImporteImpuesto();
         double subtotal = documentos.getSubtotal1();
+        
         
         Connection conexion = Conexion.obtenerConexion();
         Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
@@ -106,10 +109,11 @@ public class frmDocumentos extends javax.swing.JPanel {
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), txtCantidad.getText(), txtPrecio.getText(),descLinea, descGen , base, cbxImpuesto.getSelectedItem().toString(), importeImpuesto, subtotal});
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), cantidad, txtPrecio.getText(),DescLinea1, DescGen1 , base, Impuestos1, importeImpuesto, subtotal});
         
         double sumaCantidad = 0.0;
 
+        //Calculos de barra inferior
         
         //Suma de Cantidad de productos
         for (int i = 0; i < model.getRowCount(); i++) {
@@ -120,14 +124,17 @@ public class frmDocumentos extends javax.swing.JPanel {
         try {
             cantidad = Double.parseDouble(cantidadString);
             sumaCantidad += cantidad;
-            Double CantidadProducto=sumaCantidad;
+            
         } catch (NumberFormatException e) {
             // Manejar la excepción si no se puede convertir a Double
             // Puedes mostrar un mensaje de error o simplemente omitir la fila
             JOptionPane.showMessageDialog(null, "Agregar una cantidad del Producto agregado " + i + ": " + "este valor no es valido "+cantidadString, "Error", JOptionPane.ERROR_MESSAGE);
         }
         }
+        
+        //Asignar resultados a label
         lblCantidad.setText(String.valueOf(sumaCantidad));
+        
         
     
     }

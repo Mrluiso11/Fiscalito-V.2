@@ -100,7 +100,7 @@ public class Documentos {
 
 
     public int getIDfactura() {
-        return IDfactura;
+        return this.IDfactura;
     }
 
     public void setIDfactura(int IDfactura) {
@@ -108,7 +108,7 @@ public class Documentos {
     }
 
     public int getCodigocliente() {
-        return Codigocliente;
+        return this.Codigocliente;
     }
 
     public void setCodigocliente(int Codigocliente) {
@@ -116,7 +116,7 @@ public class Documentos {
     }
 
     public String getNombre() {
-        return Nombre;
+        return this.Nombre;
     }
 
     public void setNombre(String Nombre) {
@@ -124,7 +124,7 @@ public class Documentos {
     }
 
     public String getRUC() {
-        return RUC;
+        return this.RUC;
     }
 
     public void setRUC(String RUC) {
@@ -132,7 +132,7 @@ public class Documentos {
     }
 
     public double getDescGen() {
-        return DescGen;
+        return this.DescGen;
     }
 
     public void setDescGen(double DescGen) {
@@ -140,7 +140,7 @@ public class Documentos {
     }
 
     public String getDireccion() {
-        return Direccion;
+        return this.Direccion;
     }
 
     public void setDireccion(String Direccion) {
@@ -148,7 +148,7 @@ public class Documentos {
     }
 
     public String getTelefono1() {
-        return Telefono1;
+        return this.Telefono1;
     }
 
     public void setTelefono1(String Telefono1) {
@@ -156,7 +156,7 @@ public class Documentos {
     }
 
     public String getTelefono2() {
-        return Telefono2;
+        return this.Telefono2;
     }
 
     public void setTelefono2(String Telefono2) {
@@ -164,7 +164,7 @@ public class Documentos {
     }
 
     public String getReferencia() {
-        return Referencia;
+        return this.Referencia;
     }
 
     public void setReferencia(String Referencia) {
@@ -172,7 +172,7 @@ public class Documentos {
     }
 
     public double getCredito() {
-        return Credito;
+        return this.Credito;
     }
 
     public void setCredito(double Credito) {
@@ -180,7 +180,7 @@ public class Documentos {
     }
 
     public String getCodigoproducto() {
-        return Codigoproducto;
+        return this.Codigoproducto;
     }
 
     public void setCodigoproducto(String Codigoproducto) {
@@ -188,7 +188,7 @@ public class Documentos {
     }
 
     public String getCodigoservicio() {
-        return Codigoservicio;
+        return this.Codigoservicio;
     }
 
     public void setCodigoservicio(String Codigoservicio) {
@@ -196,7 +196,7 @@ public class Documentos {
     }
 
     public String getNombreproducto() {
-        return Nombreproducto;
+        return this.Nombreproducto;
     }
 
     public void setNombreproducto(String Nombreproducto) {
@@ -204,7 +204,7 @@ public class Documentos {
     }
 
     public String getNombreservicio() {
-        return Nombreservicio;
+        return this.Nombreservicio;
     }
 
     public void setNombreservicio(String Nombreservicio) {
@@ -212,7 +212,7 @@ public class Documentos {
     }
 
     public double getCantidad() {
-        return Cantidad;
+        return this.Cantidad;
     }
 
     public void setCantidad(double Cantidad) {
@@ -220,7 +220,7 @@ public class Documentos {
     }
 
     public String getMagnitud() {
-        return Magnitud;
+        return this.Magnitud;
     }
 
     public void setMagnitud(String Magnitud) {
@@ -228,7 +228,7 @@ public class Documentos {
     }
 
     public double getPrecioProducto() {
-        return PrecioProducto;
+        return this.PrecioProducto;
     }
 
     public void setPrecioProducto(double PrecioProducto) {
@@ -236,7 +236,7 @@ public class Documentos {
     }
 
     public double getDescLinea() {
-        return DescLinea;
+        return this.DescLinea;
     }
 
     public void setDescLinea(double DescLinea) {
@@ -244,7 +244,7 @@ public class Documentos {
     }
 
     public double getImpuestos() {
-        return Impuestos;
+        return this.Impuestos;
     }
 
     public void setImpuestos(double Impuestos) {
@@ -252,7 +252,7 @@ public class Documentos {
     }
 
     public double getImporteImpuesto() {
-        return ImporteImpuesto;
+        return this.ImporteImpuesto;
     }
 
     public void setImporteImpuesto(double ImporteImpuesto) {
@@ -260,7 +260,7 @@ public class Documentos {
     }
 
     public double getBase() {
-        return Base;
+        return this.Base;
     }
 
     public void setBase(double Base) {
@@ -268,7 +268,7 @@ public class Documentos {
     }
 
     public double getSubtotal1() {
-        return Subtotal1;
+        return this.Subtotal1;
     }
 
     public void setSubtotal1(double Subtotal1) {
@@ -276,7 +276,7 @@ public class Documentos {
     }
 
     public double getMontoPrecio() {
-        return MontoPrecio;
+        return this.MontoPrecio;
     }
 
     public void setMontoPrecio(double MontoPrecio) {
@@ -284,7 +284,7 @@ public class Documentos {
     }
 
     public double getSumaDescLinea() {
-        return SumaDescLinea;
+        return this.SumaDescLinea;
     }
 
     public void setSumaDescLinea(double SumaDescLinea) {
@@ -292,7 +292,7 @@ public class Documentos {
     }
 
     public double getSumaDescGen() {
-        return SumaDescGen;
+        return this.SumaDescGen;
     }
 
     public void setSumaDescGen(double SumaDescGen) {
@@ -300,7 +300,7 @@ public class Documentos {
     }
 
     public double getSubtotal2() {
-        return Subtotal2;
+        return this.Subtotal2;
     }
 
     public void setSubtotal2(double Subtotal2) {
@@ -308,7 +308,7 @@ public class Documentos {
     }
 
     public double getSumaImpuesto() {
-        return SumaImpuesto;
+        return this.SumaImpuesto;
     }
 
     public void setSumaImpuesto(double SumaImpuesto) {
@@ -316,7 +316,7 @@ public class Documentos {
     }
 
     public double getTotal() {
-        return Total;
+        return this.Total;
     }
 
     public void setTotal(double Total) {
@@ -324,7 +324,7 @@ public class Documentos {
     }
 
     public double getDIF() {
-        return DIF;
+        return this.DIF;
     }
 
     public void setDIF(double DIF) {
@@ -332,7 +332,7 @@ public class Documentos {
     }
 
     public String getFormaPago1() {
-        return FormaPago1;
+        return this.FormaPago1;
     }
 
     public void setFormaPago1(String FormaPago1) {
@@ -340,7 +340,7 @@ public class Documentos {
     }
 
     public double getMontoPago1() {
-        return MontoPago1;
+        return this.MontoPago1;
     }
 
     public void setMontoPago1(double MontoPago1) {
@@ -348,7 +348,7 @@ public class Documentos {
     }
 
     public String getFormaPago2() {
-        return FormaPago2;
+        return this.FormaPago2;
     }
 
     public void setFormaPago2(String FormaPago2) {
@@ -356,7 +356,7 @@ public class Documentos {
     }
 
     public double getMontoPago2() {
-        return MontoPago2;
+        return this.MontoPago2;
     }
 
     public void setMontoPago2(double MontoPago2) {
@@ -364,7 +364,7 @@ public class Documentos {
     }
 
     public String getFormaPago3() {
-        return FormaPago3;
+        return this.FormaPago3;
     }
 
     public void setFormaPago3(String FormaPago3) {
@@ -372,7 +372,7 @@ public class Documentos {
     }
 
     public double getMontoPago3() {
-        return MontoPago3;
+        return this.MontoPago3;
     }
 
     public void setMontoPago3(double MontoPago3) {
@@ -380,7 +380,7 @@ public class Documentos {
     }
 
     public String getFormaPago4() {
-        return FormaPago4;
+        return this.FormaPago4;
     }
 
     public void setFormaPago4(String FormaPago4) {
@@ -388,7 +388,7 @@ public class Documentos {
     }
 
     public double getMontoPago4() {
-        return MontoPago4;
+        return this.MontoPago4;
     }
 
     public void setMontoPago4(double MontoPago4) {
@@ -451,46 +451,64 @@ public class Documentos {
         }
     }
     
-    //Calculos dentro de la tabla
+    //Calculos de la tabla productos
     
     //metodo calculo descuentogeneral
-    public void  CalcularDescuentoGen(double DescGen){
+    public double  CalcularDescuentoGen(double DescGen){
         if (DescGen >0){
           DescGen = DescGen/100;
         }
+        DescGen = DescGen*PrecioProducto;
+        return DescGen;
     }
     
     
     //metodo calculo descuentogeneral
-    public void  CalcularDescuentoLinea(double DescLinea){
+    public double  CalcularDescuentoLinea(double DescLinea){
         if (DescLinea >0){
           DescLinea = DescLinea/100;
         }
+        DescLinea = DescLinea*PrecioProducto;
+        return DescLinea;
     }
             
     //metodo calculo base
     //Base= la suma de los precios sin impuesto de un mismo Articulo/servicio y con descuento si este tiene 
-    public void  CalcularBase (double PrecioProducto,double Cantidad,double DescLinea,double DescGen){
+    public double  CalcularBase (double PrecioProducto,double Cantidad,double DescLinea,double DescGen){
+        if (DescLinea >0){
+          DescLinea = DescLinea/100;
+        }
+        if (DescGen >0){
+          DescGen = DescGen/100;
+        }
+        DescGen = DescGen*PrecioProducto;
+        DescLinea = DescLinea*PrecioProducto;
         double preciosindesc = PrecioProducto * Cantidad;
-        Base = preciosindesc - (DescLinea+DescGen);   
+        Base = preciosindesc - (DescLinea+DescGen);  
+        return Base;
     }
     
     //metodo calculo ibtms
     //itbms = impuesto aplicado a un Articulo/servicio en especifico
-    public void  CalcularItbms(double Impuestos){
+    public double  CalcularItbms(double Impuestos){
         Impuestos = Impuestos/100;
+        return Impuestos;
     }
     
     //metodo calculo ImporteImpuesto
     //ImporteImpuesto= ibtmsxPrecio de Articulo/servicio
-    public void  CalcularImporteImpuesto(double PrecioProducto,double Impuestos){
+    public double  CalcularImporteImpuesto(double PrecioProducto,double Impuestos,double Cantidad){
+        Impuestos = Impuestos/100;
         ImporteImpuesto= PrecioProducto*Impuestos;
+        ImporteImpuesto= ImporteImpuesto*Cantidad;
+        return ImporteImpuesto;
     }
     
     //metodo calculo subtotal
     //Subtotal1= SubTotal: La suma total de precio de Articulo/servicio con descuento aplicado + ibtms de cada Articulo/servicio 
-    public void  CalcularSubtotal(){
+    public double  CalcularSubtotal(double base,double ImporteImpuesto){
         Subtotal1= Base+ImporteImpuesto;
+        return Subtotal1;
     }
     
     //Calculos panel inferior totales
