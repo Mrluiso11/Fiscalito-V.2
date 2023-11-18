@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.text.DecimalFormat;
 /**
  *
  * @author dbpan
@@ -131,7 +132,7 @@ public class Documentos {
         this.RUC = RUC;
     }
 
-    public double getDescGen() {
+    public double getDescGen() {     
         return this.DescGen;
     }
 
@@ -300,6 +301,7 @@ public class Documentos {
     }
 
     public double getSubtotal2() {
+        this.Subtotal2= this.MontoPrecio-(this.SumaDescLinea+this.SumaDescGen);
         return this.Subtotal2;
     }
 
@@ -316,6 +318,7 @@ public class Documentos {
     }
 
     public double getTotal() {
+        this.Total= this.Subtotal2+this.SumaImpuesto;
         return this.Total;
     }
 
@@ -324,6 +327,7 @@ public class Documentos {
     }
 
     public double getDIF() {
+        this.DIF = this.Total - (this.MontoPago1+ this.MontoPago2+ this.MontoPago3+ this.MontoPago4);
         return this.DIF;
     }
 
@@ -454,22 +458,22 @@ public class Documentos {
     //Calculos de la tabla productos
     
     //metodo calculo descuentogeneral
-    public double  CalcularDescuentoGen(double DescGen){
+    public double  CalcularDescuentoGen(double PrecioProducto,double DescGen){
         if (DescGen >0){
-          DescGen = DescGen/100;
+          this.DescGen = DescGen/100;
         }
-        DescGen = DescGen*PrecioProducto;
-        return DescGen;
+        this.DescGen = this.DescGen*PrecioProducto;
+        return this.DescGen;
     }
     
     
     //metodo calculo descuentogeneral
-    public double  CalcularDescuentoLinea(double DescLinea){
+    public double  CalcularDescuentoLinea(double PrecioProducto,double DescLinea){
         if (DescLinea >0){
-          DescLinea = DescLinea/100;
+          this.DescLinea = this.DescLinea/100;
         }
-        DescLinea = DescLinea*PrecioProducto;
-        return DescLinea;
+        this.DescLinea = this.DescLinea*PrecioProducto;
+        return this.DescLinea;
     }
             
     //metodo calculo base
@@ -511,8 +515,9 @@ public class Documentos {
         return Subtotal1;
     }
     
-    //Calculos panel inferior totales
+    //Metodo 
     
+
     
     
     

@@ -83,8 +83,8 @@ public class frmDocumentos extends javax.swing.JPanel {
         documentos.setImpuestos(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
         
         // Llamar a los métodos de cálculo en la clase Documentos
-        documentos.CalcularDescuentoGen(documentos.getDescGen());
-        documentos.CalcularDescuentoLinea(documentos.getDescLinea());
+        documentos.CalcularDescuentoGen(documentos.getPrecioProducto(),documentos.getDescGen());
+        documentos.CalcularDescuentoLinea(documentos.getPrecioProducto(),documentos.getDescLinea());
         documentos.CalcularBase(documentos.getPrecioProducto(), documentos.getCantidad(), documentos.getDescLinea(), documentos.getDescGen());
         documentos.CalcularItbms(documentos.getImpuestos());
         documentos.CalcularImporteImpuesto(documentos.getPrecioProducto(), documentos.getImpuestos(), documentos.getCantidad());
@@ -109,33 +109,183 @@ public class frmDocumentos extends javax.swing.JPanel {
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), cantidad, txtPrecio.getText(),DescLinea1, DescGen1 , base, Impuestos1, importeImpuesto, subtotal});
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1,DescLinea1, DescGen1 , base, Impuestos1, importeImpuesto, subtotal});
         
         double sumaCantidad = 0.0;
 
         //Calculos de barra inferior
         
         //Suma de Cantidad de productos
-        for (int i = 0; i < model.getRowCount(); i++) {
-        // Obtener el valor de la columna "Cantidad" en la fila actual
-        String cantidadString = model.getValueAt(i, model.findColumn("Cantidad")).toString();
+        // Obtener el índice de la columna "Cantidad"
+        int cantidadColumnIndex = model.findColumn("Cantidad");
 
-        // Convertir el valor a tipo Double y sumarlo a la variable acumulativa
-        try {
-            cantidad = Double.parseDouble(cantidadString);
-            sumaCantidad += cantidad;
-            
-        } catch (NumberFormatException e) {
-            // Manejar la excepción si no se puede convertir a Double
-            // Puedes mostrar un mensaje de error o simplemente omitir la fila
-            JOptionPane.showMessageDialog(null, "Agregar una cantidad del Producto agregado " + i + ": " + "este valor no es valido "+cantidadString, "Error", JOptionPane.ERROR_MESSAGE);
+        // Verificar si la columna "Cantidad" existe
+        if (cantidadColumnIndex != -1) {
+            // Suma de Cantidad de productos
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Obtener el valor de la columna "Cantidad" en la fila actual
+                Object cantidadObject = model.getValueAt(i, cantidadColumnIndex);
+
+                if (cantidadObject != null) {
+                    String cantidadString = cantidadObject.toString();
+
+                    try {
+                        double cantidadEnFila = Double.parseDouble(cantidadString);
+                        sumaCantidad += cantidadEnFila;
+
+                    } catch (NumberFormatException e) {
+                        // Manejar la excepción si no se puede convertir a Double
+                        JOptionPane.showMessageDialog(null, "Error en la fila " + i + ": " + "No se pudo convertir a número el valor " + cantidadString, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "La columna 'Cantidad' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        //Monto = suma precio del producto sin descuento y sin importe
+        int precioProductoColumnIndex = model.findColumn("Precio");
+
+        // Verificar si la columna "precioProducto1" existe
+        if (precioProductoColumnIndex != -1) {
+            // Suma de precios de productos
+            double sumaPrecio = 0.0;
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Obtener el valor de la columna "precioProducto1" en la fila actual
+                Object precioProductoObject = model.getValueAt(i, precioProductoColumnIndex);
+
+                if (precioProductoObject != null) {
+                    String precioProductoString = precioProductoObject.toString();
+
+                    try {
+                        double precioProducto = Double.parseDouble(precioProductoString);
+                        sumaPrecio += precioProducto;
+
+                    } catch (NumberFormatException e) {
+                        // Manejar la excepción si no se puede convertir a Double
+                        JOptionPane.showMessageDialog(null, "Error en la fila " + i + ": " + "No se pudo convertir a número el precio " + precioProductoString, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+            // Enviar la suma a la clase Documentos mediante el método setMontoPrecio
+            documentos.setMontoPrecio(sumaPrecio);
+
+            // Actualizar el texto del label con la suma de precios
+            lblMonto.setText(String.valueOf(sumaPrecio));
+        } else {
+            JOptionPane.showMessageDialog(null, "La columna 'precioProducto1' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-        //Asignar resultados a label
-        lblCantidad.setText(String.valueOf(sumaCantidad));
+        //descuento linea total= suma de los descuento de linea de los productos
+        // Obtener el índice de la columna "Desc. Linea"
+        int descLineaColumnIndex = model.findColumn("Desc. Linea");
+
+        // Verificar si la columna "Desc. Linea" existe
+        if (descLineaColumnIndex != -1) {
+            // Suma de Desc. Linea
+            double sumaDescLinea = 0.0;
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Obtener el valor de la columna "Desc. Linea" en la fila actual
+                Object descLineaObject = model.getValueAt(i, descLineaColumnIndex);
+
+                if (descLineaObject != null) {
+                    String descLineaString = descLineaObject.toString();
+
+                    try {
+                        double descLinea = Double.parseDouble(descLineaString);
+                        sumaDescLinea += descLinea;
+
+                    } catch (NumberFormatException e) {
+                        // Manejar la excepción si no se puede convertir a Double
+                        JOptionPane.showMessageDialog(null, "Error en la fila " + i + ": " + "No se pudo convertir a número el valor " + descLineaString, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+            // Enviar la suma a la clase Documentos mediante el método setSumaDescLinea
+            documentos.setSumaDescLinea(sumaDescLinea);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "La columna 'Desc. Linea' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
+        //descuento general total= suma de los descuento general de los productos
+        // Obtener el índice de la columna "Desc. General"
+        int descGeneralColumnIndex = model.findColumn("Desc. General");
+
+        // Verificar si la columna "Desc. Linea" existe
+        if (descGeneralColumnIndex != -1) {
+            // Suma de Desc. Linea
+            double sumadescGeneral = 0.0;
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Obtener el valor de la columna "Desc. Linea" en la fila actual
+                Object descGeneralObject = model.getValueAt(i, descGeneralColumnIndex);
+
+                if (descGeneralObject != null) {
+                    String descGeneralString = descGeneralObject.toString();
+
+                    try {
+                        double descGeneral = Double.parseDouble(descGeneralString);
+                        sumadescGeneral += descGeneral;
+
+                    } catch (NumberFormatException e) {
+                        // Manejar la excepción si no se puede convertir a Double
+                        JOptionPane.showMessageDialog(null, "Error en la fila " + i + ": " + "No se pudo convertir a número el valor " + descGeneralString, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+            // Enviar la suma a la clase Documentos mediante el método setSumaDescGen
+            documentos.setSumaDescGen(sumadescGeneral);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "La columna 'Desc. General' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
+        //Impuestos= Suma de los ImporteImpuesto de cada producto agregado a la lista
+        int impuestototalColumnIndex = model.findColumn("Importe I.T.B.M.S");
+
+        // Verificar si la columna "Impuesto" existe
+        if (impuestototalColumnIndex != -1) {
+            // Suma de precios de productos
+            double sumaImpuesto = 0.0;
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Obtener el valor de la columna "precioProducto1" en la fila actual
+                Object impuestototalObject = model.getValueAt(i, impuestototalColumnIndex);
+
+                if (impuestototalObject != null) {
+                    String impuestototalString = impuestototalObject.toString();
+
+                    try {
+                        double impuestototal = Double.parseDouble(impuestototalString);
+                        sumaImpuesto += impuestototal;
+
+                    } catch (NumberFormatException e) {
+                        // Manejar la excepción si no se puede convertir a Double
+                        JOptionPane.showMessageDialog(null, "Error en la fila " + i + ": " + "No se pudo convertir a número  " + impuestototalString, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+            // Enviar la suma a la clase Documentos mediante el método setSumaImpuesto
+            documentos.setSumaImpuesto(sumaImpuesto);
+        } else {
+            JOptionPane.showMessageDialog(null, "La columna 'Impuesto' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+                
+        //Asignar resultados a label barra inferior
+        lblCantidad.setText(String.format("%.2f", sumaCantidad));
+        lblMonto.setText(String.format("%.2f", documentos.getMontoPrecio()));
+        lblDescLinea.setText(String.format("%.2f", documentos.getSumaDescLinea()));
+        lblDescGen.setText(String.format("%.2f", documentos.getSumaDescGen()));
+        lblSubtotal.setText(String.format("%.2f", documentos.getSubtotal2()));
+        lblImpuesto.setText(String.format("%.2f", documentos.getSumaImpuesto()));
+        lblTotal.setText(String.format("%.2f", documentos.getTotal()));
     
     }
 
@@ -603,9 +753,11 @@ public class frmDocumentos extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TableDocumentos.setColumnSelectionAllowed(true);
         TableDocumentos.setShowHorizontalLines(true);
         TableDocumentos.setShowVerticalLines(true);
         jScrollPane1.setViewportView(TableDocumentos);
+        TableDocumentos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -767,6 +919,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         });
 
         btnRemover.setText("-");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnAgregar.setText("+");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -1246,8 +1403,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        cargarTable();
-        
+        cargarTable();  
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void chkDescLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDescLineaActionPerformed
@@ -1271,7 +1427,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     */
     
     private void btnRecalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecalcularActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_btnRecalcularActionPerformed
 
     private void txtDescGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescGeneralActionPerformed
@@ -1286,6 +1442,22 @@ public class frmDocumentos extends javax.swing.JPanel {
             txtDescGeneral.setText(String.valueOf(0.00));
         }
     }//GEN-LAST:event_chkDescGenActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+     DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
+
+     // Obtiene la fila seleccionada
+     int selectedRow = TableDocumentos.getSelectedRow();
+
+     // Verifica si hay una fila seleccionada antes de intentar removerla
+     if (selectedRow != -1) {
+         // Remueve la fila seleccionada del modelo de la tabla
+         model.removeRow(selectedRow);
+     } else {
+         JOptionPane.showMessageDialog(null, "Seleccione una fila para remover.", "Error", JOptionPane.ERROR_MESSAGE);
+     }
+    
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
