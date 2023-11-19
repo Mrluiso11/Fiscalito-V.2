@@ -1461,24 +1461,24 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         // Verifica si hay una fila seleccionada antes de intentar removerla
         if (selectedRow != -1) {
-            // Restar los valores de la fila eliminada a las variables de suma total
-            double cantidadRemovida = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Cantidad")).toString());
-            double precioRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Precio")).toString());
-            double descLineaRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Desc. Linea")).toString());
-            double descGeneralRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Desc. General")).toString());
-            double impuestoRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Importe I.T.B.M.S")).toString());
+            // Obtén los valores de la fila antes de removerla
+            double cantidadRemovida = (double) model.getValueAt(selectedRow, model.findColumn("Cantidad"));
+            double precioRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Precio"));
+            double descLineaRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Desc. Linea"));
+            double descGeneralRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Desc. General"));
+            double impuestoRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Importe I.T.B.M.S"));
 
-            // Restar los valores removidos a las variables de suma total en la clase Documentos
+            // Remueve la fila seleccionada del modelo de la tabla
+            model.removeRow(selectedRow);
+
+            // Resta los valores removidos de los totales
             documentos.restarSumaCantidad(cantidadRemovida);
             documentos.restarMontoPrecio(precioRemovido);
             documentos.restarSumaDescLinea(descLineaRemovido);
             documentos.restarSumaDescGen(descGeneralRemovido);
             documentos.restarSumaImpuesto(impuestoRemovido);
 
-            // Remueve la fila seleccionada del modelo de la tabla
-            model.removeRow(selectedRow);
-
-            // Actualizar los resultados en los labels
+            // Actualiza los textos de los labels con los nuevos totales
             lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
             lblMonto.setText(String.format("%.2f", documentos.getMontoPrecio()));
             lblDescLinea.setText(String.format("%.2f", documentos.getSumaDescLinea()));
