@@ -44,6 +44,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtDescGeneral.setText(String.valueOf(0.00));
         txtDescLinea.setEnabled(false);
         txtReferencia.setEnabled(false);
+        double sumaCantidad = 0.0;
         
 
     }
@@ -54,6 +55,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         TableStyler.applyStyles(table);  // Aplica estilos a la tabla
         tableStyler.fixTable(scrollPane); // Configura la apariencia del JScrollPane
         CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
+    }
+    
+    private void TipoDocumento(){
+        Documentos documentos = new Documentos();
+        documentos.setTipodocumento(jcbTipoDocumento.getSelectedItem().toString());
     }
 
     private void cargarTable() {
@@ -121,6 +127,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         // Verificar si la columna "Cantidad" existe
         if (cantidadColumnIndex != -1) {
+            
             // Suma de Cantidad de productos
             for (int i = 0; i < model.getRowCount(); i++) {
                 // Obtener el valor de la columna "Cantidad" en la fila actual
@@ -139,6 +146,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                     }
                 }
             }
+            documentos.setSumaCantidad(sumaCantidad);
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Cantidad' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -277,15 +285,16 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Impuesto' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-                
+               
         //Asignar resultados a label barra inferior
-        lblCantidad.setText(String.format("%.2f", sumaCantidad));
+        lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
         lblMonto.setText(String.format("%.2f", documentos.getMontoPrecio()));
         lblDescLinea.setText(String.format("%.2f", documentos.getSumaDescLinea()));
         lblDescGen.setText(String.format("%.2f", documentos.getSumaDescGen()));
         lblSubtotal.setText(String.format("%.2f", documentos.getSubtotal2()));
         lblImpuesto.setText(String.format("%.2f", documentos.getSumaImpuesto()));
         lblTotal.setText(String.format("%.2f", documentos.getTotal()));
+        
     
     }
 
@@ -429,13 +438,13 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel31.setText("Forma de pago [1]");
 
-        cboxFormapago1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "             ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
+        cboxFormapago1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel32.setText("Monto del pago [1]");
 
         jLabel33.setText("Forma de pago [2]");
 
-        cboxFormapago2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                  ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
+        cboxFormapago2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel34.setText("Monto del pago [2]");
 
@@ -447,13 +456,13 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel35.setText("Forma de pago [3]");
 
-        cboxFormapago3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                    ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
+        cboxFormapago3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel36.setText("Monto del pago[3]");
 
         jLabel37.setText("Forma de pago [4]");
 
-        cboxFormapago4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "                   ", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
+        cboxFormapago4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel38.setText("Monto del pago");
 
@@ -1327,7 +1336,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_txtMontopago2ActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        // TODO add your handling code here:
+        TipoDocumento();
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void jScrollPane1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane1ComponentAdded
@@ -1444,19 +1453,42 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_chkDescGenActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-     DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
+        Documentos documentos = new Documentos();
+        DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
 
-     // Obtiene la fila seleccionada
-     int selectedRow = TableDocumentos.getSelectedRow();
+        // Obtiene la fila seleccionada
+        int selectedRow = TableDocumentos.getSelectedRow();
 
-     // Verifica si hay una fila seleccionada antes de intentar removerla
-     if (selectedRow != -1) {
-         // Remueve la fila seleccionada del modelo de la tabla
-         model.removeRow(selectedRow);
-     } else {
-         JOptionPane.showMessageDialog(null, "Seleccione una fila para remover.", "Error", JOptionPane.ERROR_MESSAGE);
-     }
-    
+        // Verifica si hay una fila seleccionada antes de intentar removerla
+        if (selectedRow != -1) {
+            // Restar los valores de la fila eliminada a las variables de suma total
+            double cantidadRemovida = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Cantidad")).toString());
+            double precioRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Precio")).toString());
+            double descLineaRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Desc. Linea")).toString());
+            double descGeneralRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Desc. General")).toString());
+            double impuestoRemovido = Double.parseDouble(model.getValueAt(selectedRow, model.findColumn("Importe I.T.B.M.S")).toString());
+
+            // Restar los valores removidos a las variables de suma total en la clase Documentos
+            documentos.restarSumaCantidad(cantidadRemovida);
+            documentos.restarMontoPrecio(precioRemovido);
+            documentos.restarSumaDescLinea(descLineaRemovido);
+            documentos.restarSumaDescGen(descGeneralRemovido);
+            documentos.restarSumaImpuesto(impuestoRemovido);
+
+            // Remueve la fila seleccionada del modelo de la tabla
+            model.removeRow(selectedRow);
+
+            // Actualizar los resultados en los labels
+            lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
+            lblMonto.setText(String.format("%.2f", documentos.getMontoPrecio()));
+            lblDescLinea.setText(String.format("%.2f", documentos.getSumaDescLinea()));
+            lblDescGen.setText(String.format("%.2f", documentos.getSumaDescGen()));
+            lblSubtotal.setText(String.format("%.2f", documentos.getSubtotal2()));
+            lblImpuesto.setText(String.format("%.2f", documentos.getSumaImpuesto()));
+            lblTotal.setText(String.format("%.2f", documentos.getTotal()));
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para remover.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
 

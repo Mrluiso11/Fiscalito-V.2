@@ -19,6 +19,7 @@ import java.text.DecimalFormat;
  */
 public class Documentos {
     private int IDfactura;
+    private String Tipodocumento;
     private int Codigocliente;
     private String Nombre;
     private String RUC;
@@ -40,6 +41,7 @@ public class Documentos {
     private double ImporteImpuesto;
     private double Base;
     private double Subtotal1;
+    private double SumaCantidad;
     private double MontoPrecio;
     private double SumaDescLinea;
     private double SumaDescGen;
@@ -59,8 +61,9 @@ public class Documentos {
     public Documentos(){
     }
 
-    public Documentos(int IDfactura, int Codigocliente, String Nombre, String RUC, double DescGen, String Direccion, String Telefono1, String Telefono2, String Referencia, double Credito, String Codigoproducto, String Codigoservicio, String Nombreproducto, String Nombreservicio, double Cantidad, String Magnitud, double PrecioProducto, double DescLinea, double Impuestos, double ImporteImpuesto, double Base, double Subtotal1, double MontoPrecio, double SumaDescLinea, double SumaDescGen, double Subtotal2, double SumaImpuesto, double Total, double DIF, String FormaPago1, double MontoPago1, String FormaPago2, double MontoPago2, String FormaPago3, double MontoPago3, String FormaPago4, double MontoPago4) {
+    public Documentos(int IDfactura,String Tipodocumento, int Codigocliente, String Nombre, String RUC, double DescGen, String Direccion, String Telefono1, String Telefono2, String Referencia, double Credito, String Codigoproducto, String Codigoservicio, String Nombreproducto, String Nombreservicio, double Cantidad, String Magnitud, double PrecioProducto, double DescLinea, double Impuestos, double ImporteImpuesto, double Base, double Subtotal1, double MontoPrecio,double SumaCantidad, double SumaDescLinea, double SumaDescGen, double Subtotal2, double SumaImpuesto, double Total, double DIF, String FormaPago1, double MontoPago1, String FormaPago2, double MontoPago2, String FormaPago3, double MontoPago3, String FormaPago4, double MontoPago4) {
         this.IDfactura = IDfactura;
+        this.Tipodocumento = Tipodocumento;
         this.Codigocliente = Codigocliente;
         this.Nombre = Nombre;
         this.RUC = RUC;
@@ -83,6 +86,7 @@ public class Documentos {
         this.Base = Base;
         this.Subtotal1 = Subtotal1;
         this.MontoPrecio = MontoPrecio;
+        this.SumaCantidad = SumaCantidad;
         this.SumaDescLinea = SumaDescLinea;
         this.SumaDescGen = SumaDescGen;
         this.Subtotal2 = Subtotal2;
@@ -99,6 +103,13 @@ public class Documentos {
         this.MontoPago4 = MontoPago4;
     }
 
+    public String getTipodocumento() {
+        return Tipodocumento;
+    }
+
+    public void setTipodocumento(String Tipodocumento) {
+        this.Tipodocumento = Tipodocumento;
+    }
 
     public int getIDfactura() {
         return this.IDfactura;
@@ -276,6 +287,14 @@ public class Documentos {
         this.Subtotal1 = Subtotal1;
     }
 
+    public double getSumaCantidad() {
+        return SumaCantidad;
+    }
+
+    public void setSumaCantidad(double SumaCantidad) {
+        this.SumaCantidad = SumaCantidad;
+    }
+
     public double getMontoPrecio() {
         return this.MontoPrecio;
     }
@@ -402,46 +421,48 @@ public class Documentos {
     
     //metodo insert de datos de factura
     public int insertDocumentos(Connection conexion, Documentos documentos) {
-        String query = "INSERT INTO tbl_documentos (id,codigo_cliente,nombre,ruc,descuento_general,direccion,telefono1,telefono2,referencia,credito,codigo_producto,codigo_servicio,nombre_producto,nombre_servicio,cantidad,magnitud,precio_unitario,descuento_linea,itbms,importeimpuesto,base,subtotal1,montoprecio,suma_descuentolinea,suma_descuentogeneral,subtotal2,impuesto_total,total,diferencia,forma_pago1,monto_pago1,forma_pago2,monto_pago2,forma_pago3,monto_pago3,,forma_pago4,monto_pago4) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, CURRENT_TIMESTAMP)";
+        String query = "INSERT INTO tbl_documentos (id,tipo_documento,codigo_cliente,nombre,ruc,descuento_general,direccion,telefono1,telefono2,referencia,credito,codigo_producto,codigo_servicio,nombre_producto,nombre_servicio,cantidad,magnitud,precio_unitario,descuento_linea,itbms,importeimpuesto,base,subtotal1,montoprecio,suma_cantidad,suma_descuentolinea,suma_descuentogeneral,subtotal2,impuesto_total,total,diferencia,forma_pago1,monto_pago1,forma_pago2,monto_pago2,forma_pago3,monto_pago3,,forma_pago4,monto_pago4) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, CURRENT_TIMESTAMP)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, documentos.getIDfactura());
-            statement.setInt(2, documentos.getCodigocliente());
-            statement.setString(3, documentos.getNombre());
-            statement.setString(4, documentos.getRUC());
-            statement.setDouble(5, documentos.getDescGen());
-            statement.setString(6, documentos.getDireccion());
-            statement.setString(7, documentos.getTelefono1());
-            statement.setString(8, documentos.getTelefono2());
-            statement.setString(9, documentos.getReferencia());
-            statement.setDouble(10, documentos.getCredito());
-            statement.setString(11, documentos.getCodigoproducto());
-            statement.setString(12, documentos.getCodigoservicio());
-            statement.setString(13, documentos.getNombreproducto());
-            statement.setString(14, documentos.getNombreservicio());
-            statement.setDouble(15, documentos.getCantidad());
-            statement.setString(16, documentos.getMagnitud());
-            statement.setDouble(17, documentos.getPrecioProducto());
-            statement.setDouble(18, documentos.getDescLinea());
-            statement.setDouble(19, documentos.getImpuestos());
-            statement.setDouble(20, documentos.getImporteImpuesto());
-            statement.setDouble(21, documentos.getBase());
-            statement.setDouble(22, documentos.getSubtotal1());
-            statement.setDouble(23, documentos.getMontoPrecio());
-            statement.setDouble(24, documentos.getSumaDescLinea());
-            statement.setDouble(25, documentos.getSumaDescGen());
-            statement.setDouble(26, documentos.getSubtotal2());
-            statement.setDouble(27, documentos.getSumaImpuesto());
-            statement.setDouble(28, documentos.getTotal());
-            statement.setDouble(29, documentos.getDIF());
-            statement.setString(30, documentos.getFormaPago1());
-            statement.setDouble(31, documentos.getMontoPago1());
-            statement.setString(32, documentos.getFormaPago2());
-            statement.setDouble(33, documentos.getMontoPago2());
-            statement.setString(34, documentos.getFormaPago3());
-            statement.setDouble(35, documentos.getMontoPago3());
-            statement.setString(36, documentos.getFormaPago4());
-            statement.setDouble(37, documentos.getMontoPago4());
+            statement.setString(2, documentos.getTipodocumento());
+            statement.setInt(3, documentos.getCodigocliente());
+            statement.setString(4, documentos.getNombre());
+            statement.setString(5, documentos.getRUC());
+            statement.setDouble(6, documentos.getDescGen());
+            statement.setString(7, documentos.getDireccion());
+            statement.setString(8, documentos.getTelefono1());
+            statement.setString(9, documentos.getTelefono2());
+            statement.setString(10, documentos.getReferencia());
+            statement.setDouble(11, documentos.getCredito());
+            statement.setString(12, documentos.getCodigoproducto());
+            statement.setString(13, documentos.getCodigoservicio());
+            statement.setString(14, documentos.getNombreproducto());
+            statement.setString(15, documentos.getNombreservicio());
+            statement.setDouble(16, documentos.getCantidad());
+            statement.setString(17, documentos.getMagnitud());
+            statement.setDouble(18, documentos.getPrecioProducto());
+            statement.setDouble(19, documentos.getDescLinea());
+            statement.setDouble(20, documentos.getImpuestos());
+            statement.setDouble(21, documentos.getImporteImpuesto());
+            statement.setDouble(22, documentos.getBase());
+            statement.setDouble(23, documentos.getSubtotal1());
+            statement.setDouble(24, documentos.getMontoPrecio());
+            statement.setDouble(25, documentos.getSumaCantidad());
+            statement.setDouble(26, documentos.getSumaDescLinea());
+            statement.setDouble(27, documentos.getSumaDescGen());
+            statement.setDouble(28, documentos.getSubtotal2());
+            statement.setDouble(29, documentos.getSumaImpuesto());
+            statement.setDouble(30, documentos.getTotal());
+            statement.setDouble(31, documentos.getDIF());
+            statement.setString(32, documentos.getFormaPago1());
+            statement.setDouble(33, documentos.getMontoPago1());
+            statement.setString(34, documentos.getFormaPago2());
+            statement.setDouble(35, documentos.getMontoPago2());
+            statement.setString(36, documentos.getFormaPago3());
+            statement.setDouble(37, documentos.getMontoPago3());
+            statement.setString(38, documentos.getFormaPago4());
+            statement.setDouble(39, documentos.getMontoPago4());
             
 
             int filasAfectadas = statement.executeUpdate();
@@ -515,10 +536,25 @@ public class Documentos {
         return Subtotal1;
     }
     
-    //Metodo 
-    
+    //// Métodos para restar valores específicos
+    public void restarSumaCantidad(double cantidadRemovida) {
+        this.SumaCantidad -= cantidadRemovida;
+    }
 
-    
-    
+    public void restarMontoPrecio(double precioRemovido) {
+        this.MontoPrecio -= precioRemovido;
+    }
+
+    public void restarSumaDescLinea(double descLineaRemovido) {
+        this.SumaDescLinea -= descLineaRemovido;
+    }
+
+    public void restarSumaDescGen(double descGeneralRemovido) {
+        this.SumaDescGen -= descGeneralRemovido;
+    }
+
+    public void restarSumaImpuesto(double impuestoRemovido) {
+        this.SumaImpuesto -= impuestoRemovido;
+    }
     
 }
