@@ -37,7 +37,6 @@ public class Form_Dashboard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblActividades = new javax.swing.JLabel();
         imgFotoEmpresa = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1096, 934));
@@ -48,7 +47,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
 
         lblNombreEmpresa.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
         lblNombreEmpresa.setForeground(new java.awt.Color(102, 102, 102));
-        lblNombreEmpresa.setText("Servicio Tecnico Asesor");
+        lblNombreEmpresa.setText("lblNombreEmpresa");
         bg.add(lblNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 610, 60));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -97,27 +96,27 @@ public class Form_Dashboard extends javax.swing.JPanel {
         bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 800, -1));
 
         lblRUC.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblRUC.setText("PE-9-1882");
+        lblRUC.setText("lblRUC");
         bg.add(lblRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 80, -1));
 
         lblNombreComercialEmpresa.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
-        lblNombreComercialEmpresa.setText("Servicio Tecnico Asesor");
+        lblNombreComercialEmpresa.setText("lblNombreComercialEmpresa");
         bg.add(lblNombreComercialEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
 
         lblDV.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblDV.setText("55");
+        lblDV.setText("lblDV");
         bg.add(lblDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, -1, -1));
 
         lblFax.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblFax.setText("290-2010");
+        lblFax.setText("lblFax");
         bg.add(lblFax, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, -1, -1));
 
         lblDireccion.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblDireccion.setText("Panamá,Panamá,Bethania,La Gloria,Calle J,1,0");
+        lblDireccion.setText("lblDireccion");
         bg.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
 
         lblTelefono.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblTelefono.setText("290-2010");
+        lblTelefono.setText("lblTelefono");
         bg.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(84, 187, 251)));
@@ -125,7 +124,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
 
         lblActividades.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         lblActividades.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblActividades.setText("Ventas y servicio de informatica.");
+        lblActividades.setText("lblActividades");
         lblActividades.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -140,21 +139,13 @@ public class Form_Dashboard extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(lblActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblActividades, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, 860, 110));
         bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 170, 160));
-
-        jButton1.setText("Prueba");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 780, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -168,15 +159,9 @@ public class Form_Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        frmPrueba m = new frmPrueba();
-        m.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JLabel imgFotoEmpresa;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -196,6 +196,7 @@ public class Clientes {
 
             if (resultSet.next()) {
                 // Recupera los datos del cliente
+                codigo_cliente = resultSet.getString("codigo_cliente");
                 ruc = resultSet.getString("ruc");
                 direccion = resultSet.getString("direccion");
                 telefono1 = resultSet.getString("telefono1");
@@ -248,7 +249,7 @@ public class Clientes {
 
 // Método para obtener información de un cliente por su nombre
     public void InfoClientePorNombre(Connection conexion) {
-        String query = "SELECT ruc, telefono1, telefono2, direccion FROM tbl_cliente WHERE nombre = ?";
+        String query = "SELECT codigo_cliente, ruc, telefono1, telefono2, direccion FROM tbl_cliente WHERE nombre = ?";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, nombre);
@@ -256,6 +257,7 @@ public class Clientes {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
+                codigo_cliente = resultSet.getString("codigo_cliente");
                 ruc = resultSet.getString("ruc");
                 direccion = resultSet.getString("direccion");
                 telefono1 = resultSet.getString("telefono1");

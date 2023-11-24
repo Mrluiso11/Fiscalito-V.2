@@ -10,6 +10,9 @@ import java.awt.Container;
 import java.sql.Connection;
 import controladores.*;
 import java.awt.Color;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -276,14 +279,15 @@ public class frmClientes extends javax.swing.JPanel {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-public void limpiarCampos() {
+    public void limpiarCampos() {
         for (JTextField campo : camposDeTexto) {
             campo.setText("");
         }
         txtareaDireccion.setText("");
         txtaObservaciones.setText("");
     }
-
+    
+    
     private void txtTelefono2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono2ActionPerformed
 
     }//GEN-LAST:event_txtTelefono2ActionPerformed
@@ -345,6 +349,7 @@ public void limpiarCampos() {
         }
 
         // Actualiza los campos de texto y áreas de texto en el formulario con la información del cliente
+        lblNumCliente.setText(cliente.getCodigo_cliente());
         txtRUC.setText(cliente.getRuc());
         txtNombreCliente.setText(cliente.getNombre());
         txtareaDireccion.setText(cliente.getDireccion());

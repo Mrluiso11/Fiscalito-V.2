@@ -21,10 +21,6 @@ public class Main extends javax.swing.JFrame {
         // Establecer el tamaño deseado para la ventana principal
         Dimension dimension = new Dimension(1345, 877);
         this.setSize(dimension);
-        
-
-
-
     }
 
     private void init() {
@@ -35,6 +31,8 @@ public class Main extends javax.swing.JFrame {
             public void menuSelected(int index, int indexSubMenu) {
                 if (index == 0 && indexSubMenu == 0) {
                     showForm(new Form_Dashboard());
+                }else if (index == 1 && indexSubMenu == 1) {
+                    showForm(new frmOpciones());
                 }else if (index == 1 && indexSubMenu == 2) {
                     showForm(new frmAdministracion());
                 } else if (index == 2 && indexSubMenu == 1) {
@@ -45,8 +43,6 @@ public class Main extends javax.swing.JFrame {
                     showForm(new frmServicio());
                 } else if (index == 2 && indexSubMenu == 4) {
                     showForm(new frmClientes());
-                } else if (index == 2 && indexSubMenu == 5) {
-                    showForm(new frmConstantes());
                 } else if (index == 3 && indexSubMenu == 1) {
                     showForm(new frmDocumentos());
                 } else {

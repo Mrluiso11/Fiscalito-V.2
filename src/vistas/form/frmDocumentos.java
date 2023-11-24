@@ -11,10 +11,17 @@ import Style.Forms;
 import conexion.Conexion;
 import java.sql.Connection;
 import controladores.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.Timer;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -25,6 +32,9 @@ public class frmDocumentos extends javax.swing.JPanel {
     /**
      * Creates new form frmDocumentos
      */
+    private int contadorID = 1;
+    
+    
     public frmDocumentos() {
         initComponents(); // Inicializa los componentes del formulario.
         // Crea una instancia de Forms y la asocia con este formulario.
@@ -35,8 +45,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         applyTableStyles(TableFacturas, jScrollPane2);
         TableFacturas.setShowVerticalLines(true);
         jTabbedPane1.setUI(new CustomTabbedPaneUI());
-        ObtenerNombreCliente();
         
+        Timer timer = new Timer(1000, e -> actualizarFecha());
+        timer.start();
+        generarID();
+        ObtenerNombreCliente();
         ObtenerNombreServicio();
         ObtenerNombreProducto();
         //Descuentos
@@ -46,7 +59,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtReferencia.setEnabled(false);
         double sumaCantidad = 0.0;
         
-
     }
     // Método para aplicar estilos adicionales a la tabla contenida en un JScrollPane.
 
@@ -55,6 +67,84 @@ public class frmDocumentos extends javax.swing.JPanel {
         TableStyler.applyStyles(table);  // Aplica estilos a la tabla
         tableStyler.fixTable(scrollPane); // Configura la apariencia del JScrollPane
         CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
+    }
+    
+    private void generarID() {
+        
+       // Establecer conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+
+        if (conexion != null) {
+            try {
+                // Consulta SQL para obtener el valor máximo actual de la columna ID
+                String consulta = "SELECT MAX(ID) FROM tbl_documentos";
+                PreparedStatement ps = conexion.prepareStatement(consulta);
+                ResultSet rs = ps.executeQuery();
+
+                // Obtener el valor máximo actual
+                int maxID = 0;
+                if (rs.next()) {
+                    maxID = rs.getInt(1);
+                }
+
+                // Incrementar el valor máximo en uno para obtener el nuevo ID
+                int nuevoID = maxID + 1;
+
+                // Cerrar recursos
+                rs.close();
+                ps.close();
+
+                // Formatear el nuevo ID con ceros a la izquierda si es necesario
+                String idSecuencial = String.format("%04d", nuevoID);
+
+                // Actualizar la etiqueta con el nuevo ID
+                lblIDfactura.setText(idSecuencial);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }{
+                Conexion.cerrarConexion(conexion);
+            }
+        }
+    }
+    
+    private void LimpiarCampos(){
+        txtRUC.setText(" ");
+        txtDescGeneral.setText(" ");
+        txtDireccion.setText(" ");
+        txtTelefono1.setText(" ");
+        txtTelefono2.setText(" ");
+        txtReferencia.setText(" ");
+        txtCodigoproducto.setText(" ");
+        txtCantidad.setText(" ");
+        txtPrecio.setText(" ");
+        txtDescLinea.setText(" ");
+        txtMontopago1.setText(" ");
+        txtMontopago2.setText(" ");
+        txtMontopago3.setText(" ");
+        txtMontopago4.setText(" ");
+        DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
+        model.setRowCount(0);
+        lblCantidad.setText(" ");
+        lblMonto.setText(" ");
+        lblDescLinea.setText(" ");
+        lblDescGen.setText(" ");
+        lblSubtotal.setText(" ");
+        lblImpuesto.setText(" ");
+        lblTotal.setText(" ");
+        lblDIF.setText(" ");
+    }
+    private void actualizarFecha() {
+        // Obtener la fecha actual del sistema
+        Date fechaActual = new Date();
+
+        // Formatear la fecha en un formato específico (por ejemplo, "dd/MM/yyyy HH:mm:ss")
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String fechaFormateada = formatoFecha.format(fechaActual);
+
+        // Mostrar la fecha en el JLabel
+        lblFechaImpresion.setText(fechaFormateada);
+        
     }
     
     private void TipoDocumento(){
@@ -71,15 +161,27 @@ public class frmDocumentos extends javax.swing.JPanel {
         if (!txtDescGeneral.isEnabled()) {
             Decgen = String.valueOf(0.00);
         }
+        Articulos producto = new Articulos();
+        Servicios servicios = new Servicios();
+        Connection conexion = Conexion.obtenerConexion();
+        
         String Confirmservicio;
+        String Descripcion;
         if (chkServicio.isSelected()) {
-            Confirmservicio= "Si";
+            Confirmservicio = "Si";
+            servicios.setNombreservicio(cbxArticuloServicio.getSelectedItem().toString());
+            servicios.InfoServicioPorNombre(conexion); // Asegúrate de tener la conexión a la base de datos
+            Descripcion = servicios.getDescripcion();
         } else {
-            Confirmservicio= "No";
+            Confirmservicio = "No";
+            producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
+            producto.InfoProductoPorNombre(conexion); // Asegúrate de tener la conexión a la base de datos
+            Descripcion = producto.getDescripcion();
         }
         
         Documentos documentos = new Documentos();
         //Calculos de tabla
+        
 
         // Enviar los valores necesarios a clase (ajusta según tus necesidades)
         documentos.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
@@ -87,6 +189,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         documentos.setDescLinea(Double.parseDouble(txtDescLinea.getText()));
         documentos.setDescGen(Double.parseDouble(txtDescGeneral.getText()));
         documentos.setImpuestos(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
+        documentos.setDescripcion(Descripcion);
         
         // Llamar a los métodos de cálculo en la clase Documentos
         documentos.CalcularDescuentoGen(documentos.getPrecioProducto(),documentos.getDescGen());
@@ -106,16 +209,13 @@ public class frmDocumentos extends javax.swing.JPanel {
         double importeImpuesto = documentos.getImporteImpuesto();
         double subtotal = documentos.getSubtotal1();
         
-        
-        Connection conexion = Conexion.obtenerConexion();
-        Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
         if (conexion != null) {
             producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
             producto.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1,DescLinea1, DescGen1 , base, Impuestos1, importeImpuesto, subtotal});
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, Descripcion, cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1,DescLinea1, DescGen1 , base, Impuestos1, importeImpuesto, subtotal});
         
         double sumaCantidad = 0.0;
 
@@ -285,7 +385,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Impuesto' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-               
+        
         //Asignar resultados a label barra inferior
         lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
         lblMonto.setText(String.format("%.2f", documentos.getMontoPrecio()));
@@ -295,7 +395,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         lblImpuesto.setText(String.format("%.2f", documentos.getSumaImpuesto()));
         lblTotal.setText(String.format("%.2f", documentos.getTotal()));
         
-    
+        Conexion.cerrarConexion(conexion);
     }
 
     /**
@@ -354,8 +454,8 @@ public class frmDocumentos extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableDocumentos = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
+        LblCantidad = new javax.swing.JLabel();
+        lblMonto_precio = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -474,6 +574,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnRecalcular.setText("Recalcular");
         btnRecalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -665,32 +770,32 @@ public class frmDocumentos extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(119, 119, 119))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jcbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                                         .addComponent(btnBuscar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11)
                                     .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTelefono2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(119, 119, 119)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chkCredito)
                     .addComponent(txtDescGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReferencia, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                    .addComponent(txtReferencia)
                     .addComponent(chkDescGen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(53, 53, 53))
         );
@@ -730,7 +835,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                         .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chkCredito)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bg2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 79, 942, 180));
@@ -763,10 +868,8 @@ public class frmDocumentos extends javax.swing.JPanel {
             }
         });
         TableDocumentos.setColumnSelectionAllowed(true);
-        TableDocumentos.setShowHorizontalLines(true);
-        TableDocumentos.setShowVerticalLines(true);
         jScrollPane1.setViewportView(TableDocumentos);
-        TableDocumentos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TableDocumentos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -787,9 +890,9 @@ public class frmDocumentos extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5.setOpaque(false);
 
-        jLabel22.setText("Cantidad:");
+        LblCantidad.setText("Cantidad:");
 
-        jLabel23.setText("Monto:");
+        lblMonto_precio.setText("Monto:");
 
         jLabel24.setText("Desc. Línea");
 
@@ -810,13 +913,13 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
+                    .addComponent(LblCantidad)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblCantidad)))
                 .addGap(65, 65, 65)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23)
+                    .addComponent(lblMonto_precio)
                     .addComponent(lblMonto))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -857,8 +960,8 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel23)
+                    .addComponent(LblCantidad)
+                    .addComponent(lblMonto_precio)
                     .addComponent(jLabel24)
                     .addComponent(jLabel25)
                     .addComponent(jLabel26)
@@ -968,8 +1071,8 @@ public class frmDocumentos extends javax.swing.JPanel {
                             .addComponent(jLabel19))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxMagnitudes, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
+                            .addComponent(jLabel5)
+                            .addComponent(cbxMagnitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -981,8 +1084,8 @@ public class frmDocumentos extends javax.swing.JPanel {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 29, Short.MAX_VALUE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+                        .addGap(18, 24, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(chkDescLinea))
@@ -1291,6 +1394,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             e.printStackTrace();
         } finally {
             // Cerrar la conexión a la base de datos aquí
+            Conexion.cerrarConexion(conexion);
         }
 
     }
@@ -1315,6 +1419,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             e.printStackTrace();
         } finally {
             // Cerrar la conexión a la base de datos aquí
+            Conexion.cerrarConexion(conexion);
         }
     }
 
@@ -1324,19 +1429,180 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void chkCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCreditoActionPerformed
+        Documentos documentos = new Documentos();
+        String Confirmcredito;
         if (chkCredito.isSelected()) {
             txtReferencia.setEnabled(true);
+            Confirmcredito="Si";
         }else {
             txtReferencia.setEnabled(false);
+            Confirmcredito="no";
         }
+        documentos.setCredito(Confirmcredito);
     }//GEN-LAST:event_chkCreditoActionPerformed
-
+ 
     private void txtMontopago2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontopago2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontopago2ActionPerformed
 
+    private void insertBaseDatosE() {
+        // Se obtiene una conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+
+        if (conexion != null) {
+            try {
+                Documentos documentos = new Documentos();
+
+                // Verifica que los elementos seleccionados no sean nulos
+                if (jcbTipoDocumento.getSelectedItem() != null) {
+                    documentos.setTipodocumento(jcbTipoDocumento.getSelectedItem().toString());
+                }
+
+                // Verifica que lblIDfactura.getText() sea un valor numérico antes de intentar convertirlo
+                try {
+                    documentos.setIDfactura(Integer.parseInt(lblIDfactura.getText()));
+                } catch (NumberFormatException e) {
+                    System.out.println("Error: lblIDfactura no es un número válido.");
+                    return;  // Sale del método si no se puede convertir a un número
+                }
+
+                //InsertElementos
+                String Confirmservicio;
+                if (chkServicio.isSelected()) {
+                Confirmservicio = "Si";
+                } else {
+                Confirmservicio = "No";
+                }
+                documentos.setNombreservicio(cbxArticuloServicio.getSelectedItem().toString());
+                documentos.setCodigoservicio(txtCodigoproducto.getText());
+                documentos.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
+                documentos.setCodigoproducto(txtCodigoproducto.getText());
+                
+                documentos.setIDfactura(Integer.parseInt(lblIDfactura.getText()));
+                documentos.setConfirmservicio(Confirmservicio);
+                documentos.setCantidad(Double.parseDouble(txtCantidad.getText()));
+                documentos.setMagnitud(cbxMagnitudes.getSelectedItem().toString());
+                documentos.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
+                documentos.setDescLinea(Double.parseDouble(txtDescLinea.getText()));
+                documentos.setDescGen(Double.parseDouble(txtDescGeneral.getText()));
+                documentos.setImpuestos(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
+                
+                // Llamar a los métodos de cálculo en la clase Documentos
+                documentos.CalcularDescuentoGen(documentos.getPrecioProducto(),documentos.getDescGen());
+                documentos.CalcularDescuentoLinea(documentos.getPrecioProducto(),documentos.getDescLinea());
+                documentos.CalcularBase(documentos.getPrecioProducto(), documentos.getCantidad(), documentos.getDescLinea(), documentos.getDescGen());
+                documentos.CalcularItbms(documentos.getImpuestos());
+                documentos.CalcularImporteImpuesto(documentos.getPrecioProducto(), documentos.getImpuestos(), documentos.getCantidad());
+                documentos.CalcularSubtotal(documentos.getBase(),documentos.getImporteImpuesto());
+                
+                //resultado de calculos
+                documentos.setBase(documentos.getBase());
+                documentos.setImporteImpuesto(documentos.getImporteImpuesto());
+                documentos.setSubtotal1(documentos.getSubtotal1());
+
+                // Realiza la inserción en la base de datos
+                documentos.insertElementos(conexion, documentos);
+            /*} catch (NumberFormatException nfe) {
+                System.out.println("Error al convertir a número: " + nfe.getMessage());*/
+            } catch (Exception e) {
+                // Maneja otras excepciones de manera más específica si es posible
+                e.printStackTrace();
+                System.out.println("error "+e);
+            } finally {
+                // Cierra la conexión a la base de datos en el bloque finally para asegurar que se cierre
+                Conexion.cerrarConexion(conexion);
+            }
+        }
+    }
+    
+    private void insertBaseDatosD() {
+        // Se obtiene una conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+
+        if (conexion != null) {
+            try {
+                Documentos obj_insert = new Documentos();
+
+                // Verifica que los elementos seleccionados no sean nulos
+                if (jcbTipoDocumento.getSelectedItem() != null) {
+                    obj_insert.setTipodocumento(jcbTipoDocumento.getSelectedItem().toString());
+                }
+
+                // Verifica que lblIDfactura.getText() sea un valor numérico antes de intentar convertirlo
+                try {
+                    obj_insert.setIDfactura(Integer.parseInt(lblIDfactura.getText()));
+                } catch (NumberFormatException e) {
+                    System.out.println("Error: lblIDfactura no es un número válido.");
+                    return;  // Sale del método si no se puede convertir a un número
+                }
+                
+                obj_insert.setCodigocliente(Integer.parseInt(lblNumeroCliente.getText()));
+
+                // Verifica que el elemento seleccionado no sea nulo
+                if (jcbNombre.getSelectedItem() != null) {
+                    obj_insert.setNombre(jcbNombre.getSelectedItem().toString());
+                }
+                
+                Documentos documentos = new Documentos();
+                String Confirmcredito;
+                if (chkCredito.isSelected()) {
+                txtReferencia.setEnabled(true);
+                Confirmcredito="Si";
+                }else {
+                txtReferencia.setEnabled(false);
+                Confirmcredito="no";
+                }
+                documentos.setCredito(Confirmcredito);
+                
+                //InsertDocumentos
+                obj_insert.setRUC(txtRUC.getText().trim());
+                obj_insert.setDescGen(Double.parseDouble(txtDescGeneral.getText().trim()));
+                obj_insert.setDireccion(txtDireccion.getText().trim());
+                obj_insert.setTelefono1(txtTelefono1.getText().trim());
+                obj_insert.setTelefono2(txtTelefono2.getText().trim());
+                obj_insert.setCredito(Confirmcredito);
+                obj_insert.setReferencia(txtReferencia.getText().trim());
+                obj_insert.setMontoPrecio(Double.parseDouble(lblMonto.getText()));
+                obj_insert.setSumaCantidad(Double.parseDouble(lblCantidad.getText()));
+                obj_insert.setSumaDescLinea(Double.parseDouble(lblDescLinea.getText()));
+                obj_insert.setSumaDescGen(Double.parseDouble(lblDescGen.getText()));
+                obj_insert.setSubtotal2(Double.parseDouble(lblSubtotal.getText()));
+                obj_insert.setSumaImpuesto(Double.parseDouble(lblImpuesto.getText()));
+                obj_insert.setTotal(Double.parseDouble(lblTotal.getText()));
+                obj_insert.setFormaPago1(cboxFormapago1.getSelectedItem().toString());
+                obj_insert.setMontoPago1(Double.parseDouble(txtMontopago1.getText()));
+                obj_insert.setFormaPago2(cboxFormapago2.getSelectedItem().toString());
+                obj_insert.setMontoPago2(Double.parseDouble(txtMontopago2.getText()));
+                obj_insert.setFormaPago3(cboxFormapago3.getSelectedItem().toString());
+                obj_insert.setMontoPago3(Double.parseDouble(txtMontopago3.getText()));
+                obj_insert.setFormaPago4(cboxFormapago4.getSelectedItem().toString());
+                obj_insert.setMontoPago4(Double.parseDouble(txtMontopago4.getText()));
+                obj_insert.setDIF(Double.parseDouble(lblDIF.getText()));
+                
+
+                // Realiza la inserción en la base de datos
+                obj_insert.insertDocumentos(conexion, obj_insert);
+            /*} catch (NumberFormatException nfe) {
+                System.out.println("Error al convertir a número: " + nfe.getMessage());*/
+            } catch (Exception e) {
+                // Maneja otras excepciones de manera más específica si es posible
+                e.printStackTrace();
+                System.out.println("error "+e);
+            } finally {
+                // Cierra la conexión a la base de datos en el bloque finally para asegurar que se cierre
+                Conexion.cerrarConexion(conexion);
+            }
+        }
+    }
+    
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        Documentos documentos = new Documentos();
         TipoDocumento();
+        lblDIF.setText(String.format("%.2f", documentos.getDIF()));
+        insertBaseDatosD();
+        insertBaseDatosE();
+        LimpiarCampos();
+        generarID();
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void jScrollPane1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane1ComponentAdded
@@ -1352,6 +1618,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             cliente.InfoClientePorNombre(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
         }
+        lblNumeroCliente.setText(cliente.getCodigo_cliente());
         txtRUC.setText(cliente.getRuc());
         txtDireccion.setText(cliente.getDireccion());
         txtTelefono1.setText(cliente.getTelefono1());
@@ -1359,11 +1626,16 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void chkServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkServicioActionPerformed
+        Documentos documentos = new Documentos();
+        String Confirmservicio;
         if (chkServicio.isSelected()) {
+            Confirmservicio="Si";
             ObtenerNombreServicio();
         } else {
             ObtenerNombreProducto();
+            Confirmservicio="No";
         }
+        documentos.setConfirmservicio(Confirmservicio);
     }//GEN-LAST:event_chkServicioActionPerformed
 
         /*Info Tabla articulos agregados
@@ -1412,7 +1684,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        cargarTable();  
+        cargarTable();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void chkDescLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDescLineaActionPerformed
@@ -1436,6 +1708,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     */
     
     private void btnRecalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecalcularActionPerformed
+
        
     }//GEN-LAST:event_btnRecalcularActionPerformed
 
@@ -1491,8 +1764,13 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        LimpiarCampos();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblCantidad;
     private javax.swing.JTable TableDocumentos;
     private javax.swing.JTable TableFacturas;
     private javax.swing.JPanel bg1;
@@ -1530,8 +1808,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1577,6 +1853,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JLabel lblIDfactura;
     private javax.swing.JLabel lblImpuesto;
     private javax.swing.JLabel lblMonto;
+    private javax.swing.JLabel lblMonto_precio;
     private javax.swing.JLabel lblNumeroCliente;
     private javax.swing.JLabel lblSubtotal;
     private javax.swing.JLabel lblTotal;

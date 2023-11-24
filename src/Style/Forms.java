@@ -84,14 +84,14 @@ public class Forms extends javax.swing.JPanel {
     private void aplicarEstiloATextFields(Container container) {
     Component[] components = container.getComponents();
 
-    Border defaultBorder = new RoundBorder(4, Color.decode("#F2F2F2")); // Borde por defecto
+    Border defaultBorder = new RoundBorder(4, Color.decode("#9e9e9e")); // Borde por defecto
     Border focusBorder = new RoundBorder(4, Color.decode("#54bbfb")); // Borde cuando se selecciona
 
     for (Component component : components) {
         if (component instanceof JTextComponent) {
             final JTextComponent textComponent = (JTextComponent) component;
             textComponent.setBackground(Color.WHITE); // Establece el fondo a blanco
-            textComponent.setForeground(Color.LIGHT_GRAY);
+          textComponent.setForeground(new Color(0x85, 0x85, 0x85)); 
             textComponent.setFont(new Font("Arial", Font.BOLD, 12));
             textComponent.setBorder(defaultBorder); // Aplica el mismo borde redondeado
 
