@@ -33,8 +33,7 @@ public class frmDocumentos extends javax.swing.JPanel {
      * Creates new form frmDocumentos
      */
     private int contadorID = 1;
-    
-    
+
     public frmDocumentos() {
         initComponents(); // Inicializa los componentes del formulario.
         // Crea una instancia de Forms y la asocia con este formulario.
@@ -45,7 +44,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         applyTableStyles(TableFacturas, jScrollPane2);
         TableFacturas.setShowVerticalLines(true);
         jTabbedPane1.setUI(new CustomTabbedPaneUI());
-        
+
         Timer timer = new Timer(1000, e -> actualizarFecha());
         timer.start();
         generarID();
@@ -58,7 +57,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtDescLinea.setEnabled(false);
         txtReferencia.setEnabled(false);
         double sumaCantidad = 0.0;
-        
+
     }
     // Método para aplicar estilos adicionales a la tabla contenida en un JScrollPane.
 
@@ -68,10 +67,10 @@ public class frmDocumentos extends javax.swing.JPanel {
         tableStyler.fixTable(scrollPane); // Configura la apariencia del JScrollPane
         CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
     }
-    
+
     private void generarID() {
-        
-       // Establecer conexión a la base de datos
+
+        // Establecer conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
 
         if (conexion != null) {
@@ -102,13 +101,14 @@ public class frmDocumentos extends javax.swing.JPanel {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-            }{
+            }
+            {
                 Conexion.cerrarConexion(conexion);
             }
         }
     }
-    
-    private void LimpiarCampos(){
+
+    private void LimpiarCampos() {
         txtRUC.setText(" ");
         txtDescGeneral.setText(" ");
         txtDireccion.setText(" ");
@@ -134,6 +134,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         lblTotal.setText(" ");
         lblDIF.setText(" ");
     }
+
     private void actualizarFecha() {
         // Obtener la fecha actual del sistema
         Date fechaActual = new Date();
@@ -144,10 +145,10 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         // Mostrar la fecha en el JLabel
         lblFechaImpresion.setText(fechaFormateada);
-        
+
     }
-    
-    private void TipoDocumento(){
+
+    private void TipoDocumento() {
         Documentos documentos = new Documentos();
         documentos.setTipodocumento(jcbTipoDocumento.getSelectedItem().toString());
     }
@@ -164,7 +165,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         Articulos producto = new Articulos();
         Servicios servicios = new Servicios();
         Connection conexion = Conexion.obtenerConexion();
-        
+
         String Confirmservicio;
         String Descripcion;
         if (chkServicio.isSelected()) {
@@ -178,10 +179,9 @@ public class frmDocumentos extends javax.swing.JPanel {
             producto.InfoProductoPorNombre(conexion); // Asegúrate de tener la conexión a la base de datos
             Descripcion = producto.getDescripcion();
         }
-        
+
         Documentos documentos = new Documentos();
         //Calculos de tabla
-        
 
         // Enviar los valores necesarios a clase (ajusta según tus necesidades)
         documentos.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
@@ -190,44 +190,43 @@ public class frmDocumentos extends javax.swing.JPanel {
         documentos.setDescGen(Double.parseDouble(txtDescGeneral.getText()));
         documentos.setImpuestos(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
         documentos.setDescripcion(Descripcion);
-        
+
         // Llamar a los métodos de cálculo en la clase Documentos
-        documentos.CalcularDescuentoGen(documentos.getPrecioProducto(),documentos.getDescGen());
-        documentos.CalcularDescuentoLinea(documentos.getPrecioProducto(),documentos.getDescLinea());
+        documentos.CalcularDescuentoGen(documentos.getPrecioProducto(), documentos.getDescGen());
+        documentos.CalcularDescuentoLinea(documentos.getPrecioProducto(), documentos.getDescLinea());
         documentos.CalcularBase(documentos.getPrecioProducto(), documentos.getCantidad(), documentos.getDescLinea(), documentos.getDescGen());
         documentos.CalcularItbms(documentos.getImpuestos());
         documentos.CalcularImporteImpuesto(documentos.getPrecioProducto(), documentos.getImpuestos(), documentos.getCantidad());
-        documentos.CalcularSubtotal(documentos.getBase(),documentos.getImporteImpuesto());
+        documentos.CalcularSubtotal(documentos.getBase(), documentos.getImporteImpuesto());
 
         // Obtener resultados de los métodos get
-        double precioProducto1= documentos.getPrecioProducto();
-        double cantidad= Double.parseDouble(txtCantidad.getText());
-        double DescGen1= documentos.getDescGen();
-        double DescLinea1= documentos.getDescLinea();
-        double Impuestos1= documentos.getImpuestos();
+        double precioProducto1 = documentos.getPrecioProducto();
+        double cantidad = Double.parseDouble(txtCantidad.getText());
+        double DescGen1 = documentos.getDescGen();
+        double DescLinea1 = documentos.getDescLinea();
+        double Impuestos1 = documentos.getImpuestos();
         double base = documentos.getBase();
         double importeImpuesto = documentos.getImporteImpuesto();
         double subtotal = documentos.getSubtotal1();
-        
+
         if (conexion != null) {
             producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
             producto.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, Descripcion, cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1,DescLinea1, DescGen1 , base, Impuestos1, importeImpuesto, subtotal});
-        
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, Descripcion, cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1, DescLinea1, DescGen1, base, Impuestos1, importeImpuesto, subtotal});
+
         double sumaCantidad = 0.0;
 
         //Calculos de barra inferior
-        
         //Suma de Cantidad de productos
         // Obtener el índice de la columna "Cantidad"
         int cantidadColumnIndex = model.findColumn("Cantidad");
 
         // Verificar si la columna "Cantidad" existe
         if (cantidadColumnIndex != -1) {
-            
+
             // Suma de Cantidad de productos
             for (int i = 0; i < model.getRowCount(); i++) {
                 // Obtener el valor de la columna "Cantidad" en la fila actual
@@ -250,7 +249,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Cantidad' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         //Monto = suma precio del producto sin descuento y sin importe
         int precioProductoColumnIndex = model.findColumn("Precio");
 
@@ -285,7 +284,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'precioProducto1' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         //descuento linea total= suma de los descuento de linea de los productos
         // Obtener el índice de la columna "Desc. Linea"
         int descLineaColumnIndex = model.findColumn("Desc. Linea");
@@ -319,7 +318,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Desc. Linea' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         //descuento general total= suma de los descuento general de los productos
         // Obtener el índice de la columna "Desc. General"
         int descGeneralColumnIndex = model.findColumn("Desc. General");
@@ -353,7 +352,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Desc. General' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         //Impuestos= Suma de los ImporteImpuesto de cada producto agregado a la lista
         int impuestototalColumnIndex = model.findColumn("Importe I.T.B.M.S");
 
@@ -385,7 +384,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Impuesto' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         //Asignar resultados a label barra inferior
         lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
         lblMonto.setText(String.format("%.2f", documentos.getMontoPrecio()));
@@ -394,7 +393,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         lblSubtotal.setText(String.format("%.2f", documentos.getSubtotal2()));
         lblImpuesto.setText(String.format("%.2f", documentos.getSumaImpuesto()));
         lblTotal.setText(String.format("%.2f", documentos.getTotal()));
-        
+
         Conexion.cerrarConexion(conexion);
     }
 
@@ -1433,14 +1432,14 @@ public class frmDocumentos extends javax.swing.JPanel {
         String Confirmcredito;
         if (chkCredito.isSelected()) {
             txtReferencia.setEnabled(true);
-            Confirmcredito="Si";
-        }else {
+            Confirmcredito = "Si";
+        } else {
             txtReferencia.setEnabled(false);
-            Confirmcredito="no";
+            Confirmcredito = "no";
         }
         documentos.setCredito(Confirmcredito);
     }//GEN-LAST:event_chkCreditoActionPerformed
- 
+
     private void txtMontopago2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontopago2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontopago2ActionPerformed
@@ -1451,70 +1450,59 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         if (conexion != null) {
             try {
-                Documentos documentos = new Documentos();
-
-                // Verifica que los elementos seleccionados no sean nulos
-                if (jcbTipoDocumento.getSelectedItem() != null) {
-                    documentos.setTipodocumento(jcbTipoDocumento.getSelectedItem().toString());
-                }
-
                 // Verifica que lblIDfactura.getText() sea un valor numérico antes de intentar convertirlo
+                int idFactura;
                 try {
-                    documentos.setIDfactura(Integer.parseInt(lblIDfactura.getText()));
+                    idFactura = Integer.parseInt(lblIDfactura.getText());
                 } catch (NumberFormatException e) {
                     System.out.println("Error: lblIDfactura no es un número válido.");
                     return;  // Sale del método si no se puede convertir a un número
                 }
 
-                //InsertElementos
-                String Confirmservicio;
-                if (chkServicio.isSelected()) {
-                Confirmservicio = "Si";
-                } else {
-                Confirmservicio = "No";
-                }
-                documentos.setNombreservicio(cbxArticuloServicio.getSelectedItem().toString());
-                documentos.setCodigoservicio(txtCodigoproducto.getText());
-                documentos.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
-                documentos.setCodigoproducto(txtCodigoproducto.getText());
-                
-                documentos.setIDfactura(Integer.parseInt(lblIDfactura.getText()));
-                documentos.setConfirmservicio(Confirmservicio);
-                documentos.setCantidad(Double.parseDouble(txtCantidad.getText()));
-                documentos.setMagnitud(cbxMagnitudes.getSelectedItem().toString());
-                documentos.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
-                documentos.setDescLinea(Double.parseDouble(txtDescLinea.getText()));
-                documentos.setDescGen(Double.parseDouble(txtDescGeneral.getText()));
-                documentos.setImpuestos(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
-                
-                // Llamar a los métodos de cálculo en la clase Documentos
-                documentos.CalcularDescuentoGen(documentos.getPrecioProducto(),documentos.getDescGen());
-                documentos.CalcularDescuentoLinea(documentos.getPrecioProducto(),documentos.getDescLinea());
-                documentos.CalcularBase(documentos.getPrecioProducto(), documentos.getCantidad(), documentos.getDescLinea(), documentos.getDescGen());
-                documentos.CalcularItbms(documentos.getImpuestos());
-                documentos.CalcularImporteImpuesto(documentos.getPrecioProducto(), documentos.getImpuestos(), documentos.getCantidad());
-                documentos.CalcularSubtotal(documentos.getBase(),documentos.getImporteImpuesto());
-                
-                //resultado de calculos
-                documentos.setBase(documentos.getBase());
-                documentos.setImporteImpuesto(documentos.getImporteImpuesto());
-                documentos.setSubtotal1(documentos.getSubtotal1());
+                // Itera sobre las filas de la tabla
+                DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
 
-                // Realiza la inserción en la base de datos
-                documentos.insertElementos(conexion, documentos);
-            /*} catch (NumberFormatException nfe) {
-                System.out.println("Error al convertir a número: " + nfe.getMessage());*/
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    // Crea una nueva instancia de Documentos para cada fila
+                    Documentos documentos = new Documentos();
+                    documentos.setIDfactura(idFactura);
+                    // Configura los atributos del objeto Documentos con los valores de la fila actual
+                    documentos.setCodigoproducto(model.getValueAt(i, 0).toString());
+                    documentos.setNombreproducto(model.getValueAt(i, 1).toString());
+                    documentos.setConfirmservicio(model.getValueAt(i, 2).toString());
+                    documentos.setDescripcion(model.getValueAt(i, 3).toString());
+                    documentos.setCantidad(Double.parseDouble(model.getValueAt(i, 5).toString())); // Ajusta según la estructura de tu tabla
+                    documentos.setMagnitud(model.getValueAt(i, 4).toString());
+                    documentos.setPrecioProducto(Double.parseDouble(model.getValueAt(i, 6).toString())); // Ajusta según la estructura de tu tabla
+                    documentos.setDescLinea(Double.parseDouble(model.getValueAt(i, 7).toString())); // Ajusta según la estructura de tu tabla
+                    documentos.setDescGen(Double.parseDouble(model.getValueAt(i, 8).toString())); // Ajusta según la estructura de tu tabla
+                    documentos.setImpuestos(Double.parseDouble(model.getValueAt(i, 10).toString())); // Ajusta según la estructura de tu tabla
+
+                    // Imprime los valores que estás intentando insertar para verificar que son correctos
+                    System.out.println("Cantidad: " + documentos.getCantidad());
+                    System.out.println("Precio: " + documentos.getPrecioProducto());
+
+                    // Llama al método insertElementos para insertar en la base de datos
+                    int filasAfectadas = documentos.insertElementos(conexion, documentos);
+
+                    // Verifica el resultado de la inserción para cada fila
+                    if (filasAfectadas > 0) {
+                        System.out.println("Elemento insertado correctamente en la base de datos.");
+                    } else {
+                        System.out.println("Error al insertar el elemento en la base de datos.");
+                    }
+                }
             } catch (Exception e) {
                 // Maneja otras excepciones de manera más específica si es posible
                 e.printStackTrace();
-                System.out.println("error "+e);
+                System.out.println("error " + e);
             } finally {
                 // Cierra la conexión a la base de datos en el bloque finally para asegurar que se cierre
                 Conexion.cerrarConexion(conexion);
             }
         }
     }
-    
+
     private void insertBaseDatosD() {
         // Se obtiene una conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
@@ -1535,25 +1523,25 @@ public class frmDocumentos extends javax.swing.JPanel {
                     System.out.println("Error: lblIDfactura no es un número válido.");
                     return;  // Sale del método si no se puede convertir a un número
                 }
-                
+
                 obj_insert.setCodigocliente(Integer.parseInt(lblNumeroCliente.getText()));
 
                 // Verifica que el elemento seleccionado no sea nulo
                 if (jcbNombre.getSelectedItem() != null) {
                     obj_insert.setNombre(jcbNombre.getSelectedItem().toString());
                 }
-                
+
                 Documentos documentos = new Documentos();
                 String Confirmcredito;
                 if (chkCredito.isSelected()) {
-                txtReferencia.setEnabled(true);
-                Confirmcredito="Si";
-                }else {
-                txtReferencia.setEnabled(false);
-                Confirmcredito="no";
+                    txtReferencia.setEnabled(true);
+                    Confirmcredito = "Si";
+                } else {
+                    txtReferencia.setEnabled(false);
+                    Confirmcredito = "no";
                 }
                 documentos.setCredito(Confirmcredito);
-                
+
                 //InsertDocumentos
                 obj_insert.setRUC(txtRUC.getText().trim());
                 obj_insert.setDescGen(Double.parseDouble(txtDescGeneral.getText().trim()));
@@ -1578,30 +1566,29 @@ public class frmDocumentos extends javax.swing.JPanel {
                 obj_insert.setFormaPago4(cboxFormapago4.getSelectedItem().toString());
                 obj_insert.setMontoPago4(Double.parseDouble(txtMontopago4.getText()));
                 obj_insert.setDIF(Double.parseDouble(lblDIF.getText()));
-                
 
                 // Realiza la inserción en la base de datos
                 obj_insert.insertDocumentos(conexion, obj_insert);
-            /*} catch (NumberFormatException nfe) {
+                /*} catch (NumberFormatException nfe) {
                 System.out.println("Error al convertir a número: " + nfe.getMessage());*/
             } catch (Exception e) {
                 // Maneja otras excepciones de manera más específica si es posible
                 e.printStackTrace();
-                System.out.println("error "+e);
+                System.out.println("error " + e);
             } finally {
                 // Cierra la conexión a la base de datos en el bloque finally para asegurar que se cierre
                 Conexion.cerrarConexion(conexion);
             }
         }
     }
-    
+
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         Documentos documentos = new Documentos();
         TipoDocumento();
         lblDIF.setText(String.format("%.2f", documentos.getDIF()));
         insertBaseDatosD();
         insertBaseDatosE();
-        LimpiarCampos();
+        //LimpiarCampos();
         generarID();
     }//GEN-LAST:event_btnImprimirActionPerformed
 
@@ -1629,16 +1616,16 @@ public class frmDocumentos extends javax.swing.JPanel {
         Documentos documentos = new Documentos();
         String Confirmservicio;
         if (chkServicio.isSelected()) {
-            Confirmservicio="Si";
+            Confirmservicio = "Si";
             ObtenerNombreServicio();
         } else {
             ObtenerNombreProducto();
-            Confirmservicio="No";
+            Confirmservicio = "No";
         }
         documentos.setConfirmservicio(Confirmservicio);
     }//GEN-LAST:event_chkServicioActionPerformed
 
-        /*Info Tabla articulos agregados
+    /*Info Tabla articulos agregados
     N°= codigo de producto
     Articulo/servicio= nombre de Articulo/servicio
     ¿Servicio?= confirmacion sobre servicio si o no
@@ -1649,34 +1636,34 @@ public class frmDocumentos extends javax.swing.JPanel {
     itbms = impuesto aplicado a un Articulo/servicio en especifico
     ImporteImpuesto= 0.07xPrecio de Articulo/servicio
     SubTotal: La suma total de precio de Articulo/servicio con descuento aplicado + ibtms de cada Articulo/servicio 
-        */
-    
+     */
+
     private void cbxArticuloServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxArticuloServicioActionPerformed
 
     }//GEN-LAST:event_cbxArticuloServicioActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
-            Connection conexion = Conexion.obtenerConexion();
-            // Crear un objeto de la clase Clientes
-            Articulos articulo = new Articulos();
-            Servicios servicio = new Servicios();
-            if (chkServicio.isSelected()){
-                if (conexion != null){
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear un objeto de la clase Clientes
+        Articulos articulo = new Articulos();
+        Servicios servicio = new Servicios();
+        if (chkServicio.isSelected()) {
+            if (conexion != null) {
                 servicio.setNombreservicio(cbxArticuloServicio.getSelectedItem().toString());
                 servicio.InfoServicioPorNombre(conexion);
                 txtCodigoproducto.setText(servicio.getCodigoservicio());
                 txtPrecio.setText(String.valueOf(servicio.getPrecio()));
-                }
-            }else {
-                if (conexion != null) {
+            }
+        } else {
+            if (conexion != null) {
                 articulo.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
                 articulo.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
                 txtCodigoproducto.setText(articulo.getCodigoproducto());
-                txtPrecio.setText(String.valueOf(articulo.getPrecio())); 
-                }
+                txtPrecio.setText(String.valueOf(articulo.getPrecio()));
             }
-            Conexion.cerrarConexion(conexion);
-            
+        }
+        Conexion.cerrarConexion(conexion);
+
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -1696,7 +1683,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_chkDescLineaActionPerformed
 
-   /*info barra inferior
+    /*info barra inferior
     Cantidad = cantidad de productos
     Monto = precio del producto
     descuento linea= suma de los descuento de linea de los productos
@@ -1705,15 +1692,15 @@ public class frmDocumentos extends javax.swing.JPanel {
     Impuestos= la suma de los ImporteImpuesto de cada producto agregado a la lista
     Total = Suma de los precios de los productos con ImporteImpuesto
     DIF= diferencia de monto - total 
-    */
-    
+     */
+
     private void btnRecalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecalcularActionPerformed
 
-       
+
     }//GEN-LAST:event_btnRecalcularActionPerformed
 
     private void txtDescGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescGeneralActionPerformed
-        
+
     }//GEN-LAST:event_txtDescGeneralActionPerformed
 
     private void chkDescGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDescGenActionPerformed

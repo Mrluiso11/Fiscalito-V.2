@@ -488,25 +488,23 @@ public class Documentos {
     
     
     public int insertElementos(Connection conexion, Documentos documentos) {
-        String query = "INSERT INTO tbl_elementos (codigo_producto, id_documento, codigo_servicio, nombre_producto, nombre_servicio, servicio, descripcion, magnitud, cantidad, precio, descuento_linea, descuento_general, base, itbms, importe_impuesto, subtotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_elementos (codigo_elemento, id_documento, nombre_elemento, Elemento_servicio, descripcion, magnitud, cantidad, precio, descuento_linea, descuento_general, base, itbms, importe_impuesto, subtotal) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, documentos.getCodigoproducto());
             statement.setInt(2, documentos.getIDfactura());
-            statement.setString(3, documentos.getCodigoservicio());
-            statement.setString(4, documentos.getNombreproducto());
-            statement.setString(5, documentos.getNombreservicio());
-            statement.setString(6, documentos.getConfirmservicio());
-            statement.setString(7, documentos.getDescripcion());
-            statement.setString(8, documentos.getMagnitud());
-            statement.setDouble(9, documentos.getCantidad());
-            statement.setDouble(10, documentos.getPrecioProducto());
-            statement.setDouble(11, documentos.getDescLinea());
-            statement.setDouble(12, documentos.getDescGen());
-            statement.setDouble(13, documentos.getBase());
-            statement.setDouble(14, documentos.getImpuestos());
-            statement.setDouble(15, documentos.getImporteImpuesto());
-            statement.setDouble(16, documentos.getSubtotal1());
+            statement.setString(3, documentos.getNombreproducto());
+            statement.setString(4, documentos.getConfirmservicio());
+            statement.setString(5, documentos.getDescripcion());
+            statement.setString(6, documentos.getMagnitud());
+            statement.setDouble(7, documentos.getCantidad());
+            statement.setDouble(8, documentos.getPrecioProducto());
+            statement.setDouble(9, documentos.getDescLinea());
+            statement.setDouble(10, documentos.getDescGen());
+            statement.setDouble(11, documentos.getBase());
+            statement.setDouble(12, documentos.getImpuestos());
+            statement.setDouble(13, documentos.getImporteImpuesto());
+            statement.setDouble(14, documentos.getSubtotal1());
 
             int filasAfectadas = statement.executeUpdate();
 
