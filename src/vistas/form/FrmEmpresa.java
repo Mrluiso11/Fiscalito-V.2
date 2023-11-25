@@ -7,6 +7,7 @@ import Style.Forms;
 import controladores.*;
 import conexion.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FrmEmpresa extends javax.swing.JPanel {
 
     private Container bgContainer;
-    private BufferedImage localSelectedImage  = null;
+    private BufferedImage localSelectedImage = null;
     private BufferedImage selectedImageL = null;
     Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
 
@@ -567,12 +568,110 @@ public class FrmEmpresa extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        mostrarDatosEmpresa();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLocalActionPerformed
+
+    public void mostrarDatosEmpresa() {
+        // Se obtiene una conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+
+        // Se crea un objeto de la clase "Empresa" para manejar la información de la empresa
+        Empresa empresa = new Empresa();
+
+        // Verifica si la conexión a la base de datos es exitosa
+        if (conexion != null) {
+            empresa.selectEmpresa(conexion);
+            // Se cierra la conexión a la base de datos
+            Conexion.cerrarConexion(conexion);
+        }
+
+        // Actualiza los campos de texto y áreas de texto en el formulario con la información de la empresa
+        txtRUC.setText(empresa.getRuc());
+        txtNombreEmpresa.setText(empresa.getNombre());
+        txtNombreComercialEmpresa.setText(empresa.getNombre_comercial());
+        txtDV.setText(empresa.getDv());
+        txtPais.setText(empresa.getPais());
+        txtProvincia.setText(empresa.getProvincia());
+        txtDistrito.setText(empresa.getDistrito());
+        txtCorreguimiento.setText(empresa.getCorregimiento());
+        txtUrbanizacion.setText(empresa.getUrbanizacion());
+        txtCalle.setText(empresa.getCalle());
+        txtNCasa.setText(empresa.getCasa());
+        txtLocal.setText(empresa.getLocal());
+        txtPiso.setText(empresa.getPiso());
+        txtCorreo.setText(empresa.getCorreo_empresa());
+        txtaActividades.setText(empresa.getActividades());
+        txtaObervaciones.setText(empresa.getObservaciones());
+        txtTelefono1.setText(empresa.getTelefono1());
+        txtTelefono2.setText(empresa.getTelefono2());
+        txtFax1.setText(empresa.getFax1());
+        txtFax2.setText(empresa.getFax2());
+        txtRNombre.setText(empresa.getPrimer_nombre_representante());
+        txtRSegundoNombre.setText(empresa.getSegundo_nombre_representante());
+        txtRApellidoPaterno.setText(empresa.getApellido_paterno());
+        txtRApellidoMaterno.setText(empresa.getApellido_materno());
+        txtRCedula.setText(empresa.getCedula());
+        txtRDV.setText(empresa.getDv_representante());
+        txtRTelefono1.setText(empresa.getTelefono1_representante());
+        txtRTelefono2.setText(empresa.getTelefono2_representante());
+        txtRCorreo.setText(empresa.getCorreo_representante());
+        txtGNombre.setText(empresa.getNombre_gerente());
+        txtGCedula.setText(empresa.getCedula_gerente());
+        txtGDV.setText(empresa.getDv_gerente());
+        txtGTelefono1.setText(empresa.getTelefono_gerente1());
+        txtGTelefono2.setText(empresa.getTelefono_gerente2());
+        txtGCorreo.setText(empresa.getCorreo_gerente());
+        txtaOtros.setText(empresa.getOtros());
+
+        byte[] logoFacturaBytes = empresa.getLogo_factura();
+        if (logoFacturaBytes != null) {
+            try {
+                // Convertir el array de bytes a una ImageIcon
+                ImageIcon imagenFactura = new ImageIcon(logoFacturaBytes);
+
+                // Escalar la imagen al tamaño deseado
+                int width = 154;
+                int height = 119;
+                Image imagenEscalada = imagenFactura.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+                // Crear un nuevo ImageIcon con la imagen escalada
+                ImageIcon imagenEscaladaIcon = new ImageIcon(imagenEscalada);
+
+                // Establecer el nuevo ImageIcon en el JLabel
+                lblLogoFactura.setIcon(imagenEscaladaIcon);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Manejo de las imágenes de la empresa
+        byte[] logoEmpresaBytes = empresa.getLogo_empresa();
+        if (logoEmpresaBytes != null) {
+            try {
+                // Convertir el array de bytes a una ImageIcon
+                ImageIcon fotoEmpresa = new ImageIcon(logoEmpresaBytes);
+
+                // Escalar la imagen al tamaño deseado
+                int widthEmpresa = 154;  // Tamaño deseado para el ancho
+                int heightEmpresa = 119; // Tamaño deseado para el alto
+                Image fotoEscalada = fotoEmpresa.getImage().getScaledInstance(widthEmpresa, heightEmpresa, Image.SCALE_SMOOTH);
+
+                // Crear un nuevo ImageIcon con la imagen escalada
+                ImageIcon fotoEscaladaIcon = new ImageIcon(fotoEscalada);
+
+                // Establecer el nuevo ImageIcon en el JLabel
+                lblFotoEmpresa.setIcon(fotoEscaladaIcon);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         Connection conexion = Conexion.obtenerConexion();
@@ -628,10 +727,10 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 }
             }
 
-            if (localSelectedImage  != null) {
+            if (localSelectedImage != null) {
                 try {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(localSelectedImage , "jpg", baos);
+                    ImageIO.write(localSelectedImage, "jpg", baos);
                     byte[] imageBytes = baos.toByteArray();
                     obj_insertEmpresa.setLogo_empresa(imageBytes);
                 } catch (IOException e) {

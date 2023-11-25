@@ -1478,10 +1478,6 @@ public class frmDocumentos extends javax.swing.JPanel {
                     documentos.setDescGen(Double.parseDouble(model.getValueAt(i, 8).toString())); // Ajusta según la estructura de tu tabla
                     documentos.setImpuestos(Double.parseDouble(model.getValueAt(i, 10).toString())); // Ajusta según la estructura de tu tabla
 
-                    // Imprime los valores que estás intentando insertar para verificar que son correctos
-                    System.out.println("Cantidad: " + documentos.getCantidad());
-                    System.out.println("Precio: " + documentos.getPrecioProducto());
-
                     // Llama al método insertElementos para insertar en la base de datos
                     int filasAfectadas = documentos.insertElementos(conexion, documentos);
 

@@ -1,6 +1,10 @@
 package vistas.form;
 
 import conexion.*;
+import controladores.Empresa;
+import java.awt.Image;
+import java.sql.Connection;
+import javax.swing.ImageIcon;
 
 public class Form_Dashboard extends javax.swing.JPanel {
 
@@ -10,7 +14,50 @@ public class Form_Dashboard extends javax.swing.JPanel {
     }
 
     private void init() {
+        mostrarDatosEmpresa();
+    }
 
+    public void mostrarDatosEmpresa() {
+        // Se obtiene una conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+        // Se crea un objeto de la clase "Empresa" para manejar la información de la empresa
+        Empresa empresa = new Empresa();
+        // Verifica si la conexión a la base de datos es exitosa
+        if (conexion != null) {
+            empresa.selectEmpresa(conexion);
+            // Se cierra la conexión a la base de datos
+            Conexion.cerrarConexion(conexion);
+        }
+        lblNombreEmpresa.setText(empresa.getNombre());
+        lblNombreComercialEmpresa.setText(empresa.getNombre_comercial());
+        lblRUC.setText(empresa.getRuc());
+        lblDireccion.setText(empresa.getPais() + " " + " " + empresa.getProvincia() + " " + empresa.getDistrito());
+        lblTelefono.setText(empresa.getTelefono1() + " / " + empresa.getTelefono2());
+        lblDV.setText(empresa.getDv());
+        lblFax.setText(empresa.getFax1() + " / " + empresa.getFax2());
+        lblActividades.setText(empresa.getActividades());
+
+        // Manejo de las imágenes de la empresa
+        byte[] logoEmpresaBytes = empresa.getLogo_empresa();
+        if (logoEmpresaBytes != null) {
+            try {
+                // Convertir el array de bytes a una ImageIcon
+                ImageIcon fotoEmpresa = new ImageIcon(logoEmpresaBytes);
+
+                // Escalar la imagen al tamaño deseado
+                int widthEmpresa = 154;  // Tamaño deseado para el ancho
+                int heightEmpresa = 119; // Tamaño deseado para el alto
+                Image fotoEscalada = fotoEmpresa.getImage().getScaledInstance(widthEmpresa, heightEmpresa, Image.SCALE_SMOOTH);
+
+                // Crear un nuevo ImageIcon con la imagen escalada
+                ImageIcon fotoEscaladaIcon = new ImageIcon(fotoEscalada);
+
+                // Establecer el nuevo ImageIcon en el JLabel
+                imgFotoEmpresa.setIcon(fotoEscaladaIcon);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -145,7 +192,9 @@ public class Form_Dashboard extends javax.swing.JPanel {
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, 860, 110));
-        bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 170, 160));
+
+        imgFotoEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, 170, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

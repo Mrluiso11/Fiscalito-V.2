@@ -2,8 +2,11 @@ package controladores;
 
 import java.util.Date;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Empresa {
 
@@ -446,9 +449,6 @@ public class Empresa {
 
     public boolean insertEmpresa(Connection connection) {
         boolean insercionExitosa = false;
-        System.out.println("Logo factura "+logo_factura);
-        System.out.println("Logo empresa "+logo_empresa);    
-             
         String query = "INSERT INTO tbl_empresa (ruc, nombre, nombre_comercial, dv, pais, provincia, distrito, "
                 + "corregimiento, urbanizacion, calle, casa, piso, local, correo_empresa, actividades, observaciones, telefono1, telefono2, fax1, fax2, "
                 + "primer_nombre_representante, segundo_nombre_representante, apellido_paterno, "
@@ -509,6 +509,129 @@ public class Empresa {
         }
 
         return insercionExitosa;
+    }
+
+    // Método para seleccionar una empresa desde la base de datos
+    public void selectEmpresa(Connection connection) {
+        Empresa empresa = null;
+
+        String query = "SELECT * FROM tbl_empresa LIMIT 1";
+
+        try (PreparedStatement statement = connection.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet.next()) {
+                empresa = new Empresa();
+
+                ruc = resultSet.getString("ruc");
+                nombre = resultSet.getString("nombre");
+                nombre_comercial = resultSet.getString("nombre_comercial");
+                dv = resultSet.getString("dv");
+                pais = resultSet.getString("pais");
+                provincia = resultSet.getString("provincia");
+                distrito = resultSet.getString("distrito");
+                corregimiento = resultSet.getString("corregimiento");
+                urbanizacion = resultSet.getString("urbanizacion");
+                calle = resultSet.getString("calle");
+                casa = resultSet.getString("casa");
+                local = resultSet.getString("local");
+                piso = resultSet.getString("piso");
+                correo_empresa = resultSet.getString("correo_empresa");
+                actividades = resultSet.getString("actividades");
+                observaciones = resultSet.getString("observaciones");
+                telefono1 = resultSet.getString("telefono1");
+                telefono2 = resultSet.getString("telefono2");
+                fax1 = resultSet.getString("fax1");
+                fax2 = resultSet.getString("fax2");
+                primer_nombre_representante = resultSet.getString("primer_nombre_representante");
+                segundo_nombre_representante = resultSet.getString("segundo_nombre_representante");
+                apellido_paterno = resultSet.getString("apellido_paterno");
+                apellido_materno = resultSet.getString("apellido_materno");
+                cedula = resultSet.getString("cedula");
+                dv_representante = resultSet.getString("dv_representante");
+                telefono1_representante = resultSet.getString("telefono1_representante");
+                telefono2_representante = resultSet.getString("telefono2_representante");
+                correo_representante = resultSet.getString("correo_representante");
+                nombre_gerente = resultSet.getString("nombre_gerente");
+                cedula_gerente = resultSet.getString("cedula_gerente");
+                dv_gerente = resultSet.getString("dv_gerente");
+                telefono_gerente1 = resultSet.getString("telefono_gerente1");
+                telefono_gerente2 = resultSet.getString("telefono_gerente2");
+                correo_gerente = resultSet.getString("correo_gerente");
+                otros = resultSet.getString("otros");
+                logo_factura = resultSet.getBytes("logo_factura");
+                logo_empresa = resultSet.getBytes("logo_empresa");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    
+    public boolean updateEmpresa(Connection connection) {
+        boolean actualizacionExitosa = false;
+
+        String query = "UPDATE tbl_empresa SET nombre=?, nombre_comercial=?, dv=?, ruc=?, pais=?, provincia=?, distrito=?, "
+                + "corregimiento=?, urbanizacion=?, calle=?, casa=?, piso=?, local=?, correo_empresa=?, actividades=?, observaciones=?, "
+                + "telefono1=?, telefono2=?, fax1=?, fax2=?, primer_nombre_representante=?, segundo_nombre_representante=?, "
+                + "apellido_paterno=?, apellido_materno=?, cedula=?, dv_representante=?, telefono1_representante=?, "
+                + "telefono2_representante=?, correo_representante=?, nombre_gerente=?, cedula_gerente=?, dv_gerente=?, "
+                + "telefono_gerente1=?, telefono_gerente2=?, correo_gerente=?, otros=?, logo_factura=?, logo_empresa=? "
+                + "WHERE ruc=?";  // Asegúrate de que el WHERE coincida con la clave primaria de tu tabla
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, nombre);
+            statement.setString(2, nombre_comercial);
+            statement.setString(3, dv);
+            statement.setString(4, ruc);
+            statement.setString(5, pais);
+            statement.setString(6, provincia);
+            statement.setString(7, distrito);
+            statement.setString(8, corregimiento);
+            statement.setString(9, urbanizacion);
+            statement.setString(10, calle);
+            statement.setString(11, casa);
+            statement.setString(12, piso);
+            statement.setString(13, local);
+            statement.setString(14, correo_empresa);
+            statement.setString(15, actividades);
+            statement.setString(16, observaciones);
+            statement.setString(17, telefono1);
+            statement.setString(18, telefono2);
+            statement.setString(19, fax1);
+            statement.setString(20, fax2);
+            statement.setString(21, primer_nombre_representante);
+            statement.setString(22, segundo_nombre_representante);
+            statement.setString(23, apellido_paterno);
+            statement.setString(24, apellido_materno);
+            statement.setString(25, cedula);
+            statement.setString(26, dv_representante);
+            statement.setString(27, telefono1_representante);
+            statement.setString(28, telefono2_representante);
+            statement.setString(29, correo_representante);
+            statement.setString(30, nombre_gerente);
+            statement.setString(31, cedula_gerente);
+            statement.setString(32, dv_gerente);
+            statement.setString(33, telefono_gerente1);
+            statement.setString(34, telefono_gerente2);
+            statement.setString(35, correo_gerente);
+            statement.setString(36, otros);
+            statement.setBytes(37, logo_factura);
+            statement.setBytes(38, logo_empresa);
+            statement.setString(39, ruc);  // Clave primaria para la cláusula WHERE
+
+            // Ejecuta la actualización
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                actualizacionExitosa = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return actualizacionExitosa;
     }
 
 }
