@@ -49,6 +49,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
         lblFotoEmpresa.setMinimumSize(new Dimension(154, 119));
         lblFotoEmpresa.setMaximumSize(new Dimension(154, 119));
         lblFotoEmpresa.setSize(new Dimension(154, 119));
+        mostrarDatosEmpresa();
     }
 
     /**
@@ -568,7 +569,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        mostrarDatosEmpresa();
+        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
