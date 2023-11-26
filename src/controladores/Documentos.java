@@ -13,11 +13,13 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import java.text.DecimalFormat;
+
 /**
  *
  * @author dbpan
  */
 public class Documentos {
+
     private int IDfactura;
     private String Tipodocumento;
     private int Codigocliente;
@@ -59,12 +61,12 @@ public class Documentos {
     private double MontoPago3;
     private String FormaPago4;
     private double MontoPago4;
-    
-    
-    public Documentos(){
+    private Date  fecha_registro;
+
+    public Documentos() {
     }
 
-    public Documentos(int IDfactura,String Tipodocumento, int Codigocliente, String Nombre, String RUC, double DescGen, String Direccion, String Telefono1, String Telefono2, String Referencia, String Credito,String Confirmservicio, String Codigoproducto, String Codigoservicio, String Nombreproducto, String Nombreservicio, String Descripcion, double Cantidad, String Magnitud, double PrecioProducto, double DescLinea, double Impuestos, double ImporteImpuesto, double Base, double Subtotal1, double MontoPrecio,double SumaCantidad, double SumaDescLinea, double SumaDescGen, double Subtotal2, double SumaImpuesto, double Total, double DIF, String FormaPago1, double MontoPago1, String FormaPago2, double MontoPago2, String FormaPago3, double MontoPago3, String FormaPago4, double MontoPago4) {
+    public Documentos(int IDfactura, String Tipodocumento, int Codigocliente, String Nombre, String RUC, double DescGen, String Direccion, String Telefono1, String Telefono2, String Referencia, String Credito, String Confirmservicio, String Codigoproducto, String Codigoservicio, String Nombreproducto, String Nombreservicio, String Descripcion, double Cantidad, String Magnitud, double PrecioProducto, double DescLinea, double Impuestos, double ImporteImpuesto, double Base, double Subtotal1, double SumaCantidad, double MontoPrecio, double SumaDescLinea, double SumaDescGen, double Subtotal2, double SumaImpuesto, double Total, double DIF, String FormaPago1, double MontoPago1, String FormaPago2, double MontoPago2, String FormaPago3, double MontoPago3, String FormaPago4, double MontoPago4, Date fecha_registro) {
         this.IDfactura = IDfactura;
         this.Tipodocumento = Tipodocumento;
         this.Codigocliente = Codigocliente;
@@ -90,8 +92,8 @@ public class Documentos {
         this.ImporteImpuesto = ImporteImpuesto;
         this.Base = Base;
         this.Subtotal1 = Subtotal1;
-        this.MontoPrecio = MontoPrecio;
         this.SumaCantidad = SumaCantidad;
+        this.MontoPrecio = MontoPrecio;
         this.SumaDescLinea = SumaDescLinea;
         this.SumaDescGen = SumaDescGen;
         this.Subtotal2 = Subtotal2;
@@ -106,9 +108,10 @@ public class Documentos {
         this.MontoPago3 = MontoPago3;
         this.FormaPago4 = FormaPago4;
         this.MontoPago4 = MontoPago4;
-        
+        this.fecha_registro = fecha_registro;
     }
 
+   
     public String getTipodocumento() {
         return Tipodocumento;
     }
@@ -149,7 +152,7 @@ public class Documentos {
         this.RUC = RUC;
     }
 
-    public double getDescGen() {     
+    public double getDescGen() {
         return this.DescGen;
     }
 
@@ -196,7 +199,7 @@ public class Documentos {
     public void setCredito(String Credito) {
         this.Credito = Credito;
     }
-    
+
     public String getConfirmservicio() {
         return this.Confirmservicio;
     }
@@ -243,8 +246,8 @@ public class Documentos {
 
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
-    }    
-    
+    }
+
     public double getCantidad() {
         return this.Cantidad;
     }
@@ -342,7 +345,7 @@ public class Documentos {
     }
 
     public double getSubtotal2() {
-        this.Subtotal2= this.MontoPrecio-(this.SumaDescLinea+this.SumaDescGen);
+        this.Subtotal2 = this.MontoPrecio - (this.SumaDescLinea + this.SumaDescGen);
         return this.Subtotal2;
     }
 
@@ -359,7 +362,7 @@ public class Documentos {
     }
 
     public double getTotal() {
-        this.Total= this.Subtotal2+this.SumaImpuesto;
+        this.Total = this.Subtotal2 + this.SumaImpuesto;
         return this.Total;
     }
 
@@ -368,7 +371,7 @@ public class Documentos {
     }
 
     public double getDIF() {
-        this.DIF = this.Total - (this.MontoPago1+ this.MontoPago2+ this.MontoPago3+ this.MontoPago4);
+        this.DIF = this.Total - (this.MontoPago1 + this.MontoPago2 + this.MontoPago3 + this.MontoPago4);
         return this.DIF;
     }
 
@@ -440,7 +443,15 @@ public class Documentos {
         this.MontoPago4 = MontoPago4;
     }
 
+    public Date getFecha_registro() {
+        return fecha_registro;
+    }
+
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
+    }
     
+
     //metodo insert de datos de factura
     public int insertDocumentos(Connection conexion, Documentos documentos) {
         String query = "INSERT INTO tbl_documentos (id,tipo_documento,codigo_cliente,nombre,ruc,descuento_general,direccion,telefono1,telefono2,referencia,credito,montoprecio,suma_cantidad,suma_descuentolinea,suma_descuentogeneral,subtotal2,impuesto_total,total,diferencia,forma_pago1,monto_pago1,forma_pago2,monto_pago2,forma_pago3,monto_pago3,forma_pago4,monto_pago4,fecha_registro) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?,?,CURRENT_TIMESTAMP)";
@@ -473,7 +484,6 @@ public class Documentos {
             statement.setDouble(25, documentos.getMontoPago3());
             statement.setString(26, documentos.getFormaPago4());
             statement.setDouble(27, documentos.getMontoPago4());
-            
 
             int filasAfectadas = statement.executeUpdate();
 
@@ -485,8 +495,67 @@ public class Documentos {
             return 0;
         }
     }
-    
-    
+    // Método para seleccionar un documento por ID
+
+    public Documentos selectDocumentos(Connection conexion, int id) {
+        Documentos documento = null;
+
+        // Consulta SQL
+        String query = "SELECT * FROM tbl_documentos WHERE id = ?";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            // Establecer el parámetro ID en la consulta
+            statement.setInt(1, id);
+
+            // Ejecutar la consulta
+            ResultSet resultSet = statement.executeQuery();
+
+            // Verificar si hay resultados
+            if (resultSet.next()) {
+                // Crear un objeto Documentos y asignar valores desde el ResultSet
+                documento = new Documentos();
+                IDfactura = resultSet.getInt("id");
+                Tipodocumento = resultSet.getString("tipo_documento");
+                Codigocliente = resultSet.getInt("codigo_cliente");
+                Nombre = resultSet.getString("nombre");
+                RUC = resultSet.getString("ruc");
+                DescGen = resultSet.getDouble("descuento_general");
+                Direccion = resultSet.getString("direccion");
+                Telefono1 = resultSet.getString("telefono1");
+                Telefono2 = resultSet.getString("telefono2");
+                Referencia = resultSet.getString("referencia");
+                Credito = resultSet.getString("credito");
+                MontoPrecio = resultSet.getDouble("montoprecio");
+                SumaCantidad = resultSet.getDouble("suma_cantidad");
+                SumaDescLinea = resultSet.getDouble("suma_descuentolinea");
+                SumaDescGen = resultSet.getDouble("suma_descuentogeneral");
+                Subtotal2 = resultSet.getDouble("subtotal2");
+                SumaImpuesto = resultSet.getDouble("impuesto_total");
+                Total = resultSet.getDouble("total");
+                DIF = resultSet.getDouble("diferencia");
+                FormaPago1 = resultSet.getString("forma_pago1");
+                MontoPago1 = resultSet.getDouble("monto_pago1");
+                FormaPago2 = resultSet.getString("forma_pago2");
+                MontoPago2 = resultSet.getDouble("monto_pago2");
+                FormaPago3 = resultSet.getString("forma_pago3");
+                MontoPago3 = resultSet.getDouble("monto_pago3");
+                FormaPago4 = resultSet.getString("forma_pago4");
+                MontoPago4 = resultSet.getDouble("monto_pago4");
+                fecha_registro = resultSet.getDate("fecha_registro");
+                DescLinea=resultSet.getDouble("suma_descuentolinea");
+                // ... (asegúrate de agregar todos los campos)
+
+                // No es necesario cerrar el ResultSet aquí, ya que se cerrará automáticamente con el try-with-resources
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        return documento;
+    }
+
     public int insertElementos(Connection conexion, Documentos documentos) {
         String query = "INSERT INTO tbl_elementos (codigo_elemento, id_documento, nombre_elemento, Elemento_servicio, descripcion, magnitud, cantidad, precio, descuento_linea, descuento_general, base, itbms, importe_impuesto, subtotal) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -516,67 +585,65 @@ public class Documentos {
             return 0;
         }
     }
-    
+
     //Calculos de la tabla productos
-    
     //metodo calculo descuentogeneral
-    public double  CalcularDescuentoGen(double PrecioProducto,double DescGen){
-        if (DescGen >0){
-          this.DescGen = DescGen/100;
+    public double CalcularDescuentoGen(double PrecioProducto, double DescGen) {
+        if (DescGen > 0) {
+            this.DescGen = DescGen / 100;
         }
-        this.DescGen = this.DescGen*PrecioProducto;
+        this.DescGen = this.DescGen * PrecioProducto;
         return this.DescGen;
     }
-    
-    
+
     //metodo calculo descuentogeneral
-    public double  CalcularDescuentoLinea(double PrecioProducto,double DescLinea){
-        if (DescLinea >0){
-          this.DescLinea = this.DescLinea/100;
+    public double CalcularDescuentoLinea(double PrecioProducto, double DescLinea) {
+        if (DescLinea > 0) {
+            this.DescLinea = this.DescLinea / 100;
         }
-        this.DescLinea = this.DescLinea*PrecioProducto;
+        this.DescLinea = this.DescLinea * PrecioProducto;
         return this.DescLinea;
     }
-            
+
     //metodo calculo base
     //Base= la suma de los precios sin impuesto de un mismo Articulo/servicio y con descuento si este tiene 
-    public double  CalcularBase (double PrecioProducto,double Cantidad,double DescLinea,double DescGen){
-        if (DescLinea >0){
-          DescLinea = DescLinea/100;
+    public double CalcularBase(double PrecioProducto, double Cantidad, double DescLinea, double DescGen) {
+        if (DescLinea > 0) {
+            DescLinea = DescLinea / 100;
         }
-        if (DescGen >0){
-          DescGen = DescGen/100;
+        if (DescGen > 0) {
+            DescGen = DescGen / 100;
         }
-        DescGen = DescGen*PrecioProducto;
-        DescLinea = DescLinea*PrecioProducto;
+        DescGen = DescGen * PrecioProducto;
+        DescLinea = DescLinea * PrecioProducto;
         double preciosindesc = PrecioProducto * Cantidad;
-        Base = preciosindesc - (DescLinea+DescGen);  
+        Base = preciosindesc - (DescLinea + DescGen);
         return Base;
     }
-    
+
     //metodo calculo ibtms
     //itbms = impuesto aplicado a un Articulo/servicio en especifico
-    public double  CalcularItbms(double Impuestos){
-        Impuestos = Impuestos/100;
+    public double CalcularItbms(double Impuestos) {
+        Impuestos = Impuestos / 100;
         return Impuestos;
     }
-    
+
     //metodo calculo ImporteImpuesto
     //ImporteImpuesto= ibtmsxPrecio de Articulo/servicio
-    public double  CalcularImporteImpuesto(double PrecioProducto,double Impuestos,double Cantidad){
-        Impuestos = Impuestos/100;
-        ImporteImpuesto= PrecioProducto*Impuestos;
-        ImporteImpuesto= ImporteImpuesto*Cantidad;
+    public double CalcularImporteImpuesto(double PrecioProducto, double Impuestos, double Cantidad) {
+        Impuestos = Impuestos / 100;
+        ImporteImpuesto = PrecioProducto * Impuestos;
+        ImporteImpuesto = ImporteImpuesto * Cantidad;
         return ImporteImpuesto;
     }
-    
+
     //metodo calculo subtotal
     //Subtotal1= SubTotal: La suma total de precio de Articulo/servicio con descuento aplicado + ibtms de cada Articulo/servicio 
-    public double  CalcularSubtotal(double base,double ImporteImpuesto){
-        Subtotal1= Base+ImporteImpuesto;
+    public double CalcularSubtotal(double base, double ImporteImpuesto) {
+        Subtotal1 = Base + ImporteImpuesto;
         return Subtotal1;
     }
-    
+
     //// Métodos para restar valores específicos
     public void restarSumaCantidad(double cantidadRemovida) {
         this.SumaCantidad -= cantidadRemovida;
@@ -597,5 +664,5 @@ public class Documentos {
     public void restarSumaImpuesto(double impuestoRemovido) {
         this.SumaImpuesto -= impuestoRemovido;
     }
-    
+
 }

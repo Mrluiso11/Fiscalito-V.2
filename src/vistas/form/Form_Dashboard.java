@@ -5,6 +5,7 @@ import controladores.Empresa;
 import java.awt.Image;
 import java.sql.Connection;
 import javax.swing.ImageIcon;
+import documentgeneration.*;
 
 public class Form_Dashboard extends javax.swing.JPanel {
 
@@ -31,7 +32,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
         lblNombreEmpresa.setText(empresa.getNombre());
         lblNombreComercialEmpresa.setText(empresa.getNombre_comercial());
         lblRUC.setText(empresa.getRuc());
-        lblDireccion.setText(empresa.getPais() + " " + " " + empresa.getProvincia() + " " + empresa.getDistrito());
+        lblDireccion.setText(empresa.getPais() + "," + empresa.getProvincia() + "," + empresa.getDistrito());
         lblTelefono.setText(empresa.getTelefono1() + " / " + empresa.getTelefono2());
         lblDV.setText(empresa.getDv());
         lblFax.setText(empresa.getFax1() + " / " + empresa.getFax2());
@@ -84,6 +85,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblActividades = new javax.swing.JLabel();
         imgFotoEmpresa = new javax.swing.JLabel();
+        GenerarPDF = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1096, 934));
@@ -196,6 +198,14 @@ public class Form_Dashboard extends javax.swing.JPanel {
         imgFotoEmpresa.setBackground(new java.awt.Color(255, 255, 255));
         bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, 170, 160));
 
+        GenerarPDF.setText("GenerarPDF");
+        GenerarPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerarPDFActionPerformed(evt);
+            }
+        });
+        bg.add(GenerarPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 790, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,7 +218,13 @@ public class Form_Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void GenerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarPDFActionPerformed
+        FacturaPDF obj = new FacturaPDF();
+        obj.main(new String[]{});
+    }//GEN-LAST:event_GenerarPDFActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GenerarPDF;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel imgFotoEmpresa;
     private javax.swing.JLabel jLabel2;
