@@ -146,10 +146,8 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         // Formatear la fecha en un formato específico (por ejemplo, "dd/MM/yyyy HH:mm:ss")
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String fechaFormateada = formatoFecha.format(fechaActual);
-
-        // Mostrar la fecha en el JLabel
-        lblFechaImpresion.setText(fechaFormateada);
+       
+        lblFechaImpresion.setText( formatoFecha.format(fechaActual));
         
 
     }
@@ -1649,7 +1647,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         TipoDocumento();
         lblDIF.setText(String.format("%.2f", documentos.getDIF()));
         insertBaseDatosD();
-        insertBaseDatosE();
+        //insertBaseDatosE();
         //LimpiarCampos();
         generarID();
     }//GEN-LAST:event_btnImprimirActionPerformed

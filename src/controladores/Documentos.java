@@ -13,12 +13,14 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author dbpan
  */
 public class Documentos {
+
     DecimalFormat formato = new DecimalFormat("#0.00");
 
     private int IDfactura;
@@ -62,7 +64,7 @@ public class Documentos {
     private double MontoPago3;
     private String FormaPago4;
     private double MontoPago4;
-    private Date  fecha_registro;
+    private Date fecha_registro;
 
     public Documentos() {
     }
@@ -112,7 +114,6 @@ public class Documentos {
         this.fecha_registro = fecha_registro;
     }
 
-   
     public String getTipodocumento() {
         return Tipodocumento;
     }
@@ -327,7 +328,7 @@ public class Documentos {
     }
 
     public double getMontoPrecio() {
-        this.MontoPrecio = this.Base+(this.SumaDescLinea+this.SumaDescGen);
+        this.MontoPrecio = this.Base + (this.SumaDescLinea + this.SumaDescGen);
         return this.MontoPrecio;
     }
 
@@ -461,7 +462,6 @@ public class Documentos {
     public void setFecha_registro(Date fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
-    
 
     //metodo insert de datos de factura
     public int insertDocumentos(Connection conexion, Documentos documentos) {
@@ -495,8 +495,12 @@ public class Documentos {
             statement.setDouble(25, documentos.getMontoPago3());
             statement.setString(26, documentos.getFormaPago4());
             statement.setDouble(27, documentos.getMontoPago4());
-            statement.setDate(28, (java.sql.Date) documentos.getFecha_registro());
+            // Formatear la fecha a "yyyy-MM-dd HH:mm:ss"
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String fechaFormateada = sdf.format(documentos.getFecha_registro());
 
+            // Utilizar la fecha formateada en el PreparedStatement
+            statement.setString(28, fechaFormateada);
             int filasAfectadas = statement.executeUpdate();
 
             // Retorna la cantidad de filas afectadas por la inserción.
@@ -554,7 +558,7 @@ public class Documentos {
                 FormaPago4 = resultSet.getString("forma_pago4");
                 MontoPago4 = resultSet.getDouble("monto_pago4");
                 fecha_registro = resultSet.getDate("fecha_registro");
-                DescLinea=resultSet.getDouble("suma_descuentolinea");
+                DescLinea = resultSet.getDouble("suma_descuentolinea");
                 // ... (asegúrate de agregar todos los campos)
 
                 // No es necesario cerrar el ResultSet aquí, ya que se cerrará automáticamente con el try-with-resources
@@ -663,31 +667,31 @@ public class Documentos {
 
     /// Métodos para restar valores específicos
     public void restarSumaCantidad(double cantidadRemovida, double SumaCantidad) {
-        this.SumaCantidad = SumaCantidad-cantidadRemovida;
+        this.SumaCantidad = SumaCantidad - cantidadRemovida;
     }
 
-    public void restarMontoPrecio(double precioRemovido,double MontoPrecio) {
-        this.MontoPrecio = MontoPrecio-precioRemovido;
+    public void restarMontoPrecio(double precioRemovido, double MontoPrecio) {
+        this.MontoPrecio = MontoPrecio - precioRemovido;
     }
 
     public void restarSumaDescLinea(double descLineaRemovido, double SumaDescLinea) {
-        this.SumaDescLinea = SumaDescLinea-descLineaRemovido;
+        this.SumaDescLinea = SumaDescLinea - descLineaRemovido;
     }
 
     public void restarSumaDescGen(double descGeneralRemovido, double SumaDescGen) {
-        this.SumaDescGen = SumaDescGen-descGeneralRemovido;
+        this.SumaDescGen = SumaDescGen - descGeneralRemovido;
     }
 
     public void restarSumaImpuesto(double impuestoRemovido, double SumaImpuesto) {
-        this.SumaImpuesto = SumaImpuesto-impuestoRemovido;
+        this.SumaImpuesto = SumaImpuesto - impuestoRemovido;
     }
-    
+
     public void restarSubtotal(double subtotalRemovido, double SumaBase) {
-        this.Subtotal2 = subtotalRemovido-SumaBase;
+        this.Subtotal2 = subtotalRemovido - SumaBase;
     }
-    
+
     public void restarTotal(double totalRemovido, double SumaTotal) {
-        this.Total = totalRemovido-SumaTotal;
+        this.Total = totalRemovido - SumaTotal;
     }
 
 }

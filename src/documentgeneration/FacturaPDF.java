@@ -46,7 +46,7 @@ public class FacturaPDF {
             // Verifica si la conexión a la base de datos es exitosa
             if (conexion != null) {
                 empresa.selectEmpresa(conexion);
-                documentos.selectDocumentos(conexion, 44);
+                documentos.selectDocumentos(conexion, 2);
                 Conexion.cerrarConexion(conexion);
             }
             float margin = 20;
@@ -115,7 +115,7 @@ public class FacturaPDF {
         // Verifica si la conexión a la base de datos es exitosa
         if (conexion != null) {
             empresa.selectEmpresa(conexion);
-            documentos.selectDocumentos(conexion, 44);
+            documentos.selectDocumentos(conexion, 2);
             Conexion.cerrarConexion(conexion);
         }
 
@@ -301,7 +301,7 @@ public class FacturaPDF {
         Connection conexion = Conexion.obtenerConexion();
         if (conexion != null) {
             empresa.selectEmpresa(conexion);
-            documentos.selectDocumentos(conexion, 44);
+            documentos.selectDocumentos(conexion, 2);
             Conexion.cerrarConexion(conexion);
         }
         boxContentStream.setNonStrokingColor(Color.WHITE);
@@ -351,7 +351,7 @@ public class FacturaPDF {
         Connection conexion = Conexion.obtenerConexion();
         if (conexion != null) {
             empresa.selectEmpresa(conexion);
-            documentos.selectDocumentos(conexion, 44);
+            documentos.selectDocumentos(conexion, 2);
             Conexion.cerrarConexion(conexion);
         }
 
