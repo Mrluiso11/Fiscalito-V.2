@@ -1468,7 +1468,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace pref="16" max="32767" attributes="0"/>
                           <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1517,27 +1517,31 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <EmptySpace min="19" pref="31" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="935" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jMonthChooser1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jYearChooser1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jDateChooser2" min="-2" pref="129" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                          <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jDateChooser1" min="-2" pref="129" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                                           <Component id="btnAplicar" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jButton1" min="-2" pref="109" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jScrollPane2" alignment="0" min="-2" pref="1017" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="1017" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -1551,16 +1555,14 @@
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jMonthChooser1" pref="29" max="32767" attributes="0"/>
-                                  <Component id="jYearChooser1" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                  <Component id="jButton1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="btnAplicar" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jButton1" alignment="0" pref="30" max="32767" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" pref="30" max="32767" attributes="0"/>
+                              <Component id="btnAplicar" pref="30" max="32767" attributes="0"/>
+                              <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jDateChooser2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="566" max="-2" attributes="0"/>
@@ -1570,10 +1572,6 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="com.toedter.calendar.JMonthChooser" name="jMonthChooser1">
-                </Component>
-                <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel46">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1652,6 +1650,32 @@
                       <Image iconType="3" name="/img/visualizar_icon.png"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel41">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="cc" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Al"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel42">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="cc" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Del"/>
+                  </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
                 </Component>
               </SubComponents>
             </Container>

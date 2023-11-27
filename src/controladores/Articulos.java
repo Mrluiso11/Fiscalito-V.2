@@ -12,13 +12,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Articulos {
-
+    DecimalFormat formato = new DecimalFormat("#0.00");
+    
     // Campos de la clase que representan las propiedades de un producto.
     private String codigoproducto;
     private String nombreproducto;
@@ -78,7 +80,8 @@ public class Articulos {
     }
 
     public float getPrecio() {
-        return precio;
+        formato.format(this.precio);
+        return this.precio;
     }
 
     public void setPrecio(float precio) {

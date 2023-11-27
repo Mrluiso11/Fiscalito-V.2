@@ -19,6 +19,7 @@ import java.text.DecimalFormat;
  * @author dbpan
  */
 public class Documentos {
+    DecimalFormat formato = new DecimalFormat("#0.00");
 
     private int IDfactura;
     private String Tipodocumento;
@@ -273,6 +274,7 @@ public class Documentos {
     }
 
     public double getDescLinea() {
+        formato.format(this.DescLinea);
         return this.DescLinea;
     }
 
@@ -281,6 +283,7 @@ public class Documentos {
     }
 
     public double getImpuestos() {
+        formato.format(this.Impuestos);
         return this.Impuestos;
     }
 
@@ -289,6 +292,7 @@ public class Documentos {
     }
 
     public double getImporteImpuesto() {
+        formato.format(this.ImporteImpuesto);
         return this.ImporteImpuesto;
     }
 
@@ -297,6 +301,7 @@ public class Documentos {
     }
 
     public double getBase() {
+        formato.format(this.Base);
         return this.Base;
     }
 
@@ -305,6 +310,7 @@ public class Documentos {
     }
 
     public double getSubtotal1() {
+        formato.format(this.Subtotal1);
         return this.Subtotal1;
     }
 
@@ -321,6 +327,7 @@ public class Documentos {
     }
 
     public double getMontoPrecio() {
+        this.MontoPrecio = this.Base+(this.SumaDescLinea+this.SumaDescGen);
         return this.MontoPrecio;
     }
 
@@ -346,6 +353,7 @@ public class Documentos {
 
     public double getSubtotal2() {
         this.Subtotal2 = this.MontoPrecio - (this.SumaDescLinea + this.SumaDescGen);
+        formato.format(this.Subtotal2);
         return this.Subtotal2;
     }
 
@@ -354,6 +362,7 @@ public class Documentos {
     }
 
     public double getSumaImpuesto() {
+        formato.format(this.SumaImpuesto);
         return this.SumaImpuesto;
     }
 
@@ -363,6 +372,7 @@ public class Documentos {
 
     public double getTotal() {
         this.Total = this.Subtotal2 + this.SumaImpuesto;
+        formato.format(this.Total);
         return this.Total;
     }
 
@@ -372,6 +382,7 @@ public class Documentos {
 
     public double getDIF() {
         this.DIF = this.Total - (this.MontoPago1 + this.MontoPago2 + this.MontoPago3 + this.MontoPago4);
+        formato.format(this.DIF);
         return this.DIF;
     }
 
@@ -454,7 +465,7 @@ public class Documentos {
 
     //metodo insert de datos de factura
     public int insertDocumentos(Connection conexion, Documentos documentos) {
-        String query = "INSERT INTO tbl_documentos (id,tipo_documento,codigo_cliente,nombre,ruc,descuento_general,direccion,telefono1,telefono2,referencia,credito,montoprecio,suma_cantidad,suma_descuentolinea,suma_descuentogeneral,subtotal2,impuesto_total,total,diferencia,forma_pago1,monto_pago1,forma_pago2,monto_pago2,forma_pago3,monto_pago3,forma_pago4,monto_pago4,fecha_registro) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?,?,CURRENT_TIMESTAMP)";
+        String query = "INSERT INTO tbl_documentos (id,tipo_documento,codigo_cliente,nombre,ruc,descuento_general,direccion,telefono1,telefono2,referencia,credito,montoprecio,suma_cantidad,suma_descuentolinea,suma_descuentogeneral,subtotal2,impuesto_total,total,diferencia,forma_pago1,monto_pago1,forma_pago2,monto_pago2,forma_pago3,monto_pago3,forma_pago4,monto_pago4,fecha_registro) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?,?,?)";
 
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, documentos.getIDfactura());
@@ -484,6 +495,7 @@ public class Documentos {
             statement.setDouble(25, documentos.getMontoPago3());
             statement.setString(26, documentos.getFormaPago4());
             statement.setDouble(27, documentos.getMontoPago4());
+            statement.setDate(28, (java.sql.Date) documentos.getFecha_registro());
 
             int filasAfectadas = statement.executeUpdate();
 
@@ -593,15 +605,17 @@ public class Documentos {
             this.DescGen = DescGen / 100;
         }
         this.DescGen = this.DescGen * PrecioProducto;
+        formato.format(this.DescGen);
         return this.DescGen;
     }
 
     //metodo calculo descuentogeneral
     public double CalcularDescuentoLinea(double PrecioProducto, double DescLinea) {
         if (DescLinea > 0) {
-            this.DescLinea = this.DescLinea / 100;
+            this.DescLinea = DescLinea / 100;
         }
         this.DescLinea = this.DescLinea * PrecioProducto;
+        formato.format(this.DescLinea);
         return this.DescLinea;
     }
 
@@ -609,60 +623,71 @@ public class Documentos {
     //Base= la suma de los precios sin impuesto de un mismo Articulo/servicio y con descuento si este tiene 
     public double CalcularBase(double PrecioProducto, double Cantidad, double DescLinea, double DescGen) {
         if (DescLinea > 0) {
-            DescLinea = DescLinea / 100;
+            this.DescLinea = DescLinea / 100;
         }
         if (DescGen > 0) {
-            DescGen = DescGen / 100;
+            this.DescGen = DescGen / 100;
         }
-        DescGen = DescGen * PrecioProducto;
-        DescLinea = DescLinea * PrecioProducto;
+        this.DescGen = this.DescGen * PrecioProducto;
+        this.DescLinea = this.DescLinea * PrecioProducto;
         double preciosindesc = PrecioProducto * Cantidad;
-        Base = preciosindesc - (DescLinea + DescGen);
-        return Base;
+        this.Base = preciosindesc - (this.DescLinea + this.DescGen);
+        formato.format(this.Base);
+        return this.Base;
     }
 
     //metodo calculo ibtms
     //itbms = impuesto aplicado a un Articulo/servicio en especifico
     public double CalcularItbms(double Impuestos) {
-        Impuestos = Impuestos / 100;
-        return Impuestos;
+        this.Impuestos = Impuestos / 100;
+        return this.Impuestos;
     }
 
     //metodo calculo ImporteImpuesto
     //ImporteImpuesto= ibtmsxPrecio de Articulo/servicio
     public double CalcularImporteImpuesto(double PrecioProducto, double Impuestos, double Cantidad) {
-        Impuestos = Impuestos / 100;
-        ImporteImpuesto = PrecioProducto * Impuestos;
-        ImporteImpuesto = ImporteImpuesto * Cantidad;
-        return ImporteImpuesto;
+        this.Impuestos = Impuestos / 100;
+        this.ImporteImpuesto = PrecioProducto * this.Impuestos;
+        this.ImporteImpuesto = this.ImporteImpuesto * Cantidad;
+        formato.format(this.ImporteImpuesto);
+        return this.ImporteImpuesto;
     }
 
     //metodo calculo subtotal
     //Subtotal1= SubTotal: La suma total de precio de Articulo/servicio con descuento aplicado + ibtms de cada Articulo/servicio 
-    public double CalcularSubtotal(double base, double ImporteImpuesto) {
-        Subtotal1 = Base + ImporteImpuesto;
-        return Subtotal1;
+    public double CalcularSubtotal(double Base, double ImporteImpuesto) {
+        this.Subtotal1 = Base + ImporteImpuesto;
+        formato.format(this.Subtotal1);
+        return this.Subtotal1;
     }
 
-    //// Métodos para restar valores específicos
-    public void restarSumaCantidad(double cantidadRemovida) {
-        this.SumaCantidad -= cantidadRemovida;
+    /// Métodos para restar valores específicos
+    public void restarSumaCantidad(double cantidadRemovida, double SumaCantidad) {
+        this.SumaCantidad = SumaCantidad-cantidadRemovida;
     }
 
-    public void restarMontoPrecio(double precioRemovido) {
-        this.MontoPrecio -= precioRemovido;
+    public void restarMontoPrecio(double precioRemovido,double MontoPrecio) {
+        this.MontoPrecio = MontoPrecio-precioRemovido;
     }
 
-    public void restarSumaDescLinea(double descLineaRemovido) {
-        this.SumaDescLinea -= descLineaRemovido;
+    public void restarSumaDescLinea(double descLineaRemovido, double SumaDescLinea) {
+        this.SumaDescLinea = SumaDescLinea-descLineaRemovido;
     }
 
-    public void restarSumaDescGen(double descGeneralRemovido) {
-        this.SumaDescGen -= descGeneralRemovido;
+    public void restarSumaDescGen(double descGeneralRemovido, double SumaDescGen) {
+        this.SumaDescGen = SumaDescGen-descGeneralRemovido;
     }
 
-    public void restarSumaImpuesto(double impuestoRemovido) {
-        this.SumaImpuesto -= impuestoRemovido;
+    public void restarSumaImpuesto(double impuestoRemovido, double SumaImpuesto) {
+        this.SumaImpuesto = SumaImpuesto-impuestoRemovido;
+    }
+    
+    public void restarSubtotal(double subtotalRemovido, double SumaBase) {
+        this.Subtotal2 = subtotalRemovido-SumaBase;
+    }
+    
+    public void restarTotal(double totalRemovido, double SumaTotal) {
+        this.Total = totalRemovido-SumaTotal;
     }
 
 }

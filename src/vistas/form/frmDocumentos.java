@@ -22,6 +22,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 
 /**
  *
@@ -33,7 +36,9 @@ public class frmDocumentos extends javax.swing.JPanel {
      * Creates new form frmDocumentos
      */
     private int contadorID = 1;
-
+    DecimalFormat formato = new DecimalFormat("#0.00");
+    DecimalFormat formatoDecimal = new DecimalFormat("#.##");
+    
     public frmDocumentos() {
         initComponents(); // Inicializa los componentes del formulario.
         // Crea una instancia de Forms y la asocia con este formulario.
@@ -145,6 +150,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         // Mostrar la fecha en el JLabel
         lblFechaImpresion.setText(fechaFormateada);
+        
 
     }
 
@@ -200,6 +206,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         documentos.CalcularSubtotal(documentos.getBase(), documentos.getImporteImpuesto());
 
         // Obtener resultados de los métodos get
+        
         double precioProducto1 = documentos.getPrecioProducto();
         double cantidad = Double.parseDouble(txtCantidad.getText());
         double DescGen1 = documentos.getDescGen();
@@ -208,6 +215,15 @@ public class frmDocumentos extends javax.swing.JPanel {
         double base = documentos.getBase();
         double importeImpuesto = documentos.getImporteImpuesto();
         double subtotal = documentos.getSubtotal1();
+        
+        double precioProductoFormateado = Double.parseDouble(formatoDecimal.format(precioProducto1));
+        double descLineaFormateado = Double.parseDouble(formatoDecimal.format(DescLinea1));
+        double descGenFormateado = Double.parseDouble(formatoDecimal.format(DescGen1));
+        double baseFormateado = Double.parseDouble(formatoDecimal.format(base));
+        double impuestosFormateado = Double.parseDouble(formatoDecimal.format(Impuestos1));
+        double importeImpuestoFormateado = Double.parseDouble(formatoDecimal.format(importeImpuesto));
+        double subtotalFormateado = Double.parseDouble(formatoDecimal.format(subtotal));
+
 
         if (conexion != null) {
             producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
@@ -215,8 +231,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, Descripcion, cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1, DescLinea1, DescGen1, base, Impuestos1, importeImpuesto, subtotal});
-
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, Descripcion, cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProductoFormateado, descLineaFormateado, descGenFormateado, baseFormateado, impuestosFormateado, importeImpuestoFormateado, subtotalFormateado});
         double sumaCantidad = 0.0;
 
         //Calculos de barra inferior
@@ -268,6 +283,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                     try {
                         double precioProducto = Double.parseDouble(precioProductoString);
                         sumaPrecio += precioProducto;
+                        sumaPrecio = sumaPrecio*sumaCantidad;
 
                     } catch (NumberFormatException e) {
                         // Manejar la excepción si no se puede convertir a Double
@@ -384,6 +400,38 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Impuesto' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        //calculosuma total
+        int totalColumnIndex = model.findColumn("Subtotal");
+
+        // Verificar si la columna "subtotal" existe
+        if (totalColumnIndex != -1) {
+            // Suma de precios de productos
+            double sumatotal = 0.0;
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Obtener el valor de la columna "total" en la fila actual
+                Object totalObject = model.getValueAt(i, totalColumnIndex);
+
+                if (totalObject != null) {
+                    String totalString = totalObject.toString();
+
+                    try {
+                        double sumatotal2 = Double.parseDouble(totalString);
+                        sumatotal += sumatotal2;
+
+                    } catch (NumberFormatException e) {
+                        // Manejar la excepción si no se puede convertir a Double
+                        JOptionPane.showMessageDialog(null, "Error en la fila " + i + ": " + "No se pudo convertir a número  " + totalString, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+            // Enviar la suma a la clase Documentos mediante el método setSumaImpuesto
+            documentos.setSumaImpuesto(sumatotal);
+        } else {
+            JOptionPane.showMessageDialog(null, "La columna 'Total' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
         //Asignar resultados a label barra inferior
         lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
@@ -499,14 +547,16 @@ public class frmDocumentos extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel40 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jLabel46 = new javax.swing.JLabel();
         btnAplicar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableFacturas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         jButton7.setText("jButton7");
 
@@ -1269,30 +1319,42 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visualizar_icon.png"))); // NOI18N
 
+        jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel41.setText("Al");
+
+        jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel42.setText("Del");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(19, 31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
                         .addComponent(jLabel46)
                         .addGap(935, 935, 935))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel42)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel41)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(66, 66, 66)
                                 .addComponent(btnAplicar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1301,14 +1363,14 @@ public class frmDocumentos extends javax.swing.JPanel {
                 .addGap(13, 13, 13)
                 .addComponent(jLabel46)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jMonthChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                        .addComponent(jYearChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(btnAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel41)
+                    .addComponent(jLabel42)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -1562,6 +1624,10 @@ public class frmDocumentos extends javax.swing.JPanel {
                 obj_insert.setFormaPago4(cboxFormapago4.getSelectedItem().toString());
                 obj_insert.setMontoPago4(Double.parseDouble(txtMontopago4.getText()));
                 obj_insert.setDIF(Double.parseDouble(lblDIF.getText()));
+                
+                String pattern = "dd/MM/yyyy HH:mm:ss";
+                SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+                obj_insert.setFecha_registro(dateFormat.parse(lblFechaImpresion.getText()));
 
                 // Realiza la inserción en la base de datos
                 obj_insert.insertDocumentos(conexion, obj_insert);
@@ -1720,19 +1786,25 @@ public class frmDocumentos extends javax.swing.JPanel {
             // Obtén los valores de la fila antes de removerla
             double cantidadRemovida = (double) model.getValueAt(selectedRow, model.findColumn("Cantidad"));
             double precioRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Precio"));
+            double preciomonto = precioRemovido*cantidadRemovida;
             double descLineaRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Desc. Linea"));
             double descGeneralRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Desc. General"));
             double impuestoRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Importe I.T.B.M.S"));
-
+            double subtotalRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Base"));
+            double totalRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Subtotal"));
+            
+            
             // Remueve la fila seleccionada del modelo de la tabla
             model.removeRow(selectedRow);
 
             // Resta los valores removidos de los totales
-            documentos.restarSumaCantidad(cantidadRemovida);
-            documentos.restarMontoPrecio(precioRemovido);
-            documentos.restarSumaDescLinea(descLineaRemovido);
-            documentos.restarSumaDescGen(descGeneralRemovido);
-            documentos.restarSumaImpuesto(impuestoRemovido);
+            documentos.restarSumaCantidad(cantidadRemovida,Double.parseDouble(lblCantidad.getText()));
+            documentos.restarMontoPrecio(precioRemovido,preciomonto);
+            documentos.restarSumaDescLinea(descLineaRemovido,Double.parseDouble(lblDescLinea.getText()));
+            documentos.restarSumaDescGen(descGeneralRemovido,Double.parseDouble(lblDescGen.getText()));
+            documentos.restarSumaImpuesto(impuestoRemovido,Double.parseDouble(lblImpuesto.getText()));
+            documentos.restarSubtotal(subtotalRemovido,Double.parseDouble(lblSubtotal.getText()));
+            documentos.restarTotal(totalRemovido,Double.parseDouble(lblTotal.getText()));
 
             // Actualiza los textos de los labels con los nuevos totales
             lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
@@ -1780,6 +1852,8 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1808,11 +1882,12 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1825,7 +1900,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JComboBox<String> jcbNombre;
     private javax.swing.JComboBox<String> jcbTipoDocumento;
     private javax.swing.JLabel lblCantidad;

@@ -152,7 +152,6 @@ public class frmClientes extends javax.swing.JPanel {
         lblNumCliente.setBackground(new java.awt.Color(255, 255, 255));
         lblNumCliente.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         lblNumCliente.setForeground(new java.awt.Color(102, 102, 102));
-        lblNumCliente.setText("#####");
         bg.add(lblNumCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
         btnEliminar.setBackground(new java.awt.Color(102, 153, 255));

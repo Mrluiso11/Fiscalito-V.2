@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ import javax.swing.JOptionPane;
  * @author admin
  */
 public class Servicios {
-
+    DecimalFormat formato = new DecimalFormat("#0.00");
     // Atributos que representan las propiedades de un servicio.
     private String codigoservicio;
     private String nombreservicio;
@@ -96,6 +97,7 @@ public class Servicios {
     }
 
     public float getPrecio() {
+        formato.format(this.precio);
         return precio;
     }
 

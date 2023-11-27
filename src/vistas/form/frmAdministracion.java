@@ -417,7 +417,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     }//GEN-LAST:event_btnBorrarCActionPerformed
 
     private void btnBorrarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPActionPerformed
-        getCodigoArticulo();
+        delectArticulo();
     }//GEN-LAST:event_btnBorrarPActionPerformed
 
     private void btnBorrarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSActionPerformed
@@ -583,7 +583,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     }
 
 // Método para obtener el código de un artículo seleccionado
-    private void getCodigoArticulo() {
+    private void delectArticulo() {
         // Establecer la conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
         // Crear una instancia de la clase Articulos para gestionar artículos
