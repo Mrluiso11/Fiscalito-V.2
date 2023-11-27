@@ -496,7 +496,7 @@ public class Documentos {
             statement.setString(26, documentos.getFormaPago4());
             statement.setDouble(27, documentos.getMontoPago4());
             // Formatear la fecha a "yyyy-MM-dd HH:mm:ss"
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String fechaFormateada = sdf.format(documentos.getFecha_registro());
 
             // Utilizar la fecha formateada en el PreparedStatement
@@ -559,6 +559,7 @@ public class Documentos {
                 MontoPago4 = resultSet.getDouble("monto_pago4");
                 fecha_registro = resultSet.getDate("fecha_registro");
                 DescLinea = resultSet.getDouble("suma_descuentolinea");
+                Tipodocumento = resultSet.getString("tipo_documento"); 
                 // ... (asegúrate de agregar todos los campos)
 
                 // No es necesario cerrar el ResultSet aquí, ya que se cerrará automáticamente con el try-with-resources
@@ -601,6 +602,43 @@ public class Documentos {
             return 0;
         }
     }
+    
+public List<Documentos> selectDocumentosPorID(Connection conexion, int idFactura) {
+    String query = "SELECT * FROM tbl_elementos WHERE id_documento = ?";
+
+    List<Documentos> documentosList = new ArrayList<>();
+
+    try (PreparedStatement statement = conexion.prepareStatement(query)) {
+        statement.setInt(1, idFactura);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Documentos documento = new Documentos();
+            documento.setCodigoproducto(resultSet.getString("codigo_elemento"));
+            documento.setIDfactura(resultSet.getInt("id_documento"));
+            documento.setNombreproducto(resultSet.getString("nombre_elemento"));
+            documento.setConfirmservicio(resultSet.getString("Elemento_servicio"));
+            documento.setDescripcion(resultSet.getString("descripcion"));
+            documento.setMagnitud(resultSet.getString("magnitud"));
+            documento.setCantidad(resultSet.getDouble("cantidad"));
+            documento.setPrecioProducto(resultSet.getDouble("precio"));
+            documento.setDescLinea(resultSet.getDouble("descuento_linea"));
+            documento.setDescGen(resultSet.getDouble("descuento_general"));
+            documento.setBase(resultSet.getDouble("base"));
+            documento.setImpuestos(resultSet.getDouble("itbms"));
+            documento.setImporteImpuesto(resultSet.getDouble("importe_impuesto"));
+            documento.setSubtotal1(resultSet.getDouble("subtotal"));
+
+            documentosList.add(documento);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Error: " + e.getMessage());
+    }
+
+    return documentosList;
+}
+
 
     //Calculos de la tabla productos
     //metodo calculo descuentogeneral
