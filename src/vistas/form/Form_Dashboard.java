@@ -220,7 +220,7 @@ public class Form_Dashboard extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FacturaPDF obj = new FacturaPDF();
-       obj.main(new String[]{},"2");
+       obj.main(new String[]{},"16");
      
     }//GEN-LAST:event_jButton1ActionPerformed
 

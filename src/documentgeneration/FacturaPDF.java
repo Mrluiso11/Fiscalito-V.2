@@ -19,10 +19,19 @@ import java.io.InputStream;
 import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
 import controladores.*;
 import conexion.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -32,7 +41,7 @@ public class FacturaPDF {
 
     private static final String FONT_PATH = "/fonts/arial.ttf";
     private static final String BOLD_FONT_PATH = "/fonts/Arial_Bold.ttf";
-    private static final String IMAGE_PATH = "/img/icon_fiscalito.png";
+    //private static final String IMAGE_PATH = "/img/icon_fiscalito.png";
 
     public static int getID(int id) {
         return id;
@@ -45,17 +54,18 @@ public class FacturaPDF {
             PDPage page = new PDPage(pageSize);
             document.addPage(page);
             int ide = Integer.parseInt(id) - 1;
-            System.out.println(ide);
-            // Se obtiene una conexión a la base de datos
+          
+
             Connection conexion = Conexion.obtenerConexion();
-            // Se crea un objeto de la clase "Empresa" para manejar la información de la empresa
             Empresa empresa = new Empresa();
             Documentos documentos = new Documentos();
-            // Verifica si la conexión a la base de datos es exitosa
 
             empresa.selectEmpresa(conexion);
             documentos.selectDocumentos(conexion, ide);
             Conexion.cerrarConexion(conexion);
+
+            byte[] logoFacturaBytes = empresa.getLogo_factura();
+            ImageIcon fotoFactura = new ImageIcon(logoFacturaBytes);
 
             float margin = 20;
             float pageWidth = pageSize.getWidth() - 2 * margin;
@@ -64,7 +74,8 @@ public class FacturaPDF {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
             PDType0Font font = PDType0Font.load(document, FacturaPDF.class.getResourceAsStream(FONT_PATH));
             PDType0Font boldFont = PDType0Font.load(document, FacturaPDF.class.getResourceAsStream(BOLD_FONT_PATH), true);
-            addImage(document, page, IMAGE_PATH, 20, 760, 55, 50);
+            // Utiliza directamente el objeto ImageIcon en el método addImage
+            addImage(document, page, fotoFactura, 20, 760, 55, 50);
 
             addText(contentStream, boldFont, empresa.getNombre(), margin + 60, pageHeight + margin - 20);
             addText(contentStream, font, empresa.getNombre_comercial(), margin + 60, pageHeight + margin - 45);
@@ -74,25 +85,38 @@ public class FacturaPDF {
 
             addRightAlignedText(contentStream, font, boldFont, pageWidth, pageHeight, margin, ide);
 
-            float a =addTable(document, page, margin - 10, pageHeight - 225, ide);
+            float a = addTable(document, page, margin - 10, pageHeight - 225, ide);
+           
             addBoxWithText1(document, page, ide);
             float boxX = 20; // Ajusta según sea necesario
-            float boxY = 560; // Ajusta según sea necesario
-            //addBoxWithText2(document, page, ide, boxX, boxY);
+            float boxY = 850 - a; // Ajusta según sea necesario
+            addBoxWithText2(document, page, ide, boxX, boxY);
 
             addText(contentStream, font, "Refetencia:", margin, pageHeight + margin - 230);
             addText(contentStream, font, "22323", margin + 70, pageHeight + margin - 230);
             addText(contentStream, font, "% Descuento (General): " + String.valueOf(documentos.getDescGen()) + "%", margin + 390, pageHeight + margin - 230);
             addText(contentStream, font, "0.00%", margin + 735, pageHeight + margin - 230);
-
             contentStream.close();
 
-            File file = new File("Factura_" + documentos.getIDfactura() + ".pdf");
+            //File file = new File("Factura_" + documentos.getIDfactura() + ".pdf");
+            // Crear un diálogo de selección de archivo
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar PDF");
+// Establecer un nombre predeterminado
+            fileChooser.setSelectedFile(new File("Factura_" + documentos.getIDfactura() + ".pdf"));
+            // Mostrar el diálogo y obtener la opción del usuario
+            int userSelection = fileChooser.showSaveDialog(null);
 
-            document.save(file);
-            document.close();
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                // Obtener la ubicación seleccionada por el usuario
+                File fileToSave = fileChooser.getSelectedFile();
 
-            Desktop.getDesktop().open(file);
+                // Guardar el documento en la ubicación seleccionada
+                document.save(fileToSave);
+                document.close();
+
+                Desktop.getDesktop().open(fileToSave);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -390,7 +414,7 @@ public class FacturaPDF {
     private static void addBoxWithText2(PDDocument document, PDPage page, int id, float boxX, float boxY) throws IOException {
         float margin = 20;
         float rectWidth = 560;
-        float rectHeight = 120;
+        float rectHeight = 100;
 
         Connection conexion = Conexion.obtenerConexion();
         Empresa empresa = new Empresa();
@@ -417,66 +441,59 @@ public class FacturaPDF {
             boxContentStream.setFont(font, 12);
             boxContentStream.setNonStrokingColor(Color.BLACK);
 
-            float textOffsetX = rectX + 10;
+            float textOffsetX = rectX + 300;
             float textOffsetY = rectY + rectHeight - 15;
 
-            // Texto 1
-            float fontSize1 = 12;
-            boxContentStream.setFont(font, fontSize1);
-            float offsetY1 = 0;
-            boxContentStream.newLineAtOffset(textOffsetX + 250, textOffsetY - 10 - offsetY1);
-            boxContentStream.showText("Total de Descuento en Linea:");
+            float fontSize = 12;
+            float offsetY = 15;  // Ajusta la distancia vertical entre las líneas
 
-// Texto 2
-            float fontSize2 = 12;
-            boxContentStream.setFont(font, fontSize2);
-            float offsetY2 = 250;  // Ajusta la distancia vertical entre las líneas
-            boxContentStream.newLineAtOffset(textOffsetX - 30, textOffsetY -40 - offsetY2); // Ajusta la posición vertical
-            boxContentStream.showText("Total de Descuento general:");
+            boxContentStream.setFont(font, fontSize);
+            boxContentStream.newLineAtOffset(textOffsetX + 10, textOffsetY - 10);
+            boxContentStream.showText("Total de Descuento en Linea:     " + String.valueOf(documentos.getTotal()));
+            boxContentStream.newLine();
 
-// Texto 3
-            float fontSize3 = 12;
-            boxContentStream.setFont(font, fontSize3);
-            float offsetY3 = 250;  // Ajusta la distancia vertical entre las líneas
-            boxContentStream.newLineAtOffset(textOffsetX - 28, textOffsetY - 10 - offsetY3); // Ajusta la posición vertical
-            boxContentStream.showText("Subtotal:");
+            boxContentStream.setFont(font, fontSize);
+            boxContentStream.newLineAtOffset(0, -offsetY);
+            boxContentStream.showText("Total de Descuento general:       " + String.valueOf(documentos.getSumaImpuesto()));
+            boxContentStream.newLine();
 
-// Texto 4
-            float fontSize4 = 12;
-            boxContentStream.setFont(font, fontSize4);
-            float offsetY4 = 45;  // Ajusta la distancia vertical entre las líneas
-            boxContentStream.newLineAtOffset(textOffsetX - 29, textOffsetY - 10 - offsetY4); // Ajusta la posición vertical
-            boxContentStream.showText("Impuestos:");
+            boxContentStream.setFont(font, fontSize);
+            boxContentStream.newLineAtOffset(0, -offsetY);
+            boxContentStream.showText("Subtotal:                                      " + String.valueOf(documentos.getSubtotal2()));
+            boxContentStream.newLine();
 
-// Texto 5
-            float fontSize5 = 12;
-            boxContentStream.setFont(font, fontSize5);
-            float offsetY5 = 60;  // Ajusta la distancia vertical entre las líneas
-            boxContentStream.newLineAtOffset(textOffsetX - 30, textOffsetY - 10 - offsetY5); // Ajusta la posición vertical
-            boxContentStream.showText("TOTAL:");
+            boxContentStream.setFont(font, fontSize);
+            boxContentStream.newLineAtOffset(0, -offsetY);
+            boxContentStream.showText("Impuestos:                                  " + String.valueOf(documentos.getSumaDescGen()));
+            boxContentStream.newLine();
 
-            boxContentStream.newLineAtOffset(textOffsetX + 150, textOffsetY - 330);
-            boxContentStream.showText(String.valueOf(documentos.getSumaDescLinea()));
-            boxContentStream.newLineAtOffset(0, -20);
-            boxContentStream.showText(String.valueOf(documentos.getSumaDescGen()));
-            boxContentStream.newLineAtOffset(0, -20);
-            boxContentStream.showText(String.valueOf(documentos.getSubtotal2()));
-            boxContentStream.newLineAtOffset(0, -22);
-            boxContentStream.showText(String.valueOf(documentos.getSumaImpuesto()));
-            boxContentStream.newLineAtOffset(0, -25);
-            boxContentStream.showText(String.valueOf(documentos.getTotal()));
+            boxContentStream.setFont(font, fontSize);
+            boxContentStream.newLineAtOffset(0, -offsetY);
+            boxContentStream.showText("TOTAL:                                        " + String.valueOf(documentos.getSumaDescLinea()));
 
             boxContentStream.endText();
         }
     }
 
-    private static void addImage(PDDocument document, PDPage page, String imagePath, float x, float y, float width, float height) throws IOException {
-        try (InputStream in = FacturaPDF.class.getResourceAsStream(imagePath)) {
-            byte[] imageBytes = IOUtils.toByteArray(in);
-            PDImageXObject image = PDImageXObject.createFromByteArray(document, imageBytes, "image");
+    private static void addImage(PDDocument document, PDPage page, ImageIcon imageIcon, float x, float y, float width, float height) throws IOException {
+        try {
+            Image image = imageIcon.getImage();
+            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bufferedImage.createGraphics();
+            bGr.drawImage(image, 0, 0, null);
+            bGr.dispose();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+
+            PDImageXObject pdImage = PDImageXObject.createFromByteArray(document, imageBytes, "image");
             PDPageContentStream contentStream = new PDPageContentStream(document, page, AppendMode.APPEND, true);
-            contentStream.drawImage(image, x, y, width, height);
+            contentStream.drawImage(pdImage, x, y, width, height);
             contentStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
 }
