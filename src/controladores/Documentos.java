@@ -654,12 +654,12 @@ public List<Documentos> selectDocumentosPorID(Connection conexion, int idFactura
     //metodo calculo descuentogeneral
     public double CalcularDescuentoLinea(double PrecioProducto, double DescLinea) {
         if (DescLinea > 0) {
-            this.DescLinea = DescLinea / 100;
+            this.DescLinea = this.DescLinea / 100;
         }
         this.DescLinea = this.DescLinea * PrecioProducto;
-        formato.format(this.DescLinea);
         return this.DescLinea;
     }
+
 
     //metodo calculo base
     //Base= la suma de los precios sin impuesto de un mismo Articulo/servicio y con descuento si este tiene 

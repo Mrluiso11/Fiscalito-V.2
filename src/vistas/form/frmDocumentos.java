@@ -165,22 +165,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         if (!txtDescGeneral.isEnabled()) {
             Decgen = String.valueOf(0.00);
         }
-        Articulos producto = new Articulos();
-        Servicios servicios = new Servicios();
-        Connection conexion = Conexion.obtenerConexion();
-
         String Confirmservicio;
-        String Descripcion;
         if (chkServicio.isSelected()) {
             Confirmservicio = "Si";
-            servicios.setNombreservicio(cbxArticuloServicio.getSelectedItem().toString());
-            servicios.InfoServicioPorNombre(conexion); // Asegúrate de tener la conexión a la base de datos
-            Descripcion = servicios.getDescripcion();
         } else {
             Confirmservicio = "No";
-            producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
-            producto.InfoProductoPorNombre(conexion); // Asegúrate de tener la conexión a la base de datos
-            Descripcion = producto.getDescripcion();
         }
 
         Documentos documentos = new Documentos();
@@ -192,7 +181,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         documentos.setDescLinea(Double.parseDouble(txtDescLinea.getText()));
         documentos.setDescGen(Double.parseDouble(txtDescGeneral.getText()));
         documentos.setImpuestos(Double.parseDouble(cbxImpuesto.getSelectedItem().toString()));
-        documentos.setDescripcion(Descripcion);
 
         // Llamar a los métodos de cálculo en la clase Documentos
         documentos.CalcularDescuentoGen(documentos.getPrecioProducto(), documentos.getDescGen());
@@ -212,21 +200,16 @@ public class frmDocumentos extends javax.swing.JPanel {
         double importeImpuesto = documentos.getImporteImpuesto();
         double subtotal = documentos.getSubtotal1();
 
-        double precioProductoFormateado = Double.parseDouble(formatoDecimal.format(precioProducto1));
-        double descLineaFormateado = Double.parseDouble(formatoDecimal.format(DescLinea1));
-        double descGenFormateado = Double.parseDouble(formatoDecimal.format(DescGen1));
-        double baseFormateado = Double.parseDouble(formatoDecimal.format(base));
-        double impuestosFormateado = Double.parseDouble(formatoDecimal.format(Impuestos1));
-        double importeImpuestoFormateado = Double.parseDouble(formatoDecimal.format(importeImpuesto));
-        double subtotalFormateado = Double.parseDouble(formatoDecimal.format(subtotal));
-
+        Connection conexion = Conexion.obtenerConexion();
+        Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
         if (conexion != null) {
             producto.setNombreproducto(cbxArticuloServicio.getSelectedItem().toString());
             producto.InfoProductoPorNombre(conexion); // Llama al método en la clase Clientes
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, Descripcion, cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProductoFormateado, descLineaFormateado, descGenFormateado, baseFormateado, impuestosFormateado, importeImpuestoFormateado, subtotalFormateado});
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1, DescLinea1, DescGen1, base, Impuestos1, importeImpuesto, subtotal});
+
         double sumaCantidad = 0.0;
 
         //Calculos de barra inferior
@@ -236,7 +219,6 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         // Verificar si la columna "Cantidad" existe
         if (cantidadColumnIndex != -1) {
-
             // Suma de Cantidad de productos
             for (int i = 0; i < model.getRowCount(); i++) {
                 // Obtener el valor de la columna "Cantidad" en la fila actual
@@ -255,7 +237,6 @@ public class frmDocumentos extends javax.swing.JPanel {
                     }
                 }
             }
-            documentos.setSumaCantidad(sumaCantidad);
         } else {
             JOptionPane.showMessageDialog(null, "La columna 'Cantidad' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -278,7 +259,6 @@ public class frmDocumentos extends javax.swing.JPanel {
                     try {
                         double precioProducto = Double.parseDouble(precioProductoString);
                         sumaPrecio += precioProducto;
-                        sumaPrecio = sumaPrecio * sumaCantidad;
 
                     } catch (NumberFormatException e) {
                         // Manejar la excepción si no se puede convertir a Double
@@ -396,50 +376,18 @@ public class frmDocumentos extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "La columna 'Impuesto' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        //calculosuma total
-        int totalColumnIndex = model.findColumn("Subtotal");
-
-        // Verificar si la columna "subtotal" existe
-        if (totalColumnIndex != -1) {
-            // Suma de precios de productos
-            double sumatotal = 0.0;
-
-            for (int i = 0; i < model.getRowCount(); i++) {
-                // Obtener el valor de la columna "total" en la fila actual
-                Object totalObject = model.getValueAt(i, totalColumnIndex);
-
-                if (totalObject != null) {
-                    String totalString = totalObject.toString();
-
-                    try {
-                        double sumatotal2 = Double.parseDouble(totalString);
-                        sumatotal += sumatotal2;
-
-                    } catch (NumberFormatException e) {
-                        // Manejar la excepción si no se puede convertir a Double
-                        JOptionPane.showMessageDialog(null, "Error en la fila " + i + ": " + "No se pudo convertir a número  " + totalString, "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-
-            // Enviar la suma a la clase Documentos mediante el método setSumaImpuesto
-            documentos.setSumaImpuesto(sumatotal);
-        } else {
-            JOptionPane.showMessageDialog(null, "La columna 'Total' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
         //Asignar resultados a label barra inferior
-        lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
+        lblCantidad.setText(String.format("%.2f", sumaCantidad));
         lblMonto.setText(String.format("%.2f", documentos.getMontoPrecio()));
         lblDescLinea.setText(String.format("%.2f", documentos.getSumaDescLinea()));
         lblDescGen.setText(String.format("%.2f", documentos.getSumaDescGen()));
         lblSubtotal.setText(String.format("%.2f", documentos.getSubtotal2()));
         lblImpuesto.setText(String.format("%.2f", documentos.getSumaImpuesto()));
         lblTotal.setText(String.format("%.2f", documentos.getTotal()));
-
         Conexion.cerrarConexion(conexion);
     }
 
+//
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1640,7 +1588,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         insertBaseDatosE();
         LimpiarCampos();
         generarID();
-        
+
         //SE CREA LA FACTURA
         //lblIDfactura.getTex();
         /*FacturaPDF obj = new FacturaPDF();
