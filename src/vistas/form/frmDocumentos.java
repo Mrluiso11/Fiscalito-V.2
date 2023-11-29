@@ -38,6 +38,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     private int contadorID = 1;
     DecimalFormat formato = new DecimalFormat("#0.00");
     DecimalFormat formatoDecimal = new DecimalFormat("#.##");
+    
 
     public frmDocumentos() {
         initComponents(); // Inicializa los componentes del formulario.
@@ -173,6 +174,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
 
         Documentos documentos = new Documentos();
+      
         //Calculos de tabla
 
         // Enviar los valores necesarios a clase (ajusta según tus necesidades)
@@ -199,6 +201,15 @@ public class frmDocumentos extends javax.swing.JPanel {
         double base = documentos.getBase();
         double importeImpuesto = documentos.getImporteImpuesto();
         double subtotal = documentos.getSubtotal1();
+        
+        double precioProductoFormateado = Double.parseDouble(formatoDecimal.format(precioProducto1));
+        double descLineaFormateado = Double.parseDouble(formatoDecimal.format(DescLinea1));
+        double descGenFormateado = Double.parseDouble(formatoDecimal.format(DescGen1));
+        double baseFormateado = Double.parseDouble(formatoDecimal.format(base));
+        double impuestosFormateado = Double.parseDouble(formatoDecimal.format(Impuestos1));
+        double importeImpuestoFormateado = Double.parseDouble(formatoDecimal.format(importeImpuesto));
+        double subtotalFormateado = Double.parseDouble(formatoDecimal.format(subtotal));
+
 
         Connection conexion = Conexion.obtenerConexion();
         Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
@@ -208,8 +219,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             Conexion.cerrarConexion(conexion);
         }
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
-        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProducto1, DescLinea1, DescGen1, base, Impuestos1, importeImpuesto, subtotal});
-
+        model.addRow(new Object[]{txtCodigoproducto.getText(), cbxArticuloServicio.getSelectedItem().toString(), Confirmservicio, producto.getDescripcion(), cbxMagnitudes.getSelectedItem().toString(), cantidad, precioProductoFormateado, descLineaFormateado, descGenFormateado, baseFormateado, impuestosFormateado, importeImpuestoFormateado, subtotalFormateado});
         double sumaCantidad = 0.0;
 
         //Calculos de barra inferior
@@ -242,7 +252,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
 
         //Monto = suma precio del producto sin descuento y sin importe
-        int precioProductoColumnIndex = model.findColumn("Precio");
+        int precioProductoColumnIndex = model.findColumn("Base");
 
         // Verificar si la columna "precioProducto1" existe
         if (precioProductoColumnIndex != -1) {
@@ -344,6 +354,9 @@ public class frmDocumentos extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "La columna 'Desc. General' no existe en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
+        //Calculo monto precio total
+        documentos.CalcularMonto(documentos.getMontoPrecio(), documentos.getSumaDescGen(), documentos.getSumaDescLinea());
+        
         //Impuestos= Suma de los ImporteImpuesto de cada producto agregado a la lista
         int impuestototalColumnIndex = model.findColumn("Importe I.T.B.M.S");
 
@@ -1687,7 +1700,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     /*info barra inferior
     Cantidad = cantidad de productos
-    Monto = precio del producto
+    Monto = precio del producto sin impuesto y sin descuento
     descuento linea= suma de los descuento de linea de los productos
     descuenta general= suma de los descuento general de los productos
     Subtotal = la suma de los precio de los producto sin impuesto y con descuento si este tiene 
@@ -1726,7 +1739,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             // Obtén los valores de la fila antes de removerla
             double cantidadRemovida = (double) model.getValueAt(selectedRow, model.findColumn("Cantidad"));
             double precioRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Precio"));
-            double preciomonto = precioRemovido * cantidadRemovida;
+            double preciomontoRemovido = precioRemovido * cantidadRemovida;
             double descLineaRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Desc. Linea"));
             double descGeneralRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Desc. General"));
             double impuestoRemovido = (double) model.getValueAt(selectedRow, model.findColumn("Importe I.T.B.M.S"));
@@ -1737,13 +1750,13 @@ public class frmDocumentos extends javax.swing.JPanel {
             model.removeRow(selectedRow);
 
             // Resta los valores removidos de los totales
-            documentos.restarSumaCantidad(cantidadRemovida, Double.parseDouble(lblCantidad.getText()));
-            documentos.restarMontoPrecio(precioRemovido, preciomonto);
-            documentos.restarSumaDescLinea(descLineaRemovido, Double.parseDouble(lblDescLinea.getText()));
-            documentos.restarSumaDescGen(descGeneralRemovido, Double.parseDouble(lblDescGen.getText()));
-            documentos.restarSumaImpuesto(impuestoRemovido, Double.parseDouble(lblImpuesto.getText()));
-            documentos.restarSubtotal(subtotalRemovido, Double.parseDouble(lblSubtotal.getText()));
-            documentos.restarTotal(totalRemovido, Double.parseDouble(lblTotal.getText()));
+            documentos.restarSumaCantidad(Double.parseDouble(lblCantidad.getText()),cantidadRemovida);
+            documentos.restarMontoPrecio(Double.parseDouble(lblMonto.getText()),preciomontoRemovido );
+            documentos.restarSumaDescLinea(Double.parseDouble(lblDescLinea.getText()),descLineaRemovido);
+            documentos.restarSumaDescGen(Double.parseDouble(lblDescGen.getText()),descGeneralRemovido);
+            documentos.restarSumaImpuesto(Double.parseDouble(lblImpuesto.getText()),impuestoRemovido);
+            documentos.restarSubtotal(Double.parseDouble(lblSubtotal.getText()),subtotalRemovido);
+            documentos.restarTotal(Double.parseDouble(lblTotal.getText()),totalRemovido);
 
             // Actualiza los textos de los labels con los nuevos totales
             lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
