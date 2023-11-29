@@ -1823,7 +1823,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             Object valorCelda = modelo.getValueAt(filaSeleccionada, 0);
             if (valorCelda != null) {
                 String ruc = valorCelda.toString();
-                System.out.println(ruc);
+                
                 // Pasa el valor de ruc al constructor de frmHistorialDoc
                 frmHistorialDoc obj = new frmHistorialDoc(ruc);
                 obj.setVisible(true);
@@ -1835,7 +1835,7 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
-        System.out.println(jctipoDocumentos.getSelectedItem().toString());
+        
         cargarTableFiltro();
     }//GEN-LAST:event_btnAplicarActionPerformed
 
