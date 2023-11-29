@@ -139,7 +139,7 @@ public class FacturaPDF {
         float fontSize3 = 14;
         float fontSize4 = 10;
         float fontSize5 = 12;
-        float fontSize6 = 10;
+        float fontSize6 = 12;
         float fontSize7 = 12;
         Connection conexion = Conexion.obtenerConexion();
         // Se crea un objeto de la clase "Empresa" para manejar la información de la empresa
@@ -153,7 +153,7 @@ public class FacturaPDF {
         }
 
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss a");
 
         String fechaFormateada = formatoFecha.format(documentos.getFecha_registro());
         String horaFormateada = formatoHora.format(documentos.getFecha_registro());
@@ -161,12 +161,13 @@ public class FacturaPDF {
         float textWidth2 = regularFont.getStringWidth("Reporte a Efectos de Documentación") / 1000 * fontSize2;
         float textWidth3 = regularFont.getStringWidth("Factura " + documentos.getIDfactura()) / 1000 * fontSize3;
         float textWidth4 = regularFont.getStringWidth("Cerrado") / 1000 * fontSize4;
-        float textWidth5 = regularFont.getStringWidth(fechaFormateada) / 1000 * fontSize5;
+        float textWidth5 = regularFont.getStringWidth(fechaFormateada ) / 1000 * fontSize5;
+        float textWidth6 = regularFont.getStringWidth(fechaFormateada ) / 1000 * fontSize6;
         float textWidth7 = regularFont.getStringWidth("Credito") / 1000 * fontSize7;
 
         // Usar la fuente negrita solo para "DOCUMENTO NO FISCAL"
         contentStream.setFont(boldFont, fontSize1);
-        contentStream.newLineAtOffset(pageWidth - margin - textWidth1, pageHeight + margin - 20);
+        contentStream.newLineAtOffset(pageWidth - margin+35 - textWidth1, pageHeight + margin - 20);
         contentStream.showText("DOCUMENTO NO FISCAL");
 
         // Restaurar la fuente regular para el resto del texto
@@ -184,7 +185,11 @@ public class FacturaPDF {
 
         contentStream.setFont(regularFont, fontSize5);
         contentStream.newLineAtOffset(0, -15);
-        contentStream.showText("Fecha: " + fechaFormateada + " Hora: " + horaFormateada);
+        contentStream.showText("Fecha: " + fechaFormateada);
+        
+        contentStream.setFont(regularFont, fontSize6);
+        contentStream.newLineAtOffset(0, -15);
+        contentStream.showText("Hora: " + horaFormateada);
 
         contentStream.setFont(regularFont, fontSize7);
         contentStream.newLineAtOffset(0, -15);

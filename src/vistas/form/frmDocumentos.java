@@ -8,6 +8,7 @@ import Style.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import Style.Forms;
+import com.toedter.calendar.JDateChooser;
 import conexion.Conexion;
 import java.sql.Connection;
 import controladores.*;
@@ -38,7 +39,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     private int contadorID = 1;
     DecimalFormat formato = new DecimalFormat("#0.00");
     DecimalFormat formatoDecimal = new DecimalFormat("#.##");
-    
 
     public frmDocumentos() {
         initComponents(); // Inicializa los componentes del formulario.
@@ -146,7 +146,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         Date fechaActual = new Date();
 
         // Formatear la fecha en un formato específico (por ejemplo, "dd/MM/yyyy HH:mm:ss")
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
 
         lblFechaImpresion.setText(formatoFecha.format(fechaActual));
 
@@ -174,9 +174,8 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
 
         Documentos documentos = new Documentos();
-      
-        //Calculos de tabla
 
+        //Calculos de tabla
         // Enviar los valores necesarios a clase (ajusta según tus necesidades)
         documentos.setPrecioProducto(Double.parseDouble(txtPrecio.getText()));
         documentos.setCantidad(Double.parseDouble(txtCantidad.getText()));
@@ -201,7 +200,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         double base = documentos.getBase();
         double importeImpuesto = documentos.getImporteImpuesto();
         double subtotal = documentos.getSubtotal1();
-        
+
         double precioProductoFormateado = Double.parseDouble(formatoDecimal.format(precioProducto1));
         double descLineaFormateado = Double.parseDouble(formatoDecimal.format(DescLinea1));
         double descGenFormateado = Double.parseDouble(formatoDecimal.format(DescGen1));
@@ -209,7 +208,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         double impuestosFormateado = Double.parseDouble(formatoDecimal.format(Impuestos1));
         double importeImpuestoFormateado = Double.parseDouble(formatoDecimal.format(importeImpuesto));
         double subtotalFormateado = Double.parseDouble(formatoDecimal.format(subtotal));
-
 
         Connection conexion = Conexion.obtenerConexion();
         Articulos producto = new Articulos(); // Crear un objeto de la clase Clientes
@@ -356,7 +354,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         //Calculo monto precio total
         documentos.CalcularMonto(documentos.getMontoPrecio(), documentos.getSumaDescGen(), documentos.getSumaDescLinea());
-        
+
         //Impuestos= Suma de los ImporteImpuesto de cada producto agregado a la lista
         int impuestototalColumnIndex = model.findColumn("Importe I.T.B.M.S");
 
@@ -500,7 +498,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         lblFechaImpresion = new javax.swing.JLabel();
         bg1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jctipoDocumentos = new javax.swing.JComboBox<>();
         jLabel40 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
@@ -509,10 +507,10 @@ public class frmDocumentos extends javax.swing.JPanel {
         TableFacturas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdFecha2 = new com.toedter.calendar.JDateChooser();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jdFecha1 = new com.toedter.calendar.JDateChooser();
 
         jButton7.setText("jButton7");
 
@@ -523,6 +521,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
+            }
+        });
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
             }
         });
 
@@ -1219,10 +1222,10 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jPanel7.setOpaque(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Devolución" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jctipoDocumentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Devolución" }));
+        jctipoDocumentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jctipoDocumentosActionPerformed(evt);
             }
         });
 
@@ -1237,7 +1240,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jctipoDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel40))
                 .addContainerGap(373, Short.MAX_VALUE))
         );
@@ -1247,7 +1250,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabel40)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jctipoDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
@@ -1257,6 +1260,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel46.setText("Período Facturado");
 
         btnAplicar.setText("Aplicar");
+        btnAplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAplicarActionPerformed(evt);
+            }
+        });
 
         TableFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1280,6 +1288,8 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visualizar_icon.png"))); // NOI18N
 
+        jdFecha2.setDateFormatString("yyyy-MM-dd");
+
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(0, 204, 204));
         jLabel41.setText("Al");
@@ -1287,6 +1297,8 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(0, 204, 204));
         jLabel42.setText("Del");
+
+        jdFecha1.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1304,11 +1316,11 @@ public class frmDocumentos extends javax.swing.JPanel {
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel42)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel41)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(66, 66, 66)
                                 .addComponent(btnAplicar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1330,8 +1342,8 @@ public class frmDocumentos extends javax.swing.JPanel {
                     .addComponent(btnAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel41)
                     .addComponent(jLabel42)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jdFecha2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdFecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -1442,6 +1454,29 @@ public class frmDocumentos extends javax.swing.JPanel {
         } finally {
             // Cerrar la conexión a la base de datos aquí
             Conexion.cerrarConexion(conexion);
+        }
+    }
+
+    private void cargarTableFactura() {
+
+        Connection conexion = Conexion.obtenerConexion();
+        DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
+        // Limpiar cualquier contenido que pueda haber en la tabla actualmente
+        modelo.setRowCount(0);
+        Documentos obj_documentos = new Documentos();
+        // Obtener la lista de productos desde la base de datos
+        List<Documentos> facturas = obj_documentos.selectDocumentos(conexion);
+        // Llenar la tabla con los datos
+        for (Documentos factura : facturas) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaFormateada = dateFormat.format(factura.getFecha_registro());
+
+            modelo.addRow(new Object[]{
+                factura.getIDfactura(),
+                factura.getCodigocliente(),
+                factura.getNombre(),
+                fechaFormateada, // Mostrar la fecha formateada en la tabla
+                factura.getTotal(),});
         }
     }
 
@@ -1686,9 +1721,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jctipoDocumentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jctipoDocumentosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jctipoDocumentosActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         cargarTable();
@@ -1755,13 +1790,13 @@ public class frmDocumentos extends javax.swing.JPanel {
             model.removeRow(selectedRow);
 
             // Resta los valores removidos de los totales
-            documentos.restarSumaCantidad(Double.parseDouble(lblCantidad.getText()),cantidadRemovida);
-            documentos.restarMontoPrecio(Double.parseDouble(lblMonto.getText()),preciomontoRemovido );
-            documentos.restarSumaDescLinea(Double.parseDouble(lblDescLinea.getText()),descLineaRemovido);
-            documentos.restarSumaDescGen(Double.parseDouble(lblDescGen.getText()),descGeneralRemovido);
-            documentos.restarSumaImpuesto(Double.parseDouble(lblImpuesto.getText()),impuestoRemovido);
-            documentos.restarSubtotal(Double.parseDouble(lblSubtotal.getText()),subtotalRemovido);
-            documentos.restarTotal(Double.parseDouble(lblTotal.getText()),totalRemovido);
+            documentos.restarSumaCantidad(Double.parseDouble(lblCantidad.getText()), cantidadRemovida);
+            documentos.restarMontoPrecio(Double.parseDouble(lblMonto.getText()), preciomontoRemovido);
+            documentos.restarSumaDescLinea(Double.parseDouble(lblDescLinea.getText()), descLineaRemovido);
+            documentos.restarSumaDescGen(Double.parseDouble(lblDescGen.getText()), descGeneralRemovido);
+            documentos.restarSumaImpuesto(Double.parseDouble(lblImpuesto.getText()), impuestoRemovido);
+            documentos.restarSubtotal(Double.parseDouble(lblSubtotal.getText()), subtotalRemovido);
+            documentos.restarTotal(Double.parseDouble(lblTotal.getText()), totalRemovido);
 
             // Actualiza los textos de los labels con los nuevos totales
             lblCantidad.setText(String.format("%.2f", documentos.getSumaCantidad()));
@@ -1776,16 +1811,84 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    
+
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         LimpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        frmHistorialDoc frm_historialdoc = new frmHistorialDoc();
-        //frm_historialdoc.setTitle("");
-        frm_historialdoc.setVisible(true);
+        int filaSeleccionada = TableFacturas.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
+            Object valorCelda = modelo.getValueAt(filaSeleccionada, 0);
+            if (valorCelda != null) {
+                String ruc = valorCelda.toString();
+                System.out.println(ruc);
+                // Pasa el valor de ruc al constructor de frmHistorialDoc
+                frmHistorialDoc obj = new frmHistorialDoc(ruc);
+                obj.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna Factura", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
+        System.out.println(jctipoDocumentos.getSelectedItem().toString());
+        cargarTableFiltro();
+    }//GEN-LAST:event_btnAplicarActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        cargarTableFactura();
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+    private void cargarTableFiltro() {
+        Connection conexion = Conexion.obtenerConexion();
+        DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
+        // Limpiar cualquier contenido que pueda haber en la tabla actualmente
+        modelo.setRowCount(0);
+        Documentos obj_documentos = new Documentos();
+        // Obtener la lista de productos desde la base de datos
+        List<Documentos> facturas = obj_documentos.selectDocumentos(conexion);
+
+        // Obtener las fechas seleccionadas de los JDateChooser
+        Date fechaSeleccionada1 = jdFecha1.getDate();
+        Date fechaSeleccionada2 = jdFecha2.getDate();
+
+        // Verificar si se ha seleccionado alguna fecha
+        if (fechaSeleccionada1 == null && fechaSeleccionada2 == null) {
+            // Mostrar un mensaje indicando que no se ha seleccionado ninguna fecha
+            JOptionPane.showMessageDialog(this, "No ha seleccionado ninguna fecha", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return;  // Salir del método ya que no hay fechas seleccionadas
+        }
+
+        // Obtener el tipo de documento seleccionado
+        String tipoDocumentoSeleccionado = jctipoDocumentos.getSelectedItem().toString();
+
+        // Llenar la tabla con los datos filtrados por el rango de fechas y tipo de documento
+        for (Documentos factura : facturas) {
+            Date fechaFactura = factura.getFecha_registro();
+            String tipoDocumentoFactura = factura.getTipodocumento();
+
+            // Verificar si la fecha de la factura está dentro del rango seleccionado
+            // y si el tipo de documento coincide con la selección del JComboBox
+            if (fechaFactura != null
+                    && ((fechaSeleccionada1 == null || fechaFactura.after(fechaSeleccionada1) || fechaFactura.equals(fechaSeleccionada1))
+                    && (fechaSeleccionada2 == null || fechaFactura.before(fechaSeleccionada2) || fechaFactura.equals(fechaSeleccionada2)))
+                    && (tipoDocumentoSeleccionado.equals("Todos") || tipoDocumentoFactura.equals(tipoDocumentoSeleccionado))) {
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaFormateada = dateFormat.format(fechaFactura);
+
+                modelo.addRow(new Object[]{
+                    factura.getIDfactura(),
+                    factura.getCodigocliente(),
+                    factura.getNombre(),
+                    fechaFormateada, // Mostrar la fecha formateada en la tabla
+                    factura.getTotal(),});
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1815,9 +1918,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JCheckBox chkServicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1866,6 +1966,9 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> jcbNombre;
     private javax.swing.JComboBox<String> jcbTipoDocumento;
+    private javax.swing.JComboBox<String> jctipoDocumentos;
+    private com.toedter.calendar.JDateChooser jdFecha1;
+    private com.toedter.calendar.JDateChooser jdFecha2;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblDIF;
     private javax.swing.JLabel lblDescGen;

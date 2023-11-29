@@ -502,6 +502,56 @@ public class Documentos {
             return 0;
         }
     }
+    
+    // Método para realizar una consulta a la tabla tbl_documentos
+    public List<Documentos> selectDocumentos(Connection conexion) {
+        List<Documentos> documentosList = new ArrayList<>();
+        String query = "SELECT * FROM tbl_documentos";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Documentos documentos = new Documentos();
+                documentos.setIDfactura(resultSet.getInt("id"));
+                documentos.setTipodocumento(resultSet.getString("tipo_documento"));
+                documentos.setCodigocliente(resultSet.getInt("codigo_cliente"));
+                documentos.setNombre(resultSet.getString("nombre"));
+                documentos.setRUC(resultSet.getString("ruc"));
+                documentos.setDescGen(resultSet.getDouble("descuento_general"));
+                documentos.setDireccion(resultSet.getString("direccion"));
+                documentos.setTelefono1(resultSet.getString("telefono1"));
+                documentos.setTelefono2(resultSet.getString("telefono2"));
+                documentos.setReferencia(resultSet.getString("referencia"));
+                documentos.setCredito(resultSet.getString("credito"));
+                documentos.setMontoPrecio(resultSet.getDouble("montoprecio"));
+                documentos.setSumaCantidad(resultSet.getDouble("suma_cantidad"));
+                documentos.setSumaDescLinea(resultSet.getDouble("suma_descuentolinea"));
+                documentos.setSumaDescGen(resultSet.getDouble("suma_descuentogeneral"));
+                documentos.setSubtotal2(resultSet.getDouble("subtotal2"));
+                documentos.setSumaImpuesto(resultSet.getDouble("impuesto_total"));
+                documentos.setTotal(resultSet.getDouble("total"));
+                documentos.setDIF(resultSet.getDouble("diferencia"));
+                documentos.setFormaPago1(resultSet.getString("forma_pago1"));
+                documentos.setMontoPago1(resultSet.getDouble("monto_pago1"));
+                documentos.setFormaPago2(resultSet.getString("forma_pago2"));
+                documentos.setMontoPago2(resultSet.getDouble("monto_pago2"));
+                documentos.setFormaPago3(resultSet.getString("forma_pago3"));
+                documentos.setMontoPago3(resultSet.getDouble("monto_pago3"));
+                documentos.setFormaPago4(resultSet.getString("forma_pago4"));
+                documentos.setMontoPago4(resultSet.getDouble("monto_pago4"));
+                documentos.setFecha_registro(resultSet.getTimestamp("fecha_registro"));
+
+                documentosList.add(documentos);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        return documentosList;
+    }
     // Método para seleccionar un documento por ID
 
     public Documentos selectDocumentos(Connection conexion, int id) {
