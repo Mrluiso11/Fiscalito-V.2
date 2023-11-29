@@ -116,19 +116,19 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void LimpiarCampos() {
         txtRUC.setText(" ");
-        txtDescGeneral.setText(" ");
+        txtDescGeneral.setText("0.00");
         txtDireccion.setText(" ");
         txtTelefono1.setText(" ");
         txtTelefono2.setText(" ");
         txtReferencia.setText(" ");
         txtCodigoproducto.setText(" ");
-        txtCantidad.setText(" ");
-        txtPrecio.setText(" ");
-        txtDescLinea.setText(" ");
-        txtMontopago1.setText(" ");
-        txtMontopago2.setText(" ");
-        txtMontopago3.setText(" ");
-        txtMontopago4.setText(" ");
+        txtCantidad.setText("0.00");
+        txtPrecio.setText("0.00");
+        txtDescLinea.setText("0.00");
+        txtMontopago1.setText("0.00");
+        txtMontopago2.setText("0.00");
+        txtMontopago3.setText("0.00");
+        txtMontopago4.setText("0.00");
         DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
         model.setRowCount(0);
         lblCantidad.setText(" ");
@@ -1151,7 +1151,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                                     .addComponent(cbxMagnitudes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap(14, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1272,6 +1272,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         jScrollPane2.setViewportView(TableFacturas);
 
         jButton1.setText("Visualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visualizar_icon.png"))); // NOI18N
 
@@ -1771,9 +1776,16 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         LimpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        frmHistorialDoc frm_historialdoc = new frmHistorialDoc();
+        //frm_historialdoc.setTitle("");
+        frm_historialdoc.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

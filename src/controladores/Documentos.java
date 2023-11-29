@@ -594,7 +594,7 @@ public class Documentos {
         }
     }
     
-public List<Documentos> selectDocumentosPorID(Connection conexion, int idFactura) {
+    public List<Documentos> selectDocumentosPorID(Connection conexion, int idFactura) {
     String query = "SELECT * FROM tbl_elementos WHERE id_documento = ?";
 
     List<Documentos> documentosList = new ArrayList<>();
@@ -628,7 +628,9 @@ public List<Documentos> selectDocumentosPorID(Connection conexion, int idFactura
     }
 
     return documentosList;
-}
+    }
+    
+    
 
 
     //Calculos de la tabla productos
