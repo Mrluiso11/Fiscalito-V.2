@@ -56,8 +56,6 @@ public class frmReporteCreditos extends javax.swing.JPanel {
         btnAplicar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableFacturas = new javax.swing.JTable();
-        btnVisualizar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jdFecha2 = new com.toedter.calendar.JDateChooser();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
@@ -126,15 +124,6 @@ public class frmReporteCreditos extends javax.swing.JPanel {
         TableFacturas.setEnabled(false);
         jScrollPane2.setViewportView(TableFacturas);
 
-        btnVisualizar.setText("Visualizar");
-        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisualizarActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visualizar_icon.png"))); // NOI18N
-
         jdFecha2.setDateFormatString("yyyy-MM-dd");
 
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -188,12 +177,8 @@ public class frmReporteCreditos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jdFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
-                        .addComponent(btnAplicar)
-                        .addGap(387, 387, 387)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(btnAplicar)))
+                .addContainerGap(549, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +187,7 @@ public class frmReporteCreditos extends javax.swing.JPanel {
                 .addComponent(jLabel46)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVisualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(btnAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel41)
                     .addComponent(jLabel42)
                     .addComponent(jdFecha2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -261,10 +244,6 @@ public class frmReporteCreditos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
-
-    }//GEN-LAST:event_btnVisualizarActionPerformed
-
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
         
     }//GEN-LAST:event_btnAplicarActionPerformed
@@ -279,8 +258,6 @@ public class frmReporteCreditos extends javax.swing.JPanel {
     private javax.swing.JPanel bg1;
     private javax.swing.JButton btnAplicar;
     private javax.swing.JButton btnImprimir;
-    private javax.swing.JButton btnVisualizar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;

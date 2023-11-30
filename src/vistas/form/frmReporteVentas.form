@@ -160,10 +160,6 @@
                                   <Component id="jdFecha2" min="-2" pref="129" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                                   <Component id="btnAplicar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="387" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnVisualizar" min="-2" pref="109" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane2" alignment="0" min="-2" pref="1017" max="-2" attributes="0"/>
                               <Component id="btnImprimir" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
@@ -185,9 +181,7 @@
                       <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnVisualizar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" pref="30" max="32767" attributes="0"/>
-                          <Component id="btnAplicar" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnAplicar" alignment="0" pref="30" max="32767" attributes="0"/>
                           <Component id="jLabel41" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel42" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jdFecha2" alignment="0" max="32767" attributes="0"/>
@@ -254,21 +248,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnVisualizar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Visualizar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisualizarActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/visualizar_icon.png"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jdFecha2">
               <Properties>
                 <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
