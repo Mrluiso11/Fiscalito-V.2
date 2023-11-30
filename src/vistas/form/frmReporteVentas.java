@@ -264,7 +264,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
     }
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
-        vargarTableFiltro();
+        cargarTableFiltro();
     }//GEN-LAST:event_btnAplicarActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
@@ -312,7 +312,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                 fechaFormateada,
                 factura.getIDfactura(),
                 factura.getTipodocumento(),
-                "Activo",
+                "Pagado",
                 factura.getNombre(),
                 factura.getSubtotal2(),
                 factura.getImpuestos(),
@@ -321,7 +321,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         }
     }
 
-    private void vargarTableFiltro() {
+    private void cargarTableFiltro() {
         String td  = "";
         Connection conexion = Conexion.obtenerConexion();
         DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
@@ -361,7 +361,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                     && (tipoDocumentoSeleccionado.equals("Todos") || tipoDocumentoFactura.equals(tipoDocumentoSeleccionado))) {
                 if ("Si".equals(factura.getCredito())) {
                          td = "Credito";}else{
-                      td = "Caselado";
+                      td = "Cancelado";
                      }
                 // Formatear la fecha
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
