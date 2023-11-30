@@ -219,9 +219,9 @@ public class Form_Dashboard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FacturaPDF obj = new FacturaPDF();
-       obj.main(new String[]{},"16");
-     
+        /*ReportePDF obj = new ReportePDF();
+        obj.main(new String[]{});
+*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

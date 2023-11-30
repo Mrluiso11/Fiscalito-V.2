@@ -43,9 +43,6 @@ public class FacturaPDF {
     private static final String BOLD_FONT_PATH = "/fonts/Arial_Bold.ttf";
     //private static final String IMAGE_PATH = "/img/icon_fiscalito.png";
 
-    public static int getID(int id) {
-        return id;
-    }
 
     public static void main(String[] args, String id) {
         try {

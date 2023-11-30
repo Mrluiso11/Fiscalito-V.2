@@ -4,6 +4,9 @@
  */
 package documentgeneration;
 
+import conexion.Conexion;
+import controladores.Documentos;
+import controladores.Empresa;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -13,9 +16,17 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.commons.io.IOUtils;
 import java.awt.Color;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
 
 /**
@@ -27,15 +38,34 @@ public class ReportePDF {
     private static final String FONT_PATH = "/fonts/arial.ttf";
     private static final String BOLD_FONT_PATH = "/fonts/Arial_Bold.ttf";
     private static final String IMAGE_PATH = "/img/maleta.jpg";
-    
-    
-     public static void main(String[] args) {
+
+    private static Date fecha1;
+    private static Date fecha2;
+    private static String Tdocumento;
+    private static String TFacturado;
+
+    public ReportePDF(Date fecha1, Date fecha2,String Tdocumento,String TFacturado ) {
+        this.fecha1 = fecha1;
+        this.fecha2 = fecha2;
+        this.Tdocumento=Tdocumento;
+        this.TFacturado=TFacturado;
+    }
+
+    public static void main(String[] args) {
         try {
             PDDocument Reportes = new PDDocument();
             // Cambia la orientación a horizontal
             PDRectangle pageSize = new PDRectangle(PDRectangle.A4.getHeight(), PDRectangle.A4.getWidth());
             PDPage page = new PDPage(pageSize);
             Reportes.addPage(page);
+            Connection conexion = Conexion.obtenerConexion();
+            Empresa empresa = new Empresa();
+
+            empresa.selectEmpresa(conexion);
+            Conexion.cerrarConexion(conexion);
+
+            byte[] logoFacturaBytes = empresa.getLogo_empresa();
+            ImageIcon fotoFactura = new ImageIcon(logoFacturaBytes);
 
             float margin = 10;
             float pageWidth = pageSize.getWidth() - 2 * margin;
@@ -46,12 +76,12 @@ public class ReportePDF {
             PDType0Font boldFont = PDType0Font.load(Reportes, ReportePDF.class.getResourceAsStream(BOLD_FONT_PATH), true);
 
             // Ajusta la posición de la imagen y otros elementos
-            addImage(Reportes, page, IMAGE_PATH, 25, pageHeight + margin - 75, 68, 65);
-            addText(contentStream, boldFont, "Servicio Tecnico Asesor", margin + 85, pageHeight + margin - 20);
-            addText(contentStream, font, "Servicio Tecnico Asesor", margin + 85, pageHeight + margin - 45);
-            addText(contentStream, font, "R.U.C.:PE-9-1882", margin + 85, pageHeight + margin - 60);
-            addText(contentStream, font, "Panamá, Panamá, Panamá, Bethania, La Gloria, Calle J, 1, 0", margin+85, pageHeight + margin - 75);
-            
+            addImage(Reportes, page, fotoFactura, 20, 510, 73, 65);
+            addText(contentStream, boldFont, empresa.getNombre(), margin + 85, pageHeight + margin - 20);
+            addText(contentStream, font, empresa.getNombre_comercial(), margin + 85, pageHeight + margin - 45);
+            addText(contentStream, font, "R.U.C.: " + empresa.getRuc(), margin + 85, pageHeight + margin - 60);
+            addText(contentStream, font, empresa.getPais() + "," + empresa.getProvincia() + "," + empresa.getDistrito(), margin + 85, pageHeight + margin - 75);
+
             addRightAlignedText(contentStream, font, boldFont, pageWidth, pageHeight, margin);
             // Ajusta la posición de la tabla
             addTable(Reportes, page, margin - 10, pageHeight - 70);
@@ -67,7 +97,7 @@ public class ReportePDF {
             e.printStackTrace();
         }
     }
-     
+
     private static void addText(PDPageContentStream contentStream, PDType0Font font, String text, float x, float y) throws IOException {
         contentStream.beginText();
 
@@ -76,42 +106,54 @@ public class ReportePDF {
         contentStream.showText(text);
         contentStream.endText();
     }
+
     private static void addRightAlignedText(PDPageContentStream contentStream, PDType0Font regularFont, PDType0Font boldFont, float pageWidth, float pageHeight, float margin) throws IOException {
-    contentStream.beginText();
+        contentStream.beginText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaFormateada1 = dateFormat.format(fecha1);
+        String fechaFormateada2 = dateFormat.format(fecha2);
+        float fontSize1 = 12;
+        float fontSize2 = 12;
+        float fontSize3 = 12;
+        float fontSize4 = 12;
 
-    float fontSize1 = 12;
-    float fontSize2 = 12;
-    float fontSize3 = 12;
-    float fontSize4 = 12;
+        float textWidth1 = boldFont.getStringWidth("DOCUMENTO NO FISCAL") / 1000 * fontSize1;
+        float textWidth2 = regularFont.getStringWidth("Reporte a Efectos de Documentación") / 1000 * fontSize2;
+        float textWidth3 = regularFont.getStringWidth("Factura 1") / 1000 * fontSize3;
+        float textWidth4 = regularFont.getStringWidth("Cerrado") / 1000 * fontSize4;
 
-    float textWidth1 = boldFont.getStringWidth("DOCUMENTO NO FISCAL") / 1000 * fontSize1;
-    float textWidth2 = regularFont.getStringWidth("Reporte a Efectos de Documentación") / 1000 * fontSize2;
-    float textWidth3 = regularFont.getStringWidth("Factura 1") / 1000 * fontSize3;
-    float textWidth4 = regularFont.getStringWidth("Cerrado") / 1000 * fontSize4;
+        // Usar la fuente negrita solo para "DOCUMENTO NO FISCAL"
+        contentStream.setFont(regularFont, fontSize1);
+        contentStream.newLineAtOffset(pageWidth - margin - 70 - textWidth1, pageHeight + margin - 20);
+        contentStream.showText("Reporte de Documentos Impresos");
 
-    // Usar la fuente negrita solo para "DOCUMENTO NO FISCAL"
-    contentStream.setFont(regularFont, fontSize1);
-    contentStream.newLineAtOffset(pageWidth - margin-70 - textWidth1, pageHeight + margin - 20);
-    contentStream.showText("Reporte de Documentos Impresos");
+        // Restaurar la fuente regular para el resto del texto
+        contentStream.setFont(regularFont, fontSize2);
+        contentStream.newLineAtOffset(0, -18);
+        contentStream.showText("Del: "+fechaFormateada1+"  Al: "+fechaFormateada2);
 
-    // Restaurar la fuente regular para el resto del texto
-    contentStream.setFont(regularFont, fontSize2);
-    contentStream.newLineAtOffset(0, -18);
-    contentStream.showText("Del:11/12/1990    Al: 12/23/2009");
+        contentStream.setFont(regularFont, fontSize3);
+        contentStream.newLineAtOffset(0, -18);
+        contentStream.showText("Todos lo tipos de documentos");
 
-    contentStream.setFont(regularFont, fontSize3);
-    contentStream.newLineAtOffset(0, -18);
-    contentStream.showText("Todos lo tipos de documentos");
+        contentStream.setFont(regularFont, fontSize4);
+        contentStream.newLineAtOffset(0, -18);
+        contentStream.showText("Total Facturado: "+ TFacturado);
 
-    contentStream.setFont(regularFont, fontSize4);
-    contentStream.newLineAtOffset(0, -18);
-    contentStream.showText("Documentos con Imprensión Fiscal");
+        contentStream.endText();
+    }
 
-    contentStream.endText();
-}
+    private static float addTable(PDDocument document, PDPage page, float margin, float yStart) throws IOException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Connection conexion = Conexion.obtenerConexion();
+        Documentos documentos = new Documentos();
+        java.util.List<Documentos> documentosList = new ArrayList<>();
 
+        if (conexion != null) {
+            documentosList = documentos.selectDocumentos(conexion);
+            Conexion.cerrarConexion(conexion);
+        }
 
-    private static void addTable(PDDocument document, PDPage page, float margin, float yStart) throws IOException {
         // Calcula el ancho disponible para la tabla
         float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
 
@@ -125,7 +167,7 @@ public class ReportePDF {
         float marginY = -2;
 
         // Define los anchos de las columnas de la tabla
-        float[] columnWidths = {60, 130, 85, 65, 85, 65, 60, 50, 50, 110};
+        float[] columnWidths = {100, 50, 75, 85, 100, 85, 60, 102, 103};
 
         // Establece un margen adicional para la tabla
         float tableMargin = -8;
@@ -133,7 +175,8 @@ public class ReportePDF {
         // Ajusta la posición vertical para evitar solapamiento con el encabezado
         float headerHeight = 8; // Ajusta según el tamaño de fuente del encabezado
         yPosition -= headerHeight;
-
+        // Incluye la variable para almacenar la posición final de la tabla
+        float tableEndY = yPosition;
         // Inicializa el objeto PDPageContentStream para escribir en la página
         try (PDPageContentStream tableContentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
 
@@ -183,15 +226,15 @@ public class ReportePDF {
             // Agrega texto para cada columna del encabezado de la tabla
             tableContentStream.beginText();
             tableContentStream.newLineAtOffset(headerXPosition + 4, yPositionEncabezado - fontSize);
-            tableContentStream.showText("Fecha");
+            tableContentStream.showText("Fecha de Facturación");
             tableContentStream.newLineAtOffset(columnWidths[0], 0);
-            tableContentStream.showText("Documento");
+            tableContentStream.showText("ID Factura");
             tableContentStream.newLineAtOffset(columnWidths[1], 0);
             tableContentStream.showText("T.documento");
             tableContentStream.newLineAtOffset(columnWidths[2], 0);
             tableContentStream.showText("Estatus");
             tableContentStream.newLineAtOffset(columnWidths[3], 0);
-            tableContentStream.showText("F/H Impresion");
+            tableContentStream.showText("Nombre Cliente");
             tableContentStream.newLineAtOffset(columnWidths[4], 0);
             tableContentStream.showText("Subtotal");
             tableContentStream.newLineAtOffset(columnWidths[5], 0);
@@ -200,8 +243,6 @@ public class ReportePDF {
             tableContentStream.showText("Total");
             tableContentStream.newLineAtOffset(columnWidths[7], 0);
             tableContentStream.showText("DIF");
-            tableContentStream.newLineAtOffset(columnWidths[8], 0);
-            tableContentStream.showText("Numero de Documentos F.");
             tableContentStream.endText();
 
             // Establece el ancho de la línea para el contorno de la tabla
@@ -230,18 +271,71 @@ public class ReportePDF {
                 tableContentStream.lineTo(currentX, yPosition - marginY - 1);
                 tableContentStream.stroke();
             }
+            // Agrega los datos de la base de datos a la tabla
+            float textYPosition = yPositionEncabezado - fontSize - marginY;
+            int numeroProducto = 1; // Variable de contador para la numeración
+
+            for (Documentos documento : documentosList) {
+                Date fechaFactura = documento.getFecha_registro();
+                String fechaFormateada = dateFormat.format(fechaFactura);
+
+                if (fechaFactura != null
+                        && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
+                        && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))
+                        && (Tdocumento.equals("Todos") || documento.getTipodocumento().equals(Tdocumento))) {
+                    textYPosition -= tableHeight;  // Mueve la posición vertical hacia arriba para la próxima fila
+                    tableContentStream.beginText();
+                    tableContentStream.setFont(font, fontSize);
+                    tableContentStream.newLineAtOffset(headerXPosition + 4, textYPosition);
+                    // Ajusta según las propiedades de tu objeto Documentos
+                    tableContentStream.showText(fechaFormateada);
+                    tableContentStream.newLineAtOffset(columnWidths[0], 0);
+                    tableContentStream.showText(String.valueOf(documento.getIDfactura()));
+                    tableContentStream.newLineAtOffset(columnWidths[1], 0);
+                    tableContentStream.showText(documento.getTipodocumento());
+                    tableContentStream.newLineAtOffset(columnWidths[2], 0);
+                    tableContentStream.showText("Estatus");
+                    tableContentStream.newLineAtOffset(columnWidths[3], 0);
+                    tableContentStream.showText(documento.getNombre());
+                    tableContentStream.newLineAtOffset(columnWidths[4], 0);
+                    tableContentStream.showText(String.valueOf(documento.getSubtotal2()));
+                    tableContentStream.newLineAtOffset(columnWidths[5], 0);
+                    tableContentStream.showText(String.valueOf(documento.getImpuestos()));
+                    tableContentStream.newLineAtOffset(columnWidths[6], 0);
+                    tableContentStream.showText(String.valueOf(documento.getTotal()));
+                    tableContentStream.newLineAtOffset(columnWidths[7], 0);
+                    tableContentStream.showText(String.valueOf(documento.getDIF()));
+                    tableContentStream.newLineAtOffset(columnWidths[8], 0);
+
+                    tableContentStream.endText();
+                    numeroProducto++; // In
+                }
+
+            }
+            tableEndY = textYPosition;
+        }
+        return tableEndY;
+    }
+
+    private static void addImage(PDDocument document, PDPage page, ImageIcon imageIcon, float x, float y, float width, float height) throws IOException {
+        try {
+            Image image = imageIcon.getImage();
+            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bufferedImage.createGraphics();
+            bGr.drawImage(image, 0, 0, null);
+            bGr.dispose();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+
+            PDImageXObject pdImage = PDImageXObject.createFromByteArray(document, imageBytes, "image");
+            PDPageContentStream contentStream = new PDPageContentStream(document, page, AppendMode.APPEND, true);
+            contentStream.drawImage(pdImage, x, y, width, height);
+            contentStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private static void addImage(PDDocument document, PDPage page, String imagePath, float x, float y, float width, float height) throws IOException {
-        try (InputStream in = ReportePDF.class.getResourceAsStream(imagePath)) {
-            byte[] imageBytes = IOUtils.toByteArray(in);
-            PDImageXObject image = PDImageXObject.createFromByteArray(document, imageBytes, "image");
-            PDPageContentStream contentStream = new PDPageContentStream(document, page, AppendMode.APPEND, true);
-            contentStream.drawImage(image, x, y, width, height);
-            contentStream.close();
-        }
-    }
-     
-     
 }
