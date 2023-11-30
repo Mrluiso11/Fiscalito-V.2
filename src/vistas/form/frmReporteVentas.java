@@ -285,7 +285,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         System.out.println(fechaFormateada2);
 
         // Crear una instancia de la clase ReportePDF
-        ReportePDF reporte = new ReportePDF(fechaSeleccionada1, fechaSeleccionada2, tipoDocumentoSeleccionado, Tfacturado);
+        ReportePDF reporte = new ReportePDF(fechaSeleccionada1, fechaSeleccionada2, tipoDocumentoSeleccionado, Tfacturado,"Ventas");
 
         // Llamar al método main de esa instancia
         reporte.main(null);

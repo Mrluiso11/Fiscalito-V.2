@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
 
 /**
@@ -43,12 +44,14 @@ public class ReportePDF {
     private static Date fecha2;
     private static String Tdocumento;
     private static String TFacturado;
+    private static String rep;
 
-    public ReportePDF(Date fecha1, Date fecha2, String Tdocumento, String TFacturado) {
+    public ReportePDF(Date fecha1, Date fecha2, String Tdocumento, String TFacturado,String rep) {
         this.fecha1 = fecha1;
         this.fecha2 = fecha2;
         this.Tdocumento = Tdocumento;
         this.TFacturado = TFacturado;
+        this.rep = rep;
     }
 
     public static void main(String[] args) {
@@ -87,12 +90,25 @@ public class ReportePDF {
             addTable(Reportes, page, margin - 10, pageHeight - 70);
             contentStream.close();
 
-            // Después de agregar la tabla, agrega las líneas de texto en la parte derecha
-            // Guarda el documento y abre el archivo
-            File file = new File("document.pdf");
-            Reportes.save(file);
-            Reportes.close();
-            Desktop.getDesktop().open(file);
+            //File file = new File("Factura_" + documentos.getIDfactura() + ".pdf");
+            // Crear un diálogo de selección de archivo
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar PDF");
+// Establecer un nombre predeterminado
+            fileChooser.setSelectedFile(new File("Reporte_"+ rep +".pdf"));
+            // Mostrar el diálogo y obtener la opción del usuario
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                // Obtener la ubicación seleccionada por el usuario
+                File fileToSave = fileChooser.getSelectedFile();
+
+                // Guardar el documento en la ubicación seleccionada
+                Reportes.save(fileToSave);
+                Reportes.close();
+
+                Desktop.getDesktop().open(fileToSave);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
