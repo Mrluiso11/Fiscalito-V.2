@@ -40,7 +40,6 @@ public class Menu extends JPanel {
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.NOTE_ADD, "Catalogos", "Empresa", "Artículos", "Servicios", "Clientes"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.DVR, "Operacion", "Documentos"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.PIE_CHART_OUTLINED, "Reportes", "Reporte de Ventas", "Reporte de Creditos"));
-        addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.VIEW_LIST, "Herramientas", "Exportar Datos"));
         addMenuItem(new ModelMenuItem(GoogleMaterialDesignIcon.INSERT_EMOTICON, "ARC", "Sobre Fiscalito"));
     }
 

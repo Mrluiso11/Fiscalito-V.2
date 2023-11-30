@@ -45,6 +45,12 @@ public class Main extends javax.swing.JFrame {
                     showForm(new frmClientes());
                 } else if (index == 3 && indexSubMenu == 1) {
                     showForm(new frmDocumentos());
+                }else if (index == 4 && indexSubMenu == 1) {
+                    showForm(new frmReporteVentas());
+                }else if (index == 4 && indexSubMenu == 2) {
+                    showForm(new frmReporteCreditos());
+                }else if (index == 5 && indexSubMenu == 1) {
+                    showForm(new frmSobreFiscalito());
                 } else {
                     showForm(new Form_Empty(index + " " + indexSubMenu));
                 }

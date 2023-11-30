@@ -842,6 +842,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setEnabled(false);
         jScrollPane1.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jScrollPane1ComponentAdded(evt);
@@ -865,6 +866,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             }
         });
         TableDocumentos.setColumnSelectionAllowed(true);
+        TableDocumentos.setEnabled(false);
         jScrollPane1.setViewportView(TableDocumentos);
         TableDocumentos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
@@ -1637,14 +1639,18 @@ public class frmDocumentos extends javax.swing.JPanel {
         Documentos documentos = new Documentos();
         TipoDocumento();
         lblDIF.setText(String.format("%.2f", documentos.getDIF()));
-        insertBaseDatosD();
-        insertBaseDatosE();
-        LimpiarCampos();
-        generarID();
+        int opcion = JOptionPane.showConfirmDialog(null, "Confirmar CheckOut de Pedido", "Confirmación", JOptionPane.YES_NO_OPTION);
 
+            if (opcion == JOptionPane.YES_OPTION){
+              insertBaseDatosD();
+              insertBaseDatosE();
+              LimpiarCampos();
+              generarID();
+            }
         //SE CREA LA FACTURA
         /*FacturaPDF obj = new FacturaPDF();
         obj.main(new String[]{},lblIDfactura.getText());*/
+        
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void jScrollPane1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane1ComponentAdded

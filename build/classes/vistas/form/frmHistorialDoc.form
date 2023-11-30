@@ -84,6 +84,7 @@
           <Properties>
             <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
             <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jScrollPane1ComponentAdded"/>
@@ -111,6 +112,7 @@
                   </Table>
                 </Property>
                 <Property name="columnSelectionAllowed" type="boolean" value="true"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
@@ -207,18 +209,15 @@
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblMonto1" max="32767" attributes="0"/>
+                          <Component id="lblMonto4" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="formapg1" min="-2" pref="86" max="-2" attributes="0"/>
                                   <Component id="lblMonto3" min="-2" pref="131" max="-2" attributes="0"/>
+                                  <Component id="lblMonto2" min="-2" pref="131" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="lblMonto2" min="-2" pref="131" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="lblMonto4" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
