@@ -79,7 +79,7 @@ public class frmSobreFiscalito extends javax.swing.JPanel {
         txtaSobre.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         txtaSobre.setLineWrap(true);
         txtaSobre.setRows(6);
-        txtaSobre.setText("Fiscalito inicia en el 2013 con la misión facilitar el manejo de facturación fiscal por medio de su software. Nuestro proyecto consta del desarrollo y actualización de este programa de facturación fiscal con la Version 2.0, se diseñaron nuevas características y mejoras en su interfaz para que sea más amigable con el usuario al momento de utilizar programa de facturación fiscal.  Esto podría incluir la automatización de tareas repetitivas, la generación de informes fiscales específicos o la mejora de la usabilidad general del software. Adicional, la migración de datos de una base de datos antigua como FoxPro a SQL Lite para su administración correspondiente.");
+        txtaSobre.setText("Fiscalito inicia en el 2013 con la misión facilitar el manejo de facturación fiscal por medio de su software. Nuestro proyecto en el 2023 consta del desarrollo y actualización de este programa de facturación fiscal con la Version 2.0, se diseñaron nuevas características y mejoras en su interfaz para que sea más amigable con el usuario al momento de utilizar programa de facturación fiscal.  Esto podría incluir la automatización de tareas repetitivas, la generación de informes fiscales específicos o la mejora de la usabilidad general del software. Adicional, la migración de datos de una base de datos antigua como FoxPro a SQL Lite para su administración correspondiente.");
         txtaSobre.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txtaSobre);
 
