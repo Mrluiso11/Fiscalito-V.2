@@ -281,8 +281,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         String fechaFormateada1 = dateFormat.format(fechaSeleccionada1);
         String fechaFormateada2 = dateFormat.format(fechaSeleccionada2);
 
-        System.out.println(fechaFormateada1);
-        System.out.println(fechaFormateada2);
+     
 
         // Crear una instancia de la clase ReportePDF
         ReportePDF reporte = new ReportePDF(fechaSeleccionada1, fechaSeleccionada2, tipoDocumentoSeleccionado, Tfacturado,"Ventas");
