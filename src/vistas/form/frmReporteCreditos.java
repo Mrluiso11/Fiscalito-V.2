@@ -26,6 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+
 /**
  *
  * @author admin
@@ -37,6 +38,7 @@ public class frmReporteCreditos extends javax.swing.JPanel {
      */
     public frmReporteCreditos() {
         initComponents();
+        cargarTableFactura();
     }
 
     /**
@@ -245,12 +247,106 @@ public class frmReporteCreditos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
-        
+        vargarTableFiltro();
     }//GEN-LAST:event_btnAplicarActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
 
     }//GEN-LAST:event_btnImprimirActionPerformed
+    private void cargarTableFactura() {
+        Connection conexion = Conexion.obtenerConexion();
+        DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
+
+        // Limpiar cualquier contenido que pueda haber en la tabla actualmente
+        modelo.setRowCount(0);
+
+        Documentos obj_documentos = new Documentos();
+
+        // Obtener la lista de productos desde la base de datos
+        List<Documentos> facturas = obj_documentos.selectDocumentos(conexion);
+
+        // Llenar la tabla con los datos filtrados por "Sí" en factura.getCredito()
+        for (Documentos factura : facturas) {
+            // Verificar si factura.getCredito() es "Sí"
+            // Verificar si factura.getCredito() es "Sí"
+            if ("Si".equals(factura.getCredito())) {
+                String td = "Credito";
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaFormateada = dateFormat.format(factura.getFecha_registro());
+
+                modelo.addRow(new Object[]{
+                    fechaFormateada,
+                    factura.getIDfactura(),
+                    factura.getTipodocumento(),
+                    td,
+                    factura.getNombre(),
+                    factura.getSubtotal2(),
+                    factura.getImpuestos(),
+                    factura.getTotal(),
+                    factura.getDIF()
+                });
+            }
+        }
+    }
+
+    private void vargarTableFiltro() {
+        Connection conexion = Conexion.obtenerConexion();
+        DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
+        modelo.setRowCount(0);
+        Documentos obj_documentos = new Documentos();
+
+        // Obtener la lista de productos desde la base de datos
+        List<Documentos> facturas = obj_documentos.selectDocumentos(conexion);
+
+        // Obtener las fechas seleccionadas de los JDateChooser
+        Date fechaSeleccionada1 = jdFecha1.getDate();
+        Date fechaSeleccionada2 = jdFecha2.getDate();
+
+        // Verificar si se ha seleccionado alguna fecha
+        if (fechaSeleccionada1 == null && fechaSeleccionada2 == null) {
+            // Mostrar un mensaje indicando que no se ha seleccionado ninguna fecha
+            JOptionPane.showMessageDialog(this, "No ha seleccionado ninguna fecha", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return;  // Salir del método ya que no hay fechas seleccionadas
+        }
+        // Variable para almacenar la suma total
+        float sumaTotal = 0.0f;
+
+        // Llenar la tabla con los datos filtrados por el rango de fechas y tipo de documento
+        for (Documentos factura : facturas) {
+            Date fechaFactura = factura.getFecha_registro();
+            String tipoDocumentoFactura = factura.getTipodocumento();
+            if ("Si".equals(factura.getCredito())) {
+            // Verificar si la fecha de la factura está dentro del rango seleccionado
+            // y si el tipo de documento coincide con la selección del JComboBox
+            if (fechaFactura != null
+                    && ((fechaSeleccionada1 == null || fechaFactura.after(fechaSeleccionada1) || fechaFactura.equals(fechaSeleccionada1))
+                    && (fechaSeleccionada2 == null || fechaFactura.before(fechaSeleccionada2) || fechaFactura.equals(fechaSeleccionada2)))) {
+
+                // Formatear la fecha
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaFormateada = dateFormat.format(fechaFactura);
+                String td = "Credito";
+                // Agregar fila a la tabla
+                modelo.addRow(new Object[]{
+                    fechaFormateada,
+                    factura.getIDfactura(),
+                    factura.getTipodocumento(),
+                    td,
+                    factura.getNombre(),
+                    factura.getSubtotal2(),
+                    factura.getImpuestos(),
+                    factura.getTotal(),
+                    factura.getDIF()});
+
+                // Sumar al total
+                sumaTotal += factura.getTotal();
+            }
+            }
+        }
+
+        // Establecer el valor total en lblTotalFacturado
+        lblTotalfacturado.setText(String.valueOf(sumaTotal));
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
