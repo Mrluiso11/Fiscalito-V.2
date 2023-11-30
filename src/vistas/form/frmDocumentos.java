@@ -842,7 +842,6 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.setEnabled(false);
         jScrollPane1.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jScrollPane1ComponentAdded(evt);
@@ -866,9 +865,8 @@ public class frmDocumentos extends javax.swing.JPanel {
             }
         });
         TableDocumentos.setColumnSelectionAllowed(true);
-        TableDocumentos.setEnabled(false);
         jScrollPane1.setViewportView(TableDocumentos);
-        TableDocumentos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        TableDocumentos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);

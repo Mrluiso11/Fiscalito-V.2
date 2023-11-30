@@ -102,8 +102,6 @@ public class frmAdministracion extends javax.swing.JPanel {
 
         Articulos.setBackground(new java.awt.Color(245, 245, 245));
 
-        jScrollPane1.setEnabled(false);
-
         tbl_Productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -112,8 +110,9 @@ public class frmAdministracion extends javax.swing.JPanel {
                 "Codigo de Artículo", "Nombre del Artículo", "Descripción", "Magnitud", "Precio", "Impuesto", "Fecha de registro", "Fecha de actualizacipon"
             }
         ));
-        tbl_Productos.setEnabled(false);
+        tbl_Productos.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tbl_Productos);
+        tbl_Productos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         btnBorrarP.setText("Borrar");
         btnBorrarP.addActionListener(new java.awt.event.ActionListener() {
@@ -198,8 +197,6 @@ public class frmAdministracion extends javax.swing.JPanel {
 
         Servicios.setBackground(new java.awt.Color(245, 245, 245));
 
-        jScrollPane2.setEnabled(false);
-
         tbl_Servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -208,8 +205,9 @@ public class frmAdministracion extends javax.swing.JPanel {
                 "Codigo del Servicio", "Nombre del Servicio", "Descripcion", "Tipo de Cobro", "Precio", "Impuesto", "Fecha de registo", "Fecha de actualizacion"
             }
         ));
-        tbl_Servicios.setEnabled(false);
+        tbl_Servicios.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(tbl_Servicios);
+        tbl_Servicios.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jPLServicios.setBackground(new java.awt.Color(255, 255, 255));
         jPLServicios.setPreferredSize(new java.awt.Dimension(867, 50));
@@ -311,8 +309,6 @@ public class frmAdministracion extends javax.swing.JPanel {
             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
         );
 
-        jScrollPane3.setEnabled(false);
-
         tbl_Clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -321,8 +317,9 @@ public class frmAdministracion extends javax.swing.JPanel {
                 "Codigo del Cliente", "RUC", "Nombre", "Dirección", "Telefono 1", "Telefono 2", "Correo", "Observaciones", "Fecha de registro", "Fecha de actualización"
             }
         ));
-        tbl_Clientes.setEnabled(false);
+        tbl_Clientes.setColumnSelectionAllowed(true);
         jScrollPane3.setViewportView(tbl_Clientes);
+        tbl_Clientes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         btnActualizarC.setText("Actualizar");
         btnActualizarC.addActionListener(new java.awt.event.ActionListener() {
