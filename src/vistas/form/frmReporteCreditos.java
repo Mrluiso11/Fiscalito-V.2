@@ -13,6 +13,7 @@ import conexion.Conexion;
 import java.sql.Connection;
 import controladores.*;
 import documentgeneration.FacturaPDF;
+import documentgeneration.ReportePDF;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -39,6 +40,8 @@ public class frmReporteCreditos extends javax.swing.JPanel {
     public frmReporteCreditos() {
         initComponents();
         cargarTableFactura();
+        Forms formsPanel = new Forms(this, null);
+        applyTableStyles(TableFacturas, jScrollPane2);
     }
 
     /**
@@ -245,13 +248,37 @@ public class frmReporteCreditos extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+private void applyTableStyles(JTable table, JScrollPane scrollPane) {
+        TableStyler tableStyler = new TableStyler();
+        TableStyler.applyStyles(table);  // Aplica estilos a la tabla
+        tableStyler.fixTable(scrollPane); // Configura la apariencia del JScrollPane
+        CustomTableHeaderRenderer.applyStylesToHeader(table); // Aplica estilos al encabezado de la tabla
+    }
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
         vargarTableFiltro();
     }//GEN-LAST:event_btnAplicarActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+  Date fechaSeleccionada1 = jdFecha1.getDate();
+        Date fechaSeleccionada2 = jdFecha2.getDate();
+        String Tfacturado = lblTotalfacturado.getText();
+        // Verifica si ambas fechas están seleccionadas
+        if (fechaSeleccionada1 == null || fechaSeleccionada2 == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, selecciona ambas fechas antes de imprimir.", "Fechas no seleccionadas", JOptionPane.WARNING_MESSAGE);
+            return;  // Sale del método si las fechas no están seleccionadas
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaFormateada1 = dateFormat.format(fechaSeleccionada1);
+        String fechaFormateada2 = dateFormat.format(fechaSeleccionada2);
 
+        System.out.println(fechaFormateada1);
+        System.out.println(fechaFormateada2);
+
+        // Crear una instancia de la clase ReportePDF
+        ReportePDF reporte = new ReportePDF(fechaSeleccionada1, fechaSeleccionada2, null, Tfacturado);
+
+        // Llamar al método main de esa instancia
+        reporte.main(null);
     }//GEN-LAST:event_btnImprimirActionPerformed
     private void cargarTableFactura() {
         Connection conexion = Conexion.obtenerConexion();

@@ -44,11 +44,11 @@ public class ReportePDF {
     private static String Tdocumento;
     private static String TFacturado;
 
-    public ReportePDF(Date fecha1, Date fecha2,String Tdocumento,String TFacturado ) {
+    public ReportePDF(Date fecha1, Date fecha2, String Tdocumento, String TFacturado) {
         this.fecha1 = fecha1;
         this.fecha2 = fecha2;
-        this.Tdocumento=Tdocumento;
-        this.TFacturado=TFacturado;
+        this.Tdocumento = Tdocumento;
+        this.TFacturado = TFacturado;
     }
 
     public static void main(String[] args) {
@@ -130,7 +130,7 @@ public class ReportePDF {
         // Restaurar la fuente regular para el resto del texto
         contentStream.setFont(regularFont, fontSize2);
         contentStream.newLineAtOffset(0, -18);
-        contentStream.showText("Del: "+fechaFormateada1+"  Al: "+fechaFormateada2);
+        contentStream.showText("Del: " + fechaFormateada1 + "  Al: " + fechaFormateada2);
 
         contentStream.setFont(regularFont, fontSize3);
         contentStream.newLineAtOffset(0, -18);
@@ -138,12 +138,13 @@ public class ReportePDF {
 
         contentStream.setFont(regularFont, fontSize4);
         contentStream.newLineAtOffset(0, -18);
-        contentStream.showText("Total Facturado: "+ TFacturado);
+        contentStream.showText("Total Facturado: " + TFacturado);
 
         contentStream.endText();
     }
 
     private static float addTable(PDDocument document, PDPage page, float margin, float yStart) throws IOException {
+        String td = "";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Connection conexion = Conexion.obtenerConexion();
         Documentos documentos = new Documentos();
@@ -280,9 +281,14 @@ public class ReportePDF {
                 String fechaFormateada = dateFormat.format(fechaFactura);
 
                 if (fechaFactura != null
+                        && Tdocumento != null
                         && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
                         && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))
                         && (Tdocumento.equals("Todos") || documento.getTipodocumento().equals(Tdocumento))) {
+                     if ("Si".equals(documento.getCredito())) {
+                         td = "Credito";}else{
+                      td = "Caselado";
+                     }
                     textYPosition -= tableHeight;  // Mueve la posición vertical hacia arriba para la próxima fila
                     tableContentStream.beginText();
                     tableContentStream.setFont(font, fontSize);
@@ -294,7 +300,7 @@ public class ReportePDF {
                     tableContentStream.newLineAtOffset(columnWidths[1], 0);
                     tableContentStream.showText(documento.getTipodocumento());
                     tableContentStream.newLineAtOffset(columnWidths[2], 0);
-                    tableContentStream.showText("Estatus");
+                    tableContentStream.showText(td);
                     tableContentStream.newLineAtOffset(columnWidths[3], 0);
                     tableContentStream.showText(documento.getNombre());
                     tableContentStream.newLineAtOffset(columnWidths[4], 0);
@@ -309,6 +315,38 @@ public class ReportePDF {
 
                     tableContentStream.endText();
                     numeroProducto++; // In
+                } else if (fechaFactura != null
+                        && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
+                        && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))) {
+                    if ("Si".equals(documento.getCredito())) {
+                         td = "Credito";
+                        textYPosition -= tableHeight;  // Mueve la posición vertical hacia arriba para la próxima fila
+                        tableContentStream.beginText();
+                        tableContentStream.setFont(font, fontSize);
+                        tableContentStream.newLineAtOffset(headerXPosition + 4, textYPosition);
+                        // Ajusta según las propiedades de tu objeto Documentos
+                        tableContentStream.showText(fechaFormateada);
+                        tableContentStream.newLineAtOffset(columnWidths[0], 0);
+                        tableContentStream.showText(String.valueOf(documento.getIDfactura()));
+                        tableContentStream.newLineAtOffset(columnWidths[1], 0);
+                        tableContentStream.showText(documento.getTipodocumento());
+                        tableContentStream.newLineAtOffset(columnWidths[2], 0);
+                        tableContentStream.showText(td );
+                        tableContentStream.newLineAtOffset(columnWidths[3], 0);
+                        tableContentStream.showText(documento.getNombre());
+                        tableContentStream.newLineAtOffset(columnWidths[4], 0);
+                        tableContentStream.showText(String.valueOf(documento.getSubtotal2()));
+                        tableContentStream.newLineAtOffset(columnWidths[5], 0);
+                        tableContentStream.showText(String.valueOf(documento.getImpuestos()));
+                        tableContentStream.newLineAtOffset(columnWidths[6], 0);
+                        tableContentStream.showText(String.valueOf(documento.getTotal()));
+                        tableContentStream.newLineAtOffset(columnWidths[7], 0);
+                        tableContentStream.showText(String.valueOf(documento.getDIF()));
+                        tableContentStream.newLineAtOffset(columnWidths[8], 0);
+
+                        tableContentStream.endText();
+                        numeroProducto++; // In
+                    }
                 }
 
             }

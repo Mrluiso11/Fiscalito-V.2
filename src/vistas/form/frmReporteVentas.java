@@ -323,6 +323,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     }
 
     private void vargarTableFiltro() {
+        String td  = "";
         Connection conexion = Conexion.obtenerConexion();
         DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
         modelo.setRowCount(0);
@@ -359,7 +360,10 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                     && ((fechaSeleccionada1 == null || fechaFactura.after(fechaSeleccionada1) || fechaFactura.equals(fechaSeleccionada1))
                     && (fechaSeleccionada2 == null || fechaFactura.before(fechaSeleccionada2) || fechaFactura.equals(fechaSeleccionada2)))
                     && (tipoDocumentoSeleccionado.equals("Todos") || tipoDocumentoFactura.equals(tipoDocumentoSeleccionado))) {
-
+                if ("Si".equals(factura.getCredito())) {
+                         td = "Credito";}else{
+                      td = "Caselado";
+                     }
                 // Formatear la fecha
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaFormateada = dateFormat.format(fechaFactura);
@@ -369,7 +373,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                     fechaFormateada,
                     factura.getIDfactura(),
                     factura.getTipodocumento(),
-                    "Activo",
+                    td,
                     factura.getNombre(),
                     factura.getSubtotal2(),
                     factura.getImpuestos(),
