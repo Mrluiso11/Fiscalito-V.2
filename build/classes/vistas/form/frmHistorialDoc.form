@@ -24,8 +24,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
-              <Component id="bg" min="-2" pref="1126" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="bg" min="-2" pref="1146" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -33,7 +34,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="bg" pref="850" max="32767" attributes="0"/>
+              <Component id="bg" pref="844" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,18 +51,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnImprimir" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnImprimir" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -73,9 +72,9 @@
                   <Component id="jScrollPane1" min="-2" pref="332" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnImprimir" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnImprimir" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -145,10 +144,10 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblnombrecliente1" min="-2" pref="262" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jlabel45" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlabel41" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlabel46" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jlabel45" max="32767" attributes="0"/>
+                                          <Component id="jlabel41" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlabel46" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -175,31 +174,34 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane2" min="-2" pref="248" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="lblreferencia" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
-                                      <Component id="lblestado" min="-2" pref="104" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="lblReferencia" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
+                                      <Component id="lblEstado" min="-2" pref="104" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblFechaH" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblFechaH" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane2" min="-2" pref="248" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Monto1" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="lblFormaPago1" min="-2" pref="105" max="-2" attributes="0"/>
                           <Component id="jlabel55" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
                           <Component id="jlabel56" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Component id="jlabel58" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
-                              <Component id="Monto3" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
+                              <Component id="lblFormaPago3" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
                               <Component id="jlabel57" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
-                              <Component id="Monto4" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
-                              <Component id="Monto2" min="-2" pref="105" max="-2" attributes="0"/>
+                              <Component id="lblFormaPago4" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
+                              <Component id="lblFormaPago2" min="-2" pref="105" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -209,28 +211,21 @@
                                   <Component id="lblMonto1" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="formapg4" min="-2" max="-2" attributes="0"/>
                                           <Component id="formapg1" min="-2" pref="86" max="-2" attributes="0"/>
-                                          <Component id="formapg2" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblMonto3" min="-2" pref="131" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblMonto2" min="-2" pref="131" max="-2" attributes="0"/>
-                                  <Component id="formapg3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblMonto2" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="lblMonto4" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblMonto4" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -254,7 +249,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -275,18 +270,13 @@
                                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="Monto1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblFormaPago1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="formapg2" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jlabel56" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="Monto2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblMonto2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                      <Component id="jlabel56" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lblFormaPago2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMonto2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                   </Group>
@@ -294,7 +284,7 @@
                               <Component id="jlabel58" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="Monto3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblFormaPago3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jlabel43" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbltelefono1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblMonto3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -302,13 +292,10 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jlabel57" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="formapg4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jlabel57" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="Monto4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblFormaPago4" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblMonto4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -317,34 +304,24 @@
                                       <Component id="lbltelefono2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="lblMonto1" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblestado" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jlabel46" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jlabel45" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblreferencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" pref="41" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane2" min="-2" pref="137" max="-2" attributes="0"/>
-                                      <EmptySpace pref="42" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                                      <Component id="formapg3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlabel46" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jlabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblReferencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="194" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -455,7 +432,7 @@
                 <Property name="text" type="java.lang.String" value="Referencia :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblestado">
+            <Component class="javax.swing.JLabel" name="lblEstado">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>
@@ -471,12 +448,12 @@
                 <Property name="text" type="java.lang.String" value="Estado :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblreferencia">
+            <Component class="javax.swing.JLabel" name="lblReferencia">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Estado Doc"/>
+                <Property name="text" type="java.lang.String" value="NumeroRefer"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlabel55">
@@ -495,7 +472,7 @@
                 <Property name="text" type="java.lang.String" value="Monto Pago"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="Monto1">
+            <Component class="javax.swing.JLabel" name="lblFormaPago1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>
@@ -503,7 +480,7 @@
                 <Property name="text" type="java.lang.String" value="Monto"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="Monto3">
+            <Component class="javax.swing.JLabel" name="lblFormaPago3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>
@@ -519,7 +496,7 @@
                 <Property name="text" type="java.lang.String" value="Forma de Pago:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="Monto2">
+            <Component class="javax.swing.JLabel" name="lblFormaPago2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>
@@ -551,7 +528,7 @@
                 <Property name="text" type="java.lang.String" value="Forma de Pago:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="Monto4">
+            <Component class="javax.swing.JLabel" name="lblFormaPago4">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>
@@ -613,21 +590,6 @@
                 <Property name="text" type="java.lang.String" value="Fecha / Hora"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="formapg2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="formapg3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="formapg4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
@@ -648,7 +610,7 @@
                           <Component id="jlabel49" min="-2" max="-2" attributes="0"/>
                           <Component id="lblMontoTotal" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="103" max="32767" attributes="0"/>
+                      <EmptySpace pref="87" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jlabel48" min="-2" max="-2" attributes="0"/>
@@ -669,7 +631,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="lblTotal" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblSubTotal1" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="lblSubTotal2" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -688,11 +650,12 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jlabel50" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblSubTotal1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSubTotal2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -702,7 +665,6 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jlabel49" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jlabel48" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -718,7 +680,6 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jlabel47" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblImpuestoTotal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -825,7 +786,7 @@
                 <Property name="text" type="java.lang.String" value="ImpuestoTotal"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblSubTotal1">
+            <Component class="javax.swing.JLabel" name="lblSubTotal2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>

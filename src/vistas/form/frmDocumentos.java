@@ -1276,7 +1276,15 @@ public class frmDocumentos extends javax.swing.JPanel {
             new String [] {
                 "ID Factura", "Numero de cliente", "Nombre de Cliente", "Fecha de Facturación", "Monto Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(TableFacturas);
 
         jButton1.setText("Visualizar");
@@ -1493,7 +1501,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             Confirmcredito = "Si";
         } else {
             txtReferencia.setEnabled(false);
-            Confirmcredito = "no";
+            Confirmcredito = "No";
         }
         documentos.setCredito(Confirmcredito);
     }//GEN-LAST:event_chkCreditoActionPerformed

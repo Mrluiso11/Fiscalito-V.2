@@ -70,19 +70,19 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         lbltelefono1 = new javax.swing.JLabel();
         jlabel41 = new javax.swing.JLabel();
         jlabel45 = new javax.swing.JLabel();
-        lblestado = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
         jlabel46 = new javax.swing.JLabel();
-        lblreferencia = new javax.swing.JLabel();
+        lblReferencia = new javax.swing.JLabel();
         jlabel55 = new javax.swing.JLabel();
         formapg1 = new javax.swing.JLabel();
-        Monto1 = new javax.swing.JLabel();
-        Monto3 = new javax.swing.JLabel();
+        lblFormaPago1 = new javax.swing.JLabel();
+        lblFormaPago3 = new javax.swing.JLabel();
         jlabel57 = new javax.swing.JLabel();
-        Monto2 = new javax.swing.JLabel();
+        lblFormaPago2 = new javax.swing.JLabel();
         jlabel56 = new javax.swing.JLabel();
         lblMonto2 = new javax.swing.JLabel();
         jlabel58 = new javax.swing.JLabel();
-        Monto4 = new javax.swing.JLabel();
+        lblFormaPago4 = new javax.swing.JLabel();
         lblMonto3 = new javax.swing.JLabel();
         lblMonto1 = new javax.swing.JLabel();
         lblMonto4 = new javax.swing.JLabel();
@@ -90,9 +90,6 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         txtfDireccion = new javax.swing.JTextArea();
         jLabel45 = new javax.swing.JLabel();
         lblFechaH = new javax.swing.JLabel();
-        formapg2 = new javax.swing.JLabel();
-        formapg3 = new javax.swing.JLabel();
-        formapg4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jlabel44 = new javax.swing.JLabel();
         jlabel47 = new javax.swing.JLabel();
@@ -105,7 +102,7 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         lblDescGenTotal = new javax.swing.JLabel();
         lblDescLineaTotal = new javax.swing.JLabel();
         lblImpuestoTotal = new javax.swing.JLabel();
-        lblSubTotal1 = new javax.swing.JLabel();
+        lblSubTotal2 = new javax.swing.JLabel();
         jlabel53 = new javax.swing.JLabel();
         lblDiferencia = new javax.swing.JLabel();
         btnImprimir = new javax.swing.JButton();
@@ -182,14 +179,14 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         jlabel45.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         jlabel45.setText("Referencia :");
 
-        lblestado.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        lblestado.setText("Estado");
+        lblEstado.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
+        lblEstado.setText("Estado");
 
         jlabel46.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         jlabel46.setText("Estado :");
 
-        lblreferencia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        lblreferencia.setText("Estado Doc");
+        lblReferencia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
+        lblReferencia.setText("NumeroRefer");
 
         jlabel55.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         jlabel55.setText("Forma de Pago:");
@@ -197,17 +194,17 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         formapg1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         formapg1.setText("Monto Pago");
 
-        Monto1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        Monto1.setText("Monto");
+        lblFormaPago1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
+        lblFormaPago1.setText("Monto");
 
-        Monto3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        Monto3.setText("Monto");
+        lblFormaPago3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
+        lblFormaPago3.setText("Monto");
 
         jlabel57.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         jlabel57.setText("Forma de Pago:");
 
-        Monto2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        Monto2.setText("Monto");
+        lblFormaPago2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
+        lblFormaPago2.setText("Monto");
 
         jlabel56.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         jlabel56.setText("Forma de Pago:");
@@ -218,8 +215,8 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         jlabel58.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         jlabel58.setText("Forma de Pago:");
 
-        Monto4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        Monto4.setText("Monto");
+        lblFormaPago4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
+        lblFormaPago4.setText("Monto");
 
         lblMonto3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         lblMonto3.setText("MontoPago3");
@@ -241,12 +238,6 @@ public class frmHistorialDoc extends javax.swing.JFrame {
 
         lblFechaH.setText("Fecha / Hora");
 
-        formapg2.setText("jLabel2");
-
-        formapg3.setText("jLabel2");
-
-        formapg4.setText("jLabel2");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -264,10 +255,10 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblnombrecliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlabel45)
-                                    .addComponent(jlabel41)
-                                    .addComponent(jlabel46)))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jlabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel39)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,26 +276,28 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblreferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblestado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblFechaH)
-                        .addGap(205, 205, 205)))
+                                .addComponent(lblReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(156, 156, 156))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(lblFechaH)
+                            .addGap(205, 205, 205)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Monto1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFormaPago1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jlabel58, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Monto3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFormaPago3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlabel57, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Monto4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Monto2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblFormaPago4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFormaPago2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -312,20 +305,15 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                             .addComponent(lblMonto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(formapg4)
                                     .addComponent(formapg1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(formapg2)
                                     .addComponent(lblMonto3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMonto2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(formapg3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblMonto4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(lblMonto2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblMonto4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,57 +348,45 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                                     .addComponent(lblCedula1))
                                 .addGap(7, 7, 7))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(Monto1)
+                                .addComponent(lblFormaPago1)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(formapg2)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jlabel56)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Monto2)
-                                            .addComponent(lblMonto2))))
+                                .addComponent(jlabel56)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblFormaPago2)
+                                    .addComponent(lblMonto2))
                                 .addGap(18, 18, 18)))
                         .addComponent(jlabel58)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Monto3)
+                            .addComponent(lblFormaPago3)
                             .addComponent(jlabel43)
                             .addComponent(lbltelefono1)
                             .addComponent(lblMonto3))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlabel57)
-                                    .addComponent(formapg4))
+                                .addComponent(jlabel57)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Monto4)
+                                    .addComponent(lblFormaPago4)
                                     .addComponent(lblMonto4)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbltelefono2)))
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbltelefono2))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(lblMonto1)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblestado)
-                                    .addComponent(jlabel46))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlabel45)
-                                    .addComponent(lblreferencia))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 41, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(42, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(formapg3)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEstado)
+                            .addComponent(jlabel46))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlabel45)
+                            .addComponent(lblReferencia))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -448,8 +424,8 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         lblImpuestoTotal.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         lblImpuestoTotal.setText("ImpuestoTotal");
 
-        lblSubTotal1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        lblSubTotal1.setText("SubTotal");
+        lblSubTotal2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
+        lblSubTotal2.setText("SubTotal");
 
         jlabel53.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         jlabel53.setText("Total :");
@@ -466,7 +442,7 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlabel49)
                     .addComponent(lblMontoTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jlabel48)
@@ -483,7 +459,7 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblTotal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSubTotal1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSubTotal2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlabel47)
@@ -497,18 +473,18 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlabel50)
-                            .addComponent(lblSubTotal1))
+                            .addComponent(lblSubTotal2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlabel53)
                             .addComponent(lblTotal)))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jlabel49)
                                 .addComponent(jlabel48)
@@ -520,7 +496,6 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                                     .addComponent(lblDescGenTotal))
                                 .addComponent(lblMontoTotal)))
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jlabel47)
                                 .addComponent(lblImpuestoTotal))
@@ -543,15 +518,13 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnImprimir)
-                        .addGap(9, 9, 9)))
-                .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,9 +535,9 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnImprimir)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -572,14 +545,16 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 1126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 1146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE))
+                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -665,25 +640,38 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         lblFechaH.setText(fechaFormateada + "  Hora: " + horaFormateada);
         lblIDFactura.setText(String.valueOf(Id));
         lblTipoDoc.setText(documentos.getTipodocumento());
+        String ConfirmServicio;
+        String Referencia;
+        ConfirmServicio = documentos.getCredito();
+        Referencia = documentos.getReferencia();
+        if (ConfirmServicio.equals("Si")){
+            lblEstado.setText("Credito");
+            lblReferencia.setText(Referencia);
+        }
+        if(ConfirmServicio.equals("No")){
+            lblEstado.setText("Pagado");
+            lblReferencia.setText("No Aplica");
+        }
         lblnombrecliente1.setText(documentos.getNombre());
         lblCedula1.setText(documentos.getRUC());
         lbltelefono1.setText(documentos.getTelefono1());
         lbltelefono2.setText(documentos.getTelefono2());
-        formapg1.setText(documentos.getFormaPago1());
-        formapg2.setText(documentos.getFormaPago2());
-        formapg3.setText(documentos.getFormaPago3());
-        formapg4.setText(documentos.getFormaPago4());
+        txtfDireccion.setText(documentos.getDireccion());
+        lblFormaPago1.setText(documentos.getFormaPago1());
+        lblFormaPago2.setText(documentos.getFormaPago2());
+        lblFormaPago3.setText(documentos.getFormaPago3());
+        lblFormaPago4.setText(documentos.getFormaPago4());
         lblMonto1.setText(String.valueOf(documentos.getMontoPago1()));
         lblMonto2.setText(String.valueOf(documentos.getMontoPago2()));
         lblMonto3.setText(String.valueOf(documentos.getMontoPago3()));
         lblMonto4.setText(String.valueOf(documentos.getMontoPago4()));
-        lblMontoTotal.setText(String.valueOf(documentos.getMontoPrecio()));
-        lblDescLineaTotal.setText(String.valueOf(documentos.getSumaDescLinea()));
-        lblDescGenTotal.setText(String.valueOf(documentos.getSumaDescLinea()));
-        lblSubTotal1.setText(String.valueOf(documentos.getSubtotal1()));
-        lblTotal.setText(String.valueOf(documentos.getTotal()));
-        lblImpuestoTotal.setText(String.valueOf(documentos.getImpuestos()));
-        lblDiferencia.setText(String.valueOf(documentos.getDIF()));
+        lblMontoTotal.setText(String.format("%.2f", documentos.getMontoPrecio()));
+        lblDescLineaTotal.setText(String.format("%.2f", documentos.getSumaDescLinea()));
+        lblDescGenTotal.setText(String.format("%.2f", documentos.getSumaDescGen()));
+        lblSubTotal2.setText(String.format("%.2f", documentos.getSubtotal2()));
+        lblTotal.setText(String.format("%.2f", documentos.getTotal()));
+        lblImpuestoTotal.setText(String.format("%.2f", documentos.getSumaImpuesto()));
+        lblDiferencia.setText(String.format("%.2f", documentos.getDIF()));
         cargarTable(Id);
     }
 
@@ -717,17 +705,10 @@ public class frmHistorialDoc extends javax.swing.JFrame {
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Monto1;
-    private javax.swing.JLabel Monto2;
-    private javax.swing.JLabel Monto3;
-    private javax.swing.JLabel Monto4;
     private javax.swing.JTable TableDocumentos;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JLabel formapg1;
-    private javax.swing.JLabel formapg2;
-    private javax.swing.JLabel formapg3;
-    private javax.swing.JLabel formapg4;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JPanel jPanel2;
@@ -755,7 +736,12 @@ public class frmHistorialDoc extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescGenTotal;
     private javax.swing.JLabel lblDescLineaTotal;
     private javax.swing.JLabel lblDiferencia;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFechaH;
+    private javax.swing.JLabel lblFormaPago1;
+    private javax.swing.JLabel lblFormaPago2;
+    private javax.swing.JLabel lblFormaPago3;
+    private javax.swing.JLabel lblFormaPago4;
     private javax.swing.JLabel lblIDFactura;
     private javax.swing.JLabel lblImpuestoTotal;
     private javax.swing.JLabel lblMonto1;
@@ -763,12 +749,11 @@ public class frmHistorialDoc extends javax.swing.JFrame {
     private javax.swing.JLabel lblMonto3;
     private javax.swing.JLabel lblMonto4;
     private javax.swing.JLabel lblMontoTotal;
-    private javax.swing.JLabel lblSubTotal1;
+    private javax.swing.JLabel lblReferencia;
+    private javax.swing.JLabel lblSubTotal2;
     private javax.swing.JLabel lblTipoDoc;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JLabel lblestado;
     private javax.swing.JLabel lblnombrecliente1;
-    private javax.swing.JLabel lblreferencia;
     private javax.swing.JLabel lbltelefono1;
     private javax.swing.JLabel lbltelefono2;
     private javax.swing.JTextArea txtfDireccion;
