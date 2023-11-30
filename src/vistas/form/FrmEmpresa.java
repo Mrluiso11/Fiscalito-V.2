@@ -490,6 +490,11 @@ public class FrmEmpresa extends javax.swing.JPanel {
         btnLimpiar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setFocusPainted(false);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -569,7 +574,83 @@ public class FrmEmpresa extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
+        Connection conexion = Conexion.obtenerConexion();
+        if (conexion != null) {
+            Empresa obj_insertEmpresa = new Empresa();
+            obj_insertEmpresa.setRuc(txtRUC.getText().trim());
+            obj_insertEmpresa.setNombre(txtNombreEmpresa.getText().trim());
+            obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
+            obj_insertEmpresa.setDv(txtDV.getText().trim());
+            obj_insertEmpresa.setPais(txtPais.getText().trim());
+            obj_insertEmpresa.setProvincia(txtProvincia.getText().trim());
+            obj_insertEmpresa.setDistrito(txtDistrito.getText().trim());
+            obj_insertEmpresa.setCorregimiento(txtCorreguimiento.getText().trim());
+            obj_insertEmpresa.setUrbanizacion(txtUrbanizacion.getText().trim());
+            obj_insertEmpresa.setCalle(txtCalle.getText().trim());
+            obj_insertEmpresa.setCasa(txtNCasa.getText().trim());
+            obj_insertEmpresa.setLocal(txtLocal.getText().trim());
+            obj_insertEmpresa.setPiso(txtPiso.getText().trim());
+            obj_insertEmpresa.setCorreo_empresa(txtCorreo.getText().trim());
+            obj_insertEmpresa.setActividades(txtaActividades.getText().trim());
+            obj_insertEmpresa.setObservaciones(txtaObervaciones.getText().trim());
+            obj_insertEmpresa.setTelefono1(txtTelefono1.getText().trim());
+            obj_insertEmpresa.setTelefono2(txtTelefono2.getText().trim());
+            obj_insertEmpresa.setFax1(txtFax1.getText().trim());
+            obj_insertEmpresa.setFax2(txtFax2.getText().trim());
+            obj_insertEmpresa.setPrimer_nombre_representante(txtRNombre.getText().trim());
+            obj_insertEmpresa.setSegundo_nombre_representante(txtRSegundoNombre.getText().trim());
+            obj_insertEmpresa.setApellido_paterno(txtRApellidoPaterno.getText().trim());
+            obj_insertEmpresa.setApellido_materno(txtRApellidoMaterno.getText().trim());
+            obj_insertEmpresa.setCedula(txtRCedula.getText().trim());
+            obj_insertEmpresa.setDv_representante(txtRDV.getText().trim());
+            obj_insertEmpresa.setTelefono1_representante(txtRTelefono1.getText().trim());
+            obj_insertEmpresa.setTelefono2_representante(txtRTelefono2.getText().trim());
+            obj_insertEmpresa.setCorreo_representante(txtRCorreo.getText().trim());
+            obj_insertEmpresa.setNombre_gerente(txtGNombre.getText().trim());
+            obj_insertEmpresa.setCedula_gerente(txtGCedula.getText().trim());
+            obj_insertEmpresa.setDv_gerente(txtGDV.getText().trim());
+            obj_insertEmpresa.setTelefono_gerente1(txtGTelefono1.getText().trim());
+            obj_insertEmpresa.setTelefono_gerente2(txtGTelefono2.getText().trim());
+            obj_insertEmpresa.setCorreo_gerente(txtGCorreo.getText().trim());
+            obj_insertEmpresa.setOtros(txtaOtros.getText().trim());
+            //obj_insertEmpresa.setFecha_actualizacion(new Date());
+
+            // Insertar la imagen en la base de datos
+            if (selectedImageL != null) {
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(selectedImageL, "jpg", baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    obj_insertEmpresa.setLogo_factura(imageBytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (localSelectedImage != null) {
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(localSelectedImage, "jpg", baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    obj_insertEmpresa.setLogo_empresa(imageBytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("selectedImageL es nulo. Asegúrate de que la imagen esté cargada correctamente.");
+            }
+
+            //se ingresa informacion 
+            if (obj_insertEmpresa.updateEmpresa(conexion)) {
+                // Show a success message using JOptionPane
+                JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+            } else {
+                // Show an error message using JOptionPane
+                JOptionPane.showMessageDialog(this, "Error al insertar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            Conexion.cerrarConexion(conexion);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
@@ -741,7 +822,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
                 System.out.println("selectedImageL es nulo. Asegúrate de que la imagen esté cargada correctamente.");
             }
 
-            // Attempt to insert data
+            //se ingresa informacion 
             if (obj_insertEmpresa.insertEmpresa(conexion)) {
                 // Show a success message using JOptionPane
                 JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
@@ -812,6 +893,48 @@ public class FrmEmpresa extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_lblFotoEmpresaMouseClicked
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        LimpiarCampos();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void LimpiarCampos(){
+        txtRUC.setText(" ");
+        txtNombreEmpresa.setText(" ");
+        txtNombreComercialEmpresa.setText(" ");
+        txtDV.setText(" ");
+        txtPais.setText(" ");
+        txtProvincia.setText(" ");
+        txtDistrito.setText(" ");
+        txtCorreguimiento.setText(" ");
+        txtUrbanizacion.setText(" ");
+        txtCalle.setText(" ");
+        txtNCasa.setText(" ");
+        txtLocal.setText(" ");
+        txtPiso.setText(" ");
+        txtCorreo.setText(" ");
+        txtaActividades.setText(" ");
+        txtaObervaciones.setText(" ");
+        txtTelefono1.setText(" ");
+        txtTelefono2.setText(" ");
+        txtFax1.setText(" ");
+        txtFax2.setText(" ");
+        txtRNombre.setText(" ");
+        txtRSegundoNombre.setText(" ");
+        txtRApellidoPaterno.setText(" ");
+        txtRApellidoMaterno.setText(" ");
+        txtRCedula.setText(" ");
+        txtRDV.setText(" ");
+        txtRTelefono1.setText(" ");
+        txtRTelefono2.setText(" ");
+        txtRCorreo.setText(" ");
+        txtGNombre.setText(" ");
+        txtGCedula.setText(" ");
+        txtGDV.setText(" ");
+        txtGTelefono1.setText(" ");
+        txtGTelefono2.setText(" ");
+        txtGCorreo.setText(" ");
+        txtaOtros.setText(" ");  
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;

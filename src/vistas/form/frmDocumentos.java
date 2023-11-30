@@ -432,7 +432,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JSeparator();
         btnImprimir = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        btnRecalcular = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -588,13 +587,6 @@ public class frmDocumentos extends javax.swing.JPanel {
             }
         });
 
-        btnRecalcular.setText("Recalcular");
-        btnRecalcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecalcularActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -633,8 +625,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                                 .addGap(22, 22, 22)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnRecalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -691,13 +682,11 @@ public class frmDocumentos extends javax.swing.JPanel {
                 .addComponent(txtMontopago4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnRecalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(52, 52, 52)
                 .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(58, 58, 58)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         bg2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 0, 160, 840));
@@ -1537,12 +1526,15 @@ public class frmDocumentos extends javax.swing.JPanel {
                     documentos.setNombreproducto(model.getValueAt(i, 1).toString());
                     documentos.setConfirmservicio(model.getValueAt(i, 2).toString());
                     documentos.setDescripcion(model.getValueAt(i, 3).toString());
-                    documentos.setCantidad(Double.parseDouble(model.getValueAt(i, 5).toString())); // Ajusta según la estructura de tu tabla
                     documentos.setMagnitud(model.getValueAt(i, 4).toString());
+                    documentos.setCantidad(Double.parseDouble(model.getValueAt(i, 5).toString())); // Ajusta según la estructura de tu tabla
                     documentos.setPrecioProducto(Double.parseDouble(model.getValueAt(i, 6).toString())); // Ajusta según la estructura de tu tabla
                     documentos.setDescLinea(Double.parseDouble(model.getValueAt(i, 7).toString())); // Ajusta según la estructura de tu tabla
                     documentos.setDescGen(Double.parseDouble(model.getValueAt(i, 8).toString())); // Ajusta según la estructura de tu tabla
-                    documentos.setImpuestos(Double.parseDouble(model.getValueAt(i, 10).toString())); // Ajusta según la estructura de tu tabla
+                    documentos.setBase(Double.parseDouble(model.getValueAt(i, 9).toString()));
+                    documentos.setImpuestos(Double.parseDouble(model.getValueAt(i, 10).toString()));
+                    documentos.setImporteImpuesto(Double.parseDouble(model.getValueAt(i, 11).toString())); // Ajusta según la estructura de tu tabla
+                    documentos.setSubtotal1(Double.parseDouble(model.getValueAt(i, 12).toString()));
 
                     // Llama al método insertElementos para insertar en la base de datos
                     int filasAfectadas = documentos.insertElementos(conexion, documentos);
@@ -1746,22 +1738,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_chkDescLineaActionPerformed
 
-    /*info barra inferior
-    Cantidad = cantidad de productos
-    Monto = precio del producto sin impuesto y sin descuento
-    descuento linea= suma de los descuento de linea de los productos
-    descuenta general= suma de los descuento general de los productos
-    Subtotal = la suma de los precio de los producto sin impuesto y con descuento si este tiene 
-    Impuestos= la suma de los ImporteImpuesto de cada producto agregado a la lista
-    Total = Suma de los precios de los productos con ImporteImpuesto
-    DIF= diferencia de monto - total 
-     */
-
-    private void btnRecalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecalcularActionPerformed
-
-
-    }//GEN-LAST:event_btnRecalcularActionPerformed
-
     private void txtDescGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescGeneralActionPerformed
 
     }//GEN-LAST:event_txtDescGeneralActionPerformed
@@ -1843,7 +1819,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
-        
         cargarTableFiltro();
     }//GEN-LAST:event_btnAplicarActionPerformed
 
@@ -1911,7 +1886,6 @@ public class frmDocumentos extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscar2;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnRecalcular;
     private javax.swing.JButton btnRemover;
     private javax.swing.JComboBox<String> cboxFormapago1;
     private javax.swing.JComboBox<String> cboxFormapago2;

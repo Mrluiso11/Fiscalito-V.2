@@ -148,6 +148,11 @@ public class frmAdministracion extends javax.swing.JPanel {
         );
 
         btnEliminarTodo.setText("Eliminar Todo");
+        btnEliminarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTodoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ArticulosLayout = new javax.swing.GroupLayout(Articulos);
         Articulos.setLayout(ArticulosLayout);
@@ -423,6 +428,10 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     private void btnBorrarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSActionPerformed
         delectServicio();
     }//GEN-LAST:event_btnBorrarSActionPerformed
+
+    private void btnEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTodoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarTodoActionPerformed
 
     // Método para eliminar un cliente
     private void delectCliente() {
