@@ -85,7 +85,6 @@ public class Form_Dashboard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblActividades = new javax.swing.JLabel();
         imgFotoEmpresa = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1096, 934));
@@ -198,14 +197,6 @@ public class Form_Dashboard extends javax.swing.JPanel {
         imgFotoEmpresa.setBackground(new java.awt.Color(255, 255, 255));
         bg.add(imgFotoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, 170, 160));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 800, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,16 +209,9 @@ public class Form_Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*ReportePDF obj = new ReportePDF();
-        obj.main(new String[]{});
-*/
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JLabel imgFotoEmpresa;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
