@@ -1645,9 +1645,10 @@ public class frmDocumentos extends javax.swing.JPanel {
               LimpiarCampos();
               generarID();
             }
+            
         //SE CREA LA FACTURA
-        /*FacturaPDF obj = new FacturaPDF();
-        obj.main(new String[]{},lblIDfactura.getText());*/
+        FacturaPDF obj = new FacturaPDF();
+        obj.main(new String[]{},lblIDfactura.getText());
         
     }//GEN-LAST:event_btnImprimirActionPerformed
 

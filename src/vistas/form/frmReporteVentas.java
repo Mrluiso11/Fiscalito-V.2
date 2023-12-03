@@ -281,10 +281,8 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         String fechaFormateada1 = dateFormat.format(fechaSeleccionada1);
         String fechaFormateada2 = dateFormat.format(fechaSeleccionada2);
 
-     
-
         // Crear una instancia de la clase ReportePDF
-        ReportePDF reporte = new ReportePDF(fechaSeleccionada1, fechaSeleccionada2, tipoDocumentoSeleccionado, Tfacturado,"Ventas");
+        ReportePDF reporte = new ReportePDF(fechaSeleccionada1, fechaSeleccionada2, tipoDocumentoSeleccionado, Tfacturado, "Ventas");
 
         // Llamar al método main de esa instancia
         reporte.main(null);
@@ -304,25 +302,28 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         // Obtener la lista de productos desde la base de datos
         List<Documentos> facturas = obj_documentos.selectDocumentos(conexion);
         // Llenar la tabla con los datos
+
         for (Documentos factura : facturas) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String fechaFormateada = dateFormat.format(factura.getFecha_registro());
-
-            modelo.addRow(new Object[]{
-                fechaFormateada,
-                factura.getIDfactura(),
-                factura.getTipodocumento(),
-                "Pagado",
-                factura.getNombre(),
-                factura.getSubtotal2(),
-                factura.getImpuestos(),
-                factura.getTotal(),
-                factura.getDIF()});
+            if ("No".equalsIgnoreCase(factura.getCredito())) {
+                modelo.addRow(new Object[]{
+                    fechaFormateada,
+                    factura.getIDfactura(),
+                    factura.getTipodocumento(),
+                    factura.getCredito(),
+                    factura.getNombre(),
+                    factura.getSubtotal2(),
+                    factura.getImpuestos(),
+                    factura.getTotal(),
+                    factura.getDIF()});
+            }
         }
+
     }
 
     private void cargarTableFiltro() {
-        String td  = "";
+        String td = "";
         Connection conexion = Conexion.obtenerConexion();
         DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
         modelo.setRowCount(0);
@@ -358,11 +359,11 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
             if (fechaFactura != null
                     && ((fechaSeleccionada1 == null || fechaFactura.after(fechaSeleccionada1) || fechaFactura.equals(fechaSeleccionada1))
                     && (fechaSeleccionada2 == null || fechaFactura.before(fechaSeleccionada2) || fechaFactura.equals(fechaSeleccionada2)))
-                    && (tipoDocumentoSeleccionado.equals("Todos") || tipoDocumentoFactura.equals(tipoDocumentoSeleccionado))) {
-                if ("Si".equals(factura.getCredito())) {
-                         td = "Credito";}else{
-                      td = "Cancelado";
-                     }
+                    && (tipoDocumentoSeleccionado.equals("Todos") || tipoDocumentoFactura.equals(tipoDocumentoSeleccionado)) && "No".equalsIgnoreCase(factura.getCredito())) {
+                
+                if ("No".equalsIgnoreCase(factura.getCredito())) {
+                    td = "Cancelado";
+                }
                 // Formatear la fecha
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaFormateada = dateFormat.format(fechaFactura);

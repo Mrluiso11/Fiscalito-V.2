@@ -38,7 +38,7 @@ public class ReportePDF {
 
     private static final String FONT_PATH = "/fonts/arial.ttf";
     private static final String BOLD_FONT_PATH = "/fonts/Arial_Bold.ttf";
-    private static final String IMAGE_PATH = "/img/maleta.jpg";
+   //private static final String IMAGE_PATH = "/img/maleta.jpg";
 
     private static Date fecha1;
     private static Date fecha2;
@@ -67,7 +67,7 @@ public class ReportePDF {
             empresa.selectEmpresa(conexion);
             Conexion.cerrarConexion(conexion);
 
-            byte[] logoFacturaBytes = empresa.getLogo_empresa();
+            byte[] logoFacturaBytes = empresa.getLogo_factura();
             ImageIcon fotoFactura = new ImageIcon(logoFacturaBytes);
 
             float margin = 10;
@@ -291,7 +291,7 @@ public class ReportePDF {
             // Agrega los datos de la base de datos a la tabla
             float textYPosition = yPositionEncabezado - fontSize - marginY;
             int numeroProducto = 1; // Variable de contador para la numeración
-
+            System.out.println(Tdocumento);
             for (Documentos documento : documentosList) {
                 Date fechaFactura = documento.getFecha_registro();
                 String fechaFormateada = dateFormat.format(fechaFactura);
@@ -300,10 +300,11 @@ public class ReportePDF {
                         && Tdocumento != null
                         && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
                         && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))
-                        && (Tdocumento.equals("Todos") || documento.getTipodocumento().equals(Tdocumento))) {
-                     if ("Si".equals(documento.getCredito())) {
-                         td = "Credito";}else{
-                      td = "Caselado";
+                        && (Tdocumento.equals("Todos") || documento.getTipodocumento().equals(Tdocumento))&&("No".equalsIgnoreCase(documento.getCredito()))&&(rep.equals("Ventas"))) {
+                    System.out.println("Reportes de ventas");
+                     if ("No".equalsIgnoreCase(documento.getCredito())) {
+                         td = "Cancelado";}else{
+                      td = "Credito";
                      }
                     textYPosition -= tableHeight;  // Mueve la posición vertical hacia arriba para la próxima fila
                     tableContentStream.beginText();
@@ -333,7 +334,7 @@ public class ReportePDF {
                     numeroProducto++; // In
                 } else if (fechaFactura != null
                         && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
-                        && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))) {
+                        && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))&&("Si".equals(documento.getCredito()))&&(rep.equals("Credito"))) {
                     if ("Si".equals(documento.getCredito())) {
                          td = "Credito";
                         textYPosition -= tableHeight;  // Mueve la posición vertical hacia arriba para la próxima fila
