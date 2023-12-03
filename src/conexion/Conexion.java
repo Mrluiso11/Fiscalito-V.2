@@ -13,8 +13,8 @@ import java.sql.SQLException;
  * @author dbpan
  */
 public class Conexion {
-    //private static final String URL = "jdbc:sqlite:./database/dbfisk";
-   private static final String URL = "jdbc:sqlite:C:/database/dbfisk";
+    private static final String URL = "jdbc:sqlite:./database/dbfisk";
+   //private static final String URL = "jdbc:sqlite:C:/database/dbfisk";
 
 
 
