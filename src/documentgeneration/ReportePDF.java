@@ -150,7 +150,7 @@ public class ReportePDF {
 
         contentStream.setFont(regularFont, fontSize3);
         contentStream.newLineAtOffset(0, -18);
-        contentStream.showText("Todos lo tipos de documentos");
+        contentStream.showText("Tipo de Documento Reporte");
 
         contentStream.setFont(regularFont, fontSize4);
         contentStream.newLineAtOffset(0, -18);
@@ -301,7 +301,7 @@ public class ReportePDF {
                         && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
                         && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))
                         && (Tdocumento.equals("Todos") || documento.getTipodocumento().equals(Tdocumento))&&("No".equalsIgnoreCase(documento.getCredito()))&&(rep.equals("Ventas"))) {
-                    System.out.println("Reportes de ventas");
+                        System.out.println("Reportes de ventas");
                      if ("No".equalsIgnoreCase(documento.getCredito())) {
                          td = "Cancelado";}else{
                       td = "Credito";
