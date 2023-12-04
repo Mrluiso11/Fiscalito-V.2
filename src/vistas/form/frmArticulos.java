@@ -265,6 +265,9 @@ public class frmArticulos extends javax.swing.JPanel {
         btnBuscar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnNuevo.setEnabled(false);
+        txtCodigoProducto.setEnabled(false);
+        txtCodigoProducto.setBackground(new Color(214, 234, 248));
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     /**

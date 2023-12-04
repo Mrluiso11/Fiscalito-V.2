@@ -268,6 +268,8 @@ public class frmServicio extends javax.swing.JPanel {
         btnBuscar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnNuevo.setEnabled(false);
+        txtCodigoServicio.setEnabled(false);
+        txtCodigoServicio.setBackground(new Color(214, 234, 248));
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed

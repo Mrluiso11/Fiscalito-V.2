@@ -152,7 +152,7 @@ public class frmClientes extends javax.swing.JPanel {
         lblNumCliente.setBackground(new java.awt.Color(255, 255, 255));
         lblNumCliente.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         lblNumCliente.setForeground(new java.awt.Color(102, 102, 102));
-        bg.add(lblNumCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        bg.add(lblNumCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 20, 20));
 
         btnEliminar.setBackground(new java.awt.Color(102, 153, 255));
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -570,6 +570,9 @@ public class frmClientes extends javax.swing.JPanel {
         btnBuscar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnNuevo.setEnabled(false);
+        lblNumCliente.setText("");
+       txtRUC.setEnabled(false);
+        txtRUC.setBackground(new Color(214, 234, 248));
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed

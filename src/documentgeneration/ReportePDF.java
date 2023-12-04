@@ -151,7 +151,7 @@ public class ReportePDF {
 
         contentStream.setFont(regularFont, fontSize3);
         contentStream.newLineAtOffset(0, -18);
-        contentStream.showText("Tipo de Documento Reporte");
+        contentStream.showText("Reporte de: "+ rep);
 
 
         contentStream.setFont(regularFont, fontSize4);
