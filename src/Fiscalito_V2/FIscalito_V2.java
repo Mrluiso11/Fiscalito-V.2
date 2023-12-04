@@ -19,7 +19,6 @@ public class Fiscalito_V2 {
     public static void main(String[] args) {
         Main m = new Main();
         m.setVisible(true);
-        
     }
     
 }

@@ -124,6 +124,7 @@ public class ReportePDF {
     }
 
     private static void addRightAlignedText(PDPageContentStream contentStream, PDType0Font regularFont, PDType0Font boldFont, float pageWidth, float pageHeight, float margin) throws IOException {
+        
         contentStream.beginText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fechaFormateada1 = dateFormat.format(fecha1);
@@ -141,7 +142,7 @@ public class ReportePDF {
         // Usar la fuente negrita solo para "DOCUMENTO NO FISCAL"
         contentStream.setFont(regularFont, fontSize1);
         contentStream.newLineAtOffset(pageWidth - margin - 70 - textWidth1, pageHeight + margin - 20);
-        contentStream.showText("Reporte de Documentos Impresos");
+        contentStream.showText("Historial Documentos Impresos");
 
         // Restaurar la fuente regular para el resto del texto
         contentStream.setFont(regularFont, fontSize2);
@@ -151,6 +152,7 @@ public class ReportePDF {
         contentStream.setFont(regularFont, fontSize3);
         contentStream.newLineAtOffset(0, -18);
         contentStream.showText("Tipo de Documento Reporte");
+
 
         contentStream.setFont(regularFont, fontSize4);
         contentStream.newLineAtOffset(0, -18);
