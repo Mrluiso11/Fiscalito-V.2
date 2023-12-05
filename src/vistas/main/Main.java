@@ -30,13 +30,13 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void menuSelected(int index, int indexSubMenu) {
                 if (index == 0 && indexSubMenu == 0) {
-                    showForm(new Form_Dashboard());
+                    showForm(new frm_Dashboard());
                 }else if (index == 1 && indexSubMenu == 1) {
                     showForm(new frmOpciones());
                 }else if (index == 1 && indexSubMenu == 2) {
                     showForm(new frmAdministracion());
                 } else if (index == 2 && indexSubMenu == 1) {
-                    showForm(new FrmEmpresa());
+                    showForm(new frmEmpresa());
                 } else if (index == 2 && indexSubMenu == 2) {
                     showForm(new frmArticulos());
                 } else if (index == 2 && indexSubMenu == 3) {
@@ -89,7 +89,6 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setFocusableWindowState(false);
         setResizable(false);
 
         background.setBackground(new java.awt.Color(245, 245, 245));

@@ -20,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author dbpan
  */
-public class FrmEmpresa extends javax.swing.JPanel {
+public class frmEmpresa extends javax.swing.JPanel {
 
     private Container bgContainer;
     private BufferedImage localSelectedImage = null;
@@ -30,7 +30,7 @@ public class FrmEmpresa extends javax.swing.JPanel {
     /**
      * Creates new form FrmEmpresa
      */
-    public FrmEmpresa() {
+    public frmEmpresa() {
         initComponents();
         bgContainer = this;
         Forms formsPanel = new Forms(bgContainer, jPTitle);

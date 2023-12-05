@@ -129,7 +129,7 @@ public class frmReporteCreditos extends javax.swing.JPanel {
         TableFacturas.setEnabled(false);
         jScrollPane2.setViewportView(TableFacturas);
 
-        jdFecha2.setDateFormatString("yyyy-MM-dd");
+        jdFecha2.setDateFormatString("dd-MM-yyyy");
 
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(0, 204, 204));
@@ -139,7 +139,7 @@ public class frmReporteCreditos extends javax.swing.JPanel {
         jLabel42.setForeground(new java.awt.Color(0, 204, 204));
         jLabel42.setText("Del");
 
-        jdFecha1.setDateFormatString("yyyy-MM-dd");
+        jdFecha1.setDateFormatString("dd-MM-yyyy");
 
         lblTotalfacturado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTotalfacturado.setText("TotalFacturado");
@@ -267,7 +267,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
             JOptionPane.showMessageDialog(null, "Por favor, selecciona ambas fechas antes de imprimir.", "Fechas no seleccionadas", JOptionPane.WARNING_MESSAGE);
             return;  // Sale del método si las fechas no están seleccionadas
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String fechaFormateada1 = dateFormat.format(fechaSeleccionada1);
         String fechaFormateada2 = dateFormat.format(fechaSeleccionada2);
 
@@ -295,7 +295,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
             // Verificar si factura.getCredito() es "Sí"
             if ("Si".equals(factura.getCredito())) {
                 String td = "Credito";
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String fechaFormateada = dateFormat.format(factura.getFecha_registro());
 
                 modelo.addRow(new Object[]{
@@ -347,7 +347,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                     && (fechaSeleccionada2 == null || fechaFactura.before(fechaSeleccionada2) || fechaFactura.equals(fechaSeleccionada2)))) {
 
                 // Formatear la fecha
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String fechaFormateada = dateFormat.format(fechaFactura);
                 String td = "Credito";
                 // Agregar fila a la tabla

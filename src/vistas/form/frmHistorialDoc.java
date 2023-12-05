@@ -35,7 +35,7 @@ public class frmHistorialDoc extends javax.swing.JFrame {
     public frmHistorialDoc(String id) {
         initComponents();
         setIconImage(getIconImage());
-        setTitle("Factura");
+        setTitle("Factura "+id);
         Forms formsPanel = new Forms(this, null);
         // Inicializa el campo id con el valor pasado al constructor
         this.id = id;
@@ -108,6 +108,7 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         btnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         bg.setPreferredSize(new java.awt.Dimension(388, 60));
 

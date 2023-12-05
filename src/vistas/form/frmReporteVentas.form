@@ -299,7 +299,7 @@
             </Container>
             <Component class="com.toedter.calendar.JDateChooser" name="jdFecha2">
               <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel41">
@@ -326,7 +326,7 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jdFecha1">
               <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTotalFacturado">

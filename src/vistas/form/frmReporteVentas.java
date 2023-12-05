@@ -141,7 +141,7 @@ public class frmReporteVentas extends javax.swing.JPanel {
         TableFacturas.setEnabled(false);
         jScrollPane2.setViewportView(TableFacturas);
 
-        jdFecha2.setDateFormatString("yyyy-MM-dd");
+        jdFecha2.setDateFormatString("dd-MM-yyyy");
 
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(0, 204, 204));
@@ -151,7 +151,7 @@ public class frmReporteVentas extends javax.swing.JPanel {
         jLabel42.setForeground(new java.awt.Color(0, 204, 204));
         jLabel42.setText("Del");
 
-        jdFecha1.setDateFormatString("yyyy-MM-dd");
+        jdFecha1.setDateFormatString("dd-MM-yyyy");
 
         lblTotalFacturado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTotalFacturado.setText("TotalFacturado");
@@ -277,7 +277,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
             return;  // Sale del método si las fechas no están seleccionadas
         }
         String tipoDocumentoSeleccionado = jctipoDocumentos.getSelectedItem().toString();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String fechaFormateada1 = dateFormat.format(fechaSeleccionada1);
         String fechaFormateada2 = dateFormat.format(fechaSeleccionada2);
 
@@ -293,7 +293,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         // TODO add your handling code here:
     }//GEN-LAST:event_jctipoDocumentosActionPerformed
     private void cargarTableFactura() {
-
+        String td = "";
         Connection conexion = Conexion.obtenerConexion();
         DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();
         // Limpiar cualquier contenido que pueda haber en la tabla actualmente
@@ -304,14 +304,17 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
         // Llenar la tabla con los datos
 
         for (Documentos factura : facturas) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             String fechaFormateada = dateFormat.format(factura.getFecha_registro());
             if ("No".equalsIgnoreCase(factura.getCredito())) {
+                if ("No".equalsIgnoreCase(factura.getCredito())) {
+                     td = "Cancelado";
+                }
                 modelo.addRow(new Object[]{
                     fechaFormateada,
                     factura.getIDfactura(),
                     factura.getTipodocumento(),
-                    factura.getCredito(),
+                    td,
                     factura.getNombre(),
                     factura.getSubtotal2(),
                     factura.getImpuestos(),
@@ -360,12 +363,12 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                     && ((fechaSeleccionada1 == null || fechaFactura.after(fechaSeleccionada1) || fechaFactura.equals(fechaSeleccionada1))
                     && (fechaSeleccionada2 == null || fechaFactura.before(fechaSeleccionada2) || fechaFactura.equals(fechaSeleccionada2)))
                     && (tipoDocumentoSeleccionado.equals("Todos") || tipoDocumentoFactura.equals(tipoDocumentoSeleccionado)) && "No".equalsIgnoreCase(factura.getCredito())) {
-                
+
                 if ("No".equalsIgnoreCase(factura.getCredito())) {
                     td = "Cancelado";
                 }
                 // Formatear la fecha
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String fechaFormateada = dateFormat.format(fechaFactura);
 
                 // Agregar fila a la tabla

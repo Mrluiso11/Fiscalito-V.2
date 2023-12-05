@@ -126,7 +126,7 @@ public class ReportePDF {
     private static void addRightAlignedText(PDPageContentStream contentStream, PDType0Font regularFont, PDType0Font boldFont, float pageWidth, float pageHeight, float margin) throws IOException {
         
         contentStream.beginText();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String fechaFormateada1 = dateFormat.format(fecha1);
         String fechaFormateada2 = dateFormat.format(fecha2);
         float fontSize1 = 12;
@@ -163,7 +163,7 @@ public class ReportePDF {
 
     private static float addTable(PDDocument document, PDPage page, float margin, float yStart) throws IOException {
         String td = "";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Connection conexion = Conexion.obtenerConexion();
         Documentos documentos = new Documentos();
         java.util.List<Documentos> documentosList = new ArrayList<>();

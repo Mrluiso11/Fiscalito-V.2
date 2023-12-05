@@ -7,9 +7,9 @@ import java.sql.Connection;
 import javax.swing.ImageIcon;
 import documentgeneration.*;
 
-public class Form_Dashboard extends javax.swing.JPanel {
+public class frm_Dashboard extends javax.swing.JPanel {
 
-    public Form_Dashboard() {
+    public frm_Dashboard() {
         initComponents();
         init();
     }

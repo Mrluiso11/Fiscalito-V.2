@@ -1285,7 +1285,7 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visualizar_icon.png"))); // NOI18N
 
-        jdFecha2.setDateFormatString("yyyy-MM-dd");
+        jdFecha2.setDateFormatString("dd-MM-yyyy");
 
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(0, 204, 204));
@@ -1295,7 +1295,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel42.setForeground(new java.awt.Color(0, 204, 204));
         jLabel42.setText("Del");
 
-        jdFecha1.setDateFormatString("yyyy-MM-dd");
+        jdFecha1.setDateFormatString("dd-MM-yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1465,7 +1465,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         List<Documentos> facturas = obj_documentos.selectDocumentos(conexion);
         // Llenar la tabla con los datos
         for (Documentos factura : facturas) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             String fechaFormateada = dateFormat.format(factura.getFecha_registro());
 
             modelo.addRow(new Object[]{
@@ -1865,7 +1865,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                     && (fechaSeleccionada2 == null || fechaFactura.before(fechaSeleccionada2) || fechaFactura.equals(fechaSeleccionada2)))
                     && (tipoDocumentoSeleccionado.equals("Todos") || tipoDocumentoFactura.equals(tipoDocumentoSeleccionado))) {
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String fechaFormateada = dateFormat.format(fechaFactura);
 
                 modelo.addRow(new Object[]{
