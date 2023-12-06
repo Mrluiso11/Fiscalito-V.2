@@ -216,6 +216,9 @@
                                   <Component id="formapg1" min="-2" pref="86" max="-2" attributes="0"/>
                                   <Component id="lblMonto3" min="-2" pref="131" max="-2" attributes="0"/>
                                   <Component id="lblMonto2" min="-2" pref="131" max="-2" attributes="0"/>
+                                  <Component id="formapg2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="formapg3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="formapg4" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -267,7 +270,10 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="lblFormaPago1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jlabel56" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlabel56" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="formapg2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="lblFormaPago2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -276,7 +282,10 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jlabel58" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jlabel58" min="-2" max="-2" attributes="0"/>
+                                  <Component id="formapg3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblFormaPago3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -287,7 +296,10 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="jlabel57" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jlabel57" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="formapg4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="lblFormaPago4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -464,7 +476,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Yu Gothic UI Semibold" size="13" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Monto Pago"/>
+                <Property name="text" type="java.lang.String" value="Forma Pago"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblFormaPago1">
@@ -583,6 +595,21 @@
             <Component class="javax.swing.JLabel" name="lblFechaH">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha / Hora"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="formapg2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="formapg3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel2"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="formapg4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel3"/>
               </Properties>
             </Component>
           </SubComponents>

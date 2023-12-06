@@ -32,6 +32,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -150,7 +151,7 @@ public class FacturaPDF {
         }
 
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss a");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm a");
 
         String fechaFormateada = formatoFecha.format(documentos.getFecha_registro());
         String horaFormateada = formatoHora.format(documentos.getFecha_registro());
@@ -264,7 +265,7 @@ public class FacturaPDF {
 
             // Agrega texto para cada columna del encabezado de la tabla
             tableContentStream.beginText();
-            tableContentStream.newLineAtOffset(headerXPosition + 4, yPositionEncabezado - fontSize);
+            tableContentStream.newLineAtOffset(headerXPosition + 10, yPositionEncabezado - fontSize);
             tableContentStream.showText("Codigo");
             tableContentStream.newLineAtOffset(columnWidths[0], 0);
             tableContentStream.showText("Articulo");
@@ -284,6 +285,7 @@ public class FacturaPDF {
             tableContentStream.showText("DescG.");
             tableContentStream.newLineAtOffset(columnWidths[8], 0);
             tableContentStream.showText("Subtotal");
+            
             tableContentStream.endText();
 
             // Establece el ancho de la línea para el contorno de la tabla
@@ -314,7 +316,7 @@ public class FacturaPDF {
             }
 
             // Agrega los datos de la base de datos a la tabla
-            float textYPosition = yPositionEncabezado - fontSize - marginY;
+            float textYPosition = yPositionEncabezado+ - fontSize - marginY;
             int numeroProducto = 1; // Variable de contador para la numeración
 
             for (Documentos documento : documentosList) {
@@ -448,30 +450,30 @@ public class FacturaPDF {
 
             float fontSize = 12;
             float offsetY = 15;  // Ajusta la distancia vertical entre las líneas
-
+            DecimalFormat df = new DecimalFormat("#.##");
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(textOffsetX + 10, textOffsetY - 10);
-            boxContentStream.showText("Total de Descuento en Linea:     " + String.valueOf(documentos.getTotal()));
+            boxContentStream.showText("Total de Descuento en Linea:     " + String.valueOf(Double.parseDouble(df.format( documentos.getTotal()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("Total de Descuento general:       " + String.valueOf(documentos.getSumaImpuesto()));
+            boxContentStream.showText("Total de Descuento general:       " + String.valueOf(Double.parseDouble(df.format( documentos.getSumaImpuesto()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("Subtotal:                                      " + String.valueOf(documentos.getSubtotal2()));
+            boxContentStream.showText("Subtotal:                                      " + String.valueOf(Double.parseDouble(df.format( documentos.getSubtotal2()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("Impuestos:                                  " + String.valueOf(documentos.getSumaDescGen()));
+            boxContentStream.showText("Impuestos:                                   " + String.valueOf(Double.parseDouble(df.format( documentos.getSumaDescGen()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("TOTAL:                                        " + String.valueOf(documentos.getSumaDescLinea()));
+            boxContentStream.showText("TOTAL:                                        " + String.valueOf(Double.parseDouble(df.format( documentos.getSumaDescLinea()))));
 
             boxContentStream.endText();
         }

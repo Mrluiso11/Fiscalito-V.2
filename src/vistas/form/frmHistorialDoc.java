@@ -35,7 +35,7 @@ public class frmHistorialDoc extends javax.swing.JFrame {
     public frmHistorialDoc(String id) {
         initComponents();
         setIconImage(getIconImage());
-        setTitle("Factura "+id);
+        setTitle("Factura " + id);
         Forms formsPanel = new Forms(this, null);
         // Inicializa el campo id con el valor pasado al constructor
         this.id = id;
@@ -90,6 +90,9 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         txtfDireccion = new javax.swing.JTextArea();
         jLabel45 = new javax.swing.JLabel();
         lblFechaH = new javax.swing.JLabel();
+        formapg2 = new javax.swing.JLabel();
+        formapg3 = new javax.swing.JLabel();
+        formapg4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jlabel44 = new javax.swing.JLabel();
         jlabel47 = new javax.swing.JLabel();
@@ -195,7 +198,7 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         jlabel55.setText("Forma de Pago:");
 
         formapg1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
-        formapg1.setText("Monto Pago");
+        formapg1.setText("Forma Pago");
 
         lblFormaPago1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 13)); // NOI18N
         lblFormaPago1.setText("Monto");
@@ -240,6 +243,12 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         jLabel45.setText("Fecha/ Hora Impresión :");
 
         lblFechaH.setText("Fecha / Hora");
+
+        formapg2.setText("jLabel1");
+
+        formapg3.setText("jLabel2");
+
+        formapg4.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -309,7 +318,10 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(formapg1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblMonto3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMonto2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblMonto2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(formapg2)
+                            .addComponent(formapg3)
+                            .addComponent(formapg4))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -348,13 +360,17 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblFormaPago1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jlabel56)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlabel56)
+                                    .addComponent(formapg2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblFormaPago2)
                                     .addComponent(lblMonto2))
                                 .addGap(18, 18, 18)))
-                        .addComponent(jlabel58)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlabel58)
+                            .addComponent(formapg3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFormaPago3)
@@ -364,7 +380,9 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(jlabel57)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlabel57)
+                                    .addComponent(formapg4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblFormaPago4)
@@ -642,11 +660,11 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         String Referencia;
         ConfirmServicio = documentos.getCredito();
         Referencia = documentos.getReferencia();
-        if (ConfirmServicio.equals("Si")){
+        if (ConfirmServicio.equalsIgnoreCase("Si")) {
             lblEstado.setText("Credito");
             lblReferencia.setText(Referencia);
         }
-        if(ConfirmServicio.equals("No")){
+        if (ConfirmServicio.equalsIgnoreCase("No")) {
             lblEstado.setText("Pagado");
             lblReferencia.setText("No Aplica");
         }
@@ -660,6 +678,10 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         lblFormaPago3.setText(documentos.getFormaPago3());
         lblFormaPago4.setText(documentos.getFormaPago4());
         lblMonto1.setText(String.valueOf(documentos.getMontoPago1()));
+        formapg1.setText(documentos.getFormaPago1());
+        formapg2.setText(documentos.getFormaPago2());
+        formapg3.setText(documentos.getFormaPago3());
+        formapg4.setText(documentos.getFormaPago4());
         lblMonto2.setText(String.valueOf(documentos.getMontoPago2()));
         lblMonto3.setText(String.valueOf(documentos.getMontoPago3()));
         lblMonto4.setText(String.valueOf(documentos.getMontoPago4()));
@@ -707,6 +729,9 @@ public class frmHistorialDoc extends javax.swing.JFrame {
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JLabel formapg1;
+    private javax.swing.JLabel formapg2;
+    private javax.swing.JLabel formapg3;
+    private javax.swing.JLabel formapg4;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JPanel jPanel2;
