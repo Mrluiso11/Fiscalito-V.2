@@ -283,6 +283,18 @@ public class frmArticulos extends javax.swing.JPanel {
         Articulos obj_insertProductos = new Articulos();
 
         // Verifica si el campo del Código de Producto está vacío.
+        if (txtNombreProducto.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El nombre de Producto no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombreProducto.requestFocus();
+        }
+        if (txtPrecio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El precio de Producto no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecio.requestFocus();
+        }
+        if (txtaDescripcion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El precio de Producto no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtaDescripcion.requestFocus();
+        }
         if (txtCodigoProducto.getText().trim().isEmpty()) {
             // Muestra un mensaje de error si el campo está vacío y pide al usuario que lo complete.
             JOptionPane.showMessageDialog(null, "El Codigo de Producto no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);

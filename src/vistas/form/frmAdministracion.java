@@ -31,7 +31,6 @@ import javax.swing.table.JTableHeader;
 public class frmAdministracion extends javax.swing.JPanel {
 
     Icon customIcon = new ImageIcon(getClass().getResource("/img/check_icon2.png"));
-    String vNombre = "";
 
     /**
      * Creates new form frmAdministracion

@@ -757,6 +757,71 @@ public class frmEmpresa extends javax.swing.JPanel {
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         Connection conexion = Conexion.obtenerConexion();
+        
+        if (txtNombreEmpresa.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El Nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombreEmpresa.requestFocus();
+        }
+        if (txtNombreComercialEmpresa.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El Nombre de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombreComercialEmpresa.requestFocus();
+        }
+        if (txtDV.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El DV de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDV.requestFocus();
+        }
+        if (txtPais.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El Pais de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPais.requestFocus();
+        }
+        if (txtProvincia.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El Provincia de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtProvincia.requestFocus();
+        }
+        if (txtDistrito.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El distrito de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDistrito.requestFocus();
+        }
+        if (txtCorreguimiento.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El corregimiento de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCorreguimiento.requestFocus();
+        }
+        if (txtCorreguimiento.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El corregimiento de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCorreguimiento.requestFocus();
+        }
+        if (txtCalle.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El calle de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCalle.requestFocus();
+        }
+        if (txtLocal.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El numero de local de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtLocal.requestFocus();
+        }
+        if (txtPiso.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El piso de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPiso.requestFocus();
+        }
+        if (txtCorreo.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El correo de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCorreo.requestFocus();
+        }
+        if (txtTelefono1.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El telefono de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtTelefono1.requestFocus();
+        }
+        if (txtTelefono2.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El telefono de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtTelefono2.requestFocus();
+        }
+        if (txtTelefono2.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El telefono de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtTelefono2.requestFocus();
+        }
+        if (txtRUC.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "El R.C.U o R.U.T. no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtRUC.requestFocus();
+        } else {
         if (conexion != null) {
             Empresa obj_insertEmpresa = new Empresa();
             obj_insertEmpresa.setRuc(txtRUC.getText().trim());
@@ -832,6 +897,7 @@ public class frmEmpresa extends javax.swing.JPanel {
             }
 
             Conexion.cerrarConexion(conexion);
+            }
         }
     }//GEN-LAST:event_btnImprimirActionPerformed
 

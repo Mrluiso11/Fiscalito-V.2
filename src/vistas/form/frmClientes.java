@@ -372,7 +372,37 @@ public class frmClientes extends javax.swing.JPanel {
         // Se crea un objeto de la clase "Clientes" para manejar la información del cliente a insertar o actualizar
         Clientes obj_insertClientes = new Clientes();
 
-        // Verifica si el campo de RUC está vacío
+        // Verifica si el campo está vacío
+        if (txtNombreCliente.getText().trim().isEmpty()) {
+            // Muestra un mensaje de error si el campo está vacío
+            JOptionPane.showMessageDialog(null, "El Nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombreCliente.requestFocus();
+        }
+        if (txtareaDireccion.getText().trim().isEmpty()) {
+            // Muestra un mensaje de error si el campo está vacío
+            JOptionPane.showMessageDialog(null, "La Direccion no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtareaDireccion.requestFocus();
+        }
+        if (txttelefono1.getText().trim().isEmpty()) {
+            // Muestra un mensaje de error si el campo está vacío
+            JOptionPane.showMessageDialog(null, "El telefono no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txttelefono1.requestFocus();
+        }
+        if (txtTelefono2.getText().trim().isEmpty()) {
+            // Muestra un mensaje de error si el campo está vacío
+            JOptionPane.showMessageDialog(null, "El telefono no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtTelefono2.requestFocus();
+        }
+        if (txtEmail.getText().trim().isEmpty()) {
+            // Muestra un mensaje de error si el campo está vacío
+            JOptionPane.showMessageDialog(null, "El email no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtEmail.requestFocus();
+        }
+        if (txtaObservaciones.getText().trim().isEmpty()) {
+            // Muestra un mensaje de error si el campo está vacío
+            JOptionPane.showMessageDialog(null, "El telefono no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtaObservaciones.requestFocus();
+        }
         if (txtRUC.getText().trim().isEmpty()) {
             // Muestra un mensaje de error si el campo está vacío
             JOptionPane.showMessageDialog(null, "El R.C.U no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);

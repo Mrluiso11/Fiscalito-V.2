@@ -278,6 +278,18 @@ public class frmServicio extends javax.swing.JPanel {
         Servicios obj_insertServicios = new Servicios();
 
         // Verifica si el campo del Código de Servicio está vacío.
+        if (txtNombreServicio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El nombre de Servicio no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombreServicio.requestFocus();
+        }
+        if (txtPrecio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El precio de Servicio no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecio.requestFocus();
+        }
+        if (txtaDescripcion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El descripcion de Servicio no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtaDescripcion.requestFocus();
+        }
         if (txtCodigoServicio.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El Codigo de Servicio no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCodigoServicio.requestFocus();
