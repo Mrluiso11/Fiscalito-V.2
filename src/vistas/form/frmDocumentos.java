@@ -1403,6 +1403,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } finally {
             // Cerrar la conexión a la base de datos aquí
         }
+        Conexion.cerrarConexion(conexion);
     }
 
     private void ObtenerNombreProducto() {
@@ -1475,6 +1476,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                 fechaFormateada, // Mostrar la fecha formateada en la tabla
                 factura.getTotal(),});
         }
+        Conexion.cerrarConexion(conexion);
     }
 
 
@@ -1670,6 +1672,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtDireccion.setText(cliente.getDireccion());
         txtTelefono1.setText(cliente.getTelefono1());
         txtTelefono2.setText(cliente.getTelefono2());
+        Conexion.cerrarConexion(conexion);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void chkServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkServicioActionPerformed

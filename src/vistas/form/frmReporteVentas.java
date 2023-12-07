@@ -322,6 +322,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                     factura.getDIF()});
             }
         }
+        Conexion.cerrarConexion(conexion);
 
     }
 
@@ -387,6 +388,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                 sumaTotal += factura.getTotal();
             }
         }
+        Conexion.cerrarConexion(conexion);
 
         // Establecer el valor total en lblTotalFacturado
         lblTotalFacturado.setText(String.valueOf(sumaTotal));

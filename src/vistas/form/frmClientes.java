@@ -524,6 +524,7 @@ public class frmClientes extends javax.swing.JPanel {
                 }
             }
         }
+        Conexion.cerrarConexion(conexion);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     public void inhabilitar() {

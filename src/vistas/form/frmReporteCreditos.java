@@ -311,6 +311,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
                 });
             }
         }
+        Conexion.cerrarConexion(conexion);
     }
 
     private void vargarTableFiltro() {
@@ -367,6 +368,7 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
             }
             }
         }
+        Conexion.cerrarConexion(conexion);
 
         // Establecer el valor total en lblTotalFacturado
         lblTotalfacturado.setText(String.valueOf(sumaTotal));

@@ -693,6 +693,8 @@ public class frmHistorialDoc extends javax.swing.JFrame {
         lblImpuestoTotal.setText(String.format("%.2f", documentos.getSumaImpuesto()));
         lblDiferencia.setText(String.format("%.2f", documentos.getDIF()));
         cargarTable(Id);
+        
+        Conexion.cerrarConexion(conexion);
     }
 
     private void cargarTable(int id) {
@@ -722,6 +724,8 @@ public class frmHistorialDoc extends javax.swing.JFrame {
                 producto.getSubtotal1()
             });
         }
+        
+        Conexion.cerrarConexion(conexion);
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

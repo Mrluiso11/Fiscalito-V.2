@@ -437,6 +437,7 @@ public class frmArticulos extends javax.swing.JPanel {
                 }
             }
         }
+        Conexion.cerrarConexion(conexion);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
 
