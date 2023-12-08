@@ -549,6 +549,12 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel32.setText("Monto del pago [1]");
 
+        txtMontopago1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontopago1KeyTyped(evt);
+            }
+        });
+
         jLabel33.setText("Forma de pago [2]");
 
         cboxFormapago2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
@@ -560,6 +566,11 @@ public class frmDocumentos extends javax.swing.JPanel {
                 txtMontopago2ActionPerformed(evt);
             }
         });
+        txtMontopago2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontopago2KeyTyped(evt);
+            }
+        });
 
         jLabel35.setText("Forma de pago [3]");
 
@@ -567,11 +578,23 @@ public class frmDocumentos extends javax.swing.JPanel {
 
         jLabel36.setText("Monto del pago[3]");
 
+        txtMontopago3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontopago3KeyTyped(evt);
+            }
+        });
+
         jLabel37.setText("Forma de pago [4]");
 
         cboxFormapago4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Efectivo", "Clave", "Visa", "MasterCard", "Amex", "Transferencia Bancaria", "Cheque", "T. Débito 1", "T. Credito 1", "T. Credito 2", "Cheque Banco1", "Cheque Banco 2", "Nota de Credito", "Otros" }));
 
         jLabel38.setText("Monto del pago");
+
+        txtMontopago4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontopago4KeyTyped(evt);
+            }
+        });
 
         btnImprimir.setText("Imprimir");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -712,6 +735,11 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtDescGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescGeneralActionPerformed(evt);
+            }
+        });
+        txtDescGeneral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescGeneralKeyTyped(evt);
             }
         });
 
@@ -998,14 +1026,32 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabel19.setText("Cantidad:");
 
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
+
         jLabel20.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabel20.setText("Precio Unitario :");
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
 
         chkDescLinea.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         chkDescLinea.setText("% Desc. Línea:");
         chkDescLinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkDescLineaActionPerformed(evt);
+            }
+        });
+
+        txtDescLinea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescLineaKeyTyped(evt);
             }
         });
 
@@ -1493,6 +1539,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         } else {
             txtReferencia.setEnabled(false);
             Confirmcredito = "No";
+            documentos.setReferencia("No aplica");
         }
         documentos.setCredito(Confirmcredito);
     }//GEN-LAST:event_chkCreditoActionPerformed
@@ -1636,10 +1683,27 @@ public class frmDocumentos extends javax.swing.JPanel {
     }
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        Documentos documentos = new Documentos();
-        TipoDocumento();
-        lblDIF.setText(String.format("%.2f", documentos.getDIF()));
-        int opcion = JOptionPane.showConfirmDialog(null, "Confirmar CheckOut de Pedido", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (txtMontopago1.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El primer monto a pagar no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtMontopago1.requestFocus();
+        }
+        if (txtMontopago2.getText().trim().isEmpty()) {
+            txtMontopago2.setText("0.00");
+        }
+        if (txtMontopago3.getText().trim().isEmpty()) {
+            txtMontopago3.setText("0.00");
+        }
+        if (txtMontopago4.getText().trim().isEmpty()) {
+            txtMontopago4.setText("0.00");
+        }
+        if (txtRUC.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Datos de cliente no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            txtRUC.requestFocus();
+        }else{
+            Documentos documentos = new Documentos();
+            TipoDocumento();
+            lblDIF.setText(String.format("%.2f", documentos.getDIF()));
+            int opcion = JOptionPane.showConfirmDialog(null, "Confirmar CheckOut de Pedido", "Confirmación", JOptionPane.YES_NO_OPTION);
 
             if (opcion == JOptionPane.YES_OPTION){
               insertBaseDatosD();
@@ -1648,9 +1712,10 @@ public class frmDocumentos extends javax.swing.JPanel {
               generarID();
             }
             
-        //SE CREA LA FACTURA
-        FacturaPDF obj = new FacturaPDF();
-        obj.main(new String[]{},lblIDfactura.getText());
+            //SE CREA LA FACTURA
+            FacturaPDF obj = new FacturaPDF();
+            obj.main(new String[]{},lblIDfactura.getText());  
+            }
         
     }//GEN-LAST:event_btnImprimirActionPerformed
 
@@ -1833,6 +1898,102 @@ public class frmDocumentos extends javax.swing.JPanel {
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         cargarTableFactura();
     }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCantidad.requestFocus();
+            txtCantidad.setText("");
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void txtDescGeneralKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescGeneralKeyTyped
+       //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDescGeneral.requestFocus();
+            txtDescGeneral.setText("");
+        }
+    }//GEN-LAST:event_txtDescGeneralKeyTyped
+
+    private void txtDescLineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescLineaKeyTyped
+        //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDescLinea.requestFocus();
+            txtDescLinea.setText("");
+        }
+    }//GEN-LAST:event_txtDescLineaKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecio.requestFocus();
+            txtPrecio.setText("");
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void txtMontopago1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago1KeyTyped
+        //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtMontopago1.requestFocus();
+            txtMontopago1.setText("");
+        }
+    }//GEN-LAST:event_txtMontopago1KeyTyped
+
+    private void txtMontopago2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago2KeyTyped
+        //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtMontopago2.requestFocus();
+            txtMontopago2.setText("");
+        }
+    }//GEN-LAST:event_txtMontopago2KeyTyped
+
+    private void txtMontopago3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago3KeyTyped
+        //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtMontopago3.requestFocus();
+            txtMontopago3.setText("");
+        }
+    }//GEN-LAST:event_txtMontopago3KeyTyped
+
+    private void txtMontopago4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago4KeyTyped
+        //verificar si el dato ingresado es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
+            txtMontopago4.requestFocus();
+            txtMontopago4.setText("");
+        }
+    }//GEN-LAST:event_txtMontopago4KeyTyped
     private void cargarTableFiltro() {
         Connection conexion = Conexion.obtenerConexion();
         DefaultTableModel modelo = (DefaultTableModel) TableFacturas.getModel();

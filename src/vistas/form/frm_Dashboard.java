@@ -110,7 +110,7 @@ public class frm_Dashboard extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Nombre De la razón social:");
+        jLabel3.setText("Nombre de la Razón Social:");
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N

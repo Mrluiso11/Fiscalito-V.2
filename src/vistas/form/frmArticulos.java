@@ -123,6 +123,17 @@ public class frmArticulos extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Descripción :");
         bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
         bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 220, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -448,6 +459,22 @@ public class frmArticulos extends javax.swing.JPanel {
     private void cbxProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProductosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxProductosActionPerformed
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        //verificar si el dato ingresado en txtprecio es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecio.requestFocus();
+            txtPrecio.setText("");
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
     public void inhabilitar() {
         // Deshabilita campos y botones

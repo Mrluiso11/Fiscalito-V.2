@@ -270,6 +270,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMontopago1">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMontopago1KeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel33">
                   <Properties>
@@ -310,6 +313,7 @@
                 <Component class="javax.swing.JTextField" name="txtMontopago2">
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMontopago2ActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMontopago2KeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel35">
@@ -349,6 +353,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMontopago3">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMontopago3KeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel37">
                   <Properties>
@@ -387,6 +394,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMontopago4">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMontopago4KeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator2">
                 </Component>
@@ -579,6 +589,7 @@
                 <Component class="javax.swing.JTextField" name="txtDescGeneral">
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDescGeneralActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDescGeneralKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTelefono1">
@@ -1151,6 +1162,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCantidad">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCantidadKeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel20">
                   <Properties>
@@ -1161,6 +1175,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtPrecio">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPrecioKeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="chkDescLinea">
                   <Properties>
@@ -1174,6 +1191,9 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtDescLinea">
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDescLineaKeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel21">
                   <Properties>

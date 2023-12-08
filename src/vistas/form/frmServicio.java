@@ -128,6 +128,12 @@ public class frmServicio extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Tipo de cobro:");
         bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
         bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 220, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -422,6 +428,18 @@ public class frmServicio extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        //verificar si el dato ingresado en txtprecio es un numero
+        char validar=evt.getKeyChar();
+        
+        if (Character.isLetter(validar)){
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Ingresar solo Numeros", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPrecio.requestFocus();
+            txtPrecio.setText("");
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
     public void inhabilitar() {
         // Deshabilita campos y botones para evitar la edición.
