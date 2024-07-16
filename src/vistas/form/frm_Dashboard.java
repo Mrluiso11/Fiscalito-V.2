@@ -32,7 +32,7 @@ public class frm_Dashboard extends javax.swing.JPanel {
         lblNombreEmpresa.setText(empresa.getNombre());
         lblNombreComercialEmpresa.setText(empresa.getNombre_comercial());
         lblRUC.setText(empresa.getRuc());
-        lblDireccion.setText(empresa.getPais() + "," + empresa.getProvincia() + "," + empresa.getDistrito());
+        lblDireccion.setText(empresa.getPais() + ", " + empresa.getProvincia() + ", " + empresa.getDistrito());
         lblTelefono.setText(empresa.getTelefono1() + " / " + empresa.getTelefono2());
         lblDV.setText(empresa.getDv());
         lblFax.setText(empresa.getFax1() + " / " + empresa.getFax2());
