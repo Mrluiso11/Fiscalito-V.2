@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
  * @author admin
  */
 public class Servicios {
+
     DecimalFormat formato = new DecimalFormat("#0.00");
     // Atributos que representan las propiedades de un servicio.
     private String codigoservicio;
@@ -310,6 +311,20 @@ public class Servicios {
 
         return servicios;
     }
-    
-  
+    // Método para eliminar todos los registros de la tabla
+
+    public int deleteAllServicios(Connection conexion) {
+        String query = "DELETE FROM tbl_servicio";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            int filasAfectadas = statement.executeUpdate();
+            return filasAfectadas;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        }
+        return 0;
+    }
+
 }

@@ -62,6 +62,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         txtDescGeneral.setText(String.valueOf(0.00));
         txtDescLinea.setEnabled(false);
         txtReferencia.setEnabled(false);
+        txtDescGeneral.setEnabled(false);
         double sumaCantidad = 0.0;
 
     }
@@ -145,7 +146,6 @@ public class frmDocumentos extends javax.swing.JPanel {
         // Obtener la fecha actual del sistema
         Date fechaActual = new Date();
 
-        // Formatear la fecha en un formato específico (por ejemplo, "dd/MM/yyyy HH:mm:ss")
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
 
         lblFechaImpresion.setText(formatoFecha.format(fechaActual));
@@ -597,6 +597,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         });
 
         btnImprimir.setText("Imprimir");
+        btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirActionPerformed(evt);
@@ -604,6 +605,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         });
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -758,6 +760,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jcbNombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -1074,6 +1077,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         });
 
         btnRemover.setText("-");
+        btnRemover.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverActionPerformed(evt);
@@ -1081,6 +1085,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         });
 
         btnAgregar.setText("+");
+        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -1091,6 +1096,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel18.setText("Código Producto:");
 
         btnBuscar2.setText("Buscar");
+        btnBuscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscar2ActionPerformed(evt);
@@ -1295,6 +1301,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jLabel46.setText("Período Facturado");
 
         btnAplicar.setText("Aplicar");
+        btnAplicar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAplicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAplicarActionPerformed(evt);
@@ -1323,6 +1330,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         jScrollPane2.setViewportView(TableFacturas);
 
         jButton1.setText("Visualizar");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1547,7 +1555,97 @@ public class frmDocumentos extends javax.swing.JPanel {
     private void txtMontopago2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontopago2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontopago2ActionPerformed
+private void insertBaseDatosE() {
+    // Se obtiene una conexión a la base de datos
+    Connection conexion = Conexion.obtenerConexion();
 
+    if (conexion != null) {
+        try {
+            // Verifica que lblIDfactura.getText() sea un valor numérico antes de intentar convertirlo
+            int idFactura;
+            try {
+                idFactura = Integer.parseInt(lblIDfactura.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("Error: lblIDfactura no es un número válido.");
+                return;  // Sale del método si no se puede convertir a un número
+            }
+
+            // Itera sobre las filas de la tabla
+            DefaultTableModel model = (DefaultTableModel) TableDocumentos.getModel();
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Crea una nueva instancia de Documentos para cada fila
+                Documentos documentos = new Documentos();
+                documentos.setIDfactura(idFactura);
+
+                for (int j = 0; j <= 12; j++) {  // Ajusta el índice máximo según la estructura de tu tabla
+                    Object value = model.getValueAt(i, j);
+
+                    if (value != null) {
+                        switch (j) {
+                            case 0:
+                                documentos.setCodigoproducto(value.toString());
+                                break;
+                            case 1:
+                                documentos.setNombreproducto(value.toString());
+                                break;
+                            case 2:
+                                documentos.setConfirmservicio(value.toString());
+                                break;
+                            case 3:
+                                documentos.setDescripcion(value.toString());
+                                break;
+                            case 4:
+                                documentos.setMagnitud(value.toString());
+                                break;
+                            case 5:
+                                documentos.setCantidad(Double.parseDouble(value.toString())); // Ajusta según la estructura de tu tabla
+                                break;
+                            case 6:
+                                documentos.setPrecioProducto(Double.parseDouble(value.toString())); // Ajusta según la estructura de tu tabla
+                                break;
+                            case 7:
+                                documentos.setDescLinea(Double.parseDouble(value.toString())); // Ajusta según la estructura de tu tabla
+                                break;
+                            case 8:
+                                documentos.setDescGen(Double.parseDouble(value.toString())); // Ajusta según la estructura de tu tabla
+                                break;
+                            case 9:
+                                documentos.setBase(Double.parseDouble(value.toString()));
+                                break;
+                            case 10:
+                                documentos.setImpuestos(Double.parseDouble(value.toString()));
+                                break;
+                            case 11:
+                                documentos.setImporteImpuesto(Double.parseDouble(value.toString())); // Ajusta según la estructura de tu tabla
+                                break;
+                            case 12:
+                                documentos.setSubtotal1(Double.parseDouble(value.toString()));
+                                break;
+                            default:
+                                break;
+                        }
+                    } else {
+                        // Maneja el caso donde el valor es null (puedes imprimir un mensaje, lanzar una excepción, o manejarlo de otra manera)
+                        System.out.println("Valor en fila " + i + ", columna " + j + " es null.");
+                    }
+                }
+
+                // Llama al método insertElementos para insertar en la base de datos
+                int filasAfectadas = documentos.insertElementos(conexion, documentos);
+            }
+        } catch (Exception e) {
+            // Maneja otras excepciones de manera más específica si es posible
+            e.printStackTrace();
+            System.out.println("error " + e);
+        } finally {
+            // Cierra la conexión a la base de datos en el bloque finally para asegurar que se cierre
+            Conexion.cerrarConexion(conexion);
+        }
+    }
+}
+
+    /*
     private void insertBaseDatosE() {
         // Se obtiene una conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
@@ -1597,7 +1695,7 @@ public class frmDocumentos extends javax.swing.JPanel {
                 Conexion.cerrarConexion(conexion);
             }
         }
-    }
+    }*/
 
     private void insertBaseDatosD() {
         // Se obtiene una conexión a la base de datos
@@ -1662,10 +1760,13 @@ public class frmDocumentos extends javax.swing.JPanel {
                 obj_insert.setFormaPago4(cboxFormapago4.getSelectedItem().toString());
                 obj_insert.setMontoPago4(Double.parseDouble(txtMontopago4.getText()));
                 obj_insert.setDIF(Double.parseDouble(lblDIF.getText()));
-
-                String pattern = "dd/MM/yyyy HH:mm:ss";
+                // Obtener la fecha actual del sistema
+                Date fechaActual = new Date();
+                String pattern = "dd/MM/yyyy HH:mm:ss ";
                 SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
-                obj_insert.setFecha_registro(dateFormat.parse(lblFechaImpresion.getText()));
+                // Formatear la fecha a una cadena de texto
+                String fechaComoTexto = dateFormat.format(fechaActual);
+                obj_insert.setFecha_registro(dateFormat.parse(fechaComoTexto));
 
                 // Realiza la inserción en la base de datos
                 obj_insert.insertDocumentos(conexion, obj_insert);
@@ -1686,6 +1787,7 @@ public class frmDocumentos extends javax.swing.JPanel {
         if (txtMontopago1.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El primer monto a pagar no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtMontopago1.requestFocus();
+            return;
         }
         if (txtMontopago2.getText().trim().isEmpty()) {
             txtMontopago2.setText("0.00");
@@ -1699,24 +1801,26 @@ public class frmDocumentos extends javax.swing.JPanel {
         if (txtRUC.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Datos de cliente no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtRUC.requestFocus();
-        }else{
+        } else {
             Documentos documentos = new Documentos();
             TipoDocumento();
             lblDIF.setText(String.format("%.2f", documentos.getDIF()));
             int opcion = JOptionPane.showConfirmDialog(null, "Confirmar CheckOut de Pedido", "Confirmación", JOptionPane.YES_NO_OPTION);
 
-            if (opcion == JOptionPane.YES_OPTION){
-              insertBaseDatosD();
-              insertBaseDatosE();
-              LimpiarCampos();
-              generarID();
+            if (opcion == JOptionPane.YES_OPTION) {
+                insertBaseDatosD();
+                insertBaseDatosE();
+                LimpiarCampos();
+                generarID();
+                //SE CREA LA FACTURA
+                FacturaPDF obj = new FacturaPDF();
+                obj.main(new String[]{}, lblIDfactura.getText());
+            } else {
+                return;
             }
-            
-            //SE CREA LA FACTURA
-            FacturaPDF obj = new FacturaPDF();
-            obj.main(new String[]{},lblIDfactura.getText());  
-            }
-        
+
+        }
+
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void jScrollPane1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane1ComponentAdded
@@ -1880,7 +1984,7 @@ public class frmDocumentos extends javax.swing.JPanel {
             Object valorCelda = modelo.getValueAt(filaSeleccionada, 0);
             if (valorCelda != null) {
                 String ruc = valorCelda.toString();
-                
+
                 // Pasa el valor de ruc al constructor de frmHistorialDoc
                 frmHistorialDoc obj = new frmHistorialDoc(ruc);
                 obj.setVisible(true);
@@ -1901,9 +2005,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtCantidad.requestFocus();
@@ -1912,10 +2016,10 @@ public class frmDocumentos extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void txtDescGeneralKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescGeneralKeyTyped
-       //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        //verificar si el dato ingresado es un numero
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtDescGeneral.requestFocus();
@@ -1925,9 +2029,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void txtDescLineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescLineaKeyTyped
         //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtDescLinea.requestFocus();
@@ -1937,9 +2041,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
         //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtPrecio.requestFocus();
@@ -1949,9 +2053,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void txtMontopago1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago1KeyTyped
         //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtMontopago1.requestFocus();
@@ -1961,9 +2065,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void txtMontopago2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago2KeyTyped
         //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtMontopago2.requestFocus();
@@ -1973,9 +2077,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void txtMontopago3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago3KeyTyped
         //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtMontopago3.requestFocus();
@@ -1985,9 +2089,9 @@ public class frmDocumentos extends javax.swing.JPanel {
 
     private void txtMontopago4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontopago4KeyTyped
         //verificar si el dato ingresado es un numero
-        char validar=evt.getKeyChar();
-        
-        if (Character.isLetter(validar)){
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Ingresar solo Números", "Error", JOptionPane.ERROR_MESSAGE);
             txtMontopago4.requestFocus();

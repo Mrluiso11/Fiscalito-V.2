@@ -487,7 +487,7 @@ public class Documentos {
             statement.setString(26, documentos.getFormaPago4());
             statement.setDouble(27, documentos.getMontoPago4());
             // Formatear la fecha a "yyyy-MM-dd HH:mm:ss"
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String fechaFormateada = sdf.format(documentos.getFecha_registro());
 
             // Utilizar la fecha formateada en el PreparedStatement

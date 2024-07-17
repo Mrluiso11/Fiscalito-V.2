@@ -52,7 +52,6 @@ public class frmAdministracion extends javax.swing.JPanel {
         jTabbedPane1.setUI(new CustomTabbedPaneUI());
         applyStylesToTitlePanel(jPLServicios);
         applyStylesToTitlePanel(jPLCLientes);
-        
 
     }
 
@@ -114,6 +113,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         tbl_Productos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         btnBorrarP.setText("Borrar");
+        btnBorrarP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBorrarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarPActionPerformed(evt);
@@ -121,6 +121,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         });
 
         btnActualizarP.setText("Actualizar");
+        btnActualizarP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarPActionPerformed(evt);
@@ -150,6 +151,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         );
 
         btnEliminarTodo.setText("Eliminar Todo");
+        btnEliminarTodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarTodoActionPerformed(evt);
@@ -231,6 +233,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         );
 
         btnActualizarS.setText("Actualizar");
+        btnActualizarS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizarS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarSActionPerformed(evt);
@@ -238,6 +241,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         });
 
         btnBorrarS.setText("Borrar");
+        btnBorrarS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBorrarS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarSActionPerformed(evt);
@@ -245,6 +249,12 @@ public class frmAdministracion extends javax.swing.JPanel {
         });
 
         btnEliminarTodoS.setText("Eliminar Todo");
+        btnEliminarTodoS.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarTodoS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTodoSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ServiciosLayout = new javax.swing.GroupLayout(Servicios);
         Servicios.setLayout(ServiciosLayout);
@@ -321,6 +331,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         tbl_Clientes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         btnActualizarC.setText("Actualizar");
+        btnActualizarC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarCActionPerformed(evt);
@@ -328,6 +339,7 @@ public class frmAdministracion extends javax.swing.JPanel {
         });
 
         btnBorrarC.setText("Borrar");
+        btnBorrarC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBorrarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarCActionPerformed(evt);
@@ -335,6 +347,12 @@ public class frmAdministracion extends javax.swing.JPanel {
         });
 
         btnEliminarTodoC.setText("Eliminar Todo");
+        btnEliminarTodoC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarTodoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTodoCActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ClientesLayout = new javax.swing.GroupLayout(Clientes);
         Clientes.setLayout(ClientesLayout);
@@ -436,8 +454,124 @@ private void applyTableStyles(JTable table, JScrollPane scrollPane) {
     }//GEN-LAST:event_btnBorrarSActionPerformed
 
     private void btnEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTodoActionPerformed
-        // TODO add your handling code here:
+        // Establecer la conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear una instancia de la clase Clientes para gestionar clientes
+        Articulos articulo = new Articulos();
+        int opcion = JOptionPane.showConfirmDialog(
+                null,
+                "¿Está seguro de querer eliminar  los Artículos?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (opcion == JOptionPane.YES_OPTION) {
+
+            // Llamar al método "deleteProductoporCodigo" en la clase "Articulos" para eliminar el artículo de la base de datos
+            int filasAfectadas = articulo.deleteAllProductos(conexion);
+
+            // Cerrar la conexión a la base de datos
+            Conexion.cerrarConexion(conexion);
+            // Verificar si se eliminaron filas con éxito
+            if (filasAfectadas > 0) {
+                // Mostrar un mensaje de éxito si se eliminaron filas
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Se han eliminado  los Artículos de la tabla con éxito.",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE,
+                        customIcon
+                );
+            } else {
+                // Mostrar un mensaje de error si no se eliminaron filas
+                JOptionPane.showMessageDialog(
+                        null,
+                        "No se pudo eliminar los Artículos.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
     }//GEN-LAST:event_btnEliminarTodoActionPerformed
+
+    private void btnEliminarTodoSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTodoSActionPerformed
+        // Establecer la conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear una instancia de la clase Clientes para gestionar clientes
+        Servicios servicio = new Servicios();
+        int opcion = JOptionPane.showConfirmDialog(
+                null,
+                "¿Está seguro de querer eliminar  los Servicios?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (opcion == JOptionPane.YES_OPTION) {
+
+            // Llamar al método "deleteProductoporCodigo" en la clase "Articulos" para eliminar el artículo de la base de datos
+            int filasAfectadas = servicio.deleteAllServicios(conexion);
+
+            // Cerrar la conexión a la base de datos
+            Conexion.cerrarConexion(conexion);
+            // Verificar si se eliminaron filas con éxito
+            if (filasAfectadas > 0) {
+                // Mostrar un mensaje de éxito si se eliminaron filas
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Se han eliminado  los Servicios de la tabla con éxito.",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE,
+                        customIcon
+                );
+            } else {
+                // Mostrar un mensaje de error si no se eliminaron filas
+                JOptionPane.showMessageDialog(
+                        null,
+                        "No se pudo eliminar los Servicios.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }//GEN-LAST:event_btnEliminarTodoSActionPerformed
+
+    private void btnEliminarTodoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTodoCActionPerformed
+        // Establecer la conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+        // Crear una instancia de la clase Clientes para gestionar clientes
+        Clientes cliente = new Clientes();
+        int opcion = JOptionPane.showConfirmDialog(
+                null,
+                "¿Está seguro de querer eliminar  los Clientes?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (opcion == JOptionPane.YES_OPTION) {
+
+            // Llamar al método "deleteProductoporCodigo" en la clase "Articulos" para eliminar el artículo de la base de datos
+           int filasAfectadas = cliente.deleteAllClientes(conexion);
+
+            // Cerrar la conexión a la base de datos
+            Conexion.cerrarConexion(conexion);
+            // Verificar si se eliminaron filas con éxito
+            if (filasAfectadas > 0) {
+                // Mostrar un mensaje de éxito si se eliminaron filas
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Se han eliminado  los Clientes de la tabla con éxito.",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE,
+                        customIcon
+                );
+            } else {
+                // Mostrar un mensaje de error si no se eliminaron filas
+                JOptionPane.showMessageDialog(
+                        null,
+                        "No se pudo eliminar los Clientes.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }//GEN-LAST:event_btnEliminarTodoCActionPerformed
 
     // Método para eliminar un cliente
     private void delectCliente() {

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +39,7 @@ public class ReportePDF {
 
     private static final String FONT_PATH = "/fonts/arial.ttf";
     private static final String BOLD_FONT_PATH = "/fonts/Arial_Bold.ttf";
-   //private static final String IMAGE_PATH = "/img/maleta.jpg";
+    //private static final String IMAGE_PATH = "/img/maleta.jpg";
 
     private static Date fecha1;
     private static Date fecha2;
@@ -46,7 +47,7 @@ public class ReportePDF {
     private static String TFacturado;
     private static String rep;
 
-    public ReportePDF(Date fecha1, Date fecha2, String Tdocumento, String TFacturado,String rep) {
+    public ReportePDF(Date fecha1, Date fecha2, String Tdocumento, String TFacturado, String rep) {
         this.fecha1 = fecha1;
         this.fecha2 = fecha2;
         this.Tdocumento = Tdocumento;
@@ -68,7 +69,6 @@ public class ReportePDF {
             Conexion.cerrarConexion(conexion);
 
             byte[] logoFacturaBytes = empresa.getLogo_factura();
-            ImageIcon fotoFactura = new ImageIcon(logoFacturaBytes);
 
             float margin = 10;
             float pageWidth = pageSize.getWidth() - 2 * margin;
@@ -77,9 +77,11 @@ public class ReportePDF {
             PDPageContentStream contentStream = new PDPageContentStream(Reportes, page);
             PDType0Font font = PDType0Font.load(Reportes, ReportePDF.class.getResourceAsStream(FONT_PATH));
             PDType0Font boldFont = PDType0Font.load(Reportes, ReportePDF.class.getResourceAsStream(BOLD_FONT_PATH), true);
-
-            // Ajusta la posición de la imagen y otros elementos
-            addImage(Reportes, page, fotoFactura, 20, 510, 73, 65);
+            if (logoFacturaBytes != null) {
+                // Ajusta la posición de la imagen y otros elementos
+                ImageIcon fotoFactura = new ImageIcon(logoFacturaBytes);
+                addImage(Reportes, page, fotoFactura, 20, 510, 73, 65);
+            }
             addText(contentStream, boldFont, empresa.getNombre(), margin + 85, pageHeight + margin - 20);
             addText(contentStream, font, empresa.getNombre_comercial(), margin + 85, pageHeight + margin - 45);
             addText(contentStream, font, "R.U.C.: " + empresa.getRuc(), margin + 85, pageHeight + margin - 60);
@@ -93,9 +95,9 @@ public class ReportePDF {
             //File file = new File("Factura_" + documentos.getIDfactura() + ".pdf");
             // Crear un diálogo de selección de archivo
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar PDF");
+            fileChooser.setDialogTitle("Guardar Reporte PDF");
 // Establecer un nombre predeterminado
-            fileChooser.setSelectedFile(new File("Reporte_"+ rep +".pdf"));
+            fileChooser.setSelectedFile(new File("Reporte_" + rep + ".pdf"));
             // Mostrar el diálogo y obtener la opción del usuario
             int userSelection = fileChooser.showSaveDialog(null);
 
@@ -124,7 +126,7 @@ public class ReportePDF {
     }
 
     private static void addRightAlignedText(PDPageContentStream contentStream, PDType0Font regularFont, PDType0Font boldFont, float pageWidth, float pageHeight, float margin) throws IOException {
-        
+
         contentStream.beginText();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String fechaFormateada1 = dateFormat.format(fecha1);
@@ -151,12 +153,14 @@ public class ReportePDF {
 
         contentStream.setFont(regularFont, fontSize3);
         contentStream.newLineAtOffset(0, -18);
-        contentStream.showText("Reporte de: "+ rep);
+        contentStream.showText("Reporte de: " + rep);
 
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formattedTFacturado = df.format(Double.parseDouble(TFacturado));
 
         contentStream.setFont(regularFont, fontSize4);
         contentStream.newLineAtOffset(0, -18);
-        contentStream.showText("Total Facturado: " + TFacturado);
+        contentStream.showText("Total Facturado: " + formattedTFacturado);
 
         contentStream.endText();
     }
@@ -282,7 +286,7 @@ public class ReportePDF {
             tableContentStream.moveTo(headerXPosition, yPositionEncabezado - marginY);
             tableContentStream.lineTo(headerXPosition, yPosition - marginY);
             tableContentStream.stroke();
-
+            DecimalFormat df = new DecimalFormat("#.##");
             float currentX = headerXPosition;
             for (float width : columnWidths) {
                 currentX += width;
@@ -293,7 +297,7 @@ public class ReportePDF {
             // Agrega los datos de la base de datos a la tabla
             float textYPosition = yPositionEncabezado - fontSize - marginY;
             int numeroProducto = 1; // Variable de contador para la numeración
-            System.out.println(Tdocumento);
+
             for (Documentos documento : documentosList) {
                 Date fechaFactura = documento.getFecha_registro();
                 String fechaFormateada = dateFormat.format(fechaFactura);
@@ -302,12 +306,13 @@ public class ReportePDF {
                         && Tdocumento != null
                         && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
                         && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))
-                        && (Tdocumento.equals("Todos") || documento.getTipodocumento().equals(Tdocumento))&&("No".equalsIgnoreCase(documento.getCredito()))&&(rep.equals("Ventas"))) {
-                        System.out.println("Reportes de ventas");
-                     if ("No".equalsIgnoreCase(documento.getCredito())) {
-                         td = "Cancelado";}else{
-                      td = "Credito";
-                     }
+                        && (Tdocumento.equals("Todos") || documento.getTipodocumento().equals(Tdocumento)) && ("No".equalsIgnoreCase(documento.getCredito())) && (rep.equals("Ventas"))) {
+
+                    if ("No".equalsIgnoreCase(documento.getCredito())) {
+                        td = "Cancelado";
+                    } else {
+                        td = "Credito";
+                    }
                     textYPosition -= tableHeight;  // Mueve la posición vertical hacia arriba para la próxima fila
                     tableContentStream.beginText();
                     tableContentStream.setFont(font, fontSize);
@@ -327,18 +332,18 @@ public class ReportePDF {
                     tableContentStream.newLineAtOffset(columnWidths[5], 0);
                     tableContentStream.showText(String.valueOf(documento.getImpuestos()));
                     tableContentStream.newLineAtOffset(columnWidths[6], 0);
-                    tableContentStream.showText(String.valueOf(documento.getTotal()));
+                    tableContentStream.showText(String.valueOf(Double.parseDouble(df.format(documento.getTotal()))));
                     tableContentStream.newLineAtOffset(columnWidths[7], 0);
-                    tableContentStream.showText(String.valueOf(documento.getDIF()));
+                    tableContentStream.showText(String.valueOf(Double.parseDouble(df.format(documento.getDIF()))));
                     tableContentStream.newLineAtOffset(columnWidths[8], 0);
 
                     tableContentStream.endText();
                     numeroProducto++; // In
                 } else if (fechaFactura != null
                         && ((fecha1 == null || fechaFactura.after(fecha1) || fechaFactura.equals(fecha1))
-                        && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2)))&&("Si".equals(documento.getCredito()))&&(rep.equals("Credito"))) {
+                        && (fecha2 == null || fechaFactura.before(fecha2) || fechaFactura.equals(fecha2))) && ("Si".equals(documento.getCredito())) && (rep.equals("Credito"))) {
                     if ("Si".equals(documento.getCredito())) {
-                         td = "Credito";
+                        td = "Credito";
                         textYPosition -= tableHeight;  // Mueve la posición vertical hacia arriba para la próxima fila
                         tableContentStream.beginText();
                         tableContentStream.setFont(font, fontSize);
@@ -350,7 +355,7 @@ public class ReportePDF {
                         tableContentStream.newLineAtOffset(columnWidths[1], 0);
                         tableContentStream.showText(documento.getTipodocumento());
                         tableContentStream.newLineAtOffset(columnWidths[2], 0);
-                        tableContentStream.showText(td );
+                        tableContentStream.showText(td);
                         tableContentStream.newLineAtOffset(columnWidths[3], 0);
                         tableContentStream.showText(documento.getNombre());
                         tableContentStream.newLineAtOffset(columnWidths[4], 0);
@@ -358,9 +363,9 @@ public class ReportePDF {
                         tableContentStream.newLineAtOffset(columnWidths[5], 0);
                         tableContentStream.showText(String.valueOf(documento.getImpuestos()));
                         tableContentStream.newLineAtOffset(columnWidths[6], 0);
-                        tableContentStream.showText(String.valueOf(documento.getTotal()));
+                        tableContentStream.showText(String.valueOf(Double.parseDouble(df.format(documento.getTotal()))));
                         tableContentStream.newLineAtOffset(columnWidths[7], 0);
-                        tableContentStream.showText(String.valueOf(documento.getDIF()));
+                        tableContentStream.showText(String.valueOf(Double.parseDouble(df.format(documento.getDIF()))));
                         tableContentStream.newLineAtOffset(columnWidths[8], 0);
 
                         tableContentStream.endText();

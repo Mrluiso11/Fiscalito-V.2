@@ -13,6 +13,9 @@ import java.sql.Connection;
 import controladores.*;
 import documentgeneration.FacturaPDF;
 import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -74,6 +77,7 @@ public class frmSobreFiscalito extends javax.swing.JPanel {
         btnConoce.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnConoce.setForeground(new java.awt.Color(255, 255, 255));
         btnConoce.setText("Conoce Sobre");
+        btnConoce.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConoce.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConoceActionPerformed(evt);
@@ -103,28 +107,31 @@ public class frmSobreFiscalito extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConoceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConoceActionPerformed
-        try {
-            // Especifica la ubicación del archivo PDF dentro del paquete
-            String rutaPDF = "/ManualUsuario/Manual_de_Usuario_Fiscalito_V.2.pdf";
-
-            // Obtiene la URL del recurso
-            java.net.URL pdfURL = getClass().getResource(rutaPDF);
-
-            // Verifica si la URL es válida
-            if (pdfURL != null) {
-                // Crea un objeto File con la URL
-                java.io.File pdfFile = new java.io.File(pdfURL.toURI());
-
-                // Verifica si el escritorio es compatible para abrir el archivo
-                if (Desktop.isDesktopSupported()) {
-                    Desktop.getDesktop().open(pdfFile);
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        String rutaPDF = "./Documentation/Manual_de_Usuario_Fiscalito_V.2.pdf";
+        // Llamada a la función para abrir el PDF
+        abrirPDF(rutaPDF);
     }//GEN-LAST:event_btnConoceActionPerformed
+    private void abrirPDF(String rutaPDF) {
+        try {
+            File file = new File(rutaPDF);
 
+            // Verificar si Desktop es compatible con la acción
+            if (Desktop.isDesktopSupported()) {
+                // Obtener la instancia de Desktop
+                Desktop desktop = Desktop.getDesktop();
+
+                // Verificar si es posible abrir el archivo
+                if (file.exists()) {
+                    // Abrir el archivo con el visor predeterminado
+                    desktop.open(file);
+                } 
+            } else {
+                System.out.println("Desktop no es compatible con esta plataforma.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;

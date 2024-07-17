@@ -44,7 +44,6 @@ public class FacturaPDF {
     private static final String BOLD_FONT_PATH = "/fonts/Arial_Bold.ttf";
     //private static final String IMAGE_PATH = "/img/icon_fiscalito.png";
 
-
     public static void main(String[] args, String id) {
         try {
             PDDocument document = new PDDocument();
@@ -52,7 +51,6 @@ public class FacturaPDF {
             PDPage page = new PDPage(pageSize);
             document.addPage(page);
             int ide = Integer.parseInt(id) - 1;
-          
 
             Connection conexion = Conexion.obtenerConexion();
             Empresa empresa = new Empresa();
@@ -63,7 +61,6 @@ public class FacturaPDF {
             Conexion.cerrarConexion(conexion);
 
             byte[] logoFacturaBytes = empresa.getLogo_factura();
-            ImageIcon fotoFactura = new ImageIcon(logoFacturaBytes);
 
             float margin = 20;
             float pageWidth = pageSize.getWidth() - 2 * margin;
@@ -73,8 +70,10 @@ public class FacturaPDF {
             PDType0Font font = PDType0Font.load(document, FacturaPDF.class.getResourceAsStream(FONT_PATH));
             PDType0Font boldFont = PDType0Font.load(document, FacturaPDF.class.getResourceAsStream(BOLD_FONT_PATH), true);
             // Utiliza directamente el objeto ImageIcon en el método addImage
-            addImage(document, page, fotoFactura, 20, 760, 55, 50);
-
+            if (logoFacturaBytes != null) {
+                ImageIcon fotoFactura = new ImageIcon(logoFacturaBytes);
+                addImage(document, page, fotoFactura, 20, 760, 55, 50);
+            }
             addText(contentStream, boldFont, empresa.getNombre(), margin + 60, pageHeight + margin - 20);
             addText(contentStream, font, empresa.getNombre_comercial(), margin + 60, pageHeight + margin - 45);
             addText(contentStream, font, "R.U.C.: " + empresa.getRuc(), margin + 60, pageHeight + margin - 60);
@@ -84,14 +83,14 @@ public class FacturaPDF {
             addRightAlignedText(contentStream, font, boldFont, pageWidth, pageHeight, margin, ide);
 
             float a = addTable(document, page, margin - 10, pageHeight - 225, ide);
-           
+
             addBoxWithText1(document, page, ide);
             float boxX = 20; // Ajusta según sea necesario
             float boxY = 850 - a; // Ajusta según sea necesario
             addBoxWithText2(document, page, ide, boxX, boxY);
 
             addText(contentStream, font, "Referencia:", margin, pageHeight + margin - 230);
-            addText(contentStream, font, String.valueOf(documentos.getReferencia()) + "     /   Credito: "+ String.valueOf(documentos.getCredito()), margin + 70, pageHeight + margin - 230);
+            addText(contentStream, font, String.valueOf(documentos.getReferencia()) + "     /   Credito: " + String.valueOf(documentos.getCredito()), margin + 70, pageHeight + margin - 230);
             addText(contentStream, font, "% Descuento (General): " + String.valueOf(documentos.getDescGen()) + "%", margin + 390, pageHeight + margin - 230);
             addText(contentStream, font, "0.00%", margin + 735, pageHeight + margin - 230);
             contentStream.close();
@@ -99,7 +98,7 @@ public class FacturaPDF {
             //File file = new File("Factura_" + documentos.getIDfactura() + ".pdf");
             // Crear un diálogo de selección de archivo
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar PDF");
+            fileChooser.setDialogTitle("Guardar Factura PDF");
 // Establecer un nombre predeterminado
             fileChooser.setSelectedFile(new File("Factura_" + documentos.getIDfactura() + ".pdf"));
             // Mostrar el diálogo y obtener la opción del usuario
@@ -151,7 +150,7 @@ public class FacturaPDF {
         }
 
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm a");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm a");
 
         String fechaFormateada = formatoFecha.format(documentos.getFecha_registro());
         String horaFormateada = formatoHora.format(documentos.getFecha_registro());
@@ -159,13 +158,13 @@ public class FacturaPDF {
         float textWidth2 = regularFont.getStringWidth("Reporte a Efectos de Documentación") / 1000 * fontSize2;
         float textWidth3 = regularFont.getStringWidth("Factura " + documentos.getIDfactura()) / 1000 * fontSize3;
         float textWidth4 = regularFont.getStringWidth("Cerrado") / 1000 * fontSize4;
-        float textWidth5 = regularFont.getStringWidth(fechaFormateada ) / 1000 * fontSize5;
-        float textWidth6 = regularFont.getStringWidth(fechaFormateada ) / 1000 * fontSize6;
+        float textWidth5 = regularFont.getStringWidth(fechaFormateada) / 1000 * fontSize5;
+        float textWidth6 = regularFont.getStringWidth(fechaFormateada) / 1000 * fontSize6;
         float textWidth7 = regularFont.getStringWidth("Credito") / 1000 * fontSize7;
 
         // Usar la fuente negrita solo para "DOCUMENTO NO FISCAL"
         contentStream.setFont(boldFont, fontSize1);
-        contentStream.newLineAtOffset(pageWidth - margin+35 - textWidth1, pageHeight + margin - 20);
+        contentStream.newLineAtOffset(pageWidth - margin + 35 - textWidth1, pageHeight + margin - 20);
         contentStream.showText("DOCUMENTO NO FISCAL");
 
         // Restaurar la fuente regular para el resto del texto
@@ -184,7 +183,7 @@ public class FacturaPDF {
         contentStream.setFont(regularFont, fontSize5);
         contentStream.newLineAtOffset(0, -15);
         contentStream.showText("Fecha: " + fechaFormateada);
-        
+
         contentStream.setFont(regularFont, fontSize6);
         contentStream.newLineAtOffset(0, -15);
         contentStream.showText("Hora: " + horaFormateada);
@@ -285,7 +284,7 @@ public class FacturaPDF {
             tableContentStream.showText("Import.");
             tableContentStream.newLineAtOffset(columnWidths[8], 0);
             tableContentStream.showText("Subtotal");
-            
+
             tableContentStream.endText();
 
             // Establece el ancho de la línea para el contorno de la tabla
@@ -314,9 +313,12 @@ public class FacturaPDF {
                 tableContentStream.lineTo(currentX, yPosition - marginY - 1);
                 tableContentStream.stroke();
             }
+            DecimalFormat df = new DecimalFormat("#.####");
+            DecimalFormat df1 = new DecimalFormat("#.##");
 
+            //boxContentStream.showText("Total de Descuento en Linea:     " + String.valueOf(Double.parseDouble(df.format( documentos.getSumaDescLinea()))));
             // Agrega los datos de la base de datos a la tabla
-            float textYPosition = yPositionEncabezado+ - fontSize - marginY;
+            float textYPosition = yPositionEncabezado + -fontSize - marginY;
             int numeroProducto = 1; // Variable de contador para la numeración
 
             for (Documentos documento : documentosList) {
@@ -342,13 +344,13 @@ public class FacturaPDF {
                 tableContentStream.newLineAtOffset(columnWidths[4], 0);
                 tableContentStream.showText(String.valueOf(documento.getPrecioProducto()));
                 tableContentStream.newLineAtOffset(columnWidths[5], 0);
-                tableContentStream.showText(String.valueOf(documento.getDescLinea()));
+                tableContentStream.showText(String.valueOf(Double.parseDouble(df.format(documento.getDescLinea()))));
                 tableContentStream.newLineAtOffset(columnWidths[6], 0);
-                tableContentStream.showText(String.valueOf(documento.getDescGen()));
+                tableContentStream.showText(String.valueOf(Double.parseDouble(df1.format(documento.getDescGen()))));
                 tableContentStream.newLineAtOffset(columnWidths[7], 0);
-                tableContentStream.showText(String.valueOf(documento.getImporteImpuesto()));
+                tableContentStream.showText(String.valueOf(Double.parseDouble(df1.format(documento.getImporteImpuesto()))));
                 tableContentStream.newLineAtOffset(columnWidths[8], 0);
-                tableContentStream.showText(String.valueOf(documento.getSubtotal1()));
+                tableContentStream.showText(String.valueOf(Double.parseDouble(df1.format(documento.getSubtotal1()))));
                 tableContentStream.newLineAtOffset(columnWidths[9], 0);
                 // ... Continúa agregando las demás columnas
 
@@ -394,7 +396,7 @@ public class FacturaPDF {
         boxContentStream.setNonStrokingColor(Color.BLACK);
 
         float textOffsetX = rectX + 10;
-        float textOffsetY = rectY + rectHeight - 15;
+        float textOffsetY = rectY + rectHeight - 9;
 
         boxContentStream.setFont(PDType0Font.load(document, FacturaPDF.class.getResourceAsStream("/fonts/arial.ttf")), 8);
         boxContentStream.newLineAtOffset(textOffsetX, textOffsetY);
@@ -403,13 +405,13 @@ public class FacturaPDF {
         boxContentStream.setFont(PDType0Font.load(document, FacturaPDF.class.getResourceAsStream("/fonts/arial.ttf")), 12);
         boxContentStream.newLineAtOffset(0, -20);
         boxContentStream.showText(documentos.getNombre());
-        
-        boxContentStream.newLineAtOffset(160, 0);
+
+        // Asegurar que las siguientes líneas comiencen desde el final de la línea anterior
+        boxContentStream.newLineAtOffset(0, -15);
+
         boxContentStream.showText(documentos.getDireccion());
-
-        boxContentStream.newLineAtOffset(-160, -18);
+        boxContentStream.newLineAtOffset(0, -18);
         boxContentStream.showText(documentos.getRUC());
-
         boxContentStream.newLineAtOffset(0, -18);
         boxContentStream.showText(documentos.getTelefono1() + " / " + documentos.getTelefono1());
 
@@ -456,27 +458,27 @@ public class FacturaPDF {
             DecimalFormat df = new DecimalFormat("#.##");
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(textOffsetX + 10, textOffsetY - 10);
-            boxContentStream.showText("Total de Descuento en Linea:     " + String.valueOf(Double.parseDouble(df.format( documentos.getSumaDescLinea()))));
+            boxContentStream.showText("Total de Descuento en Linea:     " + String.valueOf(Double.parseDouble(df.format(documentos.getSumaDescLinea()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("Total de Descuento general:       " + String.valueOf(Double.parseDouble(df.format( documentos.getSumaDescGen()))));
+            boxContentStream.showText("Total de Descuento general:       " + String.valueOf(Double.parseDouble(df.format(documentos.getSumaDescGen()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("Subtotal:                                      " + String.valueOf(Double.parseDouble(df.format( documentos.getSubtotal2()))));
+            boxContentStream.showText("Subtotal:                                      " + String.valueOf(Double.parseDouble(df.format(documentos.getSubtotal2()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("Impuestos:                                   " + String.valueOf(Double.parseDouble(df.format( documentos.getSumaImpuesto()))));
+            boxContentStream.showText("Impuestos:                                   " + String.valueOf(Double.parseDouble(df.format(documentos.getSumaImpuesto()))));
             boxContentStream.newLine();
 
             boxContentStream.setFont(font, fontSize);
             boxContentStream.newLineAtOffset(0, -offsetY);
-            boxContentStream.showText("TOTAL:                                        " + String.valueOf(Double.parseDouble(df.format( documentos.getTotal()))));
+            boxContentStream.showText("TOTAL:                                        " + String.valueOf(Double.parseDouble(df.format(documentos.getTotal()))));
 
             boxContentStream.endText();
         }

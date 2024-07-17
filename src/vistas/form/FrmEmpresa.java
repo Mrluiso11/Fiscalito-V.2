@@ -12,7 +12,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -49,6 +51,8 @@ public class frmEmpresa extends javax.swing.JPanel {
         lblFotoEmpresa.setMinimumSize(new Dimension(154, 119));
         lblFotoEmpresa.setMaximumSize(new Dimension(154, 119));
         lblFotoEmpresa.setSize(new Dimension(154, 119));
+
+        DatosEmpresa();
         mostrarDatosEmpresa();
     }
 
@@ -143,7 +147,7 @@ public class frmEmpresa extends javax.swing.JPanel {
         jLabel42 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnActualizar = new javax.swing.JButton();
-        btnImprimir = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtaActividades = new javax.swing.JTextArea();
@@ -470,7 +474,7 @@ public class frmEmpresa extends javax.swing.JPanel {
 
         btnActualizar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
-        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizar.setFocusPainted(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,17 +482,19 @@ public class frmEmpresa extends javax.swing.JPanel {
             }
         });
 
-        btnImprimir.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        btnImprimir.setText("Guardar");
-        btnImprimir.setFocusPainted(false);
-        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setFocusPainted(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimirActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
         btnLimpiar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLimpiar.setFocusPainted(false);
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -504,7 +510,7 @@ public class frmEmpresa extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -514,14 +520,14 @@ public class frmEmpresa extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(btnActualizar)
                 .addGap(18, 18, 18)
-                .addComponent(btnImprimir)
+                .addComponent(btnGuardar)
                 .addGap(18, 18, 18)
                 .addComponent(btnLimpiar)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
         btnActualizar.getAccessibleContext().setAccessibleParent(bg);
-        btnImprimir.getAccessibleContext().setAccessibleParent(bg);
+        btnGuardar.getAccessibleContext().setAccessibleParent(bg);
 
         bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 600, 180, 170));
 
@@ -615,29 +621,62 @@ public class frmEmpresa extends javax.swing.JPanel {
             obj_insertEmpresa.setOtros(txtaOtros.getText().trim());
             //obj_insertEmpresa.setFecha_actualizacion(new Date());
 
-            // Insertar la imagen en la base de datos
-            if (selectedImageL != null) {
+            // Obtener icono de lblLogoFactura
+            Icon iconoLogoFactura = lblLogoFactura.getIcon();
+            if (iconoLogoFactura instanceof ImageIcon) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIcon imageIcon = (ImageIcon) iconoLogoFactura;
+                Image imagenLogoFactura = imageIcon.getImage();
+
+                // Convertir Image a RenderedImage
+                BufferedImage bufferedImage = new BufferedImage(
+                        imagenLogoFactura.getWidth(null),
+                        imagenLogoFactura.getHeight(null),
+                        BufferedImage.TYPE_INT_ARGB
+                );
+                Graphics2D bGr = bufferedImage.createGraphics();
+                bGr.drawImage(imagenLogoFactura, 0, 0, null);
+                bGr.dispose();
+
+                // Ahora puedes usar ImageIO.write con RenderedImage
                 try {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(selectedImageL, "jpg", baos);
+                    ImageIO.write(bufferedImage, "png", baos);
                     byte[] imageBytes = baos.toByteArray();
                     obj_insertEmpresa.setLogo_factura(imageBytes);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(); // Maneja la excepción adecuadamente en tu aplicación
                 }
+            } else {
+                System.out.println("lblLogoFactura no contiene una instancia de ImageIcon");
             }
 
-            if (localSelectedImage != null) {
+// Obtener icono de lblFotoEmpresa
+            Icon iconoFotoEmpresa = lblFotoEmpresa.getIcon();
+            if (iconoFotoEmpresa instanceof ImageIcon) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIcon imageIcon = (ImageIcon) iconoFotoEmpresa;
+                Image imagenFotoEmpresa = imageIcon.getImage();
+
+                // Convertir Image a RenderedImage
+                BufferedImage bufferedImage = new BufferedImage(
+                        imagenFotoEmpresa.getWidth(null),
+                        imagenFotoEmpresa.getHeight(null),
+                        BufferedImage.TYPE_INT_ARGB
+                );
+                Graphics2D bGr = bufferedImage.createGraphics();
+                bGr.drawImage(imagenFotoEmpresa, 0, 0, null);
+                bGr.dispose();
+
+                // Ahora puedes usar ImageIO.write con RenderedImage
                 try {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(localSelectedImage, "jpg", baos);
+                    ImageIO.write(bufferedImage, "png", baos);
                     byte[] imageBytes = baos.toByteArray();
                     obj_insertEmpresa.setLogo_empresa(imageBytes);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(); // Maneja la excepción adecuadamente en tu aplicación
                 }
             } else {
-                System.out.println("selectedImageL es nulo. Asegúrate de que la imagen esté cargada correctamente.");
+                System.out.println("lblFotoEmpresa no contiene una instancia de ImageIcon");
             }
 
             //se ingresa informacion 
@@ -652,7 +691,68 @@ public class frmEmpresa extends javax.swing.JPanel {
             Conexion.cerrarConexion(conexion);
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
+    private void insertarImagenDesdeLabel(JLabel label, Consumer<byte[]> setter) throws IOException {
+        Icon icon = label.getIcon();
+        if (icon != null && icon instanceof ImageIcon) {
+            ImageIcon imageIcon = (ImageIcon) icon;
+            Image image = imageIcon.getImage();
 
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(toBufferedImage(image), "jpg", baos);
+            byte[] imageBytes = baos.toByteArray();
+            setter.accept(imageBytes);
+        } else {
+            System.out.println(label.getName() + " no tiene un ImageIcon válido. Asegúrate de que la imagen esté cargada correctamente.");
+        }
+    }
+
+// Método auxiliar para convertir Image a BufferedImage
+    private BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
+            return (BufferedImage) img;
+        }
+
+        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics g = bufferedImage.createGraphics();
+        g.drawImage(img, 0, 0, null);
+        g.dispose();
+
+        return bufferedImage;
+    }
+
+    public void DatosEmpresa() {
+        // Se obtiene una conexión a la base de datos
+        Connection conexion = Conexion.obtenerConexion();
+
+        // Se crea un objeto de la clase "Empresa" para manejar la información de la empresa
+        Empresa empresa = new Empresa();
+
+        // Verifica si la conexión a la base de datos es exitosa
+        if (conexion != null) {
+            // Selecciona la información de la empresa desde la base de datos
+            empresa.selectEmpresa(conexion);
+
+            // Variable para almacenar si la tabla tiene datos
+            boolean tieneDatos = false;
+
+            // Verifica si la tabla tiene datos
+            try {
+                tieneDatos = empresa.tablaTieneDatos(conexion);
+            } catch (SQLException e) {
+                e.printStackTrace(); // Manejo adecuado de la excepción
+            }
+            // Se cierra la conexión a la base de datos
+            Conexion.cerrarConexion(conexion);
+            if (tieneDatos) {
+
+                btnActualizar.setEnabled(true);
+                btnGuardar.setEnabled(false);
+            } else {
+                btnActualizar.setEnabled(false);
+                btnGuardar.setEnabled(true);
+            }
+        }
+    }
     private void txtLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLocalActionPerformed
@@ -755,151 +855,184 @@ public class frmEmpresa extends javax.swing.JPanel {
     }
 
 
-    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Connection conexion = Conexion.obtenerConexion();
-        
-        if (txtNombreEmpresa.getText().trim().isEmpty()){
+
+        if (txtNombreEmpresa.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El Nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtNombreEmpresa.requestFocus();
         }
-        if (txtNombreComercialEmpresa.getText().trim().isEmpty()){
+        if (txtNombreComercialEmpresa.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El Nombre de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtNombreComercialEmpresa.requestFocus();
         }
-        if (txtDV.getText().trim().isEmpty()){
+        if (txtDV.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El DV de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtDV.requestFocus();
         }
-        if (txtPais.getText().trim().isEmpty()){
+        if (txtPais.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El Pais de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtPais.requestFocus();
         }
-        if (txtProvincia.getText().trim().isEmpty()){
+        if (txtProvincia.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El Provincia de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtProvincia.requestFocus();
         }
-        if (txtDistrito.getText().trim().isEmpty()){
+        if (txtDistrito.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El distrito de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtDistrito.requestFocus();
         }
-        if (txtCorreguimiento.getText().trim().isEmpty()){
+        if (txtCorreguimiento.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El corregimiento de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCorreguimiento.requestFocus();
         }
-        if (txtCorreguimiento.getText().trim().isEmpty()){
+        if (txtCorreguimiento.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El corregimiento de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCorreguimiento.requestFocus();
         }
-        if (txtCalle.getText().trim().isEmpty()){
+        if (txtCalle.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El calle de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCalle.requestFocus();
         }
-        if (txtLocal.getText().trim().isEmpty()){
+        if (txtLocal.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El numero de local de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtLocal.requestFocus();
         }
-        if (txtPiso.getText().trim().isEmpty()){
+        if (txtPiso.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El piso de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtPiso.requestFocus();
         }
-        if (txtCorreo.getText().trim().isEmpty()){
+        if (txtCorreo.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El correo de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtCorreo.requestFocus();
         }
-        if (txtTelefono1.getText().trim().isEmpty()){
+        if (txtTelefono1.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El telefono de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtTelefono1.requestFocus();
         }
-        if (txtTelefono2.getText().trim().isEmpty()){
+        if (txtTelefono2.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El telefono de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtTelefono2.requestFocus();
         }
-        if (txtTelefono2.getText().trim().isEmpty()){
+        if (txtTelefono2.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El telefono de Empresa no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtTelefono2.requestFocus();
         }
-        if (txtRUC.getText().trim().isEmpty()){
+        if (txtRUC.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El R.C.U o R.U.T. no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtRUC.requestFocus();
         } else {
-        if (conexion != null) {
-            Empresa obj_insertEmpresa = new Empresa();
-            obj_insertEmpresa.setRuc(txtRUC.getText().trim());
-            obj_insertEmpresa.setNombre(txtNombreEmpresa.getText().trim());
-            obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
-            obj_insertEmpresa.setDv(txtDV.getText().trim());
-            obj_insertEmpresa.setPais(txtPais.getText().trim());
-            obj_insertEmpresa.setProvincia(txtProvincia.getText().trim());
-            obj_insertEmpresa.setDistrito(txtDistrito.getText().trim());
-            obj_insertEmpresa.setCorregimiento(txtCorreguimiento.getText().trim());
-            obj_insertEmpresa.setUrbanizacion(txtUrbanizacion.getText().trim());
-            obj_insertEmpresa.setCalle(txtCalle.getText().trim());
-            obj_insertEmpresa.setCasa(txtNCasa.getText().trim());
-            obj_insertEmpresa.setLocal(txtLocal.getText().trim());
-            obj_insertEmpresa.setPiso(txtPiso.getText().trim());
-            obj_insertEmpresa.setCorreo_empresa(txtCorreo.getText().trim());
-            obj_insertEmpresa.setActividades(txtaActividades.getText().trim());
-            obj_insertEmpresa.setObservaciones(txtaObervaciones.getText().trim());
-            obj_insertEmpresa.setTelefono1(txtTelefono1.getText().trim());
-            obj_insertEmpresa.setTelefono2(txtTelefono2.getText().trim());
-            obj_insertEmpresa.setFax1(txtFax1.getText().trim());
-            obj_insertEmpresa.setFax2(txtFax2.getText().trim());
-            obj_insertEmpresa.setPrimer_nombre_representante(txtRNombre.getText().trim());
-            obj_insertEmpresa.setSegundo_nombre_representante(txtRSegundoNombre.getText().trim());
-            obj_insertEmpresa.setApellido_paterno(txtRApellidoPaterno.getText().trim());
-            obj_insertEmpresa.setApellido_materno(txtRApellidoMaterno.getText().trim());
-            obj_insertEmpresa.setCedula(txtRCedula.getText().trim());
-            obj_insertEmpresa.setDv_representante(txtRDV.getText().trim());
-            obj_insertEmpresa.setTelefono1_representante(txtRTelefono1.getText().trim());
-            obj_insertEmpresa.setTelefono2_representante(txtRTelefono2.getText().trim());
-            obj_insertEmpresa.setCorreo_representante(txtRCorreo.getText().trim());
-            obj_insertEmpresa.setNombre_gerente(txtGNombre.getText().trim());
-            obj_insertEmpresa.setCedula_gerente(txtGCedula.getText().trim());
-            obj_insertEmpresa.setDv_gerente(txtGDV.getText().trim());
-            obj_insertEmpresa.setTelefono_gerente1(txtGTelefono1.getText().trim());
-            obj_insertEmpresa.setTelefono_gerente2(txtGTelefono2.getText().trim());
-            obj_insertEmpresa.setCorreo_gerente(txtGCorreo.getText().trim());
-            obj_insertEmpresa.setOtros(txtaOtros.getText().trim());
-            //obj_insertEmpresa.setFecha_actualizacion(new Date());
+            if (conexion != null) {
+                Empresa obj_insertEmpresa = new Empresa();
+                obj_insertEmpresa.setRuc(txtRUC.getText().trim());
+                obj_insertEmpresa.setNombre(txtNombreEmpresa.getText().trim());
+                obj_insertEmpresa.setNombre_comercial(txtNombreComercialEmpresa.getText().trim());
+                obj_insertEmpresa.setDv(txtDV.getText().trim());
+                obj_insertEmpresa.setPais(txtPais.getText().trim());
+                obj_insertEmpresa.setProvincia(txtProvincia.getText().trim());
+                obj_insertEmpresa.setDistrito(txtDistrito.getText().trim());
+                obj_insertEmpresa.setCorregimiento(txtCorreguimiento.getText().trim());
+                obj_insertEmpresa.setUrbanizacion(txtUrbanizacion.getText().trim());
+                obj_insertEmpresa.setCalle(txtCalle.getText().trim());
+                obj_insertEmpresa.setCasa(txtNCasa.getText().trim());
+                obj_insertEmpresa.setLocal(txtLocal.getText().trim());
+                obj_insertEmpresa.setPiso(txtPiso.getText().trim());
+                obj_insertEmpresa.setCorreo_empresa(txtCorreo.getText().trim());
+                obj_insertEmpresa.setActividades(txtaActividades.getText().trim());
+                obj_insertEmpresa.setObservaciones(txtaObervaciones.getText().trim());
+                obj_insertEmpresa.setTelefono1(txtTelefono1.getText().trim());
+                obj_insertEmpresa.setTelefono2(txtTelefono2.getText().trim());
+                obj_insertEmpresa.setFax1(txtFax1.getText().trim());
+                obj_insertEmpresa.setFax2(txtFax2.getText().trim());
+                obj_insertEmpresa.setPrimer_nombre_representante(txtRNombre.getText().trim());
+                obj_insertEmpresa.setSegundo_nombre_representante(txtRSegundoNombre.getText().trim());
+                obj_insertEmpresa.setApellido_paterno(txtRApellidoPaterno.getText().trim());
+                obj_insertEmpresa.setApellido_materno(txtRApellidoMaterno.getText().trim());
+                obj_insertEmpresa.setCedula(txtRCedula.getText().trim());
+                obj_insertEmpresa.setDv_representante(txtRDV.getText().trim());
+                obj_insertEmpresa.setTelefono1_representante(txtRTelefono1.getText().trim());
+                obj_insertEmpresa.setTelefono2_representante(txtRTelefono2.getText().trim());
+                obj_insertEmpresa.setCorreo_representante(txtRCorreo.getText().trim());
+                obj_insertEmpresa.setNombre_gerente(txtGNombre.getText().trim());
+                obj_insertEmpresa.setCedula_gerente(txtGCedula.getText().trim());
+                obj_insertEmpresa.setDv_gerente(txtGDV.getText().trim());
+                obj_insertEmpresa.setTelefono_gerente1(txtGTelefono1.getText().trim());
+                obj_insertEmpresa.setTelefono_gerente2(txtGTelefono2.getText().trim());
+                obj_insertEmpresa.setCorreo_gerente(txtGCorreo.getText().trim());
+                obj_insertEmpresa.setOtros(txtaOtros.getText().trim());
+                //obj_insertEmpresa.setFecha_actualizacion(new Date());
 
-            // Insertar la imagen en la base de datos
-            if (selectedImageL != null) {
-                try {
+                // Obtener icono de lblLogoFactura
+                Icon iconoLogoFactura = lblLogoFactura.getIcon();
+                if (iconoLogoFactura instanceof ImageIcon) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(selectedImageL, "jpg", baos);
-                    byte[] imageBytes = baos.toByteArray();
-                    obj_insertEmpresa.setLogo_factura(imageBytes);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+                    ImageIcon imageIcon = (ImageIcon) iconoLogoFactura;
+                    Image imagenLogoFactura = imageIcon.getImage();
 
-            if (localSelectedImage != null) {
-                try {
+                    // Convertir Image a RenderedImage
+                    BufferedImage bufferedImage = new BufferedImage(
+                            imagenLogoFactura.getWidth(null),
+                            imagenLogoFactura.getHeight(null),
+                            BufferedImage.TYPE_INT_ARGB
+                    );
+                    Graphics2D bGr = bufferedImage.createGraphics();
+                    bGr.drawImage(imagenLogoFactura, 0, 0, null);
+                    bGr.dispose();
+
+                    // Ahora puedes usar ImageIO.write con RenderedImage
+                    try {
+                        ImageIO.write(bufferedImage, "png", baos);
+                        byte[] imageBytes = baos.toByteArray();
+                        obj_insertEmpresa.setLogo_factura(imageBytes);
+                    } catch (IOException e) {
+                        e.printStackTrace(); // Maneja la excepción adecuadamente en tu aplicación
+                    }
+                } else {
+                    System.out.println("lblLogoFactura no contiene una instancia de ImageIcon");
+                }
+
+// Obtener icono de lblFotoEmpresa
+                Icon iconoFotoEmpresa = lblFotoEmpresa.getIcon();
+                if (iconoFotoEmpresa instanceof ImageIcon) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    ImageIO.write(localSelectedImage, "jpg", baos);
-                    byte[] imageBytes = baos.toByteArray();
-                    obj_insertEmpresa.setLogo_empresa(imageBytes);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    ImageIcon imageIcon = (ImageIcon) iconoFotoEmpresa;
+                    Image imagenFotoEmpresa = imageIcon.getImage();
+
+                    // Convertir Image a RenderedImage
+                    BufferedImage bufferedImage = new BufferedImage(
+                            imagenFotoEmpresa.getWidth(null),
+                            imagenFotoEmpresa.getHeight(null),
+                            BufferedImage.TYPE_INT_ARGB
+                    );
+                    Graphics2D bGr = bufferedImage.createGraphics();
+                    bGr.drawImage(imagenFotoEmpresa, 0, 0, null);
+                    bGr.dispose();
+
+                    // Ahora puedes usar ImageIO.write con RenderedImage
+                    try {
+                        ImageIO.write(bufferedImage, "png", baos);
+                        byte[] imageBytes = baos.toByteArray();
+                        obj_insertEmpresa.setLogo_empresa(imageBytes);
+                    } catch (IOException e) {
+                        e.printStackTrace(); // Maneja la excepción adecuadamente en tu aplicación
+                    }
+                } else {
+                    System.out.println("lblFotoEmpresa no contiene una instancia de ImageIcon");
                 }
-            } else {
-                System.out.println("selectedImageL es nulo. Asegúrate de que la imagen esté cargada correctamente.");
-            }
 
-            //se ingresa informacion 
-            if (obj_insertEmpresa.insertEmpresa(conexion)) {
-                // Show a success message using JOptionPane
-                JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
-            } else {
-                // Show an error message using JOptionPane
-                JOptionPane.showMessageDialog(this, "Error al insertar los datos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+                //se ingresa información 
+                if (obj_insertEmpresa.insertEmpresa(conexion)) {
+                    // Show a success message using JOptionPane
+                    JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
+                } else {
+                    // Show an error message using JOptionPane
+                    JOptionPane.showMessageDialog(this, "Error al insertar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 
-            Conexion.cerrarConexion(conexion);
+                Conexion.cerrarConexion(conexion);
             }
         }
-    }//GEN-LAST:event_btnImprimirActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void lblLogoFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoFacturaMouseClicked
         JFileChooser fileChooser = new JFileChooser();
@@ -963,7 +1096,7 @@ public class frmEmpresa extends javax.swing.JPanel {
         LimpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void LimpiarCampos(){
+    private void LimpiarCampos() {
         txtRUC.setText(" ");
         txtNombreEmpresa.setText(" ");
         txtNombreComercialEmpresa.setText(" ");
@@ -999,13 +1132,15 @@ public class frmEmpresa extends javax.swing.JPanel {
         txtGTelefono1.setText(" ");
         txtGTelefono2.setText(" ");
         txtGCorreo.setText(" ");
-        txtaOtros.setText(" ");  
+        txtaOtros.setText(" ");
+        lblLogoFactura.setIcon(null);
+        lblFotoEmpresa.setIcon(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

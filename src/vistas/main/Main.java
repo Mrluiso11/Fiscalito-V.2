@@ -89,12 +89,16 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
+        setFocusCycleRoot(false);
         setResizable(false);
 
         background.setBackground(new java.awt.Color(245, 245, 245));
         background.setPreferredSize(new java.awt.Dimension(1324, 850));
 
+        panelMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelMenu.setFocusable(false);
+
+        menu.setFocusable(false);
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/main/logo_fiscalito_final_mini.png"))); // NOI18N
         jToggleButton1.setBorderPainted(false);

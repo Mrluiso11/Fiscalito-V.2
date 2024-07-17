@@ -152,6 +152,7 @@ public class frmArticulos extends javax.swing.JPanel {
         bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -160,6 +161,7 @@ public class frmArticulos extends javax.swing.JPanel {
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 710, 120, 40));
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -168,6 +170,7 @@ public class frmArticulos extends javax.swing.JPanel {
         bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 710, 120, 40));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -176,6 +179,7 @@ public class frmArticulos extends javax.swing.JPanel {
         bg.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 710, 120, 40));
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -184,6 +188,7 @@ public class frmArticulos extends javax.swing.JPanel {
         bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 40));
 
         btnEditar.setText("Editar");
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -297,6 +302,7 @@ public class frmArticulos extends javax.swing.JPanel {
         if (txtNombreProducto.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El nombre de Producto no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
             txtNombreProducto.requestFocus();
+         
         }
         if (txtPrecio.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El precio de Producto no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);

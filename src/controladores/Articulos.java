@@ -19,8 +19,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Articulos {
+
     DecimalFormat formato = new DecimalFormat("#0.00");
-    
+
     // Campos de la clase que representan las propiedades de un producto.
     private String codigoproducto;
     private String nombreproducto;
@@ -289,5 +290,17 @@ public class Articulos {
         return productos;
     }
 
+    public int deleteAllProductos(Connection conexion) {
+        String query = "DELETE FROM tbl_producto";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            int filasAfectadas = statement.executeUpdate();
+            return filasAfectadas;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        }
+        return 0;
+    }
 
 }

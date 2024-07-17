@@ -157,6 +157,7 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -165,6 +166,7 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 710, 120, 40));
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -173,6 +175,7 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 710, 120, 40));
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -181,6 +184,7 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 120, 40));
 
         btnEditar.setText("Editar");
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -198,6 +202,7 @@ public class frmServicio extends javax.swing.JPanel {
         bg.add(cbxTipoCobro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 230, -1));
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -331,6 +336,7 @@ public class frmServicio extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Los datos se han guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE, customIcon);
                         btnNuevo.setEnabled(true);
                         cbxServicios.setEnabled(true);
+                        inhabilitar();
                     } else {
                         // Notifica al usuario que los datos no se han podido guardar.
                         JOptionPane.showMessageDialog(null, "Los datos no se han podido guardar", "Error", JOptionPane.ERROR_MESSAGE);

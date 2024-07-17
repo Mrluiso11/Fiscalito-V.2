@@ -567,8 +567,6 @@ public class Empresa {
         }
     }
 
-    
-    
     public boolean updateEmpresa(Connection connection) {
         boolean actualizacionExitosa = false;
 
@@ -633,7 +631,21 @@ public class Empresa {
 
         return actualizacionExitosa;
     }
-    
-    
+
+    public boolean tablaTieneDatos(Connection connection) throws SQLException {
+        boolean tieneDatos = false;
+
+        String query = "SELECT COUNT(*) as total FROM tbl_empresa";
+
+        try (PreparedStatement statement = connection.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet.next()) {
+                int totalRegistros = resultSet.getInt("total");
+                tieneDatos = totalRegistros > 0;
+            }
+        }
+
+        return tieneDatos;
+    }
 
 }

@@ -5,7 +5,7 @@ import controladores.Empresa;
 import java.awt.Image;
 import java.sql.Connection;
 import javax.swing.ImageIcon;
-import documentgeneration.*;
+import java.sql.SQLException;
 
 public class frm_Dashboard extends javax.swing.JPanel {
 
@@ -21,43 +21,61 @@ public class frm_Dashboard extends javax.swing.JPanel {
     public void mostrarDatosEmpresa() {
         // Se obtiene una conexión a la base de datos
         Connection conexion = Conexion.obtenerConexion();
+
         // Se crea un objeto de la clase "Empresa" para manejar la información de la empresa
         Empresa empresa = new Empresa();
+
         // Verifica si la conexión a la base de datos es exitosa
         if (conexion != null) {
+            // Selecciona la información de la empresa desde la base de datos
             empresa.selectEmpresa(conexion);
+
+            // Variable para almacenar si la tabla tiene datos
+            boolean tieneDatos = false;
+
+            // Verifica si la tabla tiene datos
+            try {
+                tieneDatos = empresa.tablaTieneDatos(conexion);
+            } catch (SQLException e) {
+                e.printStackTrace(); // Manejo adecuado de la excepción
+            }
             // Se cierra la conexión a la base de datos
             Conexion.cerrarConexion(conexion);
-        }
-        lblNombreEmpresa.setText(empresa.getNombre());
-        lblNombreComercialEmpresa.setText(empresa.getNombre_comercial());
-        lblRUC.setText(empresa.getRuc());
-        lblDireccion.setText(empresa.getPais() + ", " + empresa.getProvincia() + ", " + empresa.getDistrito());
-        lblTelefono.setText(empresa.getTelefono1() + " / " + empresa.getTelefono2());
-        lblDV.setText(empresa.getDv());
-        lblFax.setText(empresa.getFax1() + " / " + empresa.getFax2());
-        lblActividades.setText(empresa.getActividades());
 
-        // Manejo de las imágenes de la empresa
-        byte[] logoEmpresaBytes = empresa.getLogo_empresa();
-        if (logoEmpresaBytes != null) {
-            try {
-                // Convertir el array de bytes a una ImageIcon
-                ImageIcon fotoEmpresa = new ImageIcon(logoEmpresaBytes);
+            // Verificar si la empresa tiene datos
+            if (tieneDatos) {
+                
+                lblNombreEmpresa.setText(empresa.getNombre());
+                lblNombreComercialEmpresa.setText(empresa.getNombre_comercial());
+                lblRUC.setText(empresa.getRuc());
+                lblDireccion.setText(empresa.getPais() + "," + empresa.getProvincia() + "," + empresa.getDistrito());
+                lblTelefono.setText(empresa.getTelefono1() + " / " + empresa.getTelefono2());
+                lblDV.setText(empresa.getDv());
+                lblFax.setText(empresa.getFax1() + " / " + empresa.getFax2());
+                lblActividades.setText(empresa.getActividades());
 
-                // Escalar la imagen al tamaño deseado
-                int widthEmpresa = 154;  // Tamaño deseado para el ancho
-                int heightEmpresa = 119; // Tamaño deseado para el alto
-                Image fotoEscalada = fotoEmpresa.getImage().getScaledInstance(widthEmpresa, heightEmpresa, Image.SCALE_SMOOTH);
+                // Manejo de las imágenes de la empresa
+                byte[] logoEmpresaBytes = empresa.getLogo_empresa();
+                if (logoEmpresaBytes != null) {
+                    try {
+                        // Convertir el array de bytes a una ImageIcon
+                        ImageIcon fotoEmpresa = new ImageIcon(logoEmpresaBytes);
 
-                // Crear un nuevo ImageIcon con la imagen escalada
-                ImageIcon fotoEscaladaIcon = new ImageIcon(fotoEscalada);
+                        // Escalar la imagen al tamaño deseado
+                        int widthEmpresa = 154;  // Tamaño deseado para el ancho
+                        int heightEmpresa = 119; // Tamaño deseado para el alto
+                        Image fotoEscalada = fotoEmpresa.getImage().getScaledInstance(widthEmpresa, heightEmpresa, Image.SCALE_SMOOTH);
 
-                // Establecer el nuevo ImageIcon en el JLabel
-                imgFotoEmpresa.setIcon(fotoEscaladaIcon);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                        // Crear un nuevo ImageIcon con la imagen escalada
+                        ImageIcon fotoEscaladaIcon = new ImageIcon(fotoEscalada);
+
+                        // Establecer el nuevo ImageIcon en el JLabel
+                        imgFotoEmpresa.setIcon(fotoEscaladaIcon);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } 
         }
     }
 
@@ -144,27 +162,27 @@ public class frm_Dashboard extends javax.swing.JPanel {
         bg.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 800, -1));
 
         lblRUC.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblRUC.setText("lblRUC");
+        lblRUC.setText("RUC");
         bg.add(lblRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 80, -1));
 
         lblNombreComercialEmpresa.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
-        lblNombreComercialEmpresa.setText("lblNombreComercialEmpresa");
+        lblNombreComercialEmpresa.setText("NombreComercialEmpresa");
         bg.add(lblNombreComercialEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
 
         lblDV.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblDV.setText("lblDV");
+        lblDV.setText("DV");
         bg.add(lblDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, -1, -1));
 
         lblFax.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblFax.setText("lblFax");
+        lblFax.setText("Fax");
         bg.add(lblFax, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, -1, -1));
 
         lblDireccion.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblDireccion.setText("lblDireccion");
+        lblDireccion.setText("Direccion");
         bg.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
 
         lblTelefono.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        lblTelefono.setText("lblTelefono");
+        lblTelefono.setText("Telefono");
         bg.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(84, 187, 251)));
@@ -172,7 +190,7 @@ public class frm_Dashboard extends javax.swing.JPanel {
 
         lblActividades.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         lblActividades.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblActividades.setText("lblActividades");
+        lblActividades.setText("Actividades");
         lblActividades.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

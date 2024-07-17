@@ -306,4 +306,16 @@ public class Clientes {
 
         return clientes;
     }
+
+    public int deleteAllClientes(Connection conexion) {
+        String query = "DELETE FROM tbl_cliente";
+
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            int filasAfectadas = statement.executeUpdate();
+            return filasAfectadas;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
